@@ -39,7 +39,9 @@ SECTION_LABEL = "Open Triples Green Ball 1"
 # on the live site, so this is the normal path for WDTA).
 DAYTIME_FALLBACK = "UA"
 SECTION_FALLBACK = "UA037"
-SECTION_SCAN_LIMIT = 90                  # how many section codes to try before giving up
+SECTION_SCAN_LIMIT = 90
+SCAN_FROM = 240
+SCAN_TO = 360                  # how many section codes to try before giving up
 
 UA = "Mozilla/5.0 (compatible; em-tennis-ladder/1.0)"
 
@@ -379,6 +381,15 @@ def find_our_team_code(results_html, daytime, section, valid_teams, cached=None)
         if page:
             print(f"  · {CLUB} team code {code}")
             return code, page
+    # Team codes are opaque and not published on any page we can read, so fall
+    # back to a bounded scan. Only runs once: the hit is cached in data.json.
+    print(f"  · scanning team codes {SCAN_FROM}-{SCAN_TO} for {CLUB}")
+    for n in range(SCAN_FROM, SCAN_TO + 1):
+        code = f"{daytime}{n:03d}"
+        fixture, page = check_code(code, daytime, section, valid_teams)
+        if page:
+            print(f"  · {CLUB} team code {code} (found by scan)")
+            return code, page
     print(f"  ! no team code matched this section")
     return None, None
 
@@ -459,15 +470,7 @@ def debug_pages(daytime, section):
                 print(f"[debug] club page tables: {[(' | '.join(cells(t[0]))[:90]) for t in tables(ch)][:8]}")
             except Exception as exc:  # noqa: BLE001
                 print(f"[debug] club page FAILED {exc}")
-            for code in ("UA037012", "UA037021", "UA037022", "UA289"):
-                u = (f"{BASE}/fixture.php?daytime={daytime}&section={section}"
-                     f"&style=&team={code}&which=2")
-                try:
-                    fh = fetch(u)
-                    m = re.search(r"Fixture for ([^<|]+)", fh)
-                    print(f"[debug] team={code} -> {m.group(1).strip() if m else 'NONE'} ({len(fh)}b)")
-                except Exception as exc:  # noqa: BLE001
-                    print(f"[debug] team={code} FAILED {exc}")
+            pass
 
 
 def main():
