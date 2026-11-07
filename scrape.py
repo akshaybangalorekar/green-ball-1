@@ -225,8 +225,8 @@ def parse_ladder(html):
         if "pts" not in head or "%" not in head:
             continue
         for r in t[1:]:
-            c = cells(r)
-            if len(c) < 3 or not c[0]:
+            c = [x for x in cells(r) if x.strip()]
+            if len(c) < 3:
                 continue
             pts, p = num(c[-2]), num(c[-1])
             if pts is None or p is None:
@@ -238,53 +238,72 @@ def parse_ladder(html):
 
 
 def parse_results(html):
-    """Returns [{round, date, washout, matches:[...]}] newest first."""
+    """Returns [{round, date, washout, matches:[...]}] newest first.
+
+    A match row looks like:
+        Home | Pts | S | G | (empty) | Pts | S | G | Away
+    """
     rounds, current = [], None
     for t in tables(html):
-        flat = " ".join(" ".join(cells(r)) for r in t)
-        if "home team" not in flat.lower():
+        flat = " ".join(" ".join(cells(r)) for r in t).lower()
+        if "home team" not in flat:
             continue
         for r in t:
-            c = cells(r)
-            joined = " ".join(c)
-            if not joined.strip():
+            raw = cells(r)
+            joined = " ".join(raw).strip()
+            if not joined:
                 continue
             m = re.search(r"Rd\.?\s*(\d+)", joined, re.I)
             if m:
-                date = iso_date(joined)
-                current = {"round": int(m.group(1)), "date": date,
+                current = {"round": int(m.group(1)), "date": iso_date(joined),
                            "washout": False, "matches": []}
                 rounds.append(current)
                 continue
-            if current is None or len(c) < 8:
+            if current is None:
                 continue
             if "home team" in joined.lower():
                 continue
-            home, away = c[0], c[-1]
+
+            home, away = raw[0].strip(), raw[-1].strip()
             if not home or not away:
                 continue
-            if "wash" in joined.lower():
+            middle = [x for x in raw[1:-1] if x.strip()]
+            if not middle:
+                continue
+            if any("wash" in x.lower() for x in middle):
                 current["matches"].append({"home": home, "away": away, "washout": True})
                 current["washout"] = True
                 continue
+            if len(middle) < 6:
+                continue
             current["matches"].append({
                 "home": home,
-                "homePts": num(c[1], 0.0), "homeSets": int(num(c[2], 0) or 0), "homeGames": int(num(c[3], 0) or 0),
+                "homePts": num(middle[0], 0.0), "homeSets": int(num(middle[1], 0) or 0),
+                "homeGames": int(num(middle[2], 0) or 0),
                 "away": away,
-                "awayPts": num(c[4], 0.0), "awaySets": int(num(c[5], 0) or 0), "awayGames": int(num(c[6], 0) or 0),
+                "awayPts": num(middle[3], 0.0), "awaySets": int(num(middle[4], 0) or 0),
+                "awayGames": int(num(middle[5], 0) or 0),
             })
     rounds = [r for r in rounds if r["matches"]]
     rounds.sort(key=lambda r: r["round"], reverse=True)
     return rounds
 
 
-def team_codes(html):
-    seen = []
-    for code in re.findall(r"team=([A-Za-z]{2}\d{2,3})", html):
-        code = code.upper()
+def team_codes(html, daytime, limit=40):
+    """Team codes appear as XX123. Prefer ones that sit near the club name."""
+    found = []
+    for m in re.finditer(r"\b([A-Z]{2}\d{3})\b", html):
+        code = m.group(1)
+        if not code.startswith(daytime):
+            continue
+        near_club = CLUB.lower() in html[max(0, m.start() - 400):m.end() + 400].lower()
+        found.append((0 if near_club else 1, code))
+    seen, out = set(), []
+    for _, code in sorted(found):
         if code not in seen:
-            seen.append(code)
-    return seen
+            seen.add(code)
+            out.append(code)
+    return out[:limit]
 
 
 def parse_fixture(html):
@@ -324,7 +343,9 @@ def parse_fixture(html):
 def find_our_team_code(results_html, daytime, section):
     """TROLS fixture pages are keyed by a team code that only appears in the
     page's links, so probe the codes found on the results page."""
-    for code in team_codes(results_html):
+    candidates = team_codes(results_html, daytime)
+    print(f"  · probing {len(candidates)} team codes for {CLUB}")
+    for code in candidates:
         try:
             page = fetch(f"{BASE}/fixture.php?daytime={daytime}&section={section}"
                          f"&style=&team={code}&which=2")
