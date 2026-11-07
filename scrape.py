@@ -447,7 +447,18 @@ def debug_pages(daytime, section):
             second = " | ".join(cells(t[1]))[:150] if len(t) > 1 else ""
             print(f"[debug] {name} table{i}: {len(t)} rows :: r0={first!r} :: r1={second!r}")
         if name == "ladders":
-            print(f"[debug] ladders tail: {html[-2200:]!r}")
+            for sel in re.findall(r"<select[^>]*name=\"([^\"]+)\"[^>]*>(.*?)</select>", html, re.S | re.I):
+                opts = re.findall(r'<option[^>]*value="([^"]*)"', sel[1])
+                print(f"[debug] select name={sel[0]!r} options={len(opts)} sample={opts[:6]}")
+            print(f"[debug] codes on ladder page: {sorted(set(re.findall(r'\\b([A-Z]{2}\\d{3})\\b', html)))[:12]}")
+            club_url = f"{BASE}/ladders.php?daytime={daytime}&club={CLUB.replace(' ', '+')}&style="
+            try:
+                ch = fetch(club_url)
+                print(f"[debug] club page {len(ch)} bytes, codes="
+                      f"{sorted(set(re.findall(r'\\b([A-Z]{2}\\d{3})\\b', ch)))[:12]}")
+                print(f"[debug] club page tables: {[(' | '.join(cells(t[0]))[:90]) for t in tables(ch)][:8]}")
+            except Exception as exc:  # noqa: BLE001
+                print(f"[debug] club page FAILED {exc}")
 
 
 def main():
