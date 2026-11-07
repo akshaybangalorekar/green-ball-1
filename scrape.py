@@ -394,7 +394,13 @@ def debug_pages(daytime, section):
             continue
         print(f"[debug] {name}: {len(html)} bytes, {html.count('<table')} tables, "
               f"{html.count('<tr')} rows, {html.count('</td>')} closed cells")
-        print(f"[debug] {name} head: {html[:900]!r}")
+        print(f"[debug] {name} head: {html[:300]!r}")
+        for i, t in enumerate(tables(html)):
+            first = " | ".join(cells(t[0]))[:150] if t else ""
+            second = " | ".join(cells(t[1]))[:150] if len(t) > 1 else ""
+            print(f"[debug] {name} table{i}: {len(t)} rows :: r0={first!r} :: r1={second!r}")
+        if name == "ladders":
+            print(f"[debug] ladders tail: {html[-2200:]!r}")
 
 
 def main():
