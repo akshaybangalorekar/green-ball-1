@@ -59,7 +59,12 @@ def fetch(url, tries=3):
 
 # ---- tiny HTML table reader ----------------------------------------------
 class TableReader(HTMLParser):
-    """Collects every <table> as rows of cells; keeps anchors and text."""
+    """Collects every <table> as rows of cells.
+
+    TROLS is old PHP-generated HTML and frequently omits closing </td> and
+    </tr> tags, so cells and rows are also closed implicitly when the next
+    one starts, and again at </table>.
+    """
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -69,39 +74,62 @@ class TableReader(HTMLParser):
         self._cell = None
         self._href = None
 
+    def _close_cell(self):
+        if self._cell is not None and self._row is not None:
+            self._cell["text"] = re.sub(r"\s+", " ", self._cell["text"]).strip()
+            self._row.append(self._cell)
+        self._cell = None
+        self._href = None
+
+    def _close_row(self):
+        self._close_cell()
+        if self._row is not None and self._t is not None and self._row:
+            self._t.append(self._row)
+        self._row = None
+
+    def _close_table(self):
+        self._close_row()
+        if self._t:
+            self.tables.append(self._t)
+        self._t = None
+
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
         if tag == "table":
+            self._close_table()
             self._t = []
-        elif tag == "tr" and self._t is not None:
-            self._row = []
-        elif tag in ("td", "th") and self._row is not None:
-            self._cell = {"text": "", "href": None, "tag": tag}
+        elif tag == "tr":
+            self._close_row()
+            if self._t is not None:
+                self._row = []
+        elif tag in ("td", "th"):
+            self._close_cell()
+            if self._row is not None:
+                self._cell = {"text": "", "href": None, "tag": tag}
         elif tag == "a" and self._cell is not None:
             self._href = a.get("href") or ""
-        elif tag in ("br",) and self._cell is not None:
+        elif tag == "br" and self._cell is not None:
             self._cell["text"] += " "
 
     def handle_endtag(self, tag):
-        if tag in ("td", "th") and self._cell is not None and self._row is not None:
-            self._cell["text"] = re.sub(r"\s+", " ", self._cell["text"]).strip()
-            self._row.append(self._cell)
-            self._cell = None
+        if tag in ("td", "th"):
+            self._close_cell()
+        elif tag == "tr":
+            self._close_row()
+        elif tag == "table":
+            self._close_table()
+        elif tag == "a":
             self._href = None
-        elif tag == "tr" and self._row is not None and self._t is not None:
-            if self._row:
-                self._t.append(self._row)
-            self._row = None
-        elif tag == "table" and self._t is not None:
-            if self._t:
-                self.tables.append(self._t)
-            self._t = None
 
     def handle_data(self, data):
         if self._cell is not None:
             self._cell["text"] += data
             if self._href is not None and self._cell["href"] is None:
                 self._cell["href"] = self._href
+
+    def close(self):
+        super().close()
+        self._close_table()
 
 
 def tables(html):
@@ -353,10 +381,29 @@ def build_draw(fixture):
 
 
 # ---- main -----------------------------------------------------------------
+def debug_pages(daytime, section):
+    """Print what the runner actually receives, so a markup change is obvious."""
+    for name, url in (
+        ("ladders", f"{BASE}/ladders.php?daytime={daytime}&section={section}&style="),
+        ("results", f"{BASE}/results.php?daytime={daytime}&section={section}&style="),
+    ):
+        try:
+            html = fetch(url)
+        except Exception as exc:  # noqa: BLE001
+            print(f"[debug] {name}: FETCH FAILED {exc}")
+            continue
+        print(f"[debug] {name}: {len(html)} bytes, {html.count('<table')} tables, "
+              f"{html.count('<tr')} rows, {html.count('</td>')} closed cells")
+        print(f"[debug] {name} head: {html[:900]!r}")
+
+
 def main():
     print(f"Scraping {CLUB} — {COMPETITION_LABEL} / {SECTION_LABEL}")
     daytime, section = resolve_codes()
     print(f"  · competition {daytime}, section {section}")
+
+    if "--debug" in sys.argv:
+        debug_pages(daytime, section)
 
     ladder_html = fetch(f"{BASE}/ladders.php?daytime={daytime}&section={section}&style=")
     results_html = fetch(f"{BASE}/results.php?daytime={daytime}&section={section}&style=")
