@@ -11,7 +11,8 @@
     "synced": "2026-11-07",
     "source_ladder": "https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=",
     "source_results": "https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=",
-    "source_fixture": "https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style="
+    "source_fixture": "https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style=",
+    "team_code": null
   },
   "ladder": [
     {
@@ -255,22 +256,22 @@
     {
       "round": 1,
       "date": "2026-10-11",
-      "opponent": "Doveton",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 2,
       "date": "2026-10-18",
-      "opponent": "Centenary Park",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 3,
       "date": "2026-10-25",
-      "opponent": "Clyde",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
@@ -283,29 +284,29 @@
     {
       "round": 5,
       "date": "2026-11-15",
-      "opponent": "Eildon Park",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 6,
       "date": "2026-11-22",
-      "opponent": "Glenburn",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 7,
       "date": "2026-11-29",
-      "opponent": "Centenary Park",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 8,
       "date": "2026-12-06",
-      "opponent": "North Ringwood",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
@@ -318,36 +319,36 @@
     {
       "round": 10,
       "date": "2027-01-31",
-      "opponent": "Eildon Park",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 11,
       "date": "2027-02-07",
-      "opponent": "Glenburn",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 12,
       "date": "2027-02-14",
-      "opponent": "Doveton",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 13,
       "date": "2027-02-21",
-      "opponent": "North Ringwood",
-      "homeAway": "A",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     },
     {
       "round": 14,
       "date": "2027-02-28",
-      "opponent": "Clyde",
-      "homeAway": "H",
+      "opponent": null,
+      "homeAway": null,
       "result": null
     }
   ],
