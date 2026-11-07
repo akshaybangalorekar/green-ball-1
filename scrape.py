@@ -470,6 +470,13 @@ def main():
 
     ladder = enrich(ladder, results)
 
+    old = {}
+    if DATA_FILE.exists():
+        try:
+            old = json.loads(DATA_FILE.read_text())
+        except Exception:  # noqa: BLE001
+            old = {}
+
     valid_teams = {row["team"] for row in ladder}
     our_code, fixture_html = find_our_team_code(
         results_html, daytime, section, valid_teams, cached=old.get("meta", {}).get("team_code"))
@@ -483,13 +490,6 @@ def main():
 
     loaded = re.search(r"Loaded:?\s*([0-9]{1,2}\w{2}\s+\w+\s+\d{2,4}[^<]*)", ladder_html)
     loaded_txt = loaded.group(1).strip() if loaded else None
-
-    old = {}
-    if DATA_FILE.exists():
-        try:
-            old = json.loads(DATA_FILE.read_text())
-        except Exception:  # noqa: BLE001
-            old = {}
 
     meta = old.get("meta", {})
     meta.update({
