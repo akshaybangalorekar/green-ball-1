@@ -8,124 +8,124 @@
     "section_code": "UA037",
     "ladder_loaded": "29 Oct 2026, 3:01 pm",
     "results_loaded": "29 Oct 2026, 3:01 pm",
-    "synced": "2026-11-08",
+    "synced": "2026-11-07",
     "source_ladder": "https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=",
     "source_results": "https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=",
     "source_fixture": "https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style="
   },
   "ladder": [
     {
-      "pos": 1,
       "team": "Glen Waverley",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
       "pts": 20.0,
       "pct": 480.0,
+      "pos": 1,
+      "played": 2,
+      "won": 2,
+      "lost": 0,
       "sets_for": 12,
       "sets_against": 0,
       "games_for": 72,
-      "games_against": 15
+      "games_against": 15,
+      "drawn": 0
     },
     {
-      "pos": 2,
       "team": "MCC Glen Iris",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
       "pts": 19.0,
       "pct": 283.33,
+      "pos": 2,
+      "played": 2,
+      "won": 2,
+      "lost": 0,
       "sets_for": 11,
       "sets_against": 1,
       "games_for": 68,
-      "games_against": 24
+      "games_against": 24,
+      "drawn": 0
     },
     {
-      "pos": 3,
       "team": "East Malvern",
-      "played": 2,
-      "won": 2,
-      "drawn": 0,
-      "lost": 0,
       "pts": 19.0,
       "pct": 272.0,
+      "pos": 3,
+      "played": 2,
+      "won": 2,
+      "lost": 0,
       "sets_for": 11,
       "sets_against": 1,
       "games_for": 68,
       "games_against": 25,
+      "drawn": 0,
       "isUs": true
     },
     {
-      "pos": 4,
       "team": "Mountain Gate",
-      "played": 2,
-      "won": 1,
-      "drawn": 0,
-      "lost": 1,
       "pts": 12.0,
       "pct": 115.91,
+      "pos": 4,
+      "played": 2,
+      "won": 1,
+      "lost": 1,
       "sets_for": 6,
       "sets_against": 6,
       "games_for": 51,
-      "games_against": 44
+      "games_against": 44,
+      "drawn": 0
     },
     {
-      "pos": 5,
       "team": "Rosswood",
-      "played": 2,
-      "won": 1,
-      "drawn": 0,
-      "lost": 1,
       "pts": 12.0,
       "pct": 76.27,
+      "pos": 5,
+      "played": 2,
+      "won": 1,
+      "lost": 1,
       "sets_for": 6,
       "sets_against": 6,
       "games_for": 45,
-      "games_against": 59
+      "games_against": 59,
+      "drawn": 0
     },
     {
-      "pos": 6,
       "team": "Mayfield Park",
-      "played": 2,
-      "won": 0,
-      "drawn": 0,
-      "lost": 2,
       "pts": 5.0,
       "pct": 47.83,
+      "pos": 6,
+      "played": 2,
+      "won": 0,
+      "lost": 2,
       "sets_for": 1,
       "sets_against": 11,
       "games_for": 33,
-      "games_against": 69
+      "games_against": 69,
+      "drawn": 0
     },
     {
-      "pos": 7,
       "team": "Dingley",
-      "played": 2,
-      "won": 0,
-      "drawn": 0,
-      "lost": 2,
       "pts": 5.0,
       "pct": 32.35,
+      "pos": 7,
+      "played": 2,
+      "won": 0,
+      "lost": 2,
       "sets_for": 1,
       "sets_against": 11,
       "games_for": 22,
-      "games_against": 68
+      "games_against": 68,
+      "drawn": 0
     },
     {
-      "pos": 8,
       "team": "Fountain Gate",
-      "played": 2,
-      "won": 0,
-      "drawn": 0,
-      "lost": 2,
       "pts": 4.0,
       "pct": 23.61,
+      "pos": 8,
+      "played": 2,
+      "won": 0,
+      "lost": 2,
       "sets_for": 0,
       "sets_against": 12,
       "games_for": 17,
-      "games_against": 72
+      "games_against": 72,
+      "drawn": 0
     }
   ],
   "results": [
@@ -255,99 +255,99 @@
     {
       "round": 1,
       "date": "2026-10-11",
-      "opponent": "Mayfield Park",
-      "homeAway": "H",
-      "result": "W 8.0 – 0.0"
+      "opponent": "Doveton",
+      "homeAway": "A",
+      "result": null
     },
     {
       "round": 2,
       "date": "2026-10-18",
-      "opponent": "Mountain Gate",
-      "homeAway": "A",
-      "result": "W 7.0 – 1.0"
+      "opponent": "Centenary Park",
+      "homeAway": "H",
+      "result": null
     },
     {
       "round": 3,
       "date": "2026-10-25",
-      "opponent": "Glen Waverley",
+      "opponent": "Clyde",
       "homeAway": "A",
-      "result": "Wash out"
+      "result": null
     },
     {
       "round": 4,
       "date": "2026-11-08",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "MCC Glen Iris",
+      "homeAway": "H",
       "result": null
     },
     {
       "round": 5,
       "date": "2026-11-15",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Eildon Park",
+      "homeAway": "A",
       "result": null
     },
     {
       "round": 6,
       "date": "2026-11-22",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Glenburn",
+      "homeAway": "H",
       "result": null
     },
     {
       "round": 7,
       "date": "2026-11-29",
-      "opponent": "Mountain Gate",
-      "homeAway": "H",
+      "opponent": "Centenary Park",
+      "homeAway": "A",
       "result": null
     },
     {
       "round": 8,
       "date": "2026-12-06",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "North Ringwood",
+      "homeAway": "H",
       "result": null
     },
     {
       "round": 9,
       "date": "2026-12-13",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "MCC Glen Iris",
+      "homeAway": "A",
       "result": null
     },
     {
       "round": 10,
       "date": "2027-01-31",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Eildon Park",
+      "homeAway": "H",
       "result": null
     },
     {
       "round": 11,
       "date": "2027-02-07",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Glenburn",
+      "homeAway": "A",
       "result": null
     },
     {
       "round": 12,
       "date": "2027-02-14",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Doveton",
+      "homeAway": "H",
       "result": null
     },
     {
       "round": 13,
       "date": "2027-02-21",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "North Ringwood",
+      "homeAway": "A",
       "result": null
     },
     {
       "round": 14,
       "date": "2027-02-28",
-      "opponent": null,
-      "homeAway": null,
+      "opponent": "Clyde",
+      "homeAway": "H",
       "result": null
     }
   ],
@@ -371,67 +371,58 @@
   ],
   "clubs": [
     {
-      "name": "East Malvern",
-      "melway": "59 K10",
-      "venue": "15 Moira St, opp Dorothy Laver Reserve, Glen Iris",
-      "clubPhone": "0477 858 854",
-      "contact": "Jake Zerman",
-      "phone": "0431 820 447",
-      "isUs": true
-    },
-    {
       "name": "Glen Waverley",
       "melway": "71 A5",
-      "venue": "3 Aquatic Place, rear of Monash Aquatic Centre, Glen Waverley",
-      "clubPhone": null,
+      "venue": "3 Aquatic Place Rear of Monash Aquatic Centre, Glen Waverley",
       "contact": "Brad Hasler",
       "phone": "0417 327 880"
     },
     {
       "name": "Mountain Gate",
       "melway": "64 J11",
-      "venue": "Reta Matthews Reserve, cnr Burke Rd & Agora Blvd, Ferntree Gully",
-      "clubPhone": null,
+      "venue": "Reta Matthews Reserve Cnr Burke Rd & Agora Blvd, Ferntree Gully",
       "contact": "Frank Ruberto",
       "phone": "0418 711 325"
     },
     {
+      "name": "East Malvern",
+      "melway": "59 K10",
+      "venue": "15 Moira St Opp Dorothy Laver Reserve, Glen Iris Club House Ph:0477 858 854",
+      "contact": "Jake Zerman",
+      "phone": "0431 820 447"
+    },
+    {
       "name": "Fountain Gate",
       "melway": "110 B4",
-      "venue": "Cnr Raven Cres & Princes Hwy, Narre Warren",
-      "clubPhone": null,
+      "venue": "Cnr Raven Cres & Princes Highway, Narre Warren",
       "contact": "Dejan Stojic",
       "phone": "0401 137 236"
     },
     {
       "name": "Rosswood",
       "melway": "81 E8",
-      "venue": "112A Somerset Dr, opp Francesco Dr, Dandenong North",
-      "clubPhone": "0401 177 886",
+      "venue": "112A Somerset Drive opposite Francesco Drive, Dandenong North Club House Ph:0401 177 886",
       "contact": "Marcel Pietrasik",
       "phone": "0401 177 886"
     },
     {
       "name": "Dingley",
       "melway": "88 H4",
-      "venue": "Rowan Road South, off Westall Rd Ext, behind netball, Dingley Village",
-      "clubPhone": "0411 330 289",
+      "venue": "Rowan Road South Off Westall Rd Ext. behind netball, Dingley Village Club House Ph:0411 330 289",
       "contact": "Leon Yang",
       "phone": "0400 366 188"
     },
     {
       "name": "Mayfield Park",
       "melway": "70 B4",
-      "venue": "34–38 Mayfield Drive, Mount Waverley",
-      "clubPhone": null,
+      "venue": "34 - 38 Mayfield Drive, Mount Waverley",
       "contact": "Brad Hasler",
       "phone": "0417 327 880"
     },
     {
       "name": "MCC Glen Iris",
       "melway": "61 C11",
-      "venue": "260–270 High Street Rd, opp Surrey Rd, Mount Waverley",
-      "clubPhone": "9807 7755",
+      "venue": "260-270 High Street Road Opposite Surrey Road, Mount Waverley Club House Ph:9807 7755",
       "contact": "Angelo Giampaolo",
       "phone": "0407 477 798"
     }
