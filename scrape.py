@@ -459,6 +459,14 @@ def debug_pages(daytime, section):
                 print(f"[debug] club page tables: {[(' | '.join(cells(t[0]))[:90]) for t in tables(ch)][:8]}")
             except Exception as exc:  # noqa: BLE001
                 print(f"[debug] club page FAILED {exc}")
+            for idx in range(1, 9):
+                u = f"{BASE}/fixture.php?daytime={daytime}&section={section}&style=&team={idx}&which=2"
+                try:
+                    fh = fetch(u)
+                    m = re.search(r"Fixture for ([^<|]+)", fh)
+                    print(f"[debug] team={idx} -> {m.group(1).strip() if m else 'NO FIXTURE'} ({len(fh)}b)")
+                except Exception as exc:  # noqa: BLE001
+                    print(f"[debug] team={idx} FAILED {exc}")
 
 
 def main():
