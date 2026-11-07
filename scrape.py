@@ -459,11 +459,15 @@ def debug_pages(daytime, section):
                 print(f"[debug] club page tables: {[(' | '.join(cells(t[0]))[:90]) for t in tables(ch)][:8]}")
             except Exception as exc:  # noqa: BLE001
                 print(f"[debug] club page FAILED {exc}")
-            rh = fetch(f"{BASE}/results.php?daytime={daytime}&section={section}&style=")
-            for m in list(re.finditer(re.escape(CLUB), rh))[:3]:
-                print(f"[debug] ctx: {rh[max(0, m.start()-260):m.end()+120]!r}")
-            js = fetch(f"{BASE}/js/result.js?v=2")
-            print(f"[debug] result.js {len(js)}b: {js[:700]!r}")
+            for code in ("UA037012", "UA037021", "UA037022", "UA289"):
+                u = (f"{BASE}/fixture.php?daytime={daytime}&section={section}"
+                     f"&style=&team={code}&which=2")
+                try:
+                    fh = fetch(u)
+                    m = re.search(r"Fixture for ([^<|]+)", fh)
+                    print(f"[debug] team={code} -> {m.group(1).strip() if m else 'NONE'} ({len(fh)}b)")
+                except Exception as exc:  # noqa: BLE001
+                    print(f"[debug] team={code} FAILED {exc}")
 
 
 def main():
