@@ -289,7 +289,7 @@ def parse_results(html):
     return rounds
 
 
-def team_codes(html, daytime, limit=40):
+def team_codes(html, daytime, limit=150):
     """Team codes appear as XX123. Prefer ones that sit near the club name."""
     found = []
     for m in re.finditer(r"\b([A-Z]{2}\d{3})\b", html):
@@ -340,32 +340,46 @@ def parse_fixture(html):
     return fixture, clubs
 
 
-def find_our_team_code(results_html, daytime, section, valid_teams):
+def check_code(code, daytime, section, valid_teams):
+    """Return the fixture page for this team code if it really is our team."""
+    try:
+        page = fetch(f"{BASE}/fixture.php?daytime={daytime}&section={section}"
+                     f"&style=&team={code}&which=2")
+    except Exception:  # noqa: BLE001
+        return None, None
+    if f"fixture for {CLUB}".lower() not in page.lower():
+        return None, None
+    fixture, _ = parse_fixture(page)
+    if not fixture:
+        return None, None
+    names = {f["home"] for f in fixture} | {f["away"] for f in fixture}
+    if valid_teams and not names.issubset(valid_teams | {"Bye", "No Play"}):
+        return None, None
+    return fixture, page
+
+
+def find_our_team_code(results_html, daytime, section, valid_teams, cached=None):
     """TROLS fixture pages are keyed by a team code that only appears in the
     page's markup, so probe candidate codes.
 
     A club can field several teams across the competition, so a code is only
     accepted when every name in its fixture belongs to this section.
     """
+    if cached:
+        fixture, page = check_code(cached, daytime, section, valid_teams)
+        if page:
+            print(f"  · {CLUB} team code {cached} (cached)")
+            return cached, page
+        print(f"  · cached code {cached} no longer valid — searching again")
+
     candidates = team_codes(results_html, daytime)
     print(f"  · probing {len(candidates)} team codes for {CLUB}")
     for code in candidates:
-        try:
-            page = fetch(f"{BASE}/fixture.php?daytime={daytime}&section={section}"
-                         f"&style=&team={code}&which=2")
-        except Exception:  # noqa: BLE001
-            continue
-        if f"fixture for {CLUB}".lower() not in page.lower():
-            continue
-        fixture, _ = parse_fixture(page)
-        if not fixture:
-            continue
-        names = {f["home"] for f in fixture} | {f["away"] for f in fixture}
-        if valid_teams and not names.issubset(valid_teams | {"Bye", "No Play"}):
-            print(f"  · {code} is {CLUB} in another section — skipping")
-            continue
-        print(f"  · {CLUB} team code {code}")
-        return code, page
+        fixture, page = check_code(code, daytime, section, valid_teams)
+        if page:
+            print(f"  · {CLUB} team code {code}")
+            return code, page
+    print(f"  ! no team code matched this section")
     return None, None
 
 
@@ -457,7 +471,8 @@ def main():
     ladder = enrich(ladder, results)
 
     valid_teams = {row["team"] for row in ladder}
-    our_code, fixture_html = find_our_team_code(results_html, daytime, section, valid_teams)
+    our_code, fixture_html = find_our_team_code(
+        results_html, daytime, section, valid_teams, cached=old.get("meta", {}).get("team_code"))
     fixture, clubs = (None, None)
     if fixture_html:
         fixture, clubs = parse_fixture(fixture_html)
@@ -492,11 +507,25 @@ def main():
         "source_fixture": f"{BASE}/fixture.php?daytime={daytime}&section={section}&style=",
     })
 
+    draw = build_draw(fixture)
+    if not draw:
+        # No fixture this run: keep the dates, but never keep opponents that
+        # aren't in this section.
+        draw = [
+            {**row, "opponent": row.get("opponent") if row.get("opponent") in valid_teams else None,
+             "homeAway": row.get("homeAway") if row.get("opponent") in valid_teams else None}
+            for row in old.get("draw", [])
+        ]
+        if draw:
+            print("  ! fixture unavailable — keeping dates only")
+
+    meta["team_code"] = our_code or meta.get("team_code")
+
     out = {
         "meta": meta,
         "ladder": ladder,
         "results": results,
-        "draw": build_draw(fixture) or old.get("draw", []),
+        "draw": draw,
         "finals": old.get("finals", []),
         "clubs": clubs or old.get("clubs", []),
     }
