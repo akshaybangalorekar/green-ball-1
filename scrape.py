@@ -340,9 +340,13 @@ def parse_fixture(html):
     return fixture, clubs
 
 
-def find_our_team_code(results_html, daytime, section):
+def find_our_team_code(results_html, daytime, section, valid_teams):
     """TROLS fixture pages are keyed by a team code that only appears in the
-    page's links, so probe the codes found on the results page."""
+    page's markup, so probe candidate codes.
+
+    A club can field several teams across the competition, so a code is only
+    accepted when every name in its fixture belongs to this section.
+    """
     candidates = team_codes(results_html, daytime)
     print(f"  · probing {len(candidates)} team codes for {CLUB}")
     for code in candidates:
@@ -351,9 +355,17 @@ def find_our_team_code(results_html, daytime, section):
                          f"&style=&team={code}&which=2")
         except Exception:  # noqa: BLE001
             continue
-        if f"fixture for {CLUB}".lower() in page.lower():
-            print(f"  · {CLUB} team code {code}")
-            return code, page
+        if f"fixture for {CLUB}".lower() not in page.lower():
+            continue
+        fixture, _ = parse_fixture(page)
+        if not fixture:
+            continue
+        names = {f["home"] for f in fixture} | {f["away"] for f in fixture}
+        if valid_teams and not names.issubset(valid_teams | {"Bye", "No Play"}):
+            print(f"  · {code} is {CLUB} in another section — skipping")
+            continue
+        print(f"  · {CLUB} team code {code}")
+        return code, page
     return None, None
 
 
@@ -444,7 +456,8 @@ def main():
 
     ladder = enrich(ladder, results)
 
-    our_code, fixture_html = find_our_team_code(results_html, daytime, section)
+    valid_teams = {row["team"] for row in ladder}
+    our_code, fixture_html = find_our_team_code(results_html, daytime, section, valid_teams)
     fixture, clubs = (None, None)
     if fixture_html:
         fixture, clubs = parse_fixture(fixture_html)
