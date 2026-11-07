@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>East Malvern · Green Ball 1</title>
+<meta name="theme-color" content="#14684a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314684a'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%23f6f3ec' stroke-width='2'/%3E%3Cpath d='M8.5 16h15M16 8.5c3 3 3 12 0 15M16 8.5c-3 3-3 12 0 15' stroke='%23f6f3ec' stroke-width='1.2' fill='none' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f3ec;
+    --surface: #fffdf8;
+    --surface-2: #eeeadf;
+    --ink: #1b1a17;
+    --ink-dim: #6d675b;
+    --line: rgba(27, 26, 23, .13);
+    --line-soft: rgba(27, 26, 23, .07);
+    --court: #14684a;
+    --court-ink: #0d4a34;
+    --court-wash: rgba(20, 104, 74, .09);
+    --clay: #ac4420;
+    --clay-wash: rgba(172, 68, 32, .10);
+    --gold: #9c7726;
+    --gold-wash: rgba(156, 119, 38, .12);
+    --shadow: 0 1px 2px rgba(27, 26, 23, .05), 0 8px 24px -12px rgba(27, 26, 23, .18);
+    --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
+    --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12140f;
+      --surface: #1a1d15;
+      --surface-2: #22261a;
+      --ink: #eee9dc;
+      --ink-dim: #9c9a89;
+      --line: rgba(238, 233, 220, .14);
+      --line-soft: rgba(238, 233, 220, .07);
+      --court: #5cb98c;
+      --court-ink: #8ed9b3;
+      --court-wash: rgba(92, 185, 140, .13);
+      --clay: #e2794f;
+      --clay-wash: rgba(226, 121, 79, .13);
+      --gold: #d4a94f;
+      --gold-wash: rgba(212, 169, 79, .14);
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 30px -14px rgba(0, 0, 0, .7);
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    background:
+      radial-gradient(900px 420px at 82% -12%, var(--court-wash), transparent 70%),
+      radial-gradient(700px 380px at 4% 4%, var(--gold-wash), transparent 65%),
+      var(--bg);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 44px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 18px; }
+
+  /* ---------- masthead ---------- */
+  .masthead { display: flex; align-items: center; gap: 13px; padding: 22px 0 14px; }
+  .crest {
+    width: 44px; height: 44px; flex: 0 0 44px; border-radius: 11px;
+    background: var(--court); color: #f6f3ec;
+    display: grid; place-items: center;
+    font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: .02em;
+  }
+  @media (prefers-color-scheme: dark) { .crest { color: #12140f; } }
+  .masthead h1 {
+    font-family: var(--display); font-weight: 800; font-size: 21px; line-height: 1.1;
+    margin: 0; letter-spacing: -.015em;
+  }
+  .masthead .sub {
+    margin: 3px 0 0; font-size: 12px; color: var(--ink-dim);
+    font-family: var(--mono); letter-spacing: .01em;
+  }
+  .sync {
+    margin-left: auto; text-align: right; font-family: var(--mono);
+    font-size: 10px; line-height: 1.45; color: var(--ink-dim);
+  }
+  .sync b { display: block; color: var(--court); font-weight: 500; }
+
+  /* ---------- tabs ---------- */
+  .tabs {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none;
+    margin: 0 -18px 18px; padding: 8px 18px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tabs button {
+    appearance: none; border: 0; background: transparent; cursor: pointer;
+    font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--ink-dim); padding: 7px 11px; border-radius: 7px; white-space: nowrap;
+    transition: color .15s, background .15s;
+  }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-selected="true"] { color: var(--court); background: var(--court-wash); font-weight: 500; }
+
+  /* ---------- shared ---------- */
+  .view { display: none; animation: rise .28s ease both; }
+  .view.on { display: block; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .view { animation: none; } }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--line-soft);
+    border-radius: 14px; padding: 16px; box-shadow: var(--shadow); margin-bottom: 14px;
+  }
+  .label {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-dim); display: flex; align-items: center; gap: 7px; margin: 0 0 10px;
+  }
+  .label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--court); flex: 0 0 6px; }
+  h2.sec {
+    font-family: var(--display); font-weight: 600; font-size: 15px; margin: 0 0 10px;
+    letter-spacing: -.01em;
+  }
+
+  /* ---------- next match hero ---------- */
+  .hero {
+    background: linear-gradient(160deg, var(--court-wash), transparent 62%), var(--surface);
+    border: 1px solid var(--line); border-radius: 18px; padding: 20px; margin-bottom: 14px;
+    box-shadow: var(--shadow);
+  }
+  .hero .rd {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--court); display: flex; gap: 9px; align-items: baseline; flex-wrap: wrap;
+  }
+  .hero .rd .pill {
+    background: var(--court); color: var(--bg); border-radius: 999px; padding: 2px 9px;
+    font-size: 10px; letter-spacing: .08em;
+  }
+  @media (prefers-color-scheme: dark) { .hero .rd .pill { color: #12140f; } }
+  .hero .vs {
+    font-family: var(--display); font-weight: 800; font-size: clamp(26px, 7vw, 36px);
+    line-height: 1.05; letter-spacing: -.025em; margin: 12px 0 4px;
+  }
+  .hero .vs small { display: block; font-family: var(--mono); font-weight: 400; font-size: 11px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 7px; }
+  .hero .meta { font-size: 13px; color: var(--ink-dim); margin-top: 10px; }
+  .hero .meta b { color: var(--ink); font-weight: 500; }
+  .pending {
+    display: inline-block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em;
+    color: var(--gold); background: var(--gold-wash); border-radius: 5px; padding: 3px 8px;
+    margin-top: 6px;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 14px; }
+  .stat {
+    background: var(--surface); border: 1px solid var(--line-soft); border-radius: 12px;
+    padding: 12px 13px; box-shadow: var(--shadow);
+  }
+  .stat .n {
+    font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1;
+    letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+  }
+  .stat .n span { font-size: 13px; font-weight: 600; color: var(--ink-dim); }
+  .stat .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 6px; }
+
+  .form { display: flex; gap: 6px; align-items: center; }
+  .chip {
+    font-family: var(--mono); font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 6px;
+    background: var(--surface-2); color: var(--ink-dim);
+  }
+  .chip.w { background: var(--court-wash); color: var(--court); }
+  .chip.l { background: var(--clay-wash); color: var(--clay); }
+  .chip.wo { background: var(--gold-wash); color: var(--gold); }
+
+  /* ---------- tables ---------- */
+  .tblwrap { overflow-x: auto; margin: 0 -4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th {
+    font-family: var(--mono); font-size: 9.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 400; text-align: right; padding: 0 7px 8px; white-space: nowrap;
+  }
+  th:first-child, td:first-child { text-align: left; }
+  td { padding: 9px 7px; border-top: 1px solid var(--line-soft); text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover { background: var(--line-soft); }
+  tr.us { background: var(--court-wash); }
+  tr.us:hover { background: var(--court-wash); }
+  tr.us td { font-weight: 500; }
+  td.team { font-weight: 400; white-space: nowrap; }
+  tr.us td.team { color: var(--court); font-weight: 700; }
+  .pos {
+    display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 5px;
+    font-family: var(--mono); font-size: 10.5px; background: var(--surface-2); color: var(--ink-dim);
+  }
+  tr.us .pos { background: var(--court); color: var(--bg); }
+  @media (prefers-color-scheme: dark) { tr.us .pos { color: #12140f; } }
+  .pctbar { height: 3px; border-radius: 2px; background: var(--surface-2); margin-top: 5px; overflow: hidden; }
+  .pctbar i { display: block; height: 100%; background: var(--court); border-radius: 2px; }
+
+  /* ---------- rounds ---------- */
+  .round { border-top: 1px solid var(--line-soft); padding: 12px 0 4px; }
+  .round:first-of-type { border-top: 0; padding-top: 0; }
+  .round-h {
+    display: flex; align-items: baseline; gap: 9px; margin-bottom: 8px;
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim);
+  }
+  .round-h b { color: var(--ink); font-weight: 500; letter-spacing: .08em; }
+  .match {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center;
+    padding: 7px 0; border-top: 1px solid var(--line-soft); font-size: 13.5px;
+  }
+  .match:first-of-type { border-top: 0; }
+  .match .h { text-align: right; }
+  .match .a { text-align: left; }
+  .match .sc {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim);
+    background: var(--surface-2); border-radius: 6px; padding: 3px 8px; white-space: nowrap;
+  }
+  .match.ours .h, .match.ours .a { font-weight: 700; color: var(--court); }
+  .match .win { color: var(--court); font-weight: 700; }
+
+  /* ---------- draw ---------- */
+  .draw { list-style: none; margin: 0; padding: 0; }
+  .draw li {
+    display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center;
+    padding: 10px 0; border-top: 1px solid var(--line-soft);
+  }
+  .draw li:first-child { border-top: 0; }
+  .draw .rn {
+    font-family: var(--mono); font-size: 10px; color: var(--ink-dim); text-align: center;
+    background: var(--surface-2); border-radius: 5px; padding: 3px 0;
+  }
+  .draw .who { font-size: 13.5px; }
+  .draw .who small { display: block; color: var(--ink-dim); font-size: 11.5px; font-family: var(--mono); margin-top: 2px; }
+  .draw .res { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); white-space: nowrap; }
+  .draw li.today { background: var(--court-wash); border-radius: 9px; padding-left: 8px; padding-right: 8px; }
+  .draw li.past .who { color: var(--ink-dim); }
+
+  /* ---------- team ---------- */
+  .addrow { display: flex; gap: 8px; margin-bottom: 12px; }
+  input[type="text"] {
+    flex: 1; min-width: 0; font-family: var(--body); font-size: 14px; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 9px 12px;
+  }
+  input[type="text"]:focus { outline: 2px solid var(--court); outline-offset: -1px; }
+  .btn {
+    appearance: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: .06em; text-transform: uppercase; padding: 10px 14px; border-radius: 9px;
+    background: var(--court); color: var(--bg); transition: filter .15s;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  @media (prefers-color-scheme: dark) { .btn { color: #12140f; } }
+  .btn.ghost { background: var(--surface-2); color: var(--ink); }
+  .player {
+    display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--line-soft);
+  }
+  .player:first-child { border-top: 0; }
+  .player .nm { flex: 1; font-size: 14px; min-width: 0; overflow-wrap: break-word; }
+  .seg { display: flex; gap: 3px; }
+  .seg button {
+    appearance: none; border: 1px solid var(--line); background: transparent; cursor: pointer;
+    font-family: var(--mono); font-size: 10px; letter-spacing: .05em; padding: 4px 8px; border-radius: 6px;
+    color: var(--ink-dim);
+  }
+  .seg button[data-on="in"] { background: var(--court); border-color: var(--court); color: var(--bg); }
+  .seg button[data-on="maybe"] { background: var(--gold); border-color: var(--gold); color: var(--bg); }
+  .seg button[data-on="out"] { background: var(--clay); border-color: var(--clay); color: var(--bg); }
+  @media (prefers-color-scheme: dark) {
+    .seg button[data-on="in"], .seg button[data-on="maybe"], .seg button[data-on="out"] { color: #12140f; }
+  }
+  .del {
+    appearance: none; border: 0; background: transparent; cursor: pointer; color: var(--ink-dim);
+    font-size: 15px; line-height: 1; padding: 2px 4px; border-radius: 5px;
+  }
+  .del:hover { color: var(--clay); }
+  .empty { color: var(--ink-dim); font-size: 13px; padding: 6px 0 2px; }
+
+  /* ---------- clubs ---------- */
+  .club { border-top: 1px solid var(--line-soft); padding: 12px 0; }
+  .club:first-child { border-top: 0; }
+  .club .cn { font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .club .cn .tag {
+    font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--court); color: var(--bg); border-radius: 4px; padding: 2px 6px; font-weight: 500;
+  }
+  @media (prefers-color-scheme: dark) { .club .cn .tag { color: #12140f; } }
+  .club .vd { font-size: 12.5px; color: var(--ink-dim); margin-top: 3px; }
+  .club .ct { font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); margin-top: 5px; }
+  .club .ct a { color: var(--court); text-decoration: none; }
+  .club .ct a:hover { text-decoration: underline; }
+
+  footer {
+    margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line-soft);
+    font-family: var(--mono); font-size: 10.5px; line-height: 1.7; color: var(--ink-dim);
+  }
+  footer a { color: var(--court); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .note { font-size: 12px; color: var(--ink-dim); line-height: 1.55; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="crest">EM</div>
+    <div>
+      <h1>Green Ball 1</h1>
+      <p class="sub" id="mastheadSub">East Malvern · Sunday AM</p>
+    </div>
+    <div class="sync">
+      <b id="syncState">synced</b>
+      <span id="syncWhen"></span>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" aria-selected="true" data-view="week">This week</button>
+    <button role="tab" aria-selected="false" data-view="ladder">Ladder</button>
+    <button role="tab" aria-selected="false" data-view="results">Results</button>
+    <button role="tab" aria-selected="false" data-view="draw">Draw</button>
+    <button role="tab" aria-selected="false" data-view="team">Team</button>
+    <button role="tab" aria-selected="false" data-view="clubs">Clubs</button>
+  </nav>
+
+  <main>
+    <section class="view on" id="view-week" role="tabpanel"></section>
+    <section class="view" id="view-ladder" role="tabpanel"></section>
+    <section class="view" id="view-results" role="tabpanel"></section>
+    <section class="view" id="view-draw" role="tabpanel"></section>
+    <section class="view" id="view-team" role="tabpanel"></section>
+    <section class="view" id="view-clubs" role="tabpanel"></section>
+  </main>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const DATA = {"meta":{"club":"East Malvern","competition":"Sunday AM","season":"Summer 26/27","section":"Open Triples Green Ball 1","daytime_code":"UA","section_code":"UA037","ladder_loaded":"29 Oct 2026, 3:01 pm","results_loaded":"29 Oct 2026, 3:01 pm","synced":"2026-11-08","source_ladder":"https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=","source_results":"https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=","source_fixture":"https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style="},"ladder":[{"pos":1,"team":"Glen Waverley","played":2,"won":2,"drawn":0,"lost":0,"pts":20.0,"pct":480.0,"sets_for":12,"sets_against":0,"games_for":72,"games_against":15},{"pos":2,"team":"MCC Glen Iris","played":2,"won":2,"drawn":0,"lost":0,"pts":19.0,"pct":283.33,"sets_for":11,"sets_against":1,"games_for":68,"games_against":24},{"pos":3,"team":"East Malvern","played":2,"won":2,"drawn":0,"lost":0,"pts":19.0,"pct":272.0,"sets_for":11,"sets_against":1,"games_for":68,"games_against":25,"isUs":true},{"pos":4,"team":"Mountain Gate","played":2,"won":1,"drawn":0,"lost":1,"pts":12.0,"pct":115.91,"sets_for":6,"sets_against":6,"games_for":51,"games_against":44},{"pos":5,"team":"Rosswood","played":2,"won":1,"drawn":0,"lost":1,"pts":12.0,"pct":76.27,"sets_for":6,"sets_against":6,"games_for":45,"games_against":59},{"pos":6,"team":"Mayfield Park","played":2,"won":0,"drawn":0,"lost":2,"pts":5.0,"pct":47.83,"sets_for":1,"sets_against":11,"games_for":33,"games_against":69},{"pos":7,"team":"Dingley","played":2,"won":0,"drawn":0,"lost":2,"pts":5.0,"pct":32.35,"sets_for":1,"sets_against":11,"games_for":22,"games_against":68},{"pos":8,"team":"Fountain Gate","played":2,"won":0,"drawn":0,"lost":2,"pts":4.0,"pct":23.61,"sets_for":0,"sets_against":12,"games_for":17,"games_against":72}],"results":[{"round":3,"date":"2026-10-25","washout":true,"matches":[{"home":"Glen Waverley","away":"East Malvern","washout":true},{"home":"Fountain Gate","away":"Mountain Gate","washout":true},{"home":"Dingley","away":"Mayfield Park","washout":true},{"home":"MCC Glen Iris","away":"Rosswood","washout":true}]},{"round":2,"date":"2026-10-18","washout":false,"matches":[{"home":"Mountain Gate","homePts":1.0,"homeSets":1,"homeGames":18,"away":"East Malvern","awayPts":7.0,"awaySets":5,"awayGames":32},{"home":"Fountain Gate","homePts":0.0,"homeSets":0,"homeGames":7,"away":"Glen Waverley","awayPts":8.0,"awaySets":6,"awayGames":36},{"home":"Dingley","homePts":1.0,"homeSets":1,"homeGames":14,"away":"MCC Glen Iris","awayPts":7.0,"awaySets":5,"awayGames":32},{"home":"Mayfield Park","homePts":1.0,"homeSets":1,"homeGames":26,"away":"Rosswood","awayPts":7.0,"awaySets":5,"awayGames":33}]},{"round":1,"date":"2026-10-11","washout":false,"matches":[{"home":"Glen Waverley","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Dingley","awayPts":0.0,"awaySets":0,"awayGames":8},{"home":"East Malvern","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Mayfield Park","awayPts":0.0,"awaySets":0,"awayGames":7},{"home":"Rosswood","homePts":1.0,"homeSets":1,"homeGames":12,"away":"Mountain Gate","awayPts":7.0,"awaySets":5,"awayGames":33},{"home":"MCC Glen Iris","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Fountain Gate","awayPts":0.0,"awaySets":0,"awayGames":10}]}],"draw":[{"round":1,"date":"2026-10-11","opponent":"Mayfield Park","homeAway":"H","result":"W 8.0 – 0.0"},{"round":2,"date":"2026-10-18","opponent":"Mountain Gate","homeAway":"A","result":"W 7.0 – 1.0"},{"round":3,"date":"2026-10-25","opponent":"Glen Waverley","homeAway":"A","result":"Wash out"},{"round":4,"date":"2026-11-08","opponent":null,"homeAway":null,"result":null},{"round":5,"date":"2026-11-15","opponent":null,"homeAway":null,"result":null},{"round":6,"date":"2026-11-22","opponent":null,"homeAway":null,"result":null},{"round":7,"date":"2026-11-29","opponent":"Mountain Gate","homeAway":"H","result":null},{"round":8,"date":"2026-12-06","opponent":null,"homeAway":null,"result":null},{"round":9,"date":"2026-12-13","opponent":null,"homeAway":null,"result":null},{"round":10,"date":"2027-01-31","opponent":null,"homeAway":null,"result":null},{"round":11,"date":"2027-02-07","opponent":null,"homeAway":null,"result":null},{"round":12,"date":"2027-02-14","opponent":null,"homeAway":null,"result":null},{"round":13,"date":"2027-02-21","opponent":null,"homeAway":null,"result":null},{"round":14,"date":"2027-02-28","opponent":null,"homeAway":null,"result":null}],"finals":[{"label":"No play","date":"2026-11-01"},{"label":"No play","date":"2027-03-07"},{"label":"Semi finals","date":"2027-03-14"},{"label":"Grand final","date":"2027-03-21"}],"clubs":[{"name":"East Malvern","melway":"59 K10","venue":"15 Moira St, opp Dorothy Laver Reserve, Glen Iris","clubPhone":"0477 858 854","contact":"Jake Zerman","phone":"0431 820 447","isUs":true},{"name":"Glen Waverley","melway":"71 A5","venue":"3 Aquatic Place, rear of Monash Aquatic Centre, Glen Waverley","clubPhone":null,"contact":"Brad Hasler","phone":"0417 327 880"},{"name":"Mountain Gate","melway":"64 J11","venue":"Reta Matthews Reserve, cnr Burke Rd & Agora Blvd, Ferntree Gully","clubPhone":null,"contact":"Frank Ruberto","phone":"0418 711 325"},{"name":"Fountain Gate","melway":"110 B4","venue":"Cnr Raven Cres & Princes Hwy, Narre Warren","clubPhone":null,"contact":"Dejan Stojic","phone":"0401 137 236"},{"name":"Rosswood","melway":"81 E8","venue":"112A Somerset Dr, opp Francesco Dr, Dandenong North","clubPhone":"0401 177 886","contact":"Marcel Pietrasik","phone":"0401 177 886"},{"name":"Dingley","melway":"88 H4","venue":"Rowan Road South, off Westall Rd Ext, behind netball, Dingley Village","clubPhone":"0411 330 289","contact":"Leon Yang","phone":"0400 366 188"},{"name":"Mayfield Park","melway":"70 B4","venue":"34–38 Mayfield Drive, Mount Waverley","clubPhone":null,"contact":"Brad Hasler","phone":"0417 327 880"},{"name":"MCC Glen Iris","melway":"61 C11","venue":"260–270 High Street Rd, opp Surrey Rd, Mount Waverley","clubPhone":"9807 7755","contact":"Angelo Giampaolo","phone":"0407 477 798"}]};
+
+/* ---------- helpers ---------- */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const CLUB = DATA.meta.club;
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function parseDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d, 12, 0, 0);
+}
+function fmtDate(iso) {
+  const d = parseDate(iso);
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+}
+function fmtLong(iso) {
+  const d = parseDate(iso);
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
+}
+function todayISO() {
+  const n = new Date();
+  return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
+}
+function daysBetween(aISO, bISO) {
+  return Math.round((parseDate(aISO) - parseDate(bISO)) / 86400000);
+}
+function pct(n) { return n.toFixed(2).replace(/\.00$/, ".0"); }
+
+const us = DATA.ladder.find((t) => t.isUs);
+const resultsFor = (team) => {
+  const out = [];
+  DATA.results.forEach((r) => {
+    r.matches.forEach((m) => {
+      if (m.home !== team && m.away !== team) return;
+      const home = m.home === team;
+      let res;
+      if (m.washout) res = "wo";
+      else {
+        const mine = home ? m.homePts : m.awayPts;
+        const theirs = home ? m.awayPts : m.homePts;
+        res = mine > theirs ? "w" : mine < theirs ? "l" : "d";
+      }
+      out.push({ round: r.round, date: r.date, res, home, opp: home ? m.away : m.home, m });
+    });
+  });
+  return out.sort((a, b) => b.round - a.round);
+};
+const ourResults = resultsFor(CLUB);
+const form = ourResults.filter((r) => r.res !== "wo").slice(0, 4);
+
+function nextRound() {
+  const t = todayISO();
+  const upcoming = DATA.draw.filter((d) => d.date >= t);
+  if (upcoming.length) return upcoming[0];
+  return DATA.draw[DATA.draw.length - 1];
+}
+function clubByName(name) { return DATA.clubs.find((c) => c.name === name) || null; }
+
+/* ---------- views ---------- */
+function viewWeek() {
+  const nr = nextRound();
+  const isToday = nr.date === todayISO();
+  const opp = nr.opponent ? clubByName(nr.opponent) : null;
+  const venueLine = nr.opponent
+    ? (nr.homeAway === "H" ? "Home — 15 Moira St, Glen Iris" : (opp ? "Away — " + opp.venue : "Away"))
+    : "Home or away and venue appear once TROLS publishes the round";
+
+  const formHTML = form.length
+    ? form.map((f) => `<span class="chip ${f.res}">${f.res === "w" ? "W" : f.res === "l" ? "L" : "D"} ${fmtDate(f.date).replace(/^\w+ /, "")}</span>`).join("")
+    : `<span class="chip">No completed rounds</span>`;
+
+  const lastRes = ourResults.find((r) => r.res !== "wo");
+
+  return `
+    <div class="hero">
+      <div class="rd">
+        <span class="pill">Round ${nr.round}</span>
+        <span>${fmtLong(nr.date)}</span>
+        ${isToday ? `<span class="pill" style="background:var(--clay)">Today</span>` : ""}
+      </div>
+      <div class="vs">
+        <small>${nr.opponent ? (nr.homeAway === "H" ? "Home vs" : "Away vs") : "Opponent"}</small>
+        ${nr.opponent ? esc(nr.opponent) : "To be confirmed"}
+      </div>
+      ${nr.opponent ? "" : `<span class="pending">Fixture syncs from TROLS</span>`}
+      <div class="meta">${esc(venueLine)}</div>
+      ${nr.opponent ? "" : `<div class="meta"><a href="${esc(DATA.meta.source_fixture)}" target="_blank" rel="noopener" style="color:var(--court);text-decoration:none;font-family:var(--mono);font-size:11.5px">Open the official fixture \u2192</a></div>`}
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="n">${us.pos}<span>/${DATA.ladder.length}</span></div>
+        <div class="k">Ladder</div>
+      </div>
+      <div class="stat">
+        <div class="n">${us.pts.toFixed(1)}</div>
+        <div class="k">Points</div>
+      </div>
+      <div class="stat">
+        <div class="n">${pct(us.pct)}<span>%</span></div>
+        <div class="k">Games won</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="label">Form</p>
+      <div class="form">${formHTML}</div>
+      ${lastRes ? `<p class="note" style="margin:11px 0 0">Last out: ${lastRes.home ? "home" : "away"} v ${esc(lastRes.opp)}, round ${lastRes.round} — ${lastRes.m.home === CLUB ? lastRes.m.homePts : lastRes.m.awayPts} to ${lastRes.m.home === CLUB ? lastRes.m.awayPts : lastRes.m.homePts}.</p>` : ""}
+    </div>
+
+    <div class="card">
+      <p class="label">Season so far</p>
+      <p class="note" style="margin:0">
+        ${us.won} wins from ${us.played} completed rounds, ${us.sets_for} sets to ${us.sets_against} and
+        ${us.games_for} games to ${us.games_against}. One round washed out (round 3 at Glen Waverley).
+        Ladder is current to ${esc(DATA.meta.ladder_loaded)}.
+      </p>
+    </div>`;
+}
+
+function viewLadder() {
+  const max = Math.max(...DATA.ladder.map((t) => t.pct));
+  const rows = DATA.ladder.map((t) => `
+    <tr class="${t.isUs ? "us" : ""}">
+      <td><span class="pos">${t.pos}</span></td>
+      <td class="team">${esc(t.team)}</td>
+      <td>${t.played}</td>
+      <td>${t.won}</td>
+      <td>${t.lost}</td>
+      <td>${t.sets_for}–${t.sets_against}</td>
+      <td>${t.pts.toFixed(1)}</td>
+      <td style="min-width:74px">
+        ${pct(t.pct)}
+        <div class="pctbar"><i style="width:${Math.max(3, (t.pct / max) * 100)}%"></i></div>
+      </td>
+    </tr>`).join("");
+
+  return `
+    <div class="card">
+      <p class="label">Open Triples Green Ball 1 · after round 3</p>
+      <div class="tblwrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>L</th><th>Sets</th><th>Pts</th><th>%</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      <p class="note" style="margin:13px 0 0">
+        Points decide the ladder; percentage is games won divided by games lost.
+        A wash-out pays each team 4 points. Top four play finals.
+      </p>
+    </div>
+    <div class="card">
+      <p class="label">Gap to the top</p>
+      <p class="note" style="margin:0">
+        ${esc(DATA.ladder[0].team)} lead on ${DATA.ladder[0].pts.toFixed(1)} points,
+        ${(DATA.ladder[0].pts - us.pts).toFixed(1)} clear of East Malvern.
+        ${us.pos <= 4 ? "Inside the finals four." : "Outside the four — need a result."}
+        Finals: semis ${esc(fmtDate("2027-03-14"))}, grand final ${esc(fmtDate("2027-03-21"))}.
+      </p>
+    </div>`;
+}
+
+function viewResults() {
+  const blocks = DATA.results.map((r) => {
+    const rows = r.matches.map((m) => {
+      const ours = m.home === CLUB || m.away === CLUB;
+      if (m.washout) {
+        return `<div class="match ${ours ? "ours" : ""}">
+          <div class="h">${esc(m.home)}</div>
+          <div class="sc">wash out</div>
+          <div class="a">${esc(m.away)}</div>
+        </div>`;
+      }
+      const hWin = m.homePts > m.awayPts;
+      return `<div class="match ${ours ? "ours" : ""}">
+        <div class="h ${hWin ? "win" : ""}">${esc(m.home)}</div>
+        <div class="sc">${m.homePts.toFixed(1)} · ${m.homeSets}s · ${m.homeGames}g &nbsp;–&nbsp; ${m.awayPts.toFixed(1)} · ${m.awaySets}s · ${m.awayGames}g</div>
+        <div class="a ${!hWin ? "win" : ""}">${esc(m.away)}</div>
+      </div>`;
+    }).join("");
+    return `<div class="round">
+      <div class="round-h"><b>Round ${r.round}</b><span>${fmtLong(r.date)}</span>${r.washout ? `<span class="chip wo">wash out</span>` : ""}</div>
+      ${rows}
+    </div>`;
+  }).join("");
+
+  return `<div class="card">
+    <p class="label">Round by round · loaded ${esc(DATA.meta.results_loaded)}</p>
+    ${blocks}
+    <p class="note" style="margin:13px 0 0">Scores read points · sets · games. East Malvern's matches are highlighted.</p>
+  </div>`;
+}
+
+function viewDraw() {
+  const t = todayISO();
+  const items = DATA.draw.map((d) => {
+    const past = d.date < t;
+    const isToday = d.date === t;
+    const cls = [past ? "past" : "", isToday ? "today" : ""].filter(Boolean).join(" ");
+    const who = d.opponent
+      ? `${d.homeAway === "H" ? "vs" : "at"} ${esc(d.opponent)}`
+      : "Opponent to be confirmed";
+    return `<li class="${cls}">
+      <span class="rn">R${d.round}</span>
+      <span class="who">${who}<small>${fmtDate(d.date)}${d.homeAway ? " · " + (d.homeAway === "H" ? "home" : "away") : ""}</small></span>
+      <span class="res">${d.result ? esc(d.result) : (isToday ? "today" : "")}</span>
+    </li>`;
+  }).join("");
+
+  const finals = DATA.finals.map((f) => `<li>
+      <span class="rn">—</span>
+      <span class="who">${esc(f.label)}<small>${fmtDate(f.date)}</small></span>
+      <span class="res"></span>
+    </li>`).join("");
+
+  return `<div class="card">
+    <p class="label">Season draw · Sunday AM Summer 26/27</p>
+    <ul class="draw">${items}${finals}</ul>
+    <p class="note" style="margin:13px 0 0">
+      Dates come from the WDTA season calendar and the TROLS fixture.
+      Opponents fill in automatically once the scraper reaches the fixture page —
+      until then the official fixture is on TROLS.
+    </p>
+  </div>`;
+}
+
+/* ---------- team (local) ---------- */
+const STORE = "em-gb1-team-v1";
+function loadTeam() {
+  try {
+    const raw = localStorage.getItem(STORE);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return { players: [] };
+}
+function saveTeam(state) {
+  try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) {}
+}
+let teamState = loadTeam();
+
+function renderTeam() {
+  const el = $("#view-team");
+  const nr = nextRound();
+  const ins = teamState.players.filter((p) => p.status === "in");
+  const maybes = teamState.players.filter((p) => p.status === "maybe");
+  const outs = teamState.players.filter((p) => p.status === "out");
+
+  const list = teamState.players.length
+    ? teamState.players.map((p, i) => `
+        <div class="player">
+          <span class="nm">${esc(p.name)}</span>
+          <span class="seg">
+            <button data-i="${i}" data-s="in" data-on="${p.status === "in" ? "in" : ""}">In</button>
+            <button data-i="${i}" data-s="maybe" data-on="${p.status === "maybe" ? "maybe" : ""}">?</button>
+            <button data-i="${i}" data-s="out" data-on="${p.status === "out" ? "out" : ""}">Out</button>
+          </span>
+          <button class="del" data-del="${i}" aria-label="Remove ${esc(p.name)}">×</button>
+        </div>`).join("")
+    : `<p class="empty">No players yet. Add the squad below — names stay on this phone.</p>`;
+
+  const ready = ins.length >= 3;
+  el.innerHTML = `
+    <div class="card">
+      <p class="label">Availability · round ${nr.round}, ${fmtDate(nr.date)}</p>
+      <div class="addrow">
+        <input type="text" id="newPlayer" placeholder="Add a player" autocomplete="off">
+        <button class="btn" id="addBtn">Add</button>
+      </div>
+      ${list}
+    </div>
+    <div class="card">
+      <p class="label">Selection</p>
+      <p class="note" style="margin:0 0 10px">
+        Triples needs <b>three</b> on court. ${ins.length} in${maybes.length ? `, ${maybes.length} maybe` : ""}${outs.length ? `, ${outs.length} out` : ""}.
+        ${ready ? "Team is covered." : "Short of a full three."}
+      </p>
+      <div class="form" style="flex-wrap:wrap;gap:6px">
+        ${ins.length ? ins.map((p) => `<span class="chip w">${esc(p.name)}</span>`).join("") : `<span class="chip">nobody in yet</span>`}
+      </div>
+      ${teamState.players.length ? `<div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn ghost" id="copyBtn">Copy for the group chat</button>
+      </div>` : ""}
+    </div>
+    <div class="card">
+      <p class="label">How this works</p>
+      <p class="note" style="margin:0">
+        Roster and availability are saved in this browser only — nothing is sent anywhere.
+        Player names for completed matches are not published on the public ladder, so the
+        squad starts empty and you build it once.
+      </p>
+    </div>`;
+
+  $("#addBtn").onclick = () => {
+    const inp = $("#newPlayer");
+    const name = inp.value.trim();
+    if (!name) return;
+    teamState.players.push({ name, status: "in" });
+    saveTeam(teamState);
+    renderTeam();
+  };
+  $("#newPlayer").onkeydown = (e) => { if (e.key === "Enter") $("#addBtn").click(); };
+  el.querySelectorAll(".seg button").forEach((b) => {
+    b.onclick = () => {
+      teamState.players[+b.dataset.i].status = b.dataset.s;
+      saveTeam(teamState);
+      renderTeam();
+    };
+  });
+  el.querySelectorAll(".del").forEach((b) => {
+    b.onclick = () => {
+      teamState.players.splice(+b.dataset.del, 1);
+      saveTeam(teamState);
+      renderTeam();
+    };
+  });
+  const copy = $("#copyBtn");
+  if (copy) copy.onclick = async () => {
+    const lines = [
+      `${CLUB} — Green Ball 1`,
+      `Round ${nr.round}, ${fmtDate(nr.date)}${nr.opponent ? ` ${nr.homeAway === "H" ? "vs" : "at"} ${nr.opponent}` : ""}`,
+      ``,
+      `In: ${ins.length ? ins.map((p) => p.name).join(", ") : "—"}`,
+      maybes.length ? `Maybe: ${maybes.map((p) => p.name).join(", ")}` : null,
+      outs.length ? `Out: ${outs.map((p) => p.name).join(", ")}` : null,
+    ].filter((l) => l !== null).join("\n");
+    try {
+      await navigator.clipboard.writeText(lines);
+      copy.textContent = "Copied";
+      setTimeout(() => (copy.textContent = "Copy for the group chat"), 1600);
+    } catch (e) {
+      copy.textContent = "Copy failed";
+    }
+  };
+}
+
+function viewClubs() {
+  const order = [CLUB].concat(DATA.clubs.filter((c) => c.name !== CLUB).map((c) => c.name));
+  const cards = order.map((name) => {
+    const c = clubByName(name);
+    if (!c) return "";
+    return `<div class="club">
+      <div class="cn">${esc(c.name)}${c.isUs ? `<span class="tag">us</span>` : ""}</div>
+      <div class="vd">${esc(c.venue)} · Melway ${esc(c.melway)}</div>
+      <div class="ct">${esc(c.contact)} · <a href="tel:${esc(c.phone.replace(/\s/g, ""))}">${esc(c.phone)}</a>${c.clubPhone ? ` · club ${esc(c.clubPhone)}` : ""}</div>
+    </div>`;
+  }).join("");
+
+  return `<div class="card">
+    <p class="label">The section · venues and contacts</p>
+    ${cards}
+    <p class="note" style="margin:13px 0 0">Contacts are the club contacts listed on the TROLS section sheet — for match-day issues, the venue supervisor is the first call.</p>
+  </div>`;
+}
+
+/* ---------- boot ---------- */
+function renderAll() {
+  $("#mastheadSub").textContent = `${DATA.meta.club} · ${DATA.meta.competition} · ${DATA.meta.season}`;
+  $("#syncWhen").textContent = DATA.meta.ladder_loaded.replace(/, .*/, "");
+  $("#view-week").innerHTML = viewWeek();
+  $("#view-ladder").innerHTML = viewLadder();
+  $("#view-results").innerHTML = viewResults();
+  $("#view-draw").innerHTML = viewDraw();
+  $("#view-clubs").innerHTML = viewClubs();
+  renderTeam();
+  $("#foot").innerHTML = `
+    ${esc(DATA.meta.section)} · section ${esc(DATA.meta.section_code)} · ${esc(DATA.meta.competition)} ${esc(DATA.meta.season)}<br>
+    Ladder and results from <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>,
+    the official record for Waverley Tennis. Snapshot taken ${esc(DATA.meta.ladder_loaded)}.<br>
+    Unofficial team tool — always check TROLS or your club before a match.`;
+}
+
+document.querySelectorAll(".tabs button").forEach((b) => {
+  b.onclick = () => {
+    document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-selected", "false"));
+    b.setAttribute("aria-selected", "true");
+    document.querySelectorAll(".view").forEach((v) => v.classList.remove("on"));
+    $("#view-" + b.dataset.view).classList.add("on");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+});
+
+renderAll();
+
+/* try a fresher snapshot from the daily scrape, if the page is served alongside data.json */
+fetch("data.json?t=" + Date.now(), { cache: "no-store" })
+  .then((r) => (r.ok ? r.json() : null))
+  .then((fresh) => {
+    if (!fresh || !fresh.meta || fresh.meta.ladder_loaded === DATA.meta.ladder_loaded) return;
+    Object.assign(DATA, fresh);
+    $("#syncState").textContent = "updated";
+    renderAll();
+  })
+  .catch(() => {});
+</script>
+</body>
+</html>
