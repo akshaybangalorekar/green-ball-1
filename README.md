@@ -87,6 +87,18 @@ icon-192/512.png       app icons
 apple-touch-icon.png   iOS home-screen icon
 ```
 
+## The scores passcode
+
+Games and sets are hidden by default. Settings → **Scores** takes a passcode (the team's
+is `1981`); enter it and the scores appear on that phone until you tap "Hide again".
+
+This is a curtain, not a lock. The app is a static site: `data.json` still contains every
+score and anyone who reads the file, or views the page source, can see them. The passcode
+keeps the figures off the screen when a phone is being passed around — which is the usual
+reason to want it on a junior team's app — but it cannot make public data private. If the
+scores genuinely must be secret, the data has to stop being public, and that means
+hosting it somewhere with a login rather than on GitHub Pages.
+
 ## Settings
 
 The gear in the header opens a sheet with the install control, the alerts toggle and the

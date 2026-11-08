@@ -97,6 +97,12 @@
   .setsec:first-of-type { border-top: 0; padding-top: 4px; }
   .setsec h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
     color: var(--ink-dim); margin: 0 0 12px; font-weight: 400; }
+  .passrow { display: flex; gap: 8px; margin-top: 14px; }
+  .passrow input { flex: 1; min-width: 0; font-family: var(--mono); font-size: 15px; letter-spacing: .22em;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+  .passrow input:focus { outline: 2px solid var(--clay); outline-offset: -1px; }
+  .passnote { font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin: 10px 0 0; }
+  .passnote.bad { color: var(--clay); }
   .about { font-family: var(--mono); font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
   .about a { color: var(--clay); text-decoration: none; }
 
@@ -666,6 +672,16 @@ function viewTeam() {
     </div>`;
 }
 
+const UNLOCK_KEY = "em-gb1-unlocked";
+const PASSCODE = "1981";
+function unlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
+function lockScores() { localStorage.setItem(UNLOCK_KEY, "0"); }
+function unlockScores(code) {
+  if (String(code).trim() !== PASSCODE) return false;
+  localStorage.setItem(UNLOCK_KEY, "1");
+  return true;
+}
+
 let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
 const teamPos = {};
 DATA.ladder.forEach((t) => { teamPos[t.team] = t.pos; });
@@ -708,9 +724,9 @@ function viewSquad() {
       <span class="r">${i + 1}</span>
       <span class="n">
         <span class="nm2">${esc(p.name)}</span>
-        <span class="sub2">${esc(p.team)} · ${p.games_won}–${p.games_lost} games · ${p.rubbers} sets</span>
+        <span class="sub2">${esc(p.team)}${unlocked() ? ` · ${p.games_won}–${p.games_lost} games · ${p.rubbers} sets` : ""}</span>
       </span>
-      <span class="pc">${right}</span>
+      <span class="pc">${unlocked() ? right : ""}</span>
     </button>`;
   }).join("");
 
@@ -722,9 +738,9 @@ function viewSquad() {
       <span class="krank">${r ? r.rank : "—"}</span>
       <span class="kbody">
         <span class="knm">${esc(s.name)}</span>
-        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} by games won` : "no sets yet"}${L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
+        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} by games won` : "no sets yet"}${unlocked() && L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
       </span>
-      <span class="kpct">${L ? L.games_won : "—"}</span>
+      <span class="kpct">${unlocked() && L ? L.games_won : ""}</span>
       <span class="karrow">›</span>
     </button>`;
   }).join("");
@@ -733,7 +749,7 @@ function viewSquad() {
     <div class="card">
       <p class="label">Your four</p>
       ${kids}
-      <p class="caption">Tap a child to see every set they have played.</p>
+      <p class="caption">${unlocked() ? "Tap a child to see every set they have played." : "Tap a child for their record — the scores need the passcode."}</p>
     </div>
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
@@ -761,6 +777,14 @@ function viewSquad() {
 }
 
 function explainSheet(name) {
+  if (!unlocked()) {
+    return `<div class="grab"></div>
+      <button class="ovclose" data-close="1" aria-label="Close">×</button>
+      <h3 class="ovtitle" id="ovTitle">Scores are hidden</h3>
+      <p class="ovsub">Open Triples Green Ball 1</p>
+      <p class="caption" style="margin:0">Positions are worked out from games and sets, which sit behind a
+      passcode. Enter it in Settings and tap again.</p>`;
+  }
   const rows = ladderRowsAll();
   const i = rows.findIndex((r) => r.name === name);
   if (i < 0) return "";
@@ -849,6 +873,15 @@ function explainSheet(name) {
       : `Games won is a plain count. A comfortable win is worth more games than a tight one, so the total rewards both winning and playing.`}</p>`;
 }
 
+function lockPanel(what) {
+  return `<div class="card">
+    <p class="label">Scores are hidden</p>
+    <p class="caption" style="margin:0 0 16px">${what} sit behind a passcode so the children's results
+    aren't on open display. Enter it in Settings to see them.</p>
+    <button class="btn" id="goUnlock">Enter passcode</button>
+  </div>`;
+}
+
 function viewPlayer(name) {
   const p = (DATA.our_players || {})[name] || (DATA.section_players || {})[name];
   if (!p) return `<div class="card"><p class="caption">No sets recorded for ${esc(name)} yet.</p></div>`;
@@ -872,6 +905,17 @@ function viewPlayer(name) {
       ${rubbers}
     </div>`;
   }).join("");
+
+  if (!unlocked()) {
+    const rr = rankOf(name);
+    return `<div class="card">
+      <button class="back" id="backBtn">‹ Squad</button>
+      <div class="phead">
+        <div class="pname">${esc(p.name)}</div>
+        <div class="pteam">${esc(p.team)}${rr ? ` · ${rr.rank}${ordinal(rr.rank)} of ${rr.total} by games won` : ""}</div>
+      </div>
+    </div>${lockPanel("Games and sets")}`;
+  }
 
   return `
     <div class="card">
@@ -1073,6 +1117,8 @@ function bind() {
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
   });
+  const gu = $("#goUnlock");
+  if (gu) gu.onclick = () => openSettings();
   $("#view-squad").querySelectorAll("[data-sort]").forEach((b) => {
     b.onclick = () => { ladderSort = b.dataset.sort; $("#view-squad").innerHTML = viewSquad(); bind(); };
   });
@@ -1133,6 +1179,22 @@ function aboutHTML() {
   </div>`;
 }
 
+function scoresBlock() {
+  if (unlocked()) {
+    return `<div class="act">
+      <span class="txt"><b>Scores visible</b>Games and sets are showing on this phone.</span>
+      <button class="btn ghost" id="lockBtn">Hide again</button></div>`;
+  }
+  return `<div class="act">
+    <span class="txt"><b>Scores are hidden</b>Games and sets stay covered until the passcode is entered.</span>
+  </div>
+  <div class="passrow">
+    <input type="password" id="passInput" inputmode="numeric" autocomplete="off" placeholder="Passcode" aria-label="Passcode">
+    <button class="btn" id="unlockBtn">Unlock</button>
+  </div>
+  <p class="passnote" id="passNote">Ask the team manager if you don't have it.</p>`;
+}
+
 function settingsSheet() {
   return `
     <div class="grab"></div>
@@ -1141,6 +1203,7 @@ function settingsSheet() {
     <p class="ovsub">${APP_NAME} · ${esc(DATA.meta.club)}</p>
     <div class="setsec"><h4>App</h4><div class="act">${installBlock()}</div></div>
     <div class="setsec"><h4>Alerts</h4><div class="act">${alertsBlock()}</div></div>
+    <div class="setsec"><h4>Scores</h4>${scoresBlock()}</div>
     <div class="setsec"><h4>Words used</h4>
       <div class="about">
         <b>Set</b> — one 6-game match. Each child plays three every round: one singles and two doubles.<br>
@@ -1173,6 +1236,20 @@ function bindSheet() {
   const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
   const off = $("#alertsOff");
   if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); openSettings(); };
+  const ub = $("#unlockBtn");
+  if (ub) ub.onclick = () => {
+    const val = ($("#passInput") || {}).value || "";
+    if (unlockScores(val)) { openSettings(); renderAll(); showToast("Scores unlocked"); }
+    else {
+      const n = $("#passNote");
+      if (n) { n.textContent = "That passcode doesn't match."; n.classList.add("bad"); }
+      const f = $("#passInput"); if (f) { f.value = ""; f.focus(); }
+    }
+  };
+  const pi = $("#passInput");
+  if (pi) pi.onkeydown = (e) => { if (e.key === "Enter") ub && ub.click(); };
+  const lb = $("#lockBtn");
+  if (lb) lb.onclick = () => { lockScores(); openSettings(); renderAll(); showToast("Scores hidden"); };
 }
 
 function openSheet(html) {
