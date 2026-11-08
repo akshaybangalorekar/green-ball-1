@@ -39,6 +39,7 @@ jobs:
             echo "No change to data.json"
           else
             git commit -m "data: refresh from TROLS $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash origin main
             git push
           fi
 
