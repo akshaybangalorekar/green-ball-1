@@ -643,174 +643,589 @@
       }
     ]
   },
-  "match_details": [
-    {
-      "our_players": [
-        "Atharv Bangalopekar",
-        "Liam Kari",
-        "Alana Philpott"
-      ],
-      "opp_players": [
-        "Anya Chawla",
-        "Oliver Herath",
-        "No Player 3"
-      ],
-      "rubbers": [
-        {
-          "our_label": "2+3",
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "our_label": "1",
-          "ours": 6,
-          "theirs": 2,
-          "won": true
-        },
-        {
-          "our_label": "1+3",
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "our_label": "2",
-          "ours": 6,
-          "theirs": 3,
-          "won": true
-        },
-        {
-          "our_label": "1+2",
-          "ours": 6,
-          "theirs": 2,
-          "won": true
-        },
-        {
-          "our_label": "3",
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        }
-      ],
-      "games_won": 36,
-      "games_lost": 7,
+  "section_players": {
+    "Maya Wijenayake": {
+      "name": "Maya Wijenayake",
+      "team": "Glen Waverley",
+      "rubbers": 6,
       "sets_won": 6,
       "sets_lost": 0,
-      "round": 1,
-      "date": "2026-10-11",
-      "opponent": "Mayfield Park",
-      "home": true
-    },
-    {
-      "our_players": [
-        "Atharv Bangalopekar",
-        "Bodhi Senadipathy",
-        "Liam Kari"
-      ],
-      "opp_players": [
-        "Ryan Ganji",
-        "Matthew Hawkins",
-        "Reyansh Misra"
-      ],
-      "rubbers": [
+      "games_won": 36,
+      "games_lost": 9,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
         {
-          "our_label": "2+3",
-          "ours": 6,
-          "theirs": 5,
-          "won": true
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Logan Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Hriyaan Vaid",
+              "opponents": [
+                "Logan Tran",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Ashley Zhou",
+              "opponents": [
+                "Logan Tran",
+                "Zoeyy Kwek"
+              ]
+            }
+          ]
         },
         {
-          "our_label": "1",
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "our_label": "1+3",
-          "ours": 6,
-          "theirs": 4,
-          "won": true
-        },
-        {
-          "our_label": "2",
-          "ours": 6,
-          "theirs": 1,
-          "won": true
-        },
-        {
-          "our_label": "1+2",
-          "ours": 6,
-          "theirs": 2,
-          "won": true
-        },
-        {
-          "our_label": "3",
-          "ours": 2,
-          "theirs": 6,
-          "won": false
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Adhvi Aswath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Hriyaan Vaid",
+              "opponents": [
+                "Adhvi Aswath",
+                "Hashane Jayalath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Austin Zhang",
+              "opponents": [
+                "Adhvi Aswath",
+                "Xavier Borg"
+              ]
+            }
+          ]
         }
       ],
-      "games_won": 32,
+      "set_pct": 100.0,
+      "game_pct": 80.0
+    },
+    "Ashley Zhou": {
+      "name": "Ashley Zhou",
+      "team": "Glen Waverley",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 7,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Hriyaan Vaid",
+              "opponents": [
+                "Zoeyy Kwek",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Zoeyy Kwek"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Maya Wijenayake",
+              "opponents": [
+                "Logan Tran",
+                "Zoeyy Kwek"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 72.0
+    },
+    "Hriyaan Vaid": {
+      "name": "Hriyaan Vaid",
+      "team": "Glen Waverley",
+      "rubbers": 6,
+      "sets_won": 6,
+      "sets_lost": 0,
+      "games_won": 36,
+      "games_lost": 6,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Ashley Zhou",
+              "opponents": [
+                "Zoeyy Kwek",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Maya Wijenayake",
+              "opponents": [
+                "Logan Tran",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Milo Tran"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Austin Zhang",
+              "opponents": [
+                "Xavier Borg",
+                "Hashane Jayalath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Maya Wijenayake",
+              "opponents": [
+                "Adhvi Aswath",
+                "Hashane Jayalath"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Hashane Jayalath"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 85.7
+    },
+    "Logan Tran": {
+      "name": "Logan Tran",
+      "team": "Dingley",
+      "rubbers": 6,
+      "sets_won": 1,
+      "sets_lost": 5,
+      "games_won": 14,
+      "games_lost": 32,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 0,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Maya Wijenayake"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Milo Tran",
+              "opponents": [
+                "Maya Wijenayake",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Zoeyy Kwek",
+              "opponents": [
+                "Maya Wijenayake",
+                "Ashley Zhou"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Darren Librea"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Milo Tran",
+              "opponents": [
+                "Darren Librea",
+                "Ethan Ren"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Lucas You",
+              "opponents": [
+                "Darren Librea",
+                "Lucas Yu"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 16.7,
+      "game_pct": 30.4
+    },
+    "Zoeyy Kwek": {
+      "name": "Zoeyy Kwek",
+      "team": "Dingley",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 7,
       "games_lost": 18,
-      "sets_won": 5,
-      "sets_lost": 1,
-      "round": 2,
-      "date": "2026-10-18",
-      "opponent": "Mountain Gate",
-      "home": false
-    }
-  ],
-  "player_results": {
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Milo Tran",
+              "opponents": [
+                "Ashley Zhou",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Ashley Zhou"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Logan Tran",
+              "opponents": [
+                "Maya Wijenayake",
+                "Ashley Zhou"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 28.0
+    },
+    "Milo Tran": {
+      "name": "Milo Tran",
+      "team": "Dingley",
+      "rubbers": 6,
+      "sets_won": 0,
+      "sets_lost": 6,
+      "games_won": 11,
+      "games_lost": 36,
+      "singles_won": 0,
+      "singles_played": 2,
+      "doubles_won": 0,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Zoeyy Kwek",
+              "opponents": [
+                "Ashley Zhou",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Logan Tran",
+              "opponents": [
+                "Maya Wijenayake",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Hriyaan Vaid"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Lucas You",
+              "opponents": [
+                "Lucas Yu",
+                "Ethan Ren"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Logan Tran",
+              "opponents": [
+                "Darren Librea",
+                "Ethan Ren"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Ethan Ren"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 23.4
+    },
     "Atharv Bangalorekar": {
       "name": "Atharv Bangalorekar",
-      "rounds": [
-        1,
-        2
-      ],
+      "team": "East Malvern",
       "rubbers": 6,
       "sets_won": 6,
       "sets_lost": 0,
       "games_won": 36,
       "games_lost": 10,
-      "singles": [
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
         {
           "round": 1,
-          "ours": 6,
-          "theirs": 2,
-          "won": true
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Anya Chawla"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Alana Philpott",
+              "opponents": [
+                "Anya Chawla",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Anya Chawla",
+                "Oliver Herath"
+              ]
+            }
+          ]
         },
         {
           "round": 2,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        }
-      ],
-      "doubles": [
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 2,
-          "won": true
-        },
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 4,
-          "won": true
-        },
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 2,
-          "won": true
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Ryan Ganji"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Bodhi Senadipathy",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
         }
       ],
       "set_pct": 100.0,
@@ -818,53 +1233,94 @@
     },
     "Liam Kari": {
       "name": "Liam Kari",
-      "rounds": [
-        1,
-        2
-      ],
+      "team": "East Malvern",
       "rubbers": 6,
       "sets_won": 5,
       "sets_lost": 1,
       "games_won": 32,
       "games_lost": 20,
-      "singles": [
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
         {
           "round": 1,
-          "ours": 6,
-          "theirs": 3,
-          "won": true
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Alana Philpott",
+              "opponents": [
+                "Oliver Herath",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Oliver Herath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Anya Chawla",
+                "Oliver Herath"
+              ]
+            }
+          ]
         },
         {
           "round": 2,
-          "ours": 2,
-          "theirs": 6,
-          "won": false
-        }
-      ],
-      "doubles": [
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 2,
-          "won": true
-        },
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 5,
-          "won": true
-        },
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 4,
-          "won": true
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Bodhi Senadipathy",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Reyansh Misra"
+              ]
+            }
+          ]
         }
       ],
       "set_pct": 83.3,
@@ -872,73 +1328,1986 @@
     },
     "Alana Philpott": {
       "name": "Alana Philpott",
-      "rounds": [
-        1
-      ],
+      "team": "East Malvern",
       "rubbers": 3,
       "sets_won": 3,
       "sets_lost": 0,
       "games_won": 18,
       "games_lost": 0,
-      "singles": [
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
         {
           "round": 1,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        }
-      ],
-      "doubles": [
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
-        },
-        {
-          "round": 1,
-          "ours": 6,
-          "theirs": 0,
-          "won": true
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Oliver Herath",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Anya Chawla",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "No Player 3"
+              ]
+            }
+          ]
         }
       ],
       "set_pct": 100.0,
       "game_pct": 100.0
     },
+    "Anya Chawla": {
+      "name": "Anya Chawla",
+      "team": "Mayfield Park",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 4,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "East Malvern",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Atharv Bangalopekar"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "No Player 3",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Alana Philpott"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Oliver Herath",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Liam Kari"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 18.2
+    },
+    "Oliver Herath": {
+      "name": "Oliver Herath",
+      "team": "Mayfield Park",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 5,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "East Malvern",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "No Player 3",
+              "opponents": [
+                "Liam Kari",
+                "Alana Philpott"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Liam Kari"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Anya Chawla",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Liam Kari"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 21.7
+    },
+    "Tyler Shamgar": {
+      "name": "Tyler Shamgar",
+      "team": "Rosswood",
+      "rubbers": 6,
+      "sets_won": 4,
+      "sets_lost": 2,
+      "games_won": 25,
+      "games_lost": 30,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 2,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Ryan Ganji"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Austin McCallum",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Yashvi Patel",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Filippe Muscatello"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Austin McCallum",
+              "opponents": [
+                "Filippe Muscatello",
+                "Justin Zhou"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Yashvi Patel",
+              "opponents": [
+                "Filippe Muscatello",
+                "Tiffany Soh"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 66.7,
+      "game_pct": 45.5
+    },
+    "Yashvi Patel": {
+      "name": "Yashvi Patel",
+      "team": "Rosswood",
+      "rubbers": 6,
+      "sets_won": 2,
+      "sets_lost": 4,
+      "games_won": 20,
+      "games_lost": 33,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 1,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Austin McCallum",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Matthew Hawkins"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Tyler Shamgar",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Austin McCallum",
+              "opponents": [
+                "Tiffany Soh",
+                "Justin Zhou"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Tiffany Soh"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Tyler Shamgar",
+              "opponents": [
+                "Filippe Muscatello",
+                "Tiffany Soh"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 33.3,
+      "game_pct": 37.7
+    },
+    "Austin McCallum": {
+      "name": "Austin McCallum",
+      "team": "Rosswood",
+      "rubbers": 6,
+      "sets_won": 2,
+      "sets_lost": 4,
+      "games_won": 17,
+      "games_lost": 30,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 1,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Yashvi Patel",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Tyler Shamgar",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Reyansh Misra"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Yashvi Patel",
+              "opponents": [
+                "Tiffany Soh",
+                "Justin Zhou"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Tyler Shamgar",
+              "opponents": [
+                "Filippe Muscatello",
+                "Justin Zhou"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Justin Zhou"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 33.3,
+      "game_pct": 36.2
+    },
+    "Ryan Ganji": {
+      "name": "Ryan Ganji",
+      "team": "Mountain Gate",
+      "rubbers": 6,
+      "sets_won": 2,
+      "sets_lost": 4,
+      "games_won": 21,
+      "games_lost": 25,
+      "singles_won": 0,
+      "singles_played": 2,
+      "doubles_won": 2,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Tyler Shamgar"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Reyansh Misra",
+              "opponents": [
+                "Tyler Shamgar",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Matthew Hawkins",
+              "opponents": [
+                "Tyler Shamgar",
+                "Yashvi Patel"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "East Malvern",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Atharv Bangalopekar"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Reyansh Misra",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Liam Kari"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Matthew Hawkins",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Bodhi Senadipathy"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 33.3,
+      "game_pct": 45.7
+    },
+    "Matthew Hawkins": {
+      "name": "Matthew Hawkins",
+      "team": "Mountain Gate",
+      "rubbers": 6,
+      "sets_won": 3,
+      "sets_lost": 3,
+      "games_won": 26,
+      "games_lost": 23,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 2,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Reyansh Misra",
+              "opponents": [
+                "Yashvi Patel",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Yashvi Patel"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Ryan Ganji",
+              "opponents": [
+                "Tyler Shamgar",
+                "Yashvi Patel"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "East Malvern",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Reyansh Misra",
+              "opponents": [
+                "Bodhi Senadipathy",
+                "Liam Kari"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Bodhi Senadipathy"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Ryan Ganji",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Bodhi Senadipathy"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 50.0,
+      "game_pct": 53.1
+    },
+    "Reyansh Misra": {
+      "name": "Reyansh Misra",
+      "team": "Mountain Gate",
+      "rubbers": 6,
+      "sets_won": 4,
+      "sets_lost": 2,
+      "games_won": 33,
+      "games_lost": 16,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 2,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Matthew Hawkins",
+              "opponents": [
+                "Yashvi Patel",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Ryan Ganji",
+              "opponents": [
+                "Tyler Shamgar",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Austin McCallum"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "East Malvern",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Matthew Hawkins",
+              "opponents": [
+                "Bodhi Senadipathy",
+                "Liam Kari"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Ryan Ganji",
+              "opponents": [
+                "Atharv Bangalopekar",
+                "Liam Kari"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Liam Kari"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 66.7,
+      "game_pct": 67.3
+    },
+    "Darren Librea": {
+      "name": "Darren Librea",
+      "team": "MCC Glen Iris",
+      "rubbers": 6,
+      "sets_won": 5,
+      "sets_lost": 1,
+      "games_won": 32,
+      "games_lost": 13,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Wenye He"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Oscar Tari",
+              "opponents": [
+                "Wenye He",
+                "Xavier Borg"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Lucas Yu",
+              "opponents": [
+                "Wenye He",
+                "Adhvi Aswath"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Logan Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Ethan Ren",
+              "opponents": [
+                "Logan Tran",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Lucas Yu",
+              "opponents": [
+                "Logan Tran",
+                "Lucas You"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 83.3,
+      "game_pct": 71.1
+    },
+    "Lucas Yu": {
+      "name": "Lucas Yu",
+      "team": "MCC Glen Iris",
+      "rubbers": 6,
+      "sets_won": 6,
+      "sets_lost": 0,
+      "games_won": 36,
+      "games_lost": 10,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Oscar Tari",
+              "opponents": [
+                "Adhvi Aswath",
+                "Xavier Borg"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Adhvi Aswath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Darren Librea",
+              "opponents": [
+                "Wenye He",
+                "Adhvi Aswath"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Ethan Ren",
+              "opponents": [
+                "Lucas You",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Lucas You"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Darren Librea",
+              "opponents": [
+                "Logan Tran",
+                "Lucas You"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 78.3
+    },
+    "Oscar Tari": {
+      "name": "Oscar Tari",
+      "team": "MCC Glen Iris",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 4,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Lucas Yu",
+              "opponents": [
+                "Adhvi Aswath",
+                "Xavier Borg"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Darren Librea",
+              "opponents": [
+                "Wenye He",
+                "Xavier Borg"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Xavier Borg"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 81.8
+    },
+    "Wenye He": {
+      "name": "Wenye He",
+      "team": "Fountain Gate",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 3,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Darren Librea"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Xavier Borg",
+              "opponents": [
+                "Darren Librea",
+                "Oscar Tari"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Adhvi Aswath",
+              "opponents": [
+                "Darren Librea",
+                "Lucas Yu"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 14.3
+    },
+    "Adhvi Aswath": {
+      "name": "Adhvi Aswath",
+      "team": "Fountain Gate",
+      "rubbers": 6,
+      "sets_won": 0,
+      "sets_lost": 6,
+      "games_won": 13,
+      "games_lost": 36,
+      "singles_won": 0,
+      "singles_played": 2,
+      "doubles_won": 0,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Xavier Borg",
+              "opponents": [
+                "Lucas Yu",
+                "Oscar Tari"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Lucas Yu"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": "Wenye He",
+              "opponents": [
+                "Darren Librea",
+                "Lucas Yu"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Maya Wijenayake"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Hashane Jayalath",
+              "opponents": [
+                "Maya Wijenayake",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Xavier Borg",
+              "opponents": [
+                "Maya Wijenayake",
+                "Austin Zhang"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 26.5
+    },
+    "Xavier Borg": {
+      "name": "Xavier Borg",
+      "team": "Fountain Gate",
+      "rubbers": 6,
+      "sets_won": 0,
+      "sets_lost": 6,
+      "games_won": 8,
+      "games_lost": 36,
+      "singles_won": 0,
+      "singles_played": 2,
+      "doubles_won": 0,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 3,
+              "theirs": 6,
+              "won": false,
+              "partner": "Adhvi Aswath",
+              "opponents": [
+                "Lucas Yu",
+                "Oscar Tari"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Wenye He",
+              "opponents": [
+                "Darren Librea",
+                "Oscar Tari"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Oscar Tari"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Hashane Jayalath",
+              "opponents": [
+                "Austin Zhang",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Austin Zhang"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": "Adhvi Aswath",
+              "opponents": [
+                "Maya Wijenayake",
+                "Austin Zhang"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 18.2
+    },
     "Bodhi Senadipathy": {
       "name": "Bodhi Senadipathy",
-      "rounds": [
-        2
-      ],
+      "team": "East Malvern",
       "rubbers": 3,
       "sets_won": 3,
       "sets_lost": 0,
       "games_won": 18,
       "games_lost": 8,
-      "singles": [
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
         {
           "round": 2,
-          "ours": 6,
-          "theirs": 1,
-          "won": true
-        }
-      ],
-      "doubles": [
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 5,
-          "won": true
-        },
-        {
-          "round": 2,
-          "ours": 6,
-          "theirs": 2,
-          "won": true
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Matthew Hawkins"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
         }
       ],
       "set_pct": 100.0,
       "game_pct": 69.2
+    },
+    "Hashane Jayalath": {
+      "name": "Hashane Jayalath",
+      "team": "Fountain Gate",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 2,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Glen Waverley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Xavier Borg",
+              "opponents": [
+                "Austin Zhang",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Adhvi Aswath",
+              "opponents": [
+                "Maya Wijenayake",
+                "Hriyaan Vaid"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Hriyaan Vaid"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 10.0
+    },
+    "Austin Zhang": {
+      "name": "Austin Zhang",
+      "team": "Glen Waverley",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 4,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Fountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Hriyaan Vaid",
+              "opponents": [
+                "Xavier Borg",
+                "Hashane Jayalath"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Xavier Borg"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Maya Wijenayake",
+              "opponents": [
+                "Adhvi Aswath",
+                "Xavier Borg"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 81.8
+    },
+    "Lucas You": {
+      "name": "Lucas You",
+      "team": "Dingley",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 2,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "MCC Glen Iris",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": "Milo Tran",
+              "opponents": [
+                "Lucas Yu",
+                "Ethan Ren"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Lucas Yu"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 0,
+              "theirs": 6,
+              "won": false,
+              "partner": "Logan Tran",
+              "opponents": [
+                "Darren Librea",
+                "Lucas Yu"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 10.0
+    },
+    "Ethan Ren": {
+      "name": "Ethan Ren",
+      "team": "MCC Glen Iris",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 7,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Dingley",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": "Lucas Yu",
+              "opponents": [
+                "Lucas You",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Darren Librea",
+              "opponents": [
+                "Logan Tran",
+                "Milo Tran"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Milo Tran"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 72.0
+    },
+    "Filippe Muscatello": {
+      "name": "Filippe Muscatello",
+      "team": "Mayfield Park",
+      "rubbers": 3,
+      "sets_won": 0,
+      "sets_lost": 3,
+      "games_won": 15,
+      "games_lost": 18,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 0,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Tyler Shamgar"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Justin Zhou",
+              "opponents": [
+                "Tyler Shamgar",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Tiffany Soh",
+              "opponents": [
+                "Tyler Shamgar",
+                "Yashvi Patel"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 0.0,
+      "game_pct": 45.5
+    },
+    "Tiffany Soh": {
+      "name": "Tiffany Soh",
+      "team": "Mayfield Park",
+      "rubbers": 3,
+      "sets_won": 1,
+      "sets_lost": 2,
+      "games_won": 15,
+      "games_lost": 15,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 1,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Justin Zhou",
+              "opponents": [
+                "Yashvi Patel",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 4,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Yashvi Patel"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Filippe Muscatello",
+              "opponents": [
+                "Tyler Shamgar",
+                "Yashvi Patel"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 33.3,
+      "game_pct": 50.0
+    },
+    "Justin Zhou": {
+      "name": "Justin Zhou",
+      "team": "Mayfield Park",
+      "rubbers": 3,
+      "sets_won": 1,
+      "sets_lost": 2,
+      "games_won": 12,
+      "games_lost": 15,
+      "singles_won": 0,
+      "singles_played": 1,
+      "doubles_won": 1,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Rosswood",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": "Tiffany Soh",
+              "opponents": [
+                "Yashvi Patel",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 5,
+              "theirs": 6,
+              "won": false,
+              "partner": "Filippe Muscatello",
+              "opponents": [
+                "Tyler Shamgar",
+                "Austin McCallum"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 1,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Austin McCallum"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 33.3,
+      "game_pct": 44.4
     }
-  }
+  },
+  "our_players": {
+    "Atharv Bangalorekar": {
+      "name": "Atharv Bangalorekar",
+      "team": "East Malvern",
+      "rubbers": 6,
+      "sets_won": 6,
+      "sets_lost": 0,
+      "games_won": 36,
+      "games_lost": 10,
+      "singles_won": 2,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Anya Chawla"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Alana Philpott",
+              "opponents": [
+                "Anya Chawla",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Anya Chawla",
+                "Oliver Herath"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Ryan Ganji"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Bodhi Senadipathy",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 78.3
+    },
+    "Bodhi Senadipathy": {
+      "name": "Bodhi Senadipathy",
+      "team": "East Malvern",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 8,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 1,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Matthew Hawkins"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Ryan Ganji",
+                "Matthew Hawkins"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 69.2
+    },
+    "Liam Kari": {
+      "name": "Liam Kari",
+      "team": "East Malvern",
+      "rubbers": 6,
+      "sets_won": 5,
+      "sets_lost": 1,
+      "games_won": 32,
+      "games_lost": 20,
+      "singles_won": 1,
+      "singles_played": 2,
+      "doubles_won": 4,
+      "doubles_played": 4,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Alana Philpott",
+              "opponents": [
+                "Oliver Herath",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 3,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "Oliver Herath"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 2,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Anya Chawla",
+                "Oliver Herath"
+              ]
+            }
+          ]
+        },
+        {
+          "round": 2,
+          "date": "2026-10-18",
+          "opponent_team": "Mountain Gate",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 5,
+              "won": true,
+              "partner": "Bodhi Senadipathy",
+              "opponents": [
+                "Matthew Hawkins",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 4,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Ryan Ganji",
+                "Reyansh Misra"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 2,
+              "theirs": 6,
+              "won": false,
+              "partner": null,
+              "opponents": [
+                "Reyansh Misra"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 83.3,
+      "game_pct": 61.5
+    },
+    "Alana Philpott": {
+      "name": "Alana Philpott",
+      "team": "East Malvern",
+      "rubbers": 3,
+      "sets_won": 3,
+      "sets_lost": 0,
+      "games_won": 18,
+      "games_lost": 0,
+      "singles_won": 1,
+      "singles_played": 1,
+      "doubles_won": 2,
+      "doubles_played": 2,
+      "detail": [
+        {
+          "round": 1,
+          "date": "2026-10-11",
+          "opponent_team": "Mayfield Park",
+          "rubbers": [
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Liam Kari",
+              "opponents": [
+                "Oliver Herath",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "doubles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": "Atharv Bangalopekar",
+              "opponents": [
+                "Anya Chawla",
+                "No Player 3"
+              ]
+            },
+            {
+              "type": "singles",
+              "ours": 6,
+              "theirs": 0,
+              "won": true,
+              "partner": null,
+              "opponents": [
+                "No Player 3"
+              ]
+            }
+          ]
+        }
+      ],
+      "set_pct": 100.0,
+      "game_pct": 100.0
+    }
+  },
+  "match_count": 8
 }
