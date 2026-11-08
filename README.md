@@ -43,15 +43,9 @@ the round-by-round sets: who they played, with whom, and the score.
 there is no player ladder on TROLS. These rankings are worked out from the published
 rubbers, and the app says so on the card.
 
-Children play different numbers of rubbers, so the ladder has two modes:
-
-- **Sets won** (default) — the plain count. Fair while participation varies, because it
-  does not reward a short unbeaten run over a longer one.
-- **Win %** — sets won percentage, then games won percentage. Only comparable between
-  children who have played a similar number of rubbers.
-
-Every row shows how many rubbers that player has actually played, so the denominator is
-never hidden. **Tapping any player opens a sheet explaining their exact position**, written for that child specifically: their own sets and games, the opponents
+The ladder ranks on **games won** — the total each child has actually won. Level on
+games, the better win–loss difference goes higher. Each row shows games won–lost and how
+many sets that player has played, so the volume behind the number is never hidden. **Tapping any player opens a sheet explaining their exact position**, written for that child specifically: their own sets and games, the opponents
 they faced, how many others are level with them, a side-by-side of games won for everyone
 tied on sets, what it would take to pass the player directly above, and their tightest
 set or only loss. The same sheet is one tap away from their own page. The ladder rows

@@ -311,7 +311,7 @@
   .lrow .n { flex: 1; min-width: 0; }
   .lrow .nm2 { display: block; font-size: 14.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .lrow .sub2 { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 3px;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    white-space: normal; line-height: 1.45; }
   .lrow .pc { font-family: var(--display); font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums; }
   .lrow.us .nm2, .lrow.us .pc { color: var(--clay); font-weight: 700; }
   .lrow.us { background: var(--clay-wash); border-radius: 12px; padding-left: 10px; padding-right: 10px; margin: 0 -10px; }
@@ -666,19 +666,12 @@ function viewTeam() {
     </div>`;
 }
 
-let ladderSort = "sets"; // "sets" = most sets won, "pct" = highest win rate
-
-function ladderRowsAll(mode) {
-  const m = mode || ladderSort;
+function ladderRowsAll() {
   const all = Object.values(DATA.section_players || {}).filter((p) => p.rubbers > 0);
-  return all.sort((a, b) => {
-    if (m === "pct") {
-      return (b.set_pct - a.set_pct) || ((b.game_pct || 0) - (a.game_pct || 0))
-        || (b.rubbers - a.rubbers) || a.name.localeCompare(b.name);
-    }
-    return (b.sets_won - a.sets_won) || ((b.game_pct || 0) - (a.game_pct || 0))
-      || (b.rubbers - a.rubbers) || a.name.localeCompare(b.name);
-  });
+  return all.sort((a, b) =>
+    (b.games_won - a.games_won)
+    || ((b.games_won - b.games_lost) - (a.games_won - a.games_lost))
+    || a.name.localeCompare(b.name));
 }
 function rankOf(name) {
   const rows = ladderRowsAll();
@@ -692,12 +685,12 @@ function viewSquad() {
   const rows = ladderRowsAll();
   const ladder = rows.map((p, i) => {
     const mine = p.team === CLUB;
-    const right = ladderSort === "pct" ? `${p.set_pct}%` : `${p.sets_won}`;
+    const right = p.games_won;
     return `<button class="lrow ${mine ? "us" : ""}" data-explain="${esc(p.name)}">
       <span class="r">${i + 1}</span>
       <span class="n">
         <span class="nm2">${esc(p.name)}</span>
-        <span class="sub2">${esc(p.team)} · ${p.rubbers} rubbers · ${p.sets_won}–${p.sets_lost} sets</span>
+        <span class="sub2">${esc(p.team)} · ${p.games_won}–${p.games_lost} games · ${p.rubbers} sets</span>
       </span>
       <span class="pc">${right}</span>
     </button>`;
@@ -711,9 +704,9 @@ function viewSquad() {
       <span class="krank">${r ? r.rank : "—"}</span>
       <span class="kbody">
         <span class="knm">${esc(s.name)}</span>
-        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} in the section` : "no rubbers yet"}${L ? ` · ${L.sets_won}–${L.sets_lost} sets` : ""}</span>
+        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} in the section` : "no sets yet"}${L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
       </span>
-      <span class="kpct">${pctShown != null ? pctShown + "%" : "—"}</span>
+      <span class="kpct">${L ? L.games_won : "—"}</span>
       <span class="karrow">›</span>
     </button>`;
   }).join("");
@@ -726,19 +719,13 @@ function viewSquad() {
     </div>
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
-      <div class="seg-top" style="margin-bottom:16px">
-        <button data-sort="sets" aria-selected="${ladderSort === "sets"}">Sets won</button>
-        <button data-sort="pct" aria-selected="${ladderSort === "pct"}">Win %</button>
-      </div>
       ${ladder}
       <p class="caption">
-        ${ladderSort === "pct"
-          ? "Ranked by sets won %, then games won %. Percentages only compare fairly when children have played a similar number of rubbers — tap anyone to see why."
-          : "Ranked by sets won — the simple count. Children play different numbers of rubbers, so the count is fairer than a percentage until everyone has played the same amount."}
-        Tap anyone for the detail. East Malvern in clay.
+        Ranked by <b>games won</b> — the total each child has actually won, so playing more rounds builds a bigger number.
+        Level on games, the better win–loss difference goes higher. Tap anyone for the detail. East Malvern in clay.
       </p>
       <p class="caption" style="margin-top:10px;opacity:.85">
-        Worked out from the published rubbers on TROLS. Waverley doesn't publish a player ladder — the team ladder in Season is the official one.
+        Worked out from the individual scores on TROLS. Waverley doesn't publish a player ladder — the team ladder in Season is the official one.
       </p>
     </div>`;
 }
@@ -751,94 +738,49 @@ function explainSheet(name) {
   const pos = i + 1;
   const above = rows.slice(0, i);
   const next = i > 0 ? rows[i - 1] : null;
-  const samePct = above.filter((r) => r.set_pct === p.set_pct);
-  const sameSets = above.filter((r) => r.sets_won === p.sets_won);
+  const sameGames = above.filter((r) => r.games_won === p.games_won);
   const detail = ((DATA.our_players || {})[name] || {}).detail || [];
-  const rubbers = detail.flatMap((d) => (d.rubbers || []).map((rb) => ({ ...rb, round: d.round, opp: d.opponent_team })));
+  const sets = detail.flatMap((d) => (d.rubbers || []).map((rb) => ({ ...rb, round: d.round, opp: d.opponent_team })));
   const totalG = p.games_won + p.games_lost;
+  const faced = [...new Set(detail.map((d) => d.opponent_team))];
   const steps = [];
   let stepNo = 0;
   const step = (body) => { stepNo += 1; return `<div class="step"><span class="num">${stepNo}</span><span class="body">${body}</span></div>`; };
 
-  // 1 — this child's own numbers
-  const faced = [...new Set(detail.map((d) => d.opponent_team))];
-  steps.push(step(`<span class="big">${p.sets_won}–${p.sets_lost} sets</span><br>
-    ${p.games_won} of ${totalG} games won — <b>${p.game_pct || 0}%</b> — from ${p.rubbers} rubbers${faced.length ? `, against ${faced.map(esc).join(" and ")}` : ""}.`));
+  steps.push(step(`<span class="big">${p.games_won} games won</span><br>
+    out of ${totalG} played — <b>${p.game_pct || 0}%</b> — across ${p.rubbers} sets${faced.length ? `, against ${faced.map(esc).join(" and ")}` : ""}.
+    ${p.sets_won}–${p.sets_lost} on sets.`));
 
-  // 2 — why this exact position
-  if (ladderSort === "sets") {
-    if (!above.length) {
-      steps.push(step(`Nobody has won more sets than ${esc(first(p.name))}, so this is <b>1st</b>.`));
-    } else {
-      const more = above.filter((r) => r.sets_won > p.sets_won);
-      let line;
-      if (more.length) {
-        line = `<b>${more.length}</b> ${more.length === 1 ? "player has" : "players have"} won more sets —
-          ${more.slice(0, 3).map((r) => `${esc(first(r.name))} ${r.sets_won}`).join(", ")}${more.length > 3 ? " and others" : ""}.`;
-      } else {
-        line = `Nobody has won more sets than ${esc(first(p.name))} (${p.sets_won}).`;
-      }
-      if (sameSets.length) {
-        line += ` Level on ${p.sets_won} sets with ${sameSets.map((r) => esc(first(r.name))).join(", ")}, so games won percentage breaks the tie.`;
-      }
-      line += ` This is <b>${pos}${ordinal(pos)}</b> of ${rows.length}.`;
-      steps.push(step(line));
-    }
-  } else if (!above.length) {
-    steps.push(step(`Nobody in the section is ahead of ${esc(first(p.name))} on either measure, so this is <b>1st</b>.`));
-  } else if (samePct.length) {
-    const group = rows.slice(0, i + 1).filter((r) => r.set_pct === p.set_pct);
-    const shown = group.slice(0, 7);
-    const cmp = shown.map((r) => {
-      const idx = rows.findIndex((x) => x.name === r.name) + 1;
-      return `<div class="cmprow ${r.name === p.name ? "us" : ""}">
-        <span class="p">${idx}</span><span class="n">${esc(r.name)}</span>
-        <span class="g">${r.games_won}–${r.games_lost} · ${r.game_pct || 0}%</span></div>`;
-    }).join("") + (group.length > shown.length ? `<div class="cmprow"><span class="p"></span><span class="n">+${group.length - shown.length} more on ${p.set_pct}%</span><span class="g"></span></div>` : "");
-
-    const lowest = group.every((r) => r.name === p.name || (r.game_pct || 0) >= (p.game_pct || 0));
-    const closing = lowest
-      ? `${esc(first(p.name))} has the lowest games percentage of that group.`
-      : `The players above won a higher share of their games.`;
-
-    steps.push(step(`<b>${samePct.length}</b> ${samePct.length === 1 ? "player above" : "players above"} ${samePct.length === 1 ? "is" : "are"} also on
-      ${p.set_pct}% sets — so sets do not separate them. The next thing the ladder checks is
-      <b>games won percentage</b>.
-      <div class="cmp">${cmp}</div>${closing}`));
+  if (!above.length) {
+    steps.push(step(`Nobody in the section has won more games, so this is <b>1st</b>.`));
   } else {
-    steps.push(step(`${above.length} ${above.length === 1 ? "player is" : "players are"} ahead on <b>sets won percentage</b> —
-      ${above.slice(0, 3).map((r) => `${esc(first(r.name))} ${r.set_pct}%`).join(", ")}${above.length > 3 ? " and others" : ""}.
-      Sets come before games, so this is <b>${pos}${ordinal(pos)}</b>.`));
+    const more = above.filter((r) => r.games_won > p.games_won);
+    let line = more.length
+      ? `<b>${more.length}</b> ${more.length === 1 ? "player has" : "players have"} won more games —
+         ${more.slice(0, 3).map((r) => `${esc(first(r.name))} ${r.games_won}`).join(", ")}${more.length > 3 ? " and others" : ""}.`
+      : `Nobody has won more games than ${esc(first(p.name))} (${p.games_won}).`;
+    if (sameGames.length) {
+      line += ` Level on ${p.games_won} games with ${sameGames.map((r) => esc(first(r.name))).join(", ")}, so the better win–loss difference goes higher.`;
+    }
+    line += ` This is <b>${pos}${ordinal(pos)}</b> of ${rows.length}.`;
+    steps.push(step(line));
   }
 
-  // 3 — what would move this child up
-  if (next && ladderSort === "sets") {
-    if (next.sets_won === p.sets_won) {
-      const target = next.game_pct || 0;
-      const need = Math.max(0, Math.ceil(((target / 100) * totalG - p.games_won) / (1 - target / 100) - 1e-9));
-      steps.push(step(`Level on sets with ${esc(first(next.name))} — winning <b>${need} more game${need === 1 ? "" : "s"}</b>
-        without conceding lifts ${esc(first(p.name))} above them.`));
+  if (next) {
+    if (next.games_won > p.games_won) {
+      const need = next.games_won - p.games_won + 1;
+      steps.push(step(`<b>${need}</b> more game${need === 1 ? "" : "s"} won puts ${esc(first(p.name))} level with
+        ${esc(first(next.name))} (${next.games_won}), and the difference takes it from there.`));
     } else {
-      steps.push(step(`One more set won puts ${esc(first(p.name))} level with
-        <b>${esc(first(next.name))}</b> (${next.sets_won} sets), and a higher games percentage then decides it.`));
-    }
-  } else if (next) {
-    if (next.set_pct !== p.set_pct) {
-      steps.push(step(`To pass <b>${esc(first(next.name))}</b>, ${esc(first(p.name))} needs a higher sets percentage than
-        ${next.set_pct}% — winning the next rubber does it if ${esc(first(next.name))} loses one.`));
-    } else {
-      const target = next.game_pct || 0;
-      const need = Math.max(0, Math.ceil(((target / 100) * totalG - p.games_won) / (1 - target / 100) - 1e-9));
-      steps.push(step(`${esc(first(next.name))} is one place ahead on ${target}% games. Winning
-        <b>${need} more game${need === 1 ? "" : "s"}</b> without conceding would lift
-        ${esc(first(p.name))} above ${esc(first(next.name))}.`));
+      const gap = (next.games_won - next.games_lost) - (p.games_won - p.games_lost);
+      steps.push(step(`Level with ${esc(first(next.name))} on ${p.games_won} games. Their difference is
+        ${gap > 0 ? "+" + gap : gap}, so winning a few more than them moves ${esc(first(p.name))} ahead.`));
     }
   }
 
-  // 4 — the sets behind those numbers
-  if (rubbers.length) {
-    const wins = rubbers.filter((r) => r.won).sort((a, b) => (a.ours - a.theirs) - (b.ours - b.theirs));
-    const losses = rubbers.filter((r) => !r.won);
+  if (sets.length) {
+    const wins = sets.filter((r) => r.won).sort((a, b) => (a.ours - a.theirs) - (b.ours - b.theirs));
+    const losses = sets.filter((r) => !r.won);
     const bits = [];
     const margins = [...new Set(wins.map((w) => `${w.ours}–${w.theirs}`))];
     if (wins.length) {
@@ -856,14 +798,13 @@ function explainSheet(name) {
     <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${pos}${ordinal(pos)}</h3>
     <p class="ovsub">${esc(p.team)} · Open Triples Green Ball 1</p>
     ${steps.join("")}
-    <p class="ovfoot">${ladderSort === "sets"
-      ? `Sort order: <b>sets won</b>, then <b>games won %</b>. Children play different numbers of rubbers, which is why the count comes first.`
-      : `Sort order: <b>sets won %</b>, then <b>games won %</b>. A percentage is only fair between children who have played a similar number of rubbers.`}</p>`;
+    <p class="ovfoot">The player ladder counts <b>games won</b>. A comfortable win is worth more games than a tight one,
+    so the total rewards both winning and playing.</p>`;
 }
 
 function viewPlayer(name) {
   const p = (DATA.our_players || {})[name] || (DATA.section_players || {})[name];
-  if (!p) return `<div class="card"><p class="caption">No rubbers recorded for ${esc(name)} yet.</p></div>`;
+  if (!p) return `<div class="card"><p class="caption">No sets recorded for ${esc(name)} yet.</p></div>`;
   const r = rankOf(name);
   const pctShown = p.set_pct != null ? Math.round(p.set_pct) : 0;
 
@@ -896,7 +837,7 @@ function viewPlayer(name) {
       <div style="display:flex;justify-content:center;padding:10px 0 2px">
         ${ring(pctShown, 100, pctShown + "%", "sets won")}
       </div>
-      <div class="srow"><span class="k">Rubbers played</span><span class="v">${p.rubbers}</span></div>
+      <div class="srow"><span class="k">Sets played</span><span class="v">${p.rubbers}</span></div>
       <div class="srow"><span class="k">Sets</span><span class="v">${p.sets_won}<small>–${p.sets_lost}</small></span></div>
       <div class="srow"><span class="k">Games</span><span class="v">${p.games_won}<small>–${p.games_lost}</small></span></div>
       <div class="srow"><span class="k">Singles</span><span class="v">${p.singles_won}<small>–${p.singles_played - p.singles_won}</small></span></div>
@@ -904,7 +845,7 @@ function viewPlayer(name) {
     </div>
     <div class="card">
       <p class="label">Every set</p>
-      ${rounds || `<p class="caption">No rubbers recorded yet.</p>`}
+      ${rounds || `<p class="caption">No sets recorded yet.</p>`}
     </div>`;
 }
 
@@ -1085,9 +1026,6 @@ function bind() {
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
   });
-  $("#view-squad").querySelectorAll("[data-sort]").forEach((b) => {
-    b.onclick = () => { ladderSort = b.dataset.sort; $("#view-squad").innerHTML = viewSquad(); bind(); };
-  });
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));
   });
@@ -1153,6 +1091,13 @@ function settingsSheet() {
     <p class="ovsub">${APP_NAME} · ${esc(DATA.meta.club)}</p>
     <div class="setsec"><h4>App</h4><div class="act">${installBlock()}</div></div>
     <div class="setsec"><h4>Alerts</h4><div class="act">${alertsBlock()}</div></div>
+    <div class="setsec"><h4>Words used</h4>
+      <div class="about">
+        <b>Set</b> — one 6-game match. Each child plays three every round: one singles and two doubles.<br>
+        <b>Rubber</b> — what Waverley calls that same set on the official scoresheet.<br>
+        <b>Games</b> — the 6–2, 6–3 inside each set. The player ladder counts games won.
+      </div>
+    </div>
     <div class="setsec"><h4>About</h4>${aboutHTML()}</div>`;
 }
 
