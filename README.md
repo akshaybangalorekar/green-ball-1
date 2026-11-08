@@ -14,7 +14,7 @@ availability and selection for each round.
 | --- | --- |
 | **This week** | Next round, opponent, venue, the three on court, ladder position, and a season strip |
 | **Team** | Percentage ring, the race for the four, points by round, games for/against, what a win does, which three |
-| **Squad** | Availability grid, then a card per player with a ring, team record and next round's status |
+| **Squad** | Your four — tap a child for every set they have played — plus a ladder of all 31 players in the section |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
 
@@ -37,6 +37,14 @@ Team dashboard:
 
 Player cards: rounds scheduled, team record in the rounds they were on court,
 availability percentage, most frequent partners, and next round's status.
+
+**Every player in the section, not just yours.** The scraper reads all four matches in
+every round, so the section ladder covers all 31 players across the eight clubs, and a
+parent can see where their child sits in the whole competition. Each player page shows
+the round-by-round sets: who they played, with whom, and the score.
+
+Ranking is by sets won %, then games won % — the same logic the team ladder uses. That
+means a clean 3–0 can sit above a 6–0 that dropped games.
 
 **Player points come from the official rubbers.** Each match has a pop-up on TROLS
 (`match_popup.php?matchid=…`) listing both sides' players by position and every rubber
