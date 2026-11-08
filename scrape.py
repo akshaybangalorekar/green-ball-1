@@ -282,7 +282,7 @@ def parse_results(html):
                 continue
             if len(middle) < 6:
                 continue
-            onclick = raw[0].get("onclick") if isinstance(raw[0], dict) else None
+            onclick = r[0].get("onclick") if (r and isinstance(r[0], dict)) else None
             mid = None
             if onclick:
                 found = re.search(r"open_match\([^)]*?'([A-Z]{2}\d{6})'", onclick)
