@@ -69,7 +69,7 @@ async function checkForUpdates() {
 
   if (prev && prev !== sig) {
     const body = describeChanges(prev, data);
-    await self.registration.showNotification("Green Ball 1", {
+    await self.registration.showNotification("Advantage", {
       body,
       icon: "./icon-192.png",
       badge: "./icon-192.png",

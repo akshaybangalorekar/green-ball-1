@@ -1,7 +1,8 @@
-# East Malvern — Green Ball 1
+# Advantage — East Malvern Green Ball 1
 
-A phone-first web app for the East Malvern **Open Triples Green Ball 1** team in the
-Waverley & District Tennis Association, **Sunday AM, Summer 26/27** (section `UA037`).
+**Advantage** is a phone-first app for the East Malvern **Open Triples Green Ball 1** team
+in the Waverley & District Tennis Association, **Sunday AM, Summer 26/27** (section `UA037`).
+The name is the tennis call, and it's what every screen is about: points, percentage, position.
 
 It pulls the official ladder, results and fixture from TROLS (the record keeping
 system Waverley Tennis uses) and adds the team admin that TROLS doesn't have:
