@@ -11,16 +11,14 @@ availability and selection for each round.
 
 | Tab | What it shows |
 | --- | --- |
-| **This week** | Next round, opponent, venue, who's on court, ladder position, the one-line insight |
-| **Team** | Dashboard: finals race, points by round, games for/against, what a win does to the percentage, triples combinations |
-| **Squad** | Per-player cards (schedule, team record, availability, partners) plus the round-by-round availability grid |
-| **Ladder** | All eight teams — points, percentage, sets, gap to the top |
-| **Results** | Every round, match by match, East Malvern highlighted |
-| **Draw** | The full season calendar through to the grand final, with the roster trio per round |
+| **This week** | Next round, opponent, venue, the three on court, ladder position, and a season strip |
+| **Team** | Percentage ring, the race for the four, points by round, games for/against, what a win does, which three |
+| **Squad** | Availability grid, then a card per player with a ring, team record and next round's status |
+| **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
 
-Every tab has its own link (`#team`, `#squad`, …) so you can send the team straight
-to the right screen.
+Every tab has its own link (`#team`, `#squad`, `#season`, …) so you can send the team
+straight to the right screen.
 
 ## The analysis, and what it is based on
 
