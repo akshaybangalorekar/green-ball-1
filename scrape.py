@@ -107,9 +107,11 @@ class TableReader(HTMLParser):
         elif tag in ("td", "th"):
             self._close_cell()
             if self._row is not None:
-                self._cell = {"text": "", "href": None, "tag": tag}
+                self._cell = {"text": "", "href": None, "onclick": None, "tag": tag}
         elif tag == "a" and self._cell is not None:
             self._href = a.get("href") or ""
+            if a.get("onclick"):
+                self._cell["onclick"] = a["onclick"]
         elif tag == "br" and self._cell is not None:
             self._cell["text"] += " "
 
@@ -266,10 +268,12 @@ def parse_results(html):
             if "home team" in joined.lower():
                 continue
 
-            home, away = raw[0].strip(), raw[-1].strip()
+            def ctext(x):
+                return (x["text"] if isinstance(x, dict) else x).strip()
+            home, away = ctext(raw[0]), ctext(raw[-1])
             if not home or not away:
                 continue
-            middle = [x for x in raw[1:-1] if x.strip()]
+            middle = [ctext(x) for x in raw[1:-1] if ctext(x)]
             if not middle:
                 continue
             if any("wash" in x.lower() for x in middle):
@@ -278,7 +282,13 @@ def parse_results(html):
                 continue
             if len(middle) < 6:
                 continue
+            onclick = raw[0].get("onclick") if isinstance(raw[0], dict) else None
+            mid = None
+            if onclick:
+                found = re.search(r"open_match\([^)]*?'([A-Z]{2}\d{6})'", onclick)
+                mid = found.group(1) if found else None
             current["matches"].append({
+                "matchid": mid,
                 "home": home,
                 "homePts": num(middle[0], 0.0), "homeSets": int(num(middle[1], 0) or 0),
                 "homeGames": int(num(middle[2], 0) or 0),
@@ -438,6 +448,105 @@ def build_draw(fixture):
     return draw
 
 
+
+# ---- individual rubbers --------------------------------------------------
+def parse_match_popup(html, home_is_us):
+    """The popup lists both sides' players by position and every rubber score.
+
+    Layout (left = home):
+        title "Open Triples Green Ball 1 Rd.2 on 18th Oct 26"
+        home team, away team
+        1. Player, 2. Player, 3. Player      (home)
+        2+3 | 5-6 | 2+3                       (six rubbers)
+        1   | 18-32 | 5                       (sets, games, sets)
+        1. Player, 2. Player, 3. Player      (away)
+    """
+    import html as htmllib
+    flat = htmllib.unescape(re.sub(r"<[^>]+>", "|", html))
+    toks = [t.strip() for t in flat.split("|") if t.strip() and t.strip() != "&nbsp;"]
+
+    players = []
+    for t in toks:
+        m = re.match(r"^(\d)\.\s*(.+)$", t)
+        if m and 1 <= int(m.group(1)) <= 3 and len(m.group(2)) > 1:
+            players.append(m.group(2).strip())
+    if len(players) < 4:
+        return None
+    home_players, away_players = players[:3], players[3:6]
+
+    scores = [i for i, t in enumerate(toks) if re.fullmatch(r"\d+-\d+", t)]
+    if len(scores) < 7:
+        return None
+
+    rubbers = []
+    for i in scores[:6]:
+        left_label = toks[i - 1] if i else ""
+        right_label = toks[i + 1] if i + 1 < len(toks) else ""
+        a, b = toks[i].split("-")
+        rubbers.append({
+            "our_label": left_label if home_is_us else right_label,
+            "ours": int(a) if home_is_us else int(b),
+            "theirs": int(b) if home_is_us else int(a),
+        })
+    for r in rubbers:
+        r["won"] = r["ours"] > r["theirs"]
+
+    g = toks[scores[6]].split("-")
+    return {
+        "our_players": home_players if home_is_us else away_players,
+        "opp_players": away_players if home_is_us else home_players,
+        "rubbers": rubbers,
+        "games_won": int(g[0] if home_is_us else g[1]),
+        "games_lost": int(g[1] if home_is_us else g[0]),
+        "sets_won": sum(1 for r in rubbers if r["won"]),
+        "sets_lost": sum(1 for r in rubbers if not r["won"]),
+    }
+
+
+def fetch_match_detail(matchid, home_is_us):
+    try:
+        html = fetch(f"{BASE}/match_popup.php?matchid={matchid}&seasonid=")
+    except Exception:  # noqa: BLE001
+        return None
+    return parse_match_popup(html, home_is_us)
+
+
+def aggregate_players(details, roster_names):
+    """Per-player sets and games from the rubbers they actually played."""
+    import difflib
+
+    def canon(name):
+        hit = difflib.get_close_matches(name, roster_names, n=1, cutoff=0.7)
+        return hit[0] if hit else name
+
+    stats = {}
+    for d in details:
+        for pos, raw_name in enumerate(d["our_players"], start=1):
+            name = canon(raw_name)
+            st = stats.setdefault(name, {
+                "name": name, "rounds": [], "rubbers": 0,
+                "sets_won": 0, "sets_lost": 0, "games_won": 0, "games_lost": 0,
+                "singles": [], "doubles": [],
+            })
+            st["rounds"].append(d["round"])
+            for r in d["rubbers"]:
+                positions = [int(x) for x in re.split(r"\+", r["our_label"]) if x.isdigit()]
+                if pos not in positions:
+                    continue
+                st["rubbers"] += 1
+                st["sets_won" if r["won"] else "sets_lost"] += 1
+                st["games_won"] += r["ours"]
+                st["games_lost"] += r["theirs"]
+                entry = {"round": d["round"], "ours": r["ours"], "theirs": r["theirs"], "won": r["won"]}
+                (st["singles"] if len(positions) == 1 else st["doubles"]).append(entry)
+    for st in stats.values():
+        total = st["sets_won"] + st["sets_lost"]
+        st["set_pct"] = round(100 * st["sets_won"] / total, 1) if total else None
+        total_g = st["games_won"] + st["games_lost"]
+        st["game_pct"] = round(100 * st["games_won"] / total_g, 1) if total_g else None
+    return stats
+
+
 # ---- main -----------------------------------------------------------------
 def debug_pages(daytime, section):
     """Print what the runner actually receives, so a markup change is obvious."""
@@ -511,6 +620,26 @@ def main():
         if clubs:
             print(f"  · section: {len(clubs)} clubs")
 
+    # per-player rubbers
+    details = []
+    for r in results:
+        for m in r["matches"]:
+            if m.get("washout") or not m.get("matchid"):
+                continue
+            if CLUB not in (m["home"], m["away"]):
+                continue
+            d = fetch_match_detail(m["matchid"], m["home"] == CLUB)
+            if d:
+                d["round"] = r["round"]
+                d["date"] = r["date"]
+                d["opponent"] = m["away"] if m["home"] == CLUB else m["home"]
+                d["home"] = m["home"] == CLUB
+                details.append(d)
+    details.sort(key=lambda x: x["round"])
+    roster_names = [p["name"] for p in old.get("roster", {}).get("players", [])]
+    player_results = aggregate_players(details, roster_names) if details else {}
+    print(f"  · rubbers: {len(details)} matches, {len(player_results)} players")
+
     loaded = re.search(r"Loaded:?\s*([0-9]{1,2}\w{2}\s+\w+\s+\d{2,4}[^<]*)", ladder_html)
     loaded_txt = loaded.group(1).strip() if loaded else None
 
@@ -553,6 +682,8 @@ def main():
         "clubs": clubs or old.get("clubs", []),
         # The roster is maintained by the team, not by TROLS — always carry it over.
         "roster": old.get("roster", {}),
+        "match_details": details or old.get("match_details", []),
+        "player_results": player_results or old.get("player_results", {}),
     }
 
     DATA_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")

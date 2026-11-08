@@ -8,7 +8,7 @@
     "section_code": "UA037",
     "ladder_loaded": "29 Oct 2026, 3:01 pm",
     "results_loaded": "29 Oct 2026, 3:01 pm",
-    "synced": "2026-11-08",
+    "synced": "2026-11-07",
     "source_ladder": "https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=",
     "source_results": "https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=",
     "source_fixture": "https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style=",
@@ -429,9 +429,7 @@
     }
   ],
   "roster": {
-    "captain": "Dave Philpot",
-    "captain_phone": "0478 652 600",
-    "source": "Roster sheet supplied by Dave Philpot (captain), Sunday D1 / Green Ball 1, Summer 2026/27",
+    "source": "Team roster, Sunday Green Ball 1, Summer 2026/27",
     "team_order": [
       "Atharv Bangalorekar",
       "Bodhi Senadipathy",
@@ -441,27 +439,19 @@
     "players": [
       {
         "name": "Atharv Bangalorekar",
-        "rank": 1,
-        "parent": "Akshay Bangalorekar",
-        "phone": "0434 941 987"
+        "rank": 1
       },
       {
         "name": "Bodhi Senadipathy",
-        "rank": 2,
-        "parent": "Suranga Senadipathy",
-        "phone": "0437 881 966"
+        "rank": 2
       },
       {
         "name": "Liam Kari",
-        "rank": 3,
-        "parent": "Mahesh Kari",
-        "phone": "0401 473 534"
+        "rank": 3
       },
       {
         "name": "Alana Philpott",
-        "rank": 4,
-        "parent": "Dave Philpot",
-        "phone": "0478 652 600"
+        "rank": 4
       }
     ],
     "rounds": [
