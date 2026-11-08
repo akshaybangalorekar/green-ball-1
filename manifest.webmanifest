@@ -1,7 +1,7 @@
 {
-  "name": "Advantage — East Malvern Green Ball 1",
+  "name": "Advantage \u2014 East Malvern Green Ball 1",
   "short_name": "Advantage",
-  "description": "Advantage — ladder, results, fixture and squad for East Malvern Green Ball 1 in the Waverley District Tennis Association, Sunday AM Summer 26/27.",
+  "description": "Advantage \u2014 ladder, results, fixture and squad for East Malvern Green Ball 1 in the Waverley District Tennis Association, Sunday AM Summer 26/27.",
   "id": "/green-ball-1/",
   "start_url": "./",
   "scope": "./",
@@ -11,8 +11,8 @@
     "minimal-ui"
   ],
   "orientation": "portrait",
-  "background_color": "#f7f4ee",
-  "theme_color": "#14684a",
+  "background_color": "#FAF3EA",
+  "theme_color": "#B8431F",
   "categories": [
     "sports",
     "utilities"
