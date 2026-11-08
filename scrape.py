@@ -450,7 +450,7 @@ def build_draw(fixture):
 
 
 # ---- individual rubbers --------------------------------------------------
-def parse_match_popup(html, home_is_us):
+def parse_match_popup(html):
     """The popup lists both sides' players by position and every rubber score.
 
     Layout (left = home):
@@ -472,7 +472,6 @@ def parse_match_popup(html, home_is_us):
             players.append(m.group(2).strip())
     if len(players) < 4:
         return None
-    home_players, away_players = players[:3], players[3:6]
 
     scores = [i for i, t in enumerate(toks) if re.fullmatch(r"\d+-\d+", t)]
     if len(scores) < 7:
@@ -483,68 +482,118 @@ def parse_match_popup(html, home_is_us):
         left_label = toks[i - 1] if i else ""
         right_label = toks[i + 1] if i + 1 < len(toks) else ""
         a, b = toks[i].split("-")
-        rubbers.append({
-            "our_label": left_label if home_is_us else right_label,
-            "ours": int(a) if home_is_us else int(b),
-            "theirs": int(b) if home_is_us else int(a),
-        })
-    for r in rubbers:
-        r["won"] = r["ours"] > r["theirs"]
+        rubbers.append({"home_label": left_label, "away_label": right_label,
+                        "home_games": int(a), "away_games": int(b)})
 
-    g = toks[scores[6]].split("-")
+    totals = toks[scores[6]].split("-")
     return {
-        "our_players": home_players if home_is_us else away_players,
-        "opp_players": away_players if home_is_us else home_players,
+        "home_players": players[:3],
+        "away_players": players[3:6],
         "rubbers": rubbers,
-        "games_won": int(g[0] if home_is_us else g[1]),
-        "games_lost": int(g[1] if home_is_us else g[0]),
-        "sets_won": sum(1 for r in rubbers if r["won"]),
-        "sets_lost": sum(1 for r in rubbers if not r["won"]),
+        "home_sets": sum(1 for r in rubbers if r["home_games"] > r["away_games"]),
+        "away_sets": sum(1 for r in rubbers if r["away_games"] > r["home_games"]),
+        "home_games_total": int(totals[0]),
+        "away_games_total": int(totals[1]),
     }
 
 
-def fetch_match_detail(matchid, home_is_us):
+def fetch_match_detail(matchid):
     try:
         html = fetch(f"{BASE}/match_popup.php?matchid={matchid}&seasonid=")
     except Exception:  # noqa: BLE001
         return None
-    return parse_match_popup(html, home_is_us)
+    return parse_match_popup(html)
 
 
-def aggregate_players(details, roster_names):
-    """Per-player sets and games from the rubbers they actually played."""
-    import difflib
+def positions(label):
+    return [int(x) for x in re.split(r"\+", label or "") if x.isdigit()]
 
-    def canon(name):
-        hit = difflib.get_close_matches(name, roster_names, n=1, cutoff=0.7)
-        return hit[0] if hit else name
 
-    stats = {}
-    for d in details:
-        for pos, raw_name in enumerate(d["our_players"], start=1):
-            name = canon(raw_name)
-            st = stats.setdefault(name, {
-                "name": name, "rounds": [], "rubbers": 0,
-                "sets_won": 0, "sets_lost": 0, "games_won": 0, "games_lost": 0,
-                "singles": [], "doubles": [],
-            })
-            st["rounds"].append(d["round"])
-            for r in d["rubbers"]:
-                positions = [int(x) for x in re.split(r"\+", r["our_label"]) if x.isdigit()]
-                if pos not in positions:
-                    continue
-                st["rubbers"] += 1
-                st["sets_won" if r["won"] else "sets_lost"] += 1
-                st["games_won"] += r["ours"]
-                st["games_lost"] += r["theirs"]
-                entry = {"round": d["round"], "ours": r["ours"], "theirs": r["theirs"], "won": r["won"]}
-                (st["singles"] if len(positions) == 1 else st["doubles"]).append(entry)
-    for st in stats.values():
+def build_section(results):
+    """Every player in the section, from every match, plus round-by-round detail."""
+    matches, failures = [], 0
+    for r in results:
+        for m in r["matches"]:
+            if m.get("washout") or not m.get("matchid"):
+                continue
+            d = fetch_match_detail(m["matchid"])
+            if not d:
+                failures += 1
+                continue
+            d.update({"round": r["round"], "date": r["date"], "home": m["home"], "away": m["away"]})
+            matches.append(d)
+    matches.sort(key=lambda x: x["round"])
+
+    players = {}
+
+    def slot(name, team):
+        return players.setdefault(name, {
+            "name": name, "team": team, "rubbers": 0,
+            "sets_won": 0, "sets_lost": 0, "games_won": 0, "games_lost": 0,
+            "singles_won": 0, "singles_played": 0, "doubles_won": 0, "doubles_played": 0,
+            "detail": [],
+        })
+
+    for d in matches:
+        for side in ("home", "away"):
+            other = "away" if side == "home" else "home"
+            team = d[side]
+            squad = d[f"{side}_players"]
+            opp_squad = d[f"{other}_players"]
+            for pos, raw_name in enumerate(squad, start=1):
+                if raw_name.lower().startswith("no player"):
+                    continue  # placeholder for a team that fielded fewer players
+                st = slot(raw_name, team)
+                entry = {"round": d["round"], "date": d["date"],
+                         "opponent_team": d[other], "rubbers": []}
+                for r in d["rubbers"]:
+                    mine = positions(r[f"{side}_label"])
+                    if pos not in mine:
+                        continue
+                    theirs = positions(r[f"{other}_label"])
+                    ours_g = r[f"{side}_games"]
+                    their_g = r[f"{other}_games"]
+                    won = ours_g > their_g
+                    st["rubbers"] += 1
+                    st["sets_won" if won else "sets_lost"] += 1
+                    st["games_won"] += ours_g
+                    st["games_lost"] += their_g
+                    single = len(mine) == 1
+                    key = "singles" if single else "doubles"
+                    st[f"{key}_played"] += 1
+                    if won:
+                        st[f"{key}_won"] += 1
+                    entry["rubbers"].append({
+                        "type": "singles" if single else "doubles",
+                        "ours": ours_g, "theirs": their_g, "won": won,
+                        "partner": next((squad[p - 1] for p in mine if p != pos), None),
+                        "opponents": [opp_squad[p - 1] for p in theirs if p <= len(opp_squad)],
+                    })
+                if entry["rubbers"]:
+                    st["detail"].append(entry)
+
+    for st in players.values():
         total = st["sets_won"] + st["sets_lost"]
         st["set_pct"] = round(100 * st["sets_won"] / total, 1) if total else None
         total_g = st["games_won"] + st["games_lost"]
         st["game_pct"] = round(100 * st["games_won"] / total_g, 1) if total_g else None
-    return stats
+
+    if failures:
+        print(f"  ! {failures} match pop-ups could not be read")
+    return matches, players
+
+
+def tidy_names(players, roster_names):
+    """TROLS spells a name slightly differently to the roster — align them."""
+    import difflib
+
+    fixed = {}
+    for name, st in players.items():
+        match = difflib.get_close_matches(name, roster_names, n=1, cutoff=0.7)
+        clean = match[0] if match else name
+        st["name"] = clean
+        fixed[clean] = st
+    return fixed
 
 
 # ---- main -----------------------------------------------------------------
@@ -620,25 +669,12 @@ def main():
         if clubs:
             print(f"  · section: {len(clubs)} clubs")
 
-    # per-player rubbers
-    details = []
-    for r in results:
-        for m in r["matches"]:
-            if m.get("washout") or not m.get("matchid"):
-                continue
-            if CLUB not in (m["home"], m["away"]):
-                continue
-            d = fetch_match_detail(m["matchid"], m["home"] == CLUB)
-            if d:
-                d["round"] = r["round"]
-                d["date"] = r["date"]
-                d["opponent"] = m["away"] if m["home"] == CLUB else m["home"]
-                d["home"] = m["home"] == CLUB
-                details.append(d)
-    details.sort(key=lambda x: x["round"])
+    # every match in the section, for per-player rubbers and the section ladder
     roster_names = [p["name"] for p in old.get("roster", {}).get("players", [])]
-    player_results = aggregate_players(details, roster_names) if details else {}
-    print(f"  · rubbers: {len(details)} matches, {len(player_results)} players")
+    section_matches, section_players = build_section(results)
+    section_players = tidy_names(section_players, roster_names)
+    ours = {n: section_players[n] for n in roster_names if n in section_players}
+    print(f"  · rubbers: {len(section_matches)} matches, {len(section_players)} players in section")
 
     loaded = re.search(r"Loaded:?\s*([0-9]{1,2}\w{2}\s+\w+\s+\d{2,4}[^<]*)", ladder_html)
     loaded_txt = loaded.group(1).strip() if loaded else None
@@ -682,8 +718,9 @@ def main():
         "clubs": clubs or old.get("clubs", []),
         # The roster is maintained by the team, not by TROLS — always carry it over.
         "roster": old.get("roster", {}),
-        "match_details": details or old.get("match_details", []),
-        "player_results": player_results or old.get("player_results", {}),
+        "section_players": section_players or old.get("section_players", {}),
+        "our_players": ours or old.get("our_players", {}),
+        "match_count": len(section_matches) or old.get("match_count", 0),
     }
 
     DATA_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
