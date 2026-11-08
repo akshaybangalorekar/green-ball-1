@@ -40,7 +40,10 @@ parent can see where their child sits in the whole competition. Each player page
 the round-by-round sets: who they played, with whom, and the score.
 
 Ranking is by sets won %, then games won % — the same logic the team ladder uses. That
-means a clean 3–0 can sit above a 6–0 that dropped games.
+means a clean 3–0 can sit above a 6–0 that dropped games, which is not obvious on sight,
+so **tapping any player in the section ladder opens a sheet explaining their exact
+position**: their set percentage, how many others are level with them, and a side-by-side
+of games won for everyone tied on sets. The ladder rows also show sets and games inline.
 
 **Player points come from the official rubbers.** Each match has a pop-up on TROLS
 (`match_popup.php?matchid=…`) listing both sides' players by position and every rubber

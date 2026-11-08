@@ -256,6 +256,52 @@
   .rub.w .rs { background: var(--ball); color: var(--ball-ink); }
   .rub.l .rs { background: var(--clay); color: #fff8f0; }
 
+  /* ---------- overlay ---------- */
+  .overlay { position: fixed; inset: 0; z-index: 60; display: none; }
+  .overlay.on { display: block; }
+  .overlay .backdrop { position: absolute; inset: 0; background: rgba(28, 14, 8, .48); }
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; max-height: 88vh; overflow-y: auto;
+    background: var(--surface); border-radius: 24px 24px 0 0; padding: 14px 22px calc(28px + env(safe-area-inset-bottom));
+    box-shadow: 0 -12px 40px -20px rgba(0,0,0,.6); animation: sheetup .26s ease both; }
+  @keyframes sheetup { from { transform: translateY(14px); opacity: .6; } to { transform: none; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
+  .grab { width: 38px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 auto 18px; }
+  .ovtitle { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 6px; }
+  .ovsub { font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 18px; }
+  .ovclose { position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border-radius: 50%; border: 0;
+    background: var(--surface-2); color: var(--ink-dim); font-size: 19px; line-height: 1; cursor: pointer; }
+  .step { display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line-soft); }
+  .step:first-of-type { border-top: 0; }
+  .step .num { width: 22px; height: 22px; flex: 0 0 22px; border-radius: 50%; background: var(--clay); color: #fff8f0;
+    display: grid; place-items: center; font-family: var(--mono); font-size: 10px; margin-top: 1px; }
+  @media (prefers-color-scheme: dark) { .step .num { color: #17100b; } }
+  .step .body { flex: 1; min-width: 0; font-size: 13.5px; line-height: 1.55; color: var(--ink-dim); }
+  .step .body b { color: var(--ink); font-weight: 600; }
+  .step .body .big { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--ink); letter-spacing: -.02em; }
+  .cmp { margin-top: 10px; border-top: 1px solid var(--line-soft); }
+  .cmprow { display: flex; align-items: baseline; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); font-size: 13px; }
+  .cmprow .p { width: 18px; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .cmprow .n { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cmprow .g { font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); white-space: nowrap; }
+  .cmprow.us { color: var(--clay); font-weight: 700; }
+  .cmprow.us .g { color: var(--clay); }
+  .ovfoot { margin: 18px 0 0; font-size: 12.5px; color: var(--ink-dim); line-height: 1.6; }
+
+  /* ---------- ladder list ---------- */
+  .lrow { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer;
+    background: transparent; border: 0; border-top: 1px solid var(--line-soft); padding: 12px 0;
+    font-family: var(--body); color: var(--ink); }
+  .lrow:first-of-type { border-top: 0; }
+  .lrow:active { opacity: .65; }
+  .lrow .r { width: 22px; font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); text-align: right; }
+  .lrow .n { flex: 1; min-width: 0; }
+  .lrow .nm2 { display: block; font-size: 14.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lrow .sub2 { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 3px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .lrow .pc { font-family: var(--display); font-weight: 800; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .lrow.us .nm2, .lrow.us .pc { color: var(--clay); font-weight: 700; }
+  .lrow.us { background: var(--clay-wash); border-radius: 12px; padding-left: 10px; padding-right: 10px; margin: 0 -10px; }
+
   .matrix { border-collapse: collapse; font-size: 11px; }
   .matrix th, .matrix td { padding: 8px 5px; text-align: center; }
   .matrix th:first-child, .matrix td:first-child { text-align: left; padding-right: 12px; white-space: nowrap; }
@@ -331,6 +377,11 @@
   </main>
 
   <footer id="foot"></footer>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle">
+  <div class="backdrop" data-close="1"></div>
+  <div class="sheet" id="sheet"></div>
 </div>
 
 <script>
@@ -615,13 +666,14 @@ function viewSquad() {
   const rows = ladderRowsAll();
   const ladder = rows.map((p, i) => {
     const mine = p.team === CLUB;
-    return `<tr style="${mine ? "background:var(--clay-wash)" : ""}">
-      <td style="text-align:left;width:28px">${i + 1}</td>
-      <td style="text-align:left;${mine ? "font-weight:700;color:var(--clay)" : ""}">${esc(first(p.name))} <span style="opacity:.55;font-weight:400">${esc(p.name.split(" ").slice(1).join(" "))}</span></td>
-      <td style="text-align:left;font-size:12px;color:var(--ink-dim)">${esc(p.team)}</td>
-      <td>${p.sets_won}–${p.sets_lost}</td>
-      <td>${p.set_pct}%</td>
-    </tr>`;
+    return `<button class="lrow ${mine ? "us" : ""}" data-explain="${esc(p.name)}">
+      <span class="r">${i + 1}</span>
+      <span class="n">
+        <span class="nm2">${esc(p.name)}</span>
+        <span class="sub2">${esc(p.team)} · ${p.sets_won}–${p.sets_lost} sets · ${p.games_won}–${p.games_lost} games</span>
+      </span>
+      <span class="pc">${p.set_pct}%</span>
+    </button>`;
   }).join("");
 
   const kids = squad.map((s) => {
@@ -647,11 +699,65 @@ function viewSquad() {
     </div>
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
-      <div class="tblwrap"><table style="font-size:13px">
-        <thead><tr><th style="text-align:left">#</th><th style="text-align:left">Player</th><th style="text-align:left">Team</th><th>Sets</th><th>%</th></tr></thead>
-        <tbody>${ladder}</tbody></table></div>
-      <p class="caption">Every player in Open Triples Green Ball 1. Ranked by sets won %, then games won % — a clean 3–0 sits above a 6–0 that dropped games. East Malvern in clay.</p>
+      ${ladder}
+      <p class="caption">Tap anyone to see exactly why they sit where they do. East Malvern in clay.</p>
     </div>`;
+}
+
+function explainSheet(name) {
+  const rows = ladderRowsAll();
+  const i = rows.findIndex((r) => r.name === name);
+  if (i < 0) return "";
+  const p = rows[i];
+  const above = rows.slice(0, i);
+  const samePct = above.filter((r) => r.set_pct === p.set_pct);
+  const sameGame = samePct.filter((r) => (r.game_pct || 0) === (p.game_pct || 0));
+
+  const steps = [];
+
+  steps.push(`<div class="step"><span class="num">1</span><span class="body">
+    <span class="big">${p.set_pct}% sets</span><br>
+    ${p.sets_won} sets won, ${p.sets_lost} lost across ${p.rubbers} rubbers.
+    Sets won is the first thing the ladder sorts on.</span></div>`);
+
+  if (!above.length) {
+    steps.push(`<div class="step"><span class="num">2</span><span class="body">
+      Nobody in the section is ahead on sets won, so this is <b>1st</b>.</span></div>`);
+  } else if (!samePct.length) {
+    steps.push(`<div class="step"><span class="num">2</span><span class="body">
+      ${above.length} ${above.length === 1 ? "player is" : "players are"} ahead on sets won —
+      ${above.slice(0, 3).map((r) => `<b>${esc(first(r.name))}</b> ${r.set_pct}%`).join(", ")}${above.length > 3 ? " and others" : ""} —
+      so this is <b>${i + 1}${ordinal(i + 1)}</b>.</span></div>`);
+  } else {
+    const best = Math.max(...samePct.map((r) => r.game_pct || 0), p.game_pct || 0);
+    steps.push(`<div class="step"><span class="num">2</span><span class="body">
+      <b>${samePct.length}</b> ${samePct.length === 1 ? "player above is" : "players above are"} also on
+      ${p.set_pct}% sets. When sets are level, the ladder falls back to <b>games won percentage</b> —
+      how many of the games played were won.</span></div>`);
+
+    const cmp = rows.slice(0, i + 1).filter((r) => r.set_pct === p.set_pct).map((r, k) => {
+      const idx = rows.findIndex((x) => x.name === r.name) + 1;
+      return `<div class="cmprow ${r.name === p.name ? "us" : ""}">
+        <span class="p">${idx}</span><span class="n">${esc(r.name)}</span>
+        <span class="g">${r.games_won}–${r.games_lost} · ${r.game_pct || 0}%</span></div>`;
+    }).join("");
+
+    steps.push(`<div class="step"><span class="num">3</span><span class="body">
+      <b>${esc(first(p.name))}</b> has won ${p.games_won} of ${p.games_won + p.games_lost} games —
+      <b>${p.game_pct || 0}%</b>. The players above on the same set percentage have a higher share.
+      <div class="cmp">${cmp}</div>
+      ${sameGame.length ? "Where games are level too, more rubbers played ranks higher." : ""}
+      </span></div>`);
+  }
+
+  return `
+    <div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${i + 1}${ordinal(i + 1)}</h3>
+    <p class="ovsub">${esc(p.team)} · Open Triples Green Ball 1</p>
+    ${steps.join("")}
+    <p class="ovfoot">The ladder sorts on <b>sets won %</b> first, then <b>games won %</b>, then rubbers played.
+    Winning more rubbers does not move you up on its own — how cleanly you win does.</p>`;
 }
 
 function viewPlayer(name) {
@@ -876,6 +982,9 @@ function bind() {
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
   });
+  $("#view-squad").querySelectorAll(".lrow").forEach((b) => {
+    b.onclick = () => openSheet(explainSheet(b.dataset.explain));
+  });
   $("#view-squad").querySelectorAll(".kid").forEach((b) => {
     b.onclick = () => {
       selectedPlayer = b.dataset.player;
@@ -925,6 +1034,25 @@ function renderAll() {
     Roster from the team sheet. Snapshot ${esc(DATA.meta.ladder_loaded)}.<br>
     Unofficial team tool — check TROLS or your club before a match.`;
 }
+
+function openSheet(html) {
+  const ov = $("#overlay");
+  if (!ov) return;
+  $("#sheet").innerHTML = html;
+  ov.classList.add("on");
+  document.body.style.overflow = "hidden";
+}
+function closeSheet() {
+  const ov = $("#overlay");
+  if (!ov) return;
+  ov.classList.remove("on");
+  document.body.style.overflow = "";
+}
+document.addEventListener("click", (e) => {
+  const t = e.target;
+  if (t && t.dataset && t.dataset.close) closeSheet();
+});
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
 
 function showTab(name) {
   const btn = document.querySelector('.tabs button[data-view="' + name + '"]');
