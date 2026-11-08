@@ -24,7 +24,7 @@ straight to the right screen.
 ## The analysis, and what it is based on
 
 The ladder, results, fixture and club contacts come from TROLS. The squad — team
-order, availability, captain — comes from Dave's roster sheet, and is stored in
+order and availability — comes from the team roster sheet, and is stored in
 `data.json` under `roster` so the daily scrape never overwrites it.
 
 Team dashboard:
@@ -38,15 +38,18 @@ Team dashboard:
 Player cards: rounds scheduled, team record in the rounds they were on court,
 availability percentage, most frequent partners, and next round's status.
 
-**The honest limit:** TROLS publishes team scores only. Individual rubber-by-rubber
-detail sits behind a JavaScript pop-up that is not publicly readable, so there is no
-per-player win/loss record to compute. "Team record" is how the side went in the
-rounds that player played — not their personal win/loss. Recording rubbers on the
-scoresheet each week is the way to make that a real individual ladder next season.
+**Player points come from the official rubbers.** Each match has a pop-up on TROLS
+(`match_popup.php?matchid=…`) listing both sides' players by position and every rubber
+score. The scraper reads those, so each player gets real numbers: sets won and lost,
+games won and lost, and a singles and doubles record. In triples every player plays one
+singles and two doubles each round, so a full round is three rubbers per player.
+
+TROLS spells one name slightly differently from the roster ("Bangalopekar"), so the
+scraper matches names back to the roster with a fuzzy match before totalling.
 
 Tapping In / ? / Out on a squad card records a change for the next round. That override
 lives in your phone's browser storage only — nothing is uploaded, and it isn't shared
-between phones. Dave's sheet stays the source of truth in `data.json`.
+between phones. The roster sheet stays the source of truth in `data.json`.
 
 ## It runs as an app, not a browser tab
 

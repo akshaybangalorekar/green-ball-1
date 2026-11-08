@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Advantage · East Malvern Green Ball 1</title>
-<meta name="theme-color" content="#14684a">
-<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#B8431F">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -18,26 +17,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f4ee; --surface: #fffefb; --surface-2: #efebe1;
-    --ink: #1b1a17; --ink-dim: #726c60;
-    --line: rgba(27,26,23,.10); --line-soft: rgba(27,26,23,.06);
-    --court: #14684a; --court-wash: rgba(20,104,74,.09);
-    --clay: #ac4420; --clay-wash: rgba(172,68,32,.10);
-    --gold: #9c7726; --gold-wash: rgba(156,119,38,.13);
-    --shadow: 0 1px 2px rgba(27,26,23,.04), 0 14px 34px -22px rgba(27,26,23,.35);
+    /* clay court + tennis ball */
+    --bg: #faf3ea;
+    --surface: #fffcf7;
+    --surface-2: #f1e5d6;
+    --ink: #241811;
+    --ink-dim: #7d6553;
+    --line: rgba(36, 24, 17, .12);
+    --line-soft: rgba(36, 24, 17, .07);
+    --clay: #b8431f;
+    --clay-deep: #8d3013;
+    --clay-wash: rgba(184, 67, 31, .10);
+    --ball: #d3dd2c;
+    --ball-ink: #2b3005;
+    --ball-wash: rgba(211, 221, 44, .28);
+    --taupe: #a89383;
+    --shadow: 0 1px 2px rgba(36, 24, 17, .05), 0 16px 36px -24px rgba(90, 45, 25, .55);
     --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
     --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #101309; --surface: #191d13; --surface-2: #23281a;
-      --ink: #efeade; --ink-dim: #a09d8c;
-      --line: rgba(239,234,222,.13); --line-soft: rgba(239,234,222,.06);
-      --court: #5cb98c; --court-wash: rgba(92,185,140,.13);
-      --clay: #e2794f; --clay-wash: rgba(226,121,79,.13);
-      --gold: #d4a94f; --gold-wash: rgba(212,169,79,.14);
-      --shadow: 0 1px 2px rgba(0,0,0,.5), 0 18px 40px -24px rgba(0,0,0,.9);
+      --bg: #17100b;
+      --surface: #201711;
+      --surface-2: #2b2018;
+      --ink: #f4ece1;
+      --ink-dim: #b39c88;
+      --line: rgba(244, 236, 225, .14);
+      --line-soft: rgba(244, 236, 225, .07);
+      --clay: #e5713f;
+      --clay-deep: #f08a5c;
+      --clay-wash: rgba(229, 113, 63, .15);
+      --ball: #dbe64a;
+      --ball-ink: #1a1d04;
+      --ball-wash: rgba(219, 230, 74, .18);
+      --taupe: #8c7869;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 18px 42px -26px rgba(0, 0, 0, .95);
     }
   }
   * { box-sizing: border-box; }
@@ -45,24 +61,22 @@
   body {
     margin: 0; font-family: var(--body); font-size: 15px;
     background:
-      radial-gradient(900px 460px at 84% -14%, var(--court-wash), transparent 72%),
-      radial-gradient(720px 400px at 2% 2%, var(--gold-wash), transparent 68%),
+      radial-gradient(820px 420px at 88% -10%, var(--clay-wash), transparent 70%),
+      radial-gradient(680px 380px at -6% 6%, var(--ball-wash), transparent 66%),
       var(--bg);
     color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 56px;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
-  /* ---------- masthead ---------- */
   .masthead { display: flex; align-items: center; gap: 14px; padding: 30px 0 22px; }
-  .crest { width: 50px; height: 50px; flex: 0 0 50px; border-radius: 14px; background: var(--court); color: #f7f4ee;
+  .crest { width: 50px; height: 50px; flex: 0 0 50px; border-radius: 15px; background: var(--clay); color: #fff8f0;
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 17px; }
-  @media (prefers-color-scheme: dark) { .crest { color: #101309; } }
+  @media (prefers-color-scheme: dark) { .crest { color: #17100b; } }
   .masthead h1 { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.05; margin: 0; letter-spacing: -.02em; }
   .masthead .sub { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-dim); font-family: var(--mono); }
   .sync { margin-left: auto; text-align: right; font-family: var(--mono); font-size: 10px; line-height: 1.5; color: var(--ink-dim); }
-  .sync b { display: block; color: var(--court); font-weight: 500; }
+  .sync b { display: block; color: var(--clay); font-weight: 500; }
 
-  /* ---------- tabs ---------- */
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
     margin: 0 -20px 26px; padding: 10px 20px; background: color-mix(in srgb, var(--bg) 90%, transparent);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft); }
@@ -70,79 +84,77 @@
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
     font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-dim); padding: 9px 13px;
     border-radius: 9px; white-space: nowrap; transition: color .15s, background .15s; }
-  .tabs button[aria-selected="true"] { color: var(--court); background: var(--court-wash); font-weight: 500; }
+  .tabs button[aria-selected="true"] { color: #fff8f0; background: var(--clay); font-weight: 500; }
+  @media (prefers-color-scheme: dark) { .tabs button[aria-selected="true"] { color: #17100b; } }
 
   .view { display: none; animation: rise .3s ease both; }
   .view.on { display: block; }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   @media (prefers-reduced-motion: reduce) { .view { animation: none; } }
 
-  /* ---------- cards: one idea each ---------- */
   .card { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 22px; padding: 26px 22px;
     box-shadow: var(--shadow); margin-bottom: 20px; }
   .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--ink-dim); margin: 0 0 18px; display: flex; align-items: center; gap: 8px; }
-  .label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--court); flex: 0 0 6px; }
+  .label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ball); flex: 0 0 7px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
   .caption { font-size: 13px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; }
   .caption b { color: var(--ink); font-weight: 600; }
 
-  /* ---------- hero ---------- */
-  .hero { position: relative; overflow: hidden; background: linear-gradient(165deg, var(--court-wash), transparent 58%), var(--surface);
-    border: 1px solid var(--line-soft); border-radius: 26px; padding: 28px 24px; margin-bottom: 20px; box-shadow: var(--shadow); }
-  .hero .courtlines { position: absolute; inset: 0; opacity: .5; pointer-events: none; }
+  .hero { position: relative; overflow: hidden; border-radius: 26px; padding: 28px 24px; margin-bottom: 20px;
+    background: linear-gradient(158deg, var(--clay) 0%, var(--clay-deep) 100%); color: #fff8f0; box-shadow: var(--shadow); }
+  .hero .courtlines { position: absolute; inset: 0; opacity: .18; pointer-events: none; }
   .hero .rd { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--court); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-  .pill { background: var(--court); color: #f7f4ee; border-radius: 999px; padding: 3px 11px; font-size: 10px; letter-spacing: .09em; }
-  .pill.clay { background: var(--clay); }
-  @media (prefers-color-scheme: dark) { .pill { color: #101309; } }
-  .hero h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 8.4vw, 42px); line-height: 1.02;
-    letter-spacing: -.03em; margin: 18px 0 0; }
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: relative; }
+  .pill { background: rgba(255, 248, 240, .18); border-radius: 999px; padding: 3px 11px; font-size: 10px; letter-spacing: .09em; }
+  .pill.today { background: var(--ball); color: var(--ball-ink); font-weight: 500; }
+  .hero h2 { position: relative; font-family: var(--display); font-weight: 800; font-size: clamp(30px, 8.4vw, 42px);
+    line-height: 1.02; letter-spacing: -.03em; margin: 18px 0 0; }
   .hero h2 small { display: block; font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .12em;
-    text-transform: uppercase; color: var(--ink-dim); margin-bottom: 9px; }
-  .hero .venue { font-size: 14px; color: var(--ink-dim); margin-top: 12px; }
+    text-transform: uppercase; opacity: .75; margin-bottom: 9px; }
+  .hero .venue { position: relative; font-size: 14px; opacity: .85; margin-top: 12px; }
 
-  /* trio avatars */
-  .trio { display: flex; gap: 14px; margin-top: 24px; }
+  .trio { position: relative; display: flex; gap: 14px; margin-top: 24px; }
   .trio .who { text-align: center; flex: 1; }
-  .trio .av { width: 52px; height: 52px; margin: 0 auto 9px; border-radius: 50%; background: var(--court); color: #f7f4ee;
+  .trio .av { width: 52px; height: 52px; margin: 0 auto 9px; border-radius: 50%; background: var(--ball); color: var(--ball-ink);
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 17px; }
-  @media (prefers-color-scheme: dark) { .trio .av { color: #101309; } }
-  .trio .who.em .av { background: var(--gold); }
-  .trio .nm { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--ink-dim); }
-  .trio .who.em .nm { color: var(--gold); }
+  .trio .who.em .av { background: rgba(255, 248, 240, .92); color: var(--clay-deep); }
+  .trio .nm { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; opacity: .9; }
 
-  /* ---------- KPI ---------- */
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-  .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px; text-align: center; box-shadow: var(--shadow); }
+  .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
+    text-align: center; box-shadow: var(--shadow); }
   .kpi .n { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
   .kpi .n small { font-size: 13px; font-weight: 600; color: var(--ink-dim); letter-spacing: 0; }
   .kpi .k { font-family: var(--mono); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 9px; }
 
-  /* ---------- charts ---------- */
   .chart { display: block; width: 100%; height: auto; overflow: visible; }
   .chart text { font-family: var(--mono); font-size: 10px; fill: var(--ink-dim); }
   .chart .big { font-family: var(--display); font-size: 26px; font-weight: 800; fill: var(--ink); }
   .legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); }
   .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 
-  /* ---------- ladder bars ---------- */
-  .bar-row { margin-bottom: 16px; }
-  .bar-row .top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 7px; }
-  .bar-row .tname { font-size: 14px; font-weight: 500; }
-  .bar-row.us .tname { color: var(--court); font-weight: 700; }
-  .bar-row .tp { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
-  .bar-track { height: 10px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 6px; background: var(--court); opacity: .85; }
-  .bar-row.us .bar-fill { opacity: 1; }
-  .bar-row.other .bar-fill { background: var(--ink-dim); opacity: .35; }
+  /* stat rows */
+  .srow { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+  .srow:first-child { border-top: 0; }
+  .srow .k { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-dim); }
+  .srow .v { font-family: var(--display); font-weight: 700; font-size: 19px; font-variant-numeric: tabular-nums; }
+  .srow .v small { font-size: 12px; color: var(--ink-dim); font-weight: 500; }
 
-  /* ---------- segmented ---------- */
+  /* gap rows */
+  .gap { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+  .gap:first-of-type { border-top: 0; }
+  .gap .pos { width: 24px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .gap .nm { flex: 1; font-size: 14px; }
+  .gap.us .nm { color: var(--clay); font-weight: 700; }
+  .gap .d { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .gap .d.lead { color: var(--clay); font-weight: 500; }
+
   .seg-top { display: flex; gap: 6px; background: var(--surface-2); border-radius: 14px; padding: 5px; margin-bottom: 20px; }
   .seg-top button { flex: 1; appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
     font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); padding: 10px 6px; border-radius: 10px; }
-  .seg-top button[aria-selected="true"] { background: var(--surface); color: var(--court); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .seg-top button[aria-selected="true"] { background: var(--surface); color: var(--clay); font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 
-  /* ---------- results ---------- */
   .rnd { padding: 18px 0; border-top: 1px solid var(--line-soft); }
   .rnd:first-child { border-top: 0; padding-top: 0; }
   .rnd-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; font-family: var(--mono); font-size: 10.5px;
@@ -153,9 +165,8 @@
   .mt .nm.r { text-align: right; }
   .mt .sc { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); background: var(--surface-2);
     border-radius: 8px; padding: 4px 10px; white-space: nowrap; }
-  .mt.ours .nm { color: var(--court); font-weight: 700; }
+  .mt.ours .nm { color: var(--clay); font-weight: 700; }
 
-  /* ---------- draw ---------- */
   .tl { list-style: none; margin: 0; padding: 0; }
   .tl li { display: grid; grid-template-columns: 46px 1fr auto; gap: 14px; align-items: center; padding: 15px 0;
     border-top: 1px solid var(--line-soft); }
@@ -165,20 +176,17 @@
   .tl .who { font-size: 14px; }
   .tl .who small { display: block; color: var(--ink-dim); font-size: 11.5px; font-family: var(--mono); margin-top: 4px; }
   .tl .res { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
-  .tl li.today { background: var(--court-wash); border-radius: 14px; padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
+  .tl li.today { background: var(--clay-wash); border-radius: 14px; padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
   .tl li.past .who { color: var(--ink-dim); }
 
-  /* ---------- squad ---------- */
   .pcard { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 22px; padding: 24px 22px;
     margin-bottom: 18px; box-shadow: var(--shadow); }
   .pcard .top { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-  .rank { width: 38px; height: 38px; flex: 0 0 38px; border-radius: 12px; background: var(--court); color: #f7f4ee;
+  .rank { width: 38px; height: 38px; flex: 0 0 38px; border-radius: 12px; background: var(--clay); color: #fff8f0;
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 16px; }
-  @media (prefers-color-scheme: dark) { .rank { color: #101309; } }
+  @media (prefers-color-scheme: dark) { .rank { color: #17100b; } }
   .pcard .nm { font-family: var(--display); font-weight: 600; font-size: 18px; letter-spacing: -.01em; }
   .pcard .role { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); margin-top: 4px; }
-  .capt { font-family: var(--mono); font-size: 9px; letter-spacing: .09em; text-transform: uppercase; background: var(--gold-wash);
-    color: var(--gold); border-radius: 5px; padding: 3px 7px; margin-left: 8px; }
   .pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: center; }
   .pstats .row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line-soft); }
   .pstats .row:first-child { border-top: 0; }
@@ -190,53 +198,47 @@
   .seg { display: flex; gap: 4px; margin-left: auto; }
   .seg button { appearance: none; border: 1px solid var(--line); background: transparent; cursor: pointer; font-family: var(--mono);
     font-size: 10.5px; letter-spacing: .05em; padding: 6px 11px; border-radius: 8px; color: var(--ink-dim); }
-  .seg button[data-on="in"] { background: var(--court); border-color: var(--court); color: #f7f4ee; }
-  .seg button[data-on="maybe"] { background: var(--gold); border-color: var(--gold); color: #f7f4ee; }
-  .seg button[data-on="out"] { background: var(--clay); border-color: var(--clay); color: #f7f4ee; }
-  @media (prefers-color-scheme: dark) { .seg button[data-on] { color: #101309; } }
+  .seg button[data-on="in"] { background: var(--ball); border-color: var(--ball); color: var(--ball-ink); font-weight: 500; }
+  .seg button[data-on="maybe"] { background: var(--taupe); border-color: var(--taupe); color: #fff; }
+  .seg button[data-on="out"] { background: var(--clay); border-color: var(--clay); color: #fff8f0; }
 
   .matrix { border-collapse: collapse; font-size: 11px; }
   .matrix th, .matrix td { padding: 8px 5px; text-align: center; }
   .matrix th:first-child, .matrix td:first-child { text-align: left; padding-right: 12px; white-space: nowrap; }
   .matrix .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; }
-  .dot.in { background: var(--court); } .dot.out { background: var(--clay); } .dot.un { background: var(--gold); }
+  .dot.in { background: var(--ball); } .dot.out { background: var(--clay); } .dot.un { background: var(--taupe); }
   .dot.none { background: var(--surface-2); border: 1px solid var(--line); }
 
-  /* ---------- clubs ---------- */
   .club { padding: 20px 0; border-top: 1px solid var(--line-soft); }
   .club:first-child { border-top: 0; padding-top: 0; }
   .club .cn { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 9px; }
   .club .cn .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
-    background: var(--court); color: #f7f4ee; border-radius: 5px; padding: 3px 7px; font-weight: 500; }
-  @media (prefers-color-scheme: dark) { .club .cn .tag { color: #101309; } }
+    background: var(--clay); color: #fff8f0; border-radius: 5px; padding: 3px 7px; font-weight: 500; }
   .club .vd { font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
   .club .ct { font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); margin-top: 8px; }
-  .club .ct a { color: var(--court); text-decoration: none; }
+  .club .ct a { color: var(--clay); text-decoration: none; }
 
-  footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line-soft); font-family: var(--mono);
-    font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
-  footer a { color: var(--court); text-decoration: none; }
-  .tblwrap { overflow-x: auto; margin: 0 -6px; }
-
-  /* ---------- app / alerts ---------- */
   .act { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .act .txt { flex: 1; min-width: 180px; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
   .act .txt b { color: var(--ink); font-weight: 600; display: block; margin-bottom: 3px; font-size: 13.5px; }
   .btn { appearance: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: .07em;
-    text-transform: uppercase; padding: 11px 16px; border-radius: 11px; background: var(--court); color: #f7f4ee; }
+    text-transform: uppercase; padding: 11px 16px; border-radius: 11px; background: var(--clay); color: #fff8f0; }
   .btn.ghost { background: var(--surface-2); color: var(--ink); }
   .btn[disabled] { opacity: .5; cursor: default; }
-  @media (prefers-color-scheme: dark) { .btn { color: #101309; } }
+  @media (prefers-color-scheme: dark) { .btn { color: #17100b; } }
 
-  /* ---------- season strip ---------- */
   .strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
   .blk { aspect-ratio: 1; border-radius: 10px; display: grid; place-items: center; font-family: var(--mono);
     font-size: 11px; background: var(--surface-2); color: var(--ink-dim); }
-  .blk.w { background: var(--court); color: #f7f4ee; font-weight: 500; }
-  .blk.l { background: var(--clay); color: #f7f4ee; font-weight: 500; }
-  .blk.wo { background: var(--gold-wash); color: var(--gold); }
-  .blk.today { outline: 2px solid var(--court); outline-offset: -2px; color: var(--court); font-weight: 500; }
-  @media (prefers-color-scheme: dark) { .blk.w, .blk.l { color: #101309; } }
+  .blk.w { background: var(--ball); color: var(--ball-ink); font-weight: 700; }
+  .blk.l { background: var(--clay); color: #fff8f0; font-weight: 700; }
+  .blk.wo { background: var(--taupe); color: #fff; }
+  .blk.today { outline: 2px solid var(--clay); outline-offset: -2px; color: var(--clay); font-weight: 700; }
+
+  footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line-soft); font-family: var(--mono);
+    font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
+  footer a { color: var(--clay); text-decoration: none; }
+  .tblwrap { overflow-x: auto; margin: 0 -6px; }
 </style>
 </head>
 <body>
@@ -270,7 +272,7 @@
 </div>
 
 <script>
-const DATA = {"meta":{"club":"East Malvern","competition":"Sunday AM","season":"Summer 26/27","section":"Open Triples Green Ball 1","daytime_code":"UA","section_code":"UA037","ladder_loaded":"29 Oct 2026, 3:01 pm","results_loaded":"29 Oct 2026, 3:01 pm","synced":"2026-11-07","source_ladder":"https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=","source_results":"https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=","source_fixture":"https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style=","team_code":"UA284"},"ladder":[{"team":"Glen Waverley","pts":20.0,"pct":480.0,"pos":1,"played":2,"won":2,"lost":0,"sets_for":12,"sets_against":0,"games_for":72,"games_against":15,"drawn":0},{"team":"MCC Glen Iris","pts":19.0,"pct":283.33,"pos":2,"played":2,"won":2,"lost":0,"sets_for":11,"sets_against":1,"games_for":68,"games_against":24,"drawn":0},{"team":"East Malvern","pts":19.0,"pct":272.0,"pos":3,"played":2,"won":2,"lost":0,"sets_for":11,"sets_against":1,"games_for":68,"games_against":25,"drawn":0,"isUs":true},{"team":"Mountain Gate","pts":12.0,"pct":115.91,"pos":4,"played":2,"won":1,"lost":1,"sets_for":6,"sets_against":6,"games_for":51,"games_against":44,"drawn":0},{"team":"Rosswood","pts":12.0,"pct":76.27,"pos":5,"played":2,"won":1,"lost":1,"sets_for":6,"sets_against":6,"games_for":45,"games_against":59,"drawn":0},{"team":"Mayfield Park","pts":5.0,"pct":47.83,"pos":6,"played":2,"won":0,"lost":2,"sets_for":1,"sets_against":11,"games_for":33,"games_against":69,"drawn":0},{"team":"Dingley","pts":5.0,"pct":32.35,"pos":7,"played":2,"won":0,"lost":2,"sets_for":1,"sets_against":11,"games_for":22,"games_against":68,"drawn":0},{"team":"Fountain Gate","pts":4.0,"pct":23.61,"pos":8,"played":2,"won":0,"lost":2,"sets_for":0,"sets_against":12,"games_for":17,"games_against":72,"drawn":0}],"results":[{"round":3,"date":"2026-10-25","washout":true,"matches":[{"home":"Glen Waverley","away":"East Malvern","washout":true},{"home":"Fountain Gate","away":"Mountain Gate","washout":true},{"home":"Dingley","away":"Mayfield Park","washout":true},{"home":"MCC Glen Iris","away":"Rosswood","washout":true}]},{"round":2,"date":"2026-10-18","washout":false,"matches":[{"home":"Mountain Gate","homePts":1.0,"homeSets":1,"homeGames":18,"away":"East Malvern","awayPts":7.0,"awaySets":5,"awayGames":32},{"home":"Fountain Gate","homePts":0.0,"homeSets":0,"homeGames":7,"away":"Glen Waverley","awayPts":8.0,"awaySets":6,"awayGames":36},{"home":"Dingley","homePts":1.0,"homeSets":1,"homeGames":14,"away":"MCC Glen Iris","awayPts":7.0,"awaySets":5,"awayGames":32},{"home":"Mayfield Park","homePts":1.0,"homeSets":1,"homeGames":26,"away":"Rosswood","awayPts":7.0,"awaySets":5,"awayGames":33}]},{"round":1,"date":"2026-10-11","washout":false,"matches":[{"home":"Glen Waverley","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Dingley","awayPts":0.0,"awaySets":0,"awayGames":8},{"home":"East Malvern","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Mayfield Park","awayPts":0.0,"awaySets":0,"awayGames":7},{"home":"Rosswood","homePts":1.0,"homeSets":1,"homeGames":12,"away":"Mountain Gate","awayPts":7.0,"awaySets":5,"awayGames":33},{"home":"MCC Glen Iris","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Fountain Gate","awayPts":0.0,"awaySets":0,"awayGames":10}]}],"draw":[{"round":1,"date":"2026-10-11","opponent":"Mayfield Park","homeAway":"H","result":null},{"round":2,"date":"2026-10-18","opponent":"Mountain Gate","homeAway":"A","result":null},{"round":3,"date":"2026-10-25","opponent":"Glen Waverley","homeAway":"A","result":null},{"round":4,"date":"2026-11-08","opponent":"MCC Glen Iris","homeAway":"H","result":null},{"round":5,"date":"2026-11-15","opponent":"Rosswood","homeAway":"H","result":null},{"round":6,"date":"2026-11-22","opponent":"Dingley","homeAway":"A","result":null},{"round":7,"date":"2026-11-29","opponent":"Mountain Gate","homeAway":"H","result":null},{"round":8,"date":"2026-12-06","opponent":"Fountain Gate","homeAway":"H","result":null},{"round":9,"date":"2026-12-13","opponent":"MCC Glen Iris","homeAway":"A","result":null},{"round":10,"date":"2027-01-31","opponent":"Rosswood","homeAway":"A","result":null},{"round":11,"date":"2027-02-07","opponent":"Dingley","homeAway":"H","result":null},{"round":12,"date":"2027-02-14","opponent":"Mayfield Park","homeAway":"A","result":null},{"round":13,"date":"2027-02-21","opponent":"Fountain Gate","homeAway":"A","result":null},{"round":14,"date":"2027-02-28","opponent":"Glen Waverley","homeAway":"H","result":null}],"finals":[{"label":"No play","date":"2026-11-01"},{"label":"No play","date":"2027-03-07"},{"label":"Semi finals","date":"2027-03-14"},{"label":"Grand final","date":"2027-03-21"}],"clubs":[{"name":"Glen Waverley","melway":"71 A5","venue":"3 Aquatic Place Rear of Monash Aquatic Centre, Glen Waverley","contact":"Brad Hasler","phone":"0417 327 880"},{"name":"Mountain Gate","melway":"64 J11","venue":"Reta Matthews Reserve Cnr Burke Rd & Agora Blvd, Ferntree Gully","contact":"Frank Ruberto","phone":"0418 711 325"},{"name":"East Malvern","melway":"59 K10","venue":"15 Moira St Opp Dorothy Laver Reserve, Glen Iris Club House Ph:0477 858 854","contact":"Jake Zerman","phone":"0431 820 447"},{"name":"Fountain Gate","melway":"110 B4","venue":"Cnr Raven Cres & Princes Highway, Narre Warren","contact":"Dejan Stojic","phone":"0401 137 236"},{"name":"Rosswood","melway":"81 E8","venue":"112A Somerset Drive opposite Francesco Drive, Dandenong North Club House Ph:0401 177 886","contact":"Marcel Pietrasik","phone":"0401 177 886"},{"name":"Dingley","melway":"88 H4","venue":"Rowan Road South Off Westall Rd Ext. behind netball, Dingley Village Club House Ph:0411 330 289","contact":"Leon Yang","phone":"0400 366 188"},{"name":"Mayfield Park","melway":"70 B4","venue":"34 - 38 Mayfield Drive, Mount Waverley","contact":"Brad Hasler","phone":"0417 327 880"},{"name":"MCC Glen Iris","melway":"61 C11","venue":"260-270 High Street Road Opposite Surrey Road, Mount Waverley Club House Ph:9807 7755","contact":"Angelo Giampaolo","phone":"0407 477 798"}],"roster":{"captain":"Dave Philpot","captain_phone":"0478 652 600","source":"Roster sheet supplied by Dave Philpot (captain), Sunday D1 / Green Ball 1, Summer 2026/27","team_order":["Atharv Bangalorekar","Bodhi Senadipathy","Liam Kari","Alana Philpott"],"players":[{"name":"Atharv Bangalorekar","rank":1,"parent":"Akshay Bangalorekar","phone":"0434 941 987"},{"name":"Bodhi Senadipathy","rank":2,"parent":"Suranga Senadipathy","phone":"0437 881 966"},{"name":"Liam Kari","rank":3,"parent":"Mahesh Kari","phone":"0401 473 534"},{"name":"Alana Philpott","rank":4,"parent":"Dave Philpot","phone":"0478 652 600"}],"rounds":[{"round":1,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":2,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":3,"in":["Atharv","Liam","Alana"],"out":["Bodhi"],"unavailable":["Bodhi"]},{"round":4,"in":["Atharv","Lucas Mescher","Alana"],"out":["Liam"],"unavailable":["Liam","Bodhi"],"emergency":["Lucas Mescher"]},{"round":5,"in":["Bodhi","Liam","Alana"],"out":["Atharv"],"unavailable":[]},{"round":6,"in":["Atharv","Liam","Alana"],"out":["Bodhi"],"unavailable":["Bodhi"]},{"round":7,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":8,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":9,"in":["Atharv","Bodhi","Alana"],"out":["Liam"],"unavailable":[]},{"round":10,"in":["Bodhi","Liam","Alana"],"out":["Atharv"],"unavailable":[]},{"round":11,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":12,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":13,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":14,"in":["Atharv","Bodhi","Alana"],"out":["Liam"],"unavailable":[]}]}};
+const DATA = {"meta":{"club":"East Malvern","competition":"Sunday AM","season":"Summer 26/27","section":"Open Triples Green Ball 1","daytime_code":"UA","section_code":"UA037","ladder_loaded":"29 Oct 2026, 3:01 pm","results_loaded":"29 Oct 2026, 3:01 pm","synced":"2026-11-08","source_ladder":"https://trols.org.au/wdta/ladders.php?daytime=UA&section=UA037&style=","source_results":"https://trols.org.au/wdta/results.php?daytime=UA&section=UA037&style=","source_fixture":"https://trols.org.au/wdta/fixture.php?daytime=UA&section=UA037&style=","team_code":"UA284"},"ladder":[{"team":"Glen Waverley","pts":20.0,"pct":480.0,"pos":1,"played":2,"won":2,"lost":0,"sets_for":12,"sets_against":0,"games_for":72,"games_against":15,"drawn":0},{"team":"MCC Glen Iris","pts":19.0,"pct":283.33,"pos":2,"played":2,"won":2,"lost":0,"sets_for":11,"sets_against":1,"games_for":68,"games_against":24,"drawn":0},{"team":"East Malvern","pts":19.0,"pct":272.0,"pos":3,"played":2,"won":2,"lost":0,"sets_for":11,"sets_against":1,"games_for":68,"games_against":25,"drawn":0,"isUs":true},{"team":"Mountain Gate","pts":12.0,"pct":115.91,"pos":4,"played":2,"won":1,"lost":1,"sets_for":6,"sets_against":6,"games_for":51,"games_against":44,"drawn":0},{"team":"Rosswood","pts":12.0,"pct":76.27,"pos":5,"played":2,"won":1,"lost":1,"sets_for":6,"sets_against":6,"games_for":45,"games_against":59,"drawn":0},{"team":"Mayfield Park","pts":5.0,"pct":47.83,"pos":6,"played":2,"won":0,"lost":2,"sets_for":1,"sets_against":11,"games_for":33,"games_against":69,"drawn":0},{"team":"Dingley","pts":5.0,"pct":32.35,"pos":7,"played":2,"won":0,"lost":2,"sets_for":1,"sets_against":11,"games_for":22,"games_against":68,"drawn":0},{"team":"Fountain Gate","pts":4.0,"pct":23.61,"pos":8,"played":2,"won":0,"lost":2,"sets_for":0,"sets_against":12,"games_for":17,"games_against":72,"drawn":0}],"results":[{"round":3,"date":"2026-10-25","washout":true,"matches":[{"home":"Glen Waverley","away":"East Malvern","washout":true},{"home":"Fountain Gate","away":"Mountain Gate","washout":true},{"home":"Dingley","away":"Mayfield Park","washout":true},{"home":"MCC Glen Iris","away":"Rosswood","washout":true}]},{"round":2,"date":"2026-10-18","washout":false,"matches":[{"matchid":"UA037021","home":"Mountain Gate","homePts":1.0,"homeSets":1,"homeGames":18,"away":"East Malvern","awayPts":7.0,"awaySets":5,"awayGames":32},{"matchid":"UA037022","home":"Fountain Gate","homePts":0.0,"homeSets":0,"homeGames":7,"away":"Glen Waverley","awayPts":8.0,"awaySets":6,"awayGames":36},{"matchid":"UA037023","home":"Dingley","homePts":1.0,"homeSets":1,"homeGames":14,"away":"MCC Glen Iris","awayPts":7.0,"awaySets":5,"awayGames":32},{"matchid":"UA037024","home":"Mayfield Park","homePts":1.0,"homeSets":1,"homeGames":26,"away":"Rosswood","awayPts":7.0,"awaySets":5,"awayGames":33}]},{"round":1,"date":"2026-10-11","washout":false,"matches":[{"matchid":"UA037011","home":"Glen Waverley","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Dingley","awayPts":0.0,"awaySets":0,"awayGames":8},{"matchid":"UA037012","home":"East Malvern","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Mayfield Park","awayPts":0.0,"awaySets":0,"awayGames":7},{"matchid":"UA037013","home":"Rosswood","homePts":1.0,"homeSets":1,"homeGames":12,"away":"Mountain Gate","awayPts":7.0,"awaySets":5,"awayGames":33},{"matchid":"UA037014","home":"MCC Glen Iris","homePts":8.0,"homeSets":6,"homeGames":36,"away":"Fountain Gate","awayPts":0.0,"awaySets":0,"awayGames":10}]}],"draw":[{"round":1,"date":"2026-10-11","opponent":"Mayfield Park","homeAway":"H","result":null},{"round":2,"date":"2026-10-18","opponent":"Mountain Gate","homeAway":"A","result":null},{"round":3,"date":"2026-10-25","opponent":"Glen Waverley","homeAway":"A","result":null},{"round":4,"date":"2026-11-08","opponent":"MCC Glen Iris","homeAway":"H","result":null},{"round":5,"date":"2026-11-15","opponent":"Rosswood","homeAway":"H","result":null},{"round":6,"date":"2026-11-22","opponent":"Dingley","homeAway":"A","result":null},{"round":7,"date":"2026-11-29","opponent":"Mountain Gate","homeAway":"H","result":null},{"round":8,"date":"2026-12-06","opponent":"Fountain Gate","homeAway":"H","result":null},{"round":9,"date":"2026-12-13","opponent":"MCC Glen Iris","homeAway":"A","result":null},{"round":10,"date":"2027-01-31","opponent":"Rosswood","homeAway":"A","result":null},{"round":11,"date":"2027-02-07","opponent":"Dingley","homeAway":"H","result":null},{"round":12,"date":"2027-02-14","opponent":"Mayfield Park","homeAway":"A","result":null},{"round":13,"date":"2027-02-21","opponent":"Fountain Gate","homeAway":"A","result":null},{"round":14,"date":"2027-02-28","opponent":"Glen Waverley","homeAway":"H","result":null}],"finals":[{"label":"No play","date":"2026-11-01"},{"label":"No play","date":"2027-03-07"},{"label":"Semi finals","date":"2027-03-14"},{"label":"Grand final","date":"2027-03-21"}],"clubs":[{"name":"Glen Waverley","melway":"71 A5","venue":"3 Aquatic Place Rear of Monash Aquatic Centre, Glen Waverley","contact":"Brad Hasler","phone":"0417 327 880"},{"name":"Mountain Gate","melway":"64 J11","venue":"Reta Matthews Reserve Cnr Burke Rd & Agora Blvd, Ferntree Gully","contact":"Frank Ruberto","phone":"0418 711 325"},{"name":"East Malvern","melway":"59 K10","venue":"15 Moira St Opp Dorothy Laver Reserve, Glen Iris Club House Ph:0477 858 854","contact":"Jake Zerman","phone":"0431 820 447"},{"name":"Fountain Gate","melway":"110 B4","venue":"Cnr Raven Cres & Princes Highway, Narre Warren","contact":"Dejan Stojic","phone":"0401 137 236"},{"name":"Rosswood","melway":"81 E8","venue":"112A Somerset Drive opposite Francesco Drive, Dandenong North Club House Ph:0401 177 886","contact":"Marcel Pietrasik","phone":"0401 177 886"},{"name":"Dingley","melway":"88 H4","venue":"Rowan Road South Off Westall Rd Ext. behind netball, Dingley Village Club House Ph:0411 330 289","contact":"Leon Yang","phone":"0400 366 188"},{"name":"Mayfield Park","melway":"70 B4","venue":"34 - 38 Mayfield Drive, Mount Waverley","contact":"Brad Hasler","phone":"0417 327 880"},{"name":"MCC Glen Iris","melway":"61 C11","venue":"260-270 High Street Road Opposite Surrey Road, Mount Waverley Club House Ph:9807 7755","contact":"Angelo Giampaolo","phone":"0407 477 798"}],"roster":{"source":"Team roster, Sunday Green Ball 1, Summer 2026/27","team_order":["Atharv Bangalorekar","Bodhi Senadipathy","Liam Kari","Alana Philpott"],"players":[{"name":"Atharv Bangalorekar","rank":1},{"name":"Bodhi Senadipathy","rank":2},{"name":"Liam Kari","rank":3},{"name":"Alana Philpott","rank":4}],"rounds":[{"round":1,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":2,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":3,"in":["Atharv","Liam","Alana"],"out":["Bodhi"],"unavailable":["Bodhi"]},{"round":4,"in":["Atharv","Lucas Mescher","Alana"],"out":["Liam"],"unavailable":["Liam","Bodhi"],"emergency":["Lucas Mescher"]},{"round":5,"in":["Bodhi","Liam","Alana"],"out":["Atharv"],"unavailable":[]},{"round":6,"in":["Atharv","Liam","Alana"],"out":["Bodhi"],"unavailable":["Bodhi"]},{"round":7,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":8,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":9,"in":["Atharv","Bodhi","Alana"],"out":["Liam"],"unavailable":[]},{"round":10,"in":["Bodhi","Liam","Alana"],"out":["Atharv"],"unavailable":[]},{"round":11,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":12,"in":["Atharv","Bodhi","Liam"],"out":["Alana"],"unavailable":[]},{"round":13,"in":["Atharv","Liam","Alana"],"out":[],"unavailable":["Bodhi"]},{"round":14,"in":["Atharv","Bodhi","Alana"],"out":["Liam"],"unavailable":[]}]},"match_details":[{"our_players":["Atharv Bangalopekar","Liam Kari","Alana Philpott"],"opp_players":["Anya Chawla","Oliver Herath","No Player 3"],"rubbers":[{"our_label":"2+3","ours":6,"theirs":0,"won":true},{"our_label":"1","ours":6,"theirs":2,"won":true},{"our_label":"1+3","ours":6,"theirs":0,"won":true},{"our_label":"2","ours":6,"theirs":3,"won":true},{"our_label":"1+2","ours":6,"theirs":2,"won":true},{"our_label":"3","ours":6,"theirs":0,"won":true}],"games_won":36,"games_lost":7,"sets_won":6,"sets_lost":0,"round":1,"date":"2026-10-11","opponent":"Mayfield Park","home":true},{"our_players":["Atharv Bangalopekar","Bodhi Senadipathy","Liam Kari"],"opp_players":["Ryan Ganji","Matthew Hawkins","Reyansh Misra"],"rubbers":[{"our_label":"2+3","ours":6,"theirs":5,"won":true},{"our_label":"1","ours":6,"theirs":0,"won":true},{"our_label":"1+3","ours":6,"theirs":4,"won":true},{"our_label":"2","ours":6,"theirs":1,"won":true},{"our_label":"1+2","ours":6,"theirs":2,"won":true},{"our_label":"3","ours":2,"theirs":6,"won":false}],"games_won":32,"games_lost":18,"sets_won":5,"sets_lost":1,"round":2,"date":"2026-10-18","opponent":"Mountain Gate","home":false}],"player_results":{"Atharv Bangalorekar":{"name":"Atharv Bangalorekar","rounds":[1,2],"rubbers":6,"sets_won":6,"sets_lost":0,"games_won":36,"games_lost":10,"singles":[{"round":1,"ours":6,"theirs":2,"won":true},{"round":2,"ours":6,"theirs":0,"won":true}],"doubles":[{"round":1,"ours":6,"theirs":0,"won":true},{"round":1,"ours":6,"theirs":2,"won":true},{"round":2,"ours":6,"theirs":4,"won":true},{"round":2,"ours":6,"theirs":2,"won":true}],"set_pct":100.0,"game_pct":78.3},"Liam Kari":{"name":"Liam Kari","rounds":[1,2],"rubbers":6,"sets_won":5,"sets_lost":1,"games_won":32,"games_lost":20,"singles":[{"round":1,"ours":6,"theirs":3,"won":true},{"round":2,"ours":2,"theirs":6,"won":false}],"doubles":[{"round":1,"ours":6,"theirs":0,"won":true},{"round":1,"ours":6,"theirs":2,"won":true},{"round":2,"ours":6,"theirs":5,"won":true},{"round":2,"ours":6,"theirs":4,"won":true}],"set_pct":83.3,"game_pct":61.5},"Alana Philpott":{"name":"Alana Philpott","rounds":[1],"rubbers":3,"sets_won":3,"sets_lost":0,"games_won":18,"games_lost":0,"singles":[{"round":1,"ours":6,"theirs":0,"won":true}],"doubles":[{"round":1,"ours":6,"theirs":0,"won":true},{"round":1,"ours":6,"theirs":0,"won":true}],"set_pct":100.0,"game_pct":100.0},"Bodhi Senadipathy":{"name":"Bodhi Senadipathy","rounds":[2],"rubbers":3,"sets_won":3,"sets_lost":0,"games_won":18,"games_lost":8,"singles":[{"round":2,"ours":6,"theirs":1,"won":true}],"doubles":[{"round":2,"ours":6,"theirs":5,"won":true},{"round":2,"ours":6,"theirs":2,"won":true}],"set_pct":100.0,"game_pct":69.2}}};
 
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -283,12 +285,14 @@ const parseDate = (iso) => { const [y, m, d] = iso.split("-").map(Number); retur
 const fmtDate = (iso) => { const d = parseDate(iso); return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`; };
 const fmtLong = (iso) => { const d = parseDate(iso); return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`; };
 const todayISO = () => { const n = new Date(); return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`; };
-const pct = (n) => n.toFixed(2).replace(/\.00$/, ".0");
+const pct = (n) => Number(n).toFixed(2).replace(/\.00$/, ".0");
 const first = (n) => String(n).split(" ")[0];
 const initials = (n) => String(n).split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
+const ordinal = (n) => { const s = ["th", "st", "nd", "rd"], v = n % 100; return s[(v - 20) % 10] || s[v] || s[0]; };
 
 const us = DATA.ladder.find((t) => t.isUs);
 const roster = DATA.roster || { players: [], rounds: [], team_order: [] };
+const playerResults = DATA.player_results || {};
 
 function resultsFor(team) {
   const out = [];
@@ -316,7 +320,6 @@ function nextRound() {
 }
 const clubByName = (name) => DATA.clubs.find((c) => c.name === name) || null;
 
-/* ---------- roster ---------- */
 const rosterRound = (n) => roster.rounds.find((r) => r.round === n) || null;
 function planFor(firstName, n) {
   const r = rosterRound(n);
@@ -326,7 +329,29 @@ function planFor(firstName, n) {
   if ((r.out || []).includes(firstName)) return "out";
   return "none";
 }
-function playerStats(p) {
+
+/* ---------- team totals ---------- */
+const completedRounds = ourResults.filter((r) => r.res !== "wo");
+const teamSetsFor = us.sets_for, teamSetsAgainst = us.sets_against;
+const setPct = Math.round((100 * teamSetsFor) / Math.max(1, teamSetsFor + teamSetsAgainst));
+const gamePct = Math.round((100 * us.games_for) / Math.max(1, us.games_for + us.games_against));
+const pointsPerRound = (us.pts / Math.max(1, ourResults.length)).toFixed(1);
+const winRate = completedRounds.length ? Math.round((100 * completedRounds.filter((r) => r.res === "w").length) / completedRounds.length) : 0;
+
+/* ---------- per player ---------- */
+function playerLine(name) {
+  const pr = playerResults[name];
+  if (!pr) return null;
+  const singles = pr.singles || [], doubles = pr.doubles || [];
+  return {
+    ...pr,
+    singlesWon: singles.filter((r) => r.won).length,
+    singlesPlayed: singles.length,
+    doublesWon: doubles.filter((r) => r.won).length,
+    doublesPlayed: doubles.length,
+  };
+}
+const squad = (roster.players || []).map((p) => {
   const f = first(p.name);
   const inR = [], outR = [], unR = [];
   roster.rounds.forEach((r) => {
@@ -334,27 +359,20 @@ function playerStats(p) {
     else if ((r.unavailable || []).includes(f)) unR.push(r.round);
     else if ((r.out || []).includes(f)) outR.push(r.round);
   });
-  const completed = inR.filter((n) => { const x = resultForRound(n); return x && x.res !== "wo"; });
-  const wins = completed.filter((n) => resultForRound(n).res === "w").length;
-  const washouts = inR.filter((n) => { const x = resultForRound(n); return x && x.res === "wo"; }).length;
-  const partners = {};
-  roster.rounds.forEach((r) => { if ((r.in || []).includes(f)) (r.in || []).forEach((o) => { if (o !== f) partners[o] = (partners[o] || 0) + 1; }); });
-  const top = Object.entries(partners).sort((a, b) => b[1] - a[1]).slice(0, 1);
-  const total = roster.rounds.length || 1;
-  return { ...p, inCount: inR.length, outCount: outR.length, unCount: unR.length, scheduled: total,
-    completed: completed.length, wins, washouts, inPct: (inR.length / total) * 100, partner: top.length ? top[0][0] : null };
-}
-const squad = (roster.players || []).map(playerStats).sort((a, b) => a.rank - b.rank);
+  const line = playerLine(p.name);
+  return { ...p, inCount: inR.length, outCount: outR.length, unCount: unR.length,
+    scheduled: roster.rounds.length || 1, line };
+}).sort((a, b) => a.rank - b.rank);
 
 /* ---------- graphics ---------- */
 function ring(value, max, label, sub) {
-  const r = 52, c = 2 * Math.PI * r, dash = Math.min(1, value / max) * c;
-  return `<svg class="chart" viewBox="0 0 140 140" role="img" aria-label="${esc(label)} ${value}">
+  const r = 52, c = 2 * Math.PI * r, dash = Math.max(0, Math.min(1, value / max)) * c;
+  return `<svg class="chart" viewBox="0 0 140 140" role="img" aria-label="${esc(label)}">
     <circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--surface-2)" stroke-width="13"/>
-    <circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--court)" stroke-width="13" stroke-linecap="round"
+    <circle cx="70" cy="70" r="${r}" fill="none" stroke="var(--clay)" stroke-width="13" stroke-linecap="round"
       stroke-dasharray="${dash} ${c}" transform="rotate(-90 70 70)"/>
-    <text x="70" y="70" text-anchor="middle" class="big" dominant-baseline="middle">${esc(label)}</text>
-    <text x="70" y="92" text-anchor="middle">${esc(sub)}</text>
+    <text x="70" y="${sub ? 64 : 70}" text-anchor="middle" class="big" dominant-baseline="middle">${esc(label)}</text>
+    ${sub ? `<text x="70" y="88" text-anchor="middle">${esc(sub)}</text>` : ""}
   </svg>`;
 }
 
@@ -368,10 +386,10 @@ function pointsChart() {
     const pts = ourPoints(r); cum += pts;
     const h = (pts / 8) * (base - top - 18);
     const x = pad + i * bw + bw * 0.2, w = bw * 0.6;
-    return `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" rx="4" fill="var(--court)" opacity="${r.res === "wo" ? .35 : .9}"/>
+    return `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" rx="4" fill="var(--clay)" opacity="${r.res === "wo" ? .35 : .9}"/>
       <text x="${x + w / 2}" y="${base - h - 9}" text-anchor="middle" style="fill:var(--ink)">${pts.toFixed(0)}</text>
       <text x="${x + w / 2}" y="${base + 17}" text-anchor="middle">R${r.round}</text>
-      <text x="${x + w / 2}" y="${H - 2}" text-anchor="middle" style="fill:var(--court)">${cum.toFixed(0)}</text>`;
+      <text x="${x + w / 2}" y="${H - 2}" text-anchor="middle" style="fill:var(--clay)">${cum.toFixed(0)}</text>`;
   }).join("");
   return `<svg class="chart" viewBox="0 0 ${W} ${H}"><line x1="${pad}" y1="${base}" x2="${W - pad}" y2="${base}" stroke="var(--line)"/>${bars}</svg>`;
 }
@@ -387,8 +405,8 @@ function gamesChart() {
     const theirs = r.m.home === CLUB ? r.m.awayGames : r.m.homeGames;
     const hM = (mine / maxG) * (base - top), hT = (theirs / maxG) * (base - top);
     const x = pad + i * bw + bw * 0.14, w = bw * 0.34;
-    return `<rect x="${x}" y="${base - hM}" width="${w}" height="${hM}" rx="4" fill="var(--court)"/>
-      <rect x="${x + w + 4}" y="${base - hT}" width="${w}" height="${hT}" rx="4" fill="var(--clay)" opacity=".6"/>
+    return `<rect x="${x}" y="${base - hM}" width="${w}" height="${hM}" rx="4" fill="var(--ball)"/>
+      <rect x="${x + w + 4}" y="${base - hT}" width="${w}" height="${hT}" rx="4" fill="var(--taupe)" opacity=".7"/>
       <text x="${x + w}" y="${base + 16}" text-anchor="middle">R${r.round}</text>`;
   }).join("");
   return `<svg class="chart" viewBox="0 0 ${W} ${H}"><line x1="${pad}" y1="${base}" x2="${W - pad}" y2="${base}" stroke="var(--line)"/>${bars}</svg>`;
@@ -405,15 +423,6 @@ function seasonStrip() {
   }).join("");
 }
 
-function ladderBars() {
-  const max = Math.max(...DATA.ladder.map((t) => t.pts));
-  return DATA.ladder.map((t) => `
-    <div class="bar-row ${t.isUs ? "us" : "other"}">
-      <div class="top"><span class="tname">${esc(t.team)}</span><span class="tp">${t.pts.toFixed(1)} pts · ${pct(t.pct)}%</span></div>
-      <div class="bar-track"><div class="bar-fill" style="width:${Math.max(4, (t.pts / max) * 100)}%"></div></div>
-    </div>`).join("");
-}
-
 /* ---------- views ---------- */
 function insightLine() {
   const sorted = DATA.ladder.slice().sort((a, b) => a.pos - b.pos);
@@ -424,7 +433,6 @@ function insightLine() {
   s += ` Top four play finals; 4th is ${(us.pts - fourth.pts).toFixed(1)} points back.`;
   return s;
 }
-function ordinal(n) { const s = ["th", "st", "nd", "rd"], v = n % 100; return s[(v - 20) % 10] || s[v] || s[0]; }
 
 function viewWeek() {
   const nr = nextRound();
@@ -444,8 +452,8 @@ function viewWeek() {
   return `
     <div class="hero">
       <svg class="courtlines" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true">
-        <g stroke="var(--court)" stroke-width="1" fill="none" opacity=".13">
-          <rect x="30" y="26" width="340" height="208" rx="4"/>
+        <g stroke="#fff8f0" stroke-width="1.2" fill="none">
+          <rect x="30" y="26" width="340" height="208" rx="3"/>
           <line x1="30" y1="130" x2="370" y2="130"/>
           <line x1="120" y1="26" x2="120" y2="234"/>
           <line x1="280" y1="26" x2="280" y2="234"/>
@@ -456,7 +464,7 @@ function viewWeek() {
       <div class="rd">
         <span class="pill">Round ${nr.round}</span>
         <span>${fmtLong(nr.date)}</span>
-        ${isToday ? `<span class="pill clay">Today</span>` : ""}
+        ${isToday ? `<span class="pill today">Today</span>` : ""}
       </div>
       <h2><small>${nr.opponent ? (nr.homeAway === "H" ? "Home vs" : "Away vs") : "Opponent"}</small>
         ${nr.opponent ? esc(nr.opponent) : "To be confirmed"}</h2>
@@ -467,7 +475,7 @@ function viewWeek() {
     <div class="kpis">
       <div class="kpi"><div class="n">${us.pos}<small>/${DATA.ladder.length}</small></div><div class="k">Ladder</div></div>
       <div class="kpi"><div class="n">${us.pts.toFixed(1)}</div><div class="k">Points</div></div>
-      <div class="kpi"><div class="n">${Math.round(us.pct)}<small>%</small></div><div class="k">Games</div></div>
+      <div class="kpi"><div class="n">${setPct}<small>%</small></div><div class="k">Sets won</div></div>
     </div>
 
     <div class="card">
@@ -478,7 +486,7 @@ function viewWeek() {
     <div class="card">
       <p class="label">Season so far</p>
       <div class="strip">${seasonStrip()}</div>
-      <div class="legend"><span><i style="background:var(--court)"></i>win</span><span><i style="background:var(--clay)"></i>loss</span><span><i style="background:var(--gold-wash)"></i>wash-out</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>to come</span></div>
+      <div class="legend"><span><i style="background:var(--ball)"></i>win</span><span><i style="background:var(--clay)"></i>loss</span><span><i style="background:var(--taupe)"></i>wash-out</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>to come</span></div>
     </div>
 
     <div class="card">
@@ -490,10 +498,19 @@ function viewWeek() {
 
 function viewTeam() {
   const sorted = DATA.ladder.slice().sort((a, b) => a.pos - b.pos);
+  const top = sorted[0], second = sorted[1], fourth = sorted[3];
   const level = sorted.find((t) => t.pos !== us.pos && t.pts === us.pts);
   const gf = us.games_for, ga = us.games_against;
   const win36 = ((gf + 36) / (ga + 10)) * 100;
-  const win30 = ((gf + 30) / (ga + 18)) * 100;
+
+  const gapRow = (t, label) => {
+    const diff = t.pts - us.pts;
+    const d = t.isUs ? "you" : diff === 0 ? "level" : (diff > 0 ? `+${diff.toFixed(1)} ahead` : `${Math.abs(diff).toFixed(1)} behind`);
+    return `<div class="gap ${t.isUs ? "us" : ""}">
+      <span class="pos">${t.pos}</span>
+      <span class="nm">${esc(t.team)}</span>
+      <span class="d ${!t.isUs && diff < 0 ? "lead" : ""}">${d}</span></div>`;
+  };
 
   const combos = {};
   roster.rounds.forEach((r) => {
@@ -508,80 +525,116 @@ function viewTeam() {
     .sort((a, b) => b[1].rounds.length - a[1].rounds.length)
     .map(([k, v]) => {
       const rec = v.played ? `${v.wins}W–${v.played - v.wins}L` : "—";
-      return `<div class="bar-row"><div class="top"><span class="tname">${esc(k)}</span>
-        <span class="tp">${v.rounds.length} rd${v.rounds.length === 1 ? "" : "s"} · ${rec}</span></div>
-        <div class="bar-track"><div class="bar-fill" style="width:${(v.rounds.length / 14) * 100}%"></div></div></div>`;
+      return `<div class="srow"><span class="k">${esc(k)}</span><span class="v" style="font-size:14px">${rec} <small>· ${v.rounds.length} rd${v.rounds.length === 1 ? "" : "s"}</small></span></div>`;
     }).join("");
 
   return `
     <div class="card">
-      <p class="label">Percentage</p>
+      <p class="label">Sets won</p>
       <div style="display:flex;justify-content:center;padding:8px 0 4px">
-        ${ring(us.pct, 500, Math.round(us.pct) + "%", "games won")}
+        ${ring(setPct, 100, setPct + "%", "sets won")}
       </div>
-      <p class="caption">${us.games_for} games won, ${us.games_against} conceded.</p>
+      <p class="caption">${teamSetsFor} sets won, ${teamSetsAgainst} lost across ${completedRounds.length} completed rounds.</p>
     </div>
 
     <div class="card">
-      <p class="label">The race for the four</p>
-      <div style="margin-top:4px">${ladderBars()}</div>
-      <p class="caption">Points decide the ladder. Percentage only breaks a tie — which is exactly where you sit.</p>
+      <p class="label">How the team is going</p>
+      <div class="srow"><span class="k">Points per round</span><span class="v">${pointsPerRound} <small>of 8</small></span></div>
+      <div class="srow"><span class="k">Rounds won</span><span class="v">${completedRounds.filter((r) => r.res === "w").length}<small>/${completedRounds.length}</small></span></div>
+      <div class="srow"><span class="k">Sets won</span><span class="v">${teamSetsFor}<small>/${teamSetsFor + teamSetsAgainst} · ${setPct}%</small></span></div>
+      <div class="srow"><span class="k">Games won</span><span class="v">${us.games_for}<small>/${us.games_for + us.games_against} · ${gamePct}%</small></span></div>
+      <p class="caption">The ladder's own percentage is games won divided by games lost — kept in Season for the official standings.</p>
+    </div>
+
+    <div class="card">
+      <p class="label">Gap to the finals line</p>
+      ${gapRow(top)}
+      ${second && second.pos !== us.pos ? gapRow(second) : ""}
+      ${gapRow(us)}
+      ${gapRow(fourth)}
+      <p class="caption">${level ? `Level on points with ${esc(level.team)} — percentage is the only thing separating you.` : "Top four play finals."}</p>
     </div>
 
     <div class="card">
       <p class="label">Points by round</p>
       ${pointsChart()}
-      <div class="legend"><span><i style="background:var(--court)"></i>earned</span><span><i style="background:var(--court);opacity:.35"></i>wash-out (4)</span><span><i style="background:var(--court)"></i>running total</span></div>
+      <div class="legend"><span><i style="background:var(--clay)"></i>earned</span><span><i style="background:var(--clay);opacity:.35"></i>wash-out (4)</span><span><i style="background:var(--clay)"></i>running total</span></div>
       <p class="caption">A wash-out still banks four points — that is why round 3 is not a blank.</p>
     </div>
 
     <div class="card">
       <p class="label">Games for and against</p>
       ${gamesChart()}
-      <div class="legend"><span><i style="background:var(--court)"></i>East Malvern</span><span><i style="background:var(--clay)"></i>opponent</span></div>
-      <p class="caption">Every game counts towards percentage, even after the match is decided.</p>
+      <div class="legend"><span><i style="background:var(--ball)"></i>East Malvern</span><span><i style="background:var(--taupe)"></i>opponent</span></div>
+      <p class="caption">Every game counts towards the ladder percentage, even after the match is decided.</p>
     </div>
 
     <div class="card">
       <p class="label">What a win does</p>
-      <p class="caption" style="margin:0">
-        6–0 next round → <b>${pct(win36)}%</b> &nbsp;·&nbsp; 5–1 → <b>${pct(win30)}%</b>
-        ${level ? `<br>${esc(level.team)} sit on ${pct(level.pct)}%, so a clean win clears them on both counts.` : ""}
-      </p>
+      <p class="caption" style="margin:0">A 6–0 next round lifts your ladder percentage to <b>${pct(win36)}%</b>${level ? `, clear of ${esc(level.team)} on ${pct(level.pct)}%` : ""}.</p>
     </div>
 
     <div class="card">
       <p class="label">Which three</p>
       ${comboRows}
-      <p class="caption">Triples needs three on court — these are the combinations Dave has named so far.</p>
+      <p class="caption">Triples needs three on court — these are the combinations named so far.</p>
     </div>`;
 }
 
 function viewSquad() {
+  const ranked = squad.slice().sort((a, b) => {
+    const A = a.line, B = b.line;
+    if (!A && !B) return a.rank - b.rank;
+    if (!A) return 1;
+    if (!B) return -1;
+    return (B.set_pct || 0) - (A.set_pct || 0) || B.sets_won - A.sets_won;
+  });
+
+  const ladderRows = ranked.map((p, i) => {
+    const L = p.line;
+    const sets = L ? `${L.sets_won}–${L.sets_lost}` : "—";
+    const games = L ? `${L.games_won}–${L.games_lost}` : "—";
+    const pctv = L && L.set_pct != null ? L.set_pct + "%" : "—";
+    return `<tr>
+      <td style="text-align:left">${i + 1}</td>
+      <td style="text-align:left;${i === 0 && L ? "font-weight:700;color:var(--clay)" : ""}">${esc(first(p.name))}</td>
+      <td>${L ? L.rubbers : "—"}</td><td>${sets}</td><td>${games}</td><td>${pctv}</td>
+    </tr>`;
+  }).join("");
+
   const cards = squad.map((s) => {
-    const isCaptain = roster.captain && first(roster.captain) === first(s.parent || "");
     const nr = nextRound();
     const planned = planFor(first(s.name), nr.round);
     const override = overrideFor(first(s.name), nr.round);
     const shown = override || planned;
     const label = { in: "In", out: "Out", un: "Unavailable", none: "—", maybe: "Maybe" }[shown] || "—";
+    const L = s.line;
+    const pctShown = L && L.set_pct != null ? Math.round(L.set_pct) : 0;
+
+    const stats = L ? `
+      <div class="pstats">
+        <div class="row"><span class="k">Sets</span><span class="v">${L.sets_won}–${L.sets_lost}</span></div>
+        <div class="row"><span class="k">Games</span><span class="v">${L.games_won}–${L.games_lost}</span></div>
+        <div class="row"><span class="k">Singles</span><span class="v">${L.singlesWon}–${L.singlesPlayed - L.singlesWon}</span></div>
+        <div class="row"><span class="k">Doubles</span><span class="v">${L.doublesWon}–${L.doublesPlayed - L.doublesWon}</span></div>
+      </div>` : `
+      <div class="pstats">
+        <div class="row"><span class="k">Rubbers</span><span class="v">—</span></div>
+        <div class="row"><span class="k">Scheduled</span><span class="v">${s.inCount}/${s.scheduled}</span></div>
+      </div>`;
 
     return `<div class="pcard">
       <div class="top">
         <span class="rank">${s.rank}</span>
         <div>
-          <div class="nm">${esc(s.name)}${isCaptain ? `<span class="capt">captain</span>` : ""}</div>
-          <div class="role">${esc(s.parent || "")}</div>
+          <div class="nm">${esc(s.name)}</div>
+          <div class="role">${L ? `${L.rubbers} rubbers played` : "No rubbers yet"}</div>
         </div>
       </div>
 
       <div class="pgrid">
-        <div style="text-align:center">${ring(s.inCount, s.scheduled, s.inCount + "/" + s.scheduled, "rounds in")}</div>
-        <div class="pstats">
-          <div class="row"><span class="k">Team record</span><span class="v">${s.wins}–${Math.max(0, s.completed - s.wins)}</span></div>
-          <div class="row"><span class="k">Unavailable</span><span class="v">${s.unCount}</span></div>
-          <div class="row"><span class="k">Usual partner</span><span class="v" style="font-size:14px">${esc(s.partner ? first(s.partner) : "—")}</span></div>
-        </div>
+        <div style="text-align:center">${L ? ring(pctShown, 100, pctShown + "%", "sets won") : ring(0, 100, "—", "no rubbers")}</div>
+        ${stats}
       </div>
 
       <div class="pnext">
@@ -607,12 +660,19 @@ function viewSquad() {
 
   return `
     <div class="card">
+      <p class="label">Player ladder</p>
+      <div class="tblwrap"><table style="font-size:13.5px">
+        <thead><tr><th style="text-align:left">#</th><th style="text-align:left">Player</th><th>Rub</th><th>Sets</th><th>Games</th><th>Set %</th></tr></thead>
+        <tbody>${ladderRows}</tbody></table></div>
+      <p class="caption">From the official rubbers on TROLS — every player plays one singles and two doubles each round.</p>
+    </div>
+    ${cards}
+    <div class="card">
       <p class="label">Season availability</p>
       <div class="tblwrap"><table class="matrix"><thead><tr><th></th>${head}</tr></thead><tbody>${body}</tbody></table></div>
       <div class="legend"><span><i class="dot in" style="border-radius:50%"></i>in</span><span><i class="dot out" style="border-radius:50%"></i>out</span><span><i class="dot un" style="border-radius:50%"></i>unavailable</span></div>
-      <p class="caption">From Dave's roster sheet. Tap In / ? / Out on a card to change the next round — saved on this phone only.</p>
-    </div>
-    ${cards}`;
+      <p class="caption">Tap In / ? / Out on a card to change the next round — saved on this phone only.</p>
+    </div>`;
 }
 
 function viewSeason() {
@@ -627,17 +687,17 @@ function viewSeason() {
 
 function ladderView() {
   const rows = DATA.ladder.map((t) => `
-    <tr class="${t.isUs ? "us" : ""}" style="${t.isUs ? "background:var(--court-wash)" : ""}">
+    <tr style="${t.isUs ? "background:var(--clay-wash)" : ""}">
       <td style="text-align:left">${t.pos}</td>
-      <td style="text-align:left">${esc(t.team)}</td>
+      <td style="text-align:left;${t.isUs ? "font-weight:700;color:var(--clay)" : ""}">${esc(t.team)}</td>
       <td>${t.played}</td><td>${t.pts.toFixed(1)}</td><td>${pct(t.pct)}</td>
     </tr>`).join("");
   return `<div class="card">
-    <p class="label">After round 3</p>
+    <p class="label">Official ladder · after round 3</p>
     <div class="tblwrap"><table style="font-size:14px">
       <thead><tr><th style="text-align:left">#</th><th style="text-align:left">Team</th><th>P</th><th>Pts</th><th>%</th></tr></thead>
       <tbody>${rows}</tbody></table></div>
-    <p class="caption">Top four play finals. Wash-outs pay 4 points each.</p>
+    <p class="caption">Points decide the ladder; percentage is games won ÷ games lost. Wash-outs pay 4 points each. Top four play finals.</p>
   </div>`;
 }
 
@@ -688,35 +748,11 @@ function viewClubs() {
   return `<div class="card"><p class="label">The section</p>${cards}</div>`;
 }
 
-/* ---------- state ---------- */
-let seasonTab = "ladder";
-const STORE = "em-gb1-avail-v2";
-const loadOverrides = () => { try { return JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { return {}; } };
-const saveOverrides = (o) => { try { localStorage.setItem(STORE, JSON.stringify(o)); } catch (e) {} };
-let overrides = loadOverrides();
-const overrideFor = (f, round) => (overrides[round] || {})[f] || null;
-
-function bind() {
-  $("#view-squad").querySelectorAll(".seg button").forEach((b) => {
-    b.onclick = () => {
-      const r = nextRound().round;
-      overrides[r] = overrides[r] || {};
-      overrides[r][b.dataset.p] = b.dataset.s;
-      saveOverrides(overrides);
-      renderAll();
-    };
-  });
-  $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
-    b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
-  });
-}
-
 /* ---------- app install + alerts ---------- */
 const NOTIFY_KEY = "em-gb1-notify-v1";
 const SIG_KEY = "em-gb1-sig-v1";
 let deferredPrompt = null;
 let swReg = null;
-
 window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; });
 
 function isStandalone() {
@@ -727,27 +763,19 @@ function alertsOn() { return ("Notification" in window) && Notification.permissi
 
 function installBlock() {
   if (isStandalone()) {
-    return `<span class="txt"><b>Installed</b>You're using the app version — it opens full screen, no browser bars.</span>
+    return `<span class="txt"><b>Installed</b>You're using the app version — full screen, no browser bars.</span>
       <button class="btn ghost" disabled>Installed</button>`;
   }
-  const hint = isIOS()
-    ? "Tap Share, then <b>Add to Home Screen</b>."
-    : "Tap Install, or use the browser menu → Add to Home screen.";
+  const hint = isIOS() ? "Tap Share, then <b>Add to Home Screen</b>." : "Tap Install, or use the browser menu → Add to Home screen.";
   return `<span class="txt"><b>Open it as an app</b>${hint}</span>
     <button class="btn" id="installBtn">${isIOS() ? "How" : "Install"}</button>`;
 }
 
 function alertsBlock() {
-  if (!("Notification" in window)) {
-    return `<span class="txt"><b>Alerts</b>This browser can't show notifications.</span>`;
-  }
-  if (Notification.permission === "denied") {
-    return `<span class="txt"><b>Alerts blocked</b>Notifications are turned off for this site in your browser settings.</span>`;
-  }
-  if (alertsOn()) {
-    return `<span class="txt"><b>Alerts on</b>Results posted, ladder changes and fixture moves. Checks when you open the app, and in the background on Android.</span>
+  if (!("Notification" in window)) return `<span class="txt"><b>Alerts</b>This browser can't show notifications.</span>`;
+  if (Notification.permission === "denied") return `<span class="txt"><b>Alerts blocked</b>Notifications are turned off for this site in your browser settings.</span>`;
+  if (alertsOn()) return `<span class="txt"><b>Alerts on</b>Results posted, ladder changes and fixture moves.</span>
       <button class="btn ghost" id="alertsOff">Turn off</button>`;
-  }
   return `<span class="txt"><b>Alerts</b>Get told when results are posted, the ladder moves or the fixture changes.</span>
     <button class="btn" id="alertsOn">Turn on</button>`;
 }
@@ -759,7 +787,7 @@ async function enableAlerts() {
       localStorage.setItem(NOTIFY_KEY, "1");
       const reg = swReg || (navigator.serviceWorker && await navigator.serviceWorker.ready);
       if (reg) {
-        reg.active && reg.active.postMessage({ type: "check" });
+        if (reg.active) reg.active.postMessage({ type: "check" });
         reg.showNotification(APP_NAME + " alerts on", {
           body: "We'll tell you when results, the ladder or the fixture change.",
           icon: "icon-192.png", badge: "icon-192.png", tag: "gb1-welcome",
@@ -775,9 +803,7 @@ async function initApp() {
   try {
     swReg = await navigator.serviceWorker.register("sw.js", { scope: "./" });
     if (navigator.periodicSync) {
-      try {
-        await navigator.periodicSync.register("check-updates", { minInterval: 12 * 60 * 60 * 1000 });
-      } catch (e) {}
+      try { await navigator.periodicSync.register("check-updates", { minInterval: 12 * 60 * 60 * 1000 }); } catch (e) {}
     }
   } catch (e) {}
 }
@@ -802,7 +828,28 @@ async function noteUpdate(fresh) {
   } catch (e) {}
 }
 
-function bindApp() {
+/* ---------- state ---------- */
+let seasonTab = "ladder";
+const STORE = "em-gb1-avail-v2";
+const loadOverrides = () => { try { return JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { return {}; } };
+const saveOverrides = (o) => { try { localStorage.setItem(STORE, JSON.stringify(o)); } catch (e) {} };
+let overrides = loadOverrides();
+const overrideFor = (f, round) => (overrides[round] || {})[f] || null;
+
+function bind() {
+  const squadView = $("#view-squad");
+  squadView.querySelectorAll(".seg button").forEach((b) => {
+    b.onclick = () => {
+      const r = nextRound().round;
+      overrides[r] = overrides[r] || {};
+      overrides[r][b.dataset.p] = b.dataset.s;
+      saveOverrides(overrides);
+      renderAll();
+    };
+  });
+  $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
+    b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
+  });
   const ib = $("#installBtn");
   if (ib) ib.onclick = async () => {
     if (deferredPrompt) {
@@ -811,15 +858,13 @@ function bindApp() {
       deferredPrompt = null;
       renderAll();
     } else if (isIOS()) {
-      alert("On iPhone: tap the Share button, scroll down, then choose \"Add to Home Screen\".");
+      alert('On iPhone: tap Share, then "Add to Home Screen".');
     } else {
-      alert("Open the browser menu and choose \"Add to Home screen\" or \"Install app\".");
+      alert('Open the browser menu and choose "Add to Home screen".');
     }
   };
-  const on = $("#alertsOn");
-  if (on) on.onclick = enableAlerts;
-  const off = $("#alertsOff");
-  if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); renderAll(); };
+  const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
+  const off = $("#alertsOff"); if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); renderAll(); };
 }
 
 function renderAll() {
@@ -831,11 +876,10 @@ function renderAll() {
   $("#view-season").innerHTML = viewSeason();
   $("#view-clubs").innerHTML = viewClubs();
   bind();
-  bindApp();
   $("#foot").innerHTML = `
     ${APP_NAME} · ${esc(DATA.meta.section)} · ${esc(DATA.meta.competition)} ${esc(DATA.meta.season)} · Waverley District Tennis Association<br>
-    Ladder, results and fixture from <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>.
-    Roster from the captain's sheet. Snapshot ${esc(DATA.meta.ladder_loaded)}.<br>
+    Ladder, results, rubbers and fixture from <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>.
+    Roster from the team sheet. Snapshot ${esc(DATA.meta.ladder_loaded)}.<br>
     Unofficial team tool — check TROLS or your club before a match.`;
 }
 
