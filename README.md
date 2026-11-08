@@ -63,13 +63,24 @@ To run it yourself:
 python scrape.py
 ```
 
-### If the fixture stays "to be confirmed"
+### The team code
 
-The fixture page is keyed by an internal team code that only appears inside the
-JavaScript on the results page. If TROLS changes that markup, `scrape.py` won't find
-the code and the draw keeps its previous values while the ladder and results carry on
-updating. Fix is usually one line: set `DAYTIME_FALLBACK` / `SECTION_FALLBACK` at the
-top of `scrape.py`, or print `team_codes(results_html)` and pin the code.
+The fixture page is keyed by an opaque team code (`UA284` for this side) that isn't
+published on any page — the site builds its match links in JavaScript. The scraper
+handles that in three steps, cheapest first:
+
+1. reuse the code cached in `data.json` → `meta.team_code` (verified every run);
+2. probe the codes that appear in the results page markup;
+3. scan `SCAN_FROM`–`SCAN_TO` (240–360 by default) as a last resort.
+
+A code is only accepted when every team in its fixture belongs to this section — a
+club can field several teams, and East Malvern has another side elsewhere in the
+competition whose code would otherwise match by name. Once found, the code is cached,
+so the scan runs at most once.
+
+If TROLS ever renumbers teams and the draw goes blank, the fix is one line: set
+`SCAN_FROM` / `SCAN_TO` in `scrape.py` to a wider window and run it once. The ladder,
+results and club contacts keep working either way.
 
 ## Changing season or section
 
@@ -86,9 +97,10 @@ whatever `data.json` contains, so it follows automatically.
 
 ## Data provenance
 
-Ladder and results are the official WDTA figures, loaded from TROLS on
-29 October 2026 (after round 3). The wash-out in round 3 pays each team 4 points,
-which is why 19 points shows against two wins.
+Ladder, results, season draw and club contacts are the official WDTA figures, scraped
+from TROLS. The snapshot in the repo is the 29 October 2026 load (after round 3); the
+wash-out in round 3 pays each team 4 points, which is why 19 points shows against two
+wins. Round 4, on 8 November, is a home match against MCC Glen Iris.
 
 This is an unofficial team tool. TROLS and your club remain the authority on
 scores, fixtures and ladders.
