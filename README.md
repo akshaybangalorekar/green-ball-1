@@ -11,15 +11,43 @@ availability and selection for each round.
 
 | Tab | What it shows |
 | --- | --- |
-| **This week** | Next round, opponent, venue, ladder position, recent form |
+| **This week** | Next round, opponent, venue, who's on court, ladder position, the one-line insight |
+| **Team** | Dashboard: finals race, points by round, games for/against, what a win does to the percentage, triples combinations |
+| **Squad** | Per-player cards (schedule, team record, availability, partners) plus the round-by-round availability grid |
 | **Ladder** | All eight teams — points, percentage, sets, gap to the top |
 | **Results** | Every round, match by match, East Malvern highlighted |
-| **Draw** | The full season calendar through to the grand final |
-| **Team** | Roster, availability (in / maybe / out), the three picked, copy-to-clipboard for the group chat |
+| **Draw** | The full season calendar through to the grand final, with the roster trio per round |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
 
-The roster and availability live in your phone's browser storage. Nothing is uploaded,
-and nothing is shared between phones — it's a selection aid, not a live shared sheet.
+Every tab has its own link (`#team`, `#squad`, …) so you can send the team straight
+to the right screen.
+
+## The analysis, and what it is based on
+
+The ladder, results, fixture and club contacts come from TROLS. The squad — team
+order, availability, captain — comes from Dave's roster sheet, and is stored in
+`data.json` under `roster` so the daily scrape never overwrites it.
+
+Team dashboard:
+
+- **Finals race** — position, points gap to first and to fourth, and who you are level with.
+- **Points by round** — points earned per round with the running total, wash-outs shown faded (they still bank 4).
+- **Games for and against** — the trend behind the percentage.
+- **What it takes** — what a 6–0 or a 5–1 does to the percentage, against the team you're level with.
+- **Triples combinations** — which three have played together and how that went.
+
+Player cards: rounds scheduled, team record in the rounds they were on court,
+availability percentage, most frequent partners, and next round's status.
+
+**The honest limit:** TROLS publishes team scores only. Individual rubber-by-rubber
+detail sits behind a JavaScript pop-up that is not publicly readable, so there is no
+per-player win/loss record to compute. "Team record" is how the side went in the
+rounds that player played — not their personal win/loss. Recording rubbers on the
+scoresheet each week is the way to make that a real individual ladder next season.
+
+Tapping In / ? / Out on a squad card records a change for the next round. That override
+lives in your phone's browser storage only — nothing is uploaded, and it isn't shared
+between phones. Dave's sheet stays the source of truth in `data.json`.
 
 ## Files
 

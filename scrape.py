@@ -551,6 +551,8 @@ def main():
         "draw": draw,
         "finals": old.get("finals", []),
         "clubs": clubs or old.get("clubs", []),
+        # The roster is maintained by the team, not by TROLS — always carry it over.
+        "roster": old.get("roster", {}),
     }
 
     DATA_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
