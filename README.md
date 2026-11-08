@@ -13,7 +13,7 @@ availability and selection for each round.
 | Tab | What it shows |
 | --- | --- |
 | **This week** | Next round, opponent, venue, the three on court, ladder position, and a season strip |
-| **Team** | Percentage ring, the race for the four, points by round, games for/against, what a win does, which three |
+| **Team** | One thing only: the gap to the finals line, with the points for each team that matters |
 | **Squad** | Your four — tap a child for every set they have played — plus a ladder of all 31 players in the section |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
@@ -27,13 +27,9 @@ The ladder, results, fixture and club contacts come from TROLS. The squad — te
 order and availability — comes from the team roster sheet, and is stored in
 `data.json` under `roster` so the daily scrape never overwrites it.
 
-Team dashboard:
-
-- **Finals race** — position, points gap to first and to fourth, and who you are level with.
-- **Points by round** — points earned per round with the running total, wash-outs shown faded (they still bank 4).
-- **Games for and against** — the trend behind the percentage.
-- **What it takes** — what a 6–0 or a 5–1 does to the percentage, against the team you're level with.
-- **Triples combinations** — which three have played together and how that went.
+Team tab: a single card showing first, whoever you are level with, you, and fourth, with
+points and a dashed line where the finals cut falls, then one sentence of plain English
+(how many points clear of the cut, how many rounds left).
 
 Player cards: rounds scheduled, team record in the rounds they were on court,
 availability percentage, most frequent partners, and next round's status.

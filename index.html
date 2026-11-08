@@ -8,7 +8,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Advantage">
 <meta name="apple-mobile-web-app-title" content="Advantage">
@@ -64,11 +64,12 @@
       radial-gradient(820px 420px at 88% -10%, var(--clay-wash), transparent 70%),
       radial-gradient(680px 380px at -6% 6%, var(--ball-wash), transparent 66%),
       var(--bg);
-    color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; padding-bottom: 56px;
+    color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px); padding-bottom: 56px;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
-  .masthead { display: flex; align-items: center; gap: 12px; padding: 30px 0 22px; }
+  .masthead { display: flex; align-items: center; gap: 12px; padding: 26px 0 20px; }
   .masthead .who { flex: 1; min-width: 0; }
   .crest { width: 50px; height: 50px; flex: 0 0 50px; border-radius: 15px; background: var(--clay); color: #fff8f0;
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 17px; }
@@ -88,7 +89,7 @@
   @keyframes spin { to { transform: rotate(360deg); } }
   @media (prefers-reduced-motion: reduce) { .refresh.spin svg { animation: none; } }
 
-  .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+  .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
     margin: 0 -20px 26px; padding: 10px 20px; background: color-mix(in srgb, var(--bg) 90%, transparent);
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line-soft); }
   .tabs::-webkit-scrollbar { display: none; }
@@ -153,13 +154,22 @@
   .srow .v small { font-size: 12px; color: var(--ink-dim); font-weight: 500; }
 
   /* gap rows */
-  .gap { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line-soft); }
+  .gap { padding: 14px 0; border-top: 1px solid var(--line-soft); }
   .gap:first-of-type { border-top: 0; }
-  .gap .pos { width: 24px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
-  .gap .nm { flex: 1; font-size: 14px; }
+  .gline { display: flex; align-items: baseline; gap: 10px; }
+  .gap .pos { width: 16px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .gap .nm { flex: 1; font-size: 15px; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .gap.us .nm { color: var(--clay); font-weight: 700; }
-  .gap .d { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
-  .gap .d.lead { color: var(--clay); font-weight: 500; }
+  .gap .pts { font-family: var(--display); font-weight: 700; font-size: 16px; font-variant-numeric: tabular-nums; }
+  .gap .d { width: 58px; text-align: right; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .gap .d.ahead { color: var(--taupe); }
+  .gap.us .d { color: var(--clay); font-weight: 500; }
+  .gtrack { height: 7px; border-radius: 4px; background: var(--surface-2); margin: 9px 0 0 26px; overflow: hidden; }
+  .gtrack i { display: block; height: 100%; border-radius: 4px; background: var(--taupe); opacity: .55; }
+  .gap.us .gtrack i { background: var(--clay); opacity: 1; }
+  .cutline { display: flex; align-items: center; gap: 10px; margin: 6px 0 0 26px; }
+  .cutline::before, .cutline::after { content: ""; height: 1px; flex: 1; background: repeating-linear-gradient(90deg, var(--line) 0 5px, transparent 5px 10px); }
+  .cutline span { font-family: var(--mono); font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-dim); }
 
   .seg-top { display: flex; gap: 6px; background: var(--surface-2); border-radius: 14px; padding: 5px; margin-bottom: 20px; }
   .seg-top button { flex: 1; appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
@@ -547,86 +557,44 @@ function viewWeek() {
 
 function viewTeam() {
   const sorted = DATA.ladder.slice().sort((a, b) => a.pos - b.pos);
-  const top = sorted[0], second = sorted[1], fourth = sorted[3];
+  const top = sorted[0];
+  const fourth = sorted[3];
   const level = sorted.find((t) => t.pos !== us.pos && t.pts === us.pts);
-  const gf = us.games_for, ga = us.games_against;
-  const win36 = ((gf + 36) / (ga + 10)) * 100;
 
-  const gapRow = (t, label) => {
+  const wanted = [top, level, us, fourth]
+    .filter(Boolean)
+    .filter((t, i, arr) => arr.findIndex((x) => x.team === t.team) === i)
+    .sort((a, b) => a.pos - b.pos);
+
+  const maxPts = Math.max(...DATA.ladder.map((t) => t.pts), 1);
+  const roundsLeft = DATA.draw.filter((d) => d.date >= todayISO()).length;
+
+  const rows = wanted.map((t) => {
     const diff = t.pts - us.pts;
-    const d = t.isUs ? "you" : diff === 0 ? "level" : (diff > 0 ? `+${diff.toFixed(1)} ahead` : `${Math.abs(diff).toFixed(1)} behind`);
-    return `<div class="gap ${t.isUs ? "us" : ""}">
-      <span class="pos">${t.pos}</span>
-      <span class="nm">${esc(t.team)}</span>
-      <span class="d ${!t.isUs && diff < 0 ? "lead" : ""}">${d}</span></div>`;
-  };
+    const delta = t.isUs ? "you" : diff === 0 ? "level" : (diff > 0 ? `+${diff.toFixed(1)}` : `−${Math.abs(diff).toFixed(1)}`);
+    const cut = t.pos === 4;
+    return `<div class="gap ${t.isUs ? "us" : ""} ${cut ? "cut" : ""}">
+      <div class="gline">
+        <span class="pos">${t.pos}</span>
+        <span class="nm">${esc(t.team)}</span>
+        <span class="pts">${t.pts.toFixed(1)}</span>
+        <span class="d ${!t.isUs && diff > 0 ? "ahead" : ""}">${delta}</span>
+      </div>
+      <div class="gtrack"><i style="width:${Math.max(3, (t.pts / maxPts) * 100)}%"></i></div>
+    </div>`;
+  }).join("");
 
-  const combos = {};
-  roster.rounds.forEach((r) => {
-    if ((r.in || []).length !== 3) return;
-    const key = r.in.slice().sort().join(" · ");
-    const res = resultForRound(r.round);
-    const c = combos[key] || (combos[key] = { played: 0, wins: 0, rounds: [] });
-    c.rounds.push(r.round);
-    if (res && res.res !== "wo") { c.played++; if (res.res === "w") c.wins++; }
-  });
-  const comboRows = Object.entries(combos)
-    .sort((a, b) => b[1].rounds.length - a[1].rounds.length)
-    .map(([k, v]) => {
-      const rec = v.played ? `${v.wins}W–${v.played - v.wins}L` : "—";
-      return `<div class="srow"><span class="k">${esc(k)}</span><span class="v" style="font-size:14px">${rec} <small>· ${v.rounds.length} rd${v.rounds.length === 1 ? "" : "s"}</small></span></div>`;
-    }).join("");
+  const clear = us.pts - fourth.pts;
 
   return `
     <div class="card">
-      <p class="label">Sets won</p>
-      <div style="display:flex;justify-content:center;padding:8px 0 4px">
-        ${ring(setPct, 100, setPct + "%", "sets won")}
-      </div>
-      <p class="caption">${teamSetsFor} sets won, ${teamSetsAgainst} lost across ${completedRounds.length} completed rounds.</p>
-    </div>
-
-    <div class="card">
-      <p class="label">How the team is going</p>
-      <div class="srow"><span class="k">Points per round</span><span class="v">${pointsPerRound} <small>of 8</small></span></div>
-      <div class="srow"><span class="k">Rounds won</span><span class="v">${completedRounds.filter((r) => r.res === "w").length}<small>/${completedRounds.length}</small></span></div>
-      <div class="srow"><span class="k">Sets won</span><span class="v">${teamSetsFor}<small>/${teamSetsFor + teamSetsAgainst} · ${setPct}%</small></span></div>
-      <div class="srow"><span class="k">Games won</span><span class="v">${us.games_for}<small>/${us.games_for + us.games_against} · ${gamePct}%</small></span></div>
-      <p class="caption">The ladder's own percentage is games won divided by games lost — kept in Season for the official standings.</p>
-    </div>
-
-    <div class="card">
       <p class="label">Gap to the finals line</p>
-      ${gapRow(top)}
-      ${second && second.pos !== us.pos ? gapRow(second) : ""}
-      ${gapRow(us)}
-      ${gapRow(fourth)}
-      <p class="caption">${level ? `Level on points with ${esc(level.team)} — percentage is the only thing separating you.` : "Top four play finals."}</p>
-    </div>
-
-    <div class="card">
-      <p class="label">Points by round</p>
-      ${pointsChart()}
-      <div class="legend"><span><i style="background:var(--clay)"></i>earned</span><span><i style="background:var(--clay);opacity:.35"></i>wash-out (4)</span><span><i style="background:var(--clay)"></i>running total</span></div>
-      <p class="caption">A wash-out still banks four points — that is why round 3 is not a blank.</p>
-    </div>
-
-    <div class="card">
-      <p class="label">Games for and against</p>
-      ${gamesChart()}
-      <div class="legend"><span><i style="background:var(--ball)"></i>East Malvern</span><span><i style="background:var(--taupe)"></i>opponent</span></div>
-      <p class="caption">Every game counts towards the ladder percentage, even after the match is decided.</p>
-    </div>
-
-    <div class="card">
-      <p class="label">What a win does</p>
-      <p class="caption" style="margin:0">A 6–0 next round lifts your ladder percentage to <b>${pct(win36)}%</b>${level ? `, clear of ${esc(level.team)} on ${pct(level.pct)}%` : ""}.</p>
-    </div>
-
-    <div class="card">
-      <p class="label">Which three</p>
-      ${comboRows}
-      <p class="caption">Triples needs three on court — these are the combinations named so far.</p>
+      ${rows}
+      <div class="cutline"><span>finals cut</span></div>
+      <p class="caption" style="margin-top:18px">
+        Top four of eight play finals. You are <b>${clear.toFixed(1)} points clear</b> of the cut
+        with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
+      </p>
     </div>`;
 }
 
