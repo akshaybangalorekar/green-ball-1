@@ -666,15 +666,31 @@ function viewTeam() {
     </div>`;
 }
 
-function ladderRowsAll() {
+let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
+const teamPos = {};
+DATA.ladder.forEach((t) => { teamPos[t.team] = t.pos; });
+
+function ladderRowsAll(mode) {
+  const m = mode || ladderSort;
   const all = Object.values(DATA.section_players || {}).filter((p) => p.rubbers > 0);
-  return all.sort((a, b) =>
-    (b.games_won - a.games_won)
-    || ((b.games_won - b.games_lost) - (a.games_won - a.games_lost))
-    || a.name.localeCompare(b.name));
+  return all.sort((a, b) => {
+    if (m === "team") {
+      const ta = teamPos[a.team] || 99, tb = teamPos[b.team] || 99;
+      return (ta - tb) || (b.games_won - a.games_won) || a.name.localeCompare(b.name);
+    }
+    if (m === "pct") {
+      return (b.set_pct - a.set_pct) || ((b.game_pct || 0) - (a.game_pct || 0)) || a.name.localeCompare(b.name);
+    }
+    if (m === "sets") {
+      return (b.sets_won - a.sets_won) || (b.games_won - a.games_won) || a.name.localeCompare(b.name);
+    }
+    return (b.games_won - a.games_won)
+      || ((b.games_won - b.games_lost) - (a.games_won - a.games_lost))
+      || a.name.localeCompare(b.name);
+  });
 }
 function rankOf(name) {
-  const rows = ladderRowsAll();
+  const rows = ladderRowsAll("games");
   const i = rows.findIndex((r) => r.name === name);
   return i < 0 ? null : { rank: i + 1, total: rows.length };
 }
@@ -685,7 +701,9 @@ function viewSquad() {
   const rows = ladderRowsAll();
   const ladder = rows.map((p, i) => {
     const mine = p.team === CLUB;
-    const right = p.games_won;
+    const right = ladderSort === "pct" ? `${p.set_pct}%`
+      : ladderSort === "sets" ? p.sets_won
+      : p.games_won;
     return `<button class="lrow ${mine ? "us" : ""}" data-explain="${esc(p.name)}">
       <span class="r">${i + 1}</span>
       <span class="n">
@@ -704,7 +722,7 @@ function viewSquad() {
       <span class="krank">${r ? r.rank : "—"}</span>
       <span class="kbody">
         <span class="knm">${esc(s.name)}</span>
-        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} in the section` : "no sets yet"}${L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
+        <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} by games won` : "no sets yet"}${L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
       </span>
       <span class="kpct">${L ? L.games_won : "—"}</span>
       <span class="karrow">›</span>
@@ -719,13 +737,25 @@ function viewSquad() {
     </div>
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
+      <div class="seg-top" style="margin-bottom:16px">
+        <button data-sort="team" aria-selected="${ladderSort === "team"}">By team</button>
+        <button data-sort="games" aria-selected="${ladderSort === "games"}">Games</button>
+        <button data-sort="pct" aria-selected="${ladderSort === "pct"}">Win %</button>
+        <button data-sort="sets" aria-selected="${ladderSort === "sets"}">Sets</button>
+      </div>
       ${ladder}
       <p class="caption">
-        Ranked by <b>games won</b> — the total each child has actually won, so playing more rounds builds a bigger number.
-        Level on games, the better win–loss difference goes higher. Tap anyone for the detail. East Malvern in clay.
+        ${ladderSort === "team"
+          ? "In the website's order: the eight clubs as they stand on the official ladder, each club's players listed together. Within a club, most games won comes first."
+          : ladderSort === "pct"
+          ? "Ranked by sets won %, then games won %. A percentage only compares fairly between children who have played a similar number of sets."
+          : ladderSort === "sets"
+          ? "Ranked by sets won, then games won."
+          : "Ranked by games won. Level on games, the better win–loss difference goes higher."}
+        Tap anyone for the detail. East Malvern in clay.
       </p>
       <p class="caption" style="margin-top:10px;opacity:.85">
-        Worked out from the individual scores on TROLS. Waverley doesn't publish a player ladder — the team ladder in Season is the official one.
+        Worked out from the individual scores on TROLS. Waverley publishes a team ladder only — that one is in Season, untouched.
       </p>
     </div>`;
 }
@@ -751,7 +781,17 @@ function explainSheet(name) {
     out of ${totalG} played — <b>${p.game_pct || 0}%</b> — across ${p.rubbers} sets${faced.length ? `, against ${faced.map(esc).join(" and ")}` : ""}.
     ${p.sets_won}–${p.sets_lost} on sets.`));
 
-  if (!above.length) {
+  if (ladderSort === "team") {
+    const gamesRank = ladderRowsAll("games").findIndex((r) => r.name === p.name) + 1;
+    const tp = teamPos[p.team];
+    const mates = ladderRowsAll("team").filter((r) => r.team === p.team);
+    const within = mates.findIndex((r) => r.name === p.name) + 1;
+    steps.push(step(`${esc(p.team)} are <b>${tp}${ordinal(tp)}</b> of ${DATA.ladder.length} on the official team ladder,
+      so the list follows that order. Within the club, ${esc(first(p.name))} is
+      <b>${within}${ordinal(within)} of ${mates.length}</b> by games won.
+      Across the whole section that puts ${esc(first(p.name))} <b>${gamesRank}${ordinal(gamesRank)} of ${rows.length}</b> by games won.
+      Switch the sort to Games, Win % or Sets to re-order the list itself.`));
+  } else if (!above.length) {
     steps.push(step(`Nobody in the section has won more games, so this is <b>1st</b>.`));
   } else {
     const more = above.filter((r) => r.games_won > p.games_won);
@@ -795,11 +835,18 @@ function explainSheet(name) {
   return `
     <div class="grab"></div>
     <button class="ovclose" data-close="1" aria-label="Close">×</button>
-    <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${pos}${ordinal(pos)}</h3>
+    <h3 class="ovtitle" id="ovTitle">${ladderSort === "team"
+      ? `Where ${esc(first(p.name))} sits`
+      : `Why ${esc(first(p.name))} is ${pos}${ordinal(pos)}`}</h3>
     <p class="ovsub">${esc(p.team)} · Open Triples Green Ball 1</p>
     ${steps.join("")}
-    <p class="ovfoot">The player ladder counts <b>games won</b>. A comfortable win is worth more games than a tight one,
-    so the total rewards both winning and playing.</p>`;
+    <p class="ovfoot">${ladderSort === "team"
+      ? `The website ranks teams, not players — so "By team" keeps the official team order and lists each club's players together.`
+      : ladderSort === "pct"
+      ? `Win % is sets won divided by sets played. It compares fairly only when children have played a similar number of sets.`
+      : ladderSort === "sets"
+      ? `Sets won is a plain count — it rewards turning up as well as winning.`
+      : `Games won is a plain count. A comfortable win is worth more games than a tight one, so the total rewards both winning and playing.`}</p>`;
 }
 
 function viewPlayer(name) {
@@ -1025,6 +1072,9 @@ function bind() {
   });
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
+  });
+  $("#view-squad").querySelectorAll("[data-sort]").forEach((b) => {
+    b.onclick = () => { ladderSort = b.dataset.sort; $("#view-squad").innerHTML = viewSquad(); bind(); };
   });
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));

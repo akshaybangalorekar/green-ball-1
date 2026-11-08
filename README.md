@@ -43,9 +43,17 @@ the round-by-round sets: who they played, with whom, and the score.
 there is no player ladder on TROLS. These rankings are worked out from the published
 rubbers, and the app says so on the card.
 
-The ladder ranks on **games won** — the total each child has actually won. Level on
-games, the better win–loss difference goes higher. Each row shows games won–lost and how
-many sets that player has played, so the volume behind the number is never hidden. **Tapping any player opens a sheet explaining their exact position**, written for that child specifically: their own sets and games, the opponents
+The ladder opens in **the website's order**: the eight clubs exactly as they stand on the
+official team ladder, with each club's players listed together (within a club, most games
+won first). That mirrors how the association lists the section, rather than inventing a
+player ranking.
+
+Three further sorts are one tap away — **Games** won, **Win %** (sets won ÷ sets played)
+and **Sets** won — for anyone who wants to compare across the whole section. The four
+child cards keep their true games-won rank whatever the list is sorted by.
+
+Each row shows games won–lost and how many sets that player has played, so the volume
+behind any number is never hidden. **Tapping any player opens a sheet explaining their exact position**, written for that child specifically: their own sets and games, the opponents
 they faced, how many others are level with them, a side-by-side of games won for everyone
 tied on sets, what it would take to pass the player directly above, and their tightest
 set or only loss. The same sheet is one tap away from their own page. The ladder rows
