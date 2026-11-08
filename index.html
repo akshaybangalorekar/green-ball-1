@@ -77,17 +77,28 @@
   .masthead h1 { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.05; margin: 0; letter-spacing: -.02em; }
   .masthead .sub { margin: 4px 0 0; font-size: 11.5px; color: var(--ink-dim); font-family: var(--mono);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .sync { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-  .synctext { text-align: right; font-family: var(--mono); font-size: 10px; line-height: 1.5; color: var(--ink-dim); }
-  .synctext b { display: block; color: var(--clay); font-weight: 500; }
-  .refresh { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%; border: 1px solid var(--line);
+  .hbtns { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+  .hbtn { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; border: 1px solid var(--line);
     background: var(--surface); color: var(--clay); display: grid; place-items: center; cursor: pointer;
     transition: background .15s, transform .15s; }
-  .refresh:hover { background: var(--clay-wash); }
-  .refresh:active { transform: scale(.94); }
-  .refresh.spin svg { animation: spin .9s linear infinite; }
+  .hbtn:hover { background: var(--clay-wash); }
+  .hbtn:active { transform: scale(.94); }
+  .hbtn.spin svg { animation: spin .9s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce) { .refresh.spin svg { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .hbtn.spin svg { animation: none; } }
+
+  .toast { position: fixed; left: 50%; bottom: calc(26px + env(safe-area-inset-bottom)); transform: translateX(-50%) translateY(8px);
+    background: var(--ink); color: var(--bg); font-family: var(--mono); font-size: 11.5px; letter-spacing: .03em;
+    padding: 11px 18px; border-radius: 999px; z-index: 70; opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease; white-space: nowrap; }
+  .toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .setsec { padding: 18px 0; border-top: 1px solid var(--line-soft); }
+  .setsec:first-of-type { border-top: 0; padding-top: 4px; }
+  .setsec h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--ink-dim); margin: 0 0 12px; font-weight: 400; }
+  .about { font-family: var(--mono); font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
+  .about a { color: var(--clay); text-decoration: none; }
 
   .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
     margin: 0 -20px 26px; padding: 10px 20px; background: color-mix(in srgb, var(--bg) 90%, transparent);
@@ -239,6 +250,9 @@
   .back { appearance: none; border: 0; background: transparent; cursor: pointer; color: var(--clay);
     font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding: 0 0 14px; }
   .phead { margin-bottom: 6px; }
+  .whyr { display: inline-block; margin-top: 12px; appearance: none; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface-2); color: var(--clay);
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; padding: 8px 13px; border-radius: 9px; }
   .pname { font-family: var(--display); font-weight: 800; font-size: 26px; letter-spacing: -.02em; line-height: 1.1; }
   .pteam { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-top: 6px; }
 
@@ -349,12 +363,18 @@
       <h1>Advantage</h1>
       <p class="sub" id="mastheadSub">Sunday AM · Green Ball 1</p>
     </div>
-    <div class="sync">
-      <div class="synctext"><b id="syncState">synced</b><span id="syncWhen"></span></div>
-      <button class="refresh" id="refreshBtn" aria-label="Check for latest results" title="Check for latest results">
+    <div class="hbtns">
+      <button class="hbtn" id="refreshBtn" aria-label="Check for the latest results" title="Check for latest">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.1"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/>
+        </svg>
+      </button>
+      <button class="hbtn" id="settingsBtn" aria-label="Settings and about" title="Settings">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3.2"/>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
         </svg>
       </button>
     </div>
@@ -376,8 +396,9 @@
     <section class="view" id="view-clubs" role="tabpanel"></section>
   </main>
 
-  <footer id="foot"></footer>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle">
   <div class="backdrop" data-close="1"></div>
@@ -599,11 +620,7 @@ function viewWeek() {
       <div class="legend"><span><i style="background:var(--ball)"></i>win</span><span><i style="background:var(--clay)"></i>loss</span><span><i style="background:var(--taupe)"></i>wash-out</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>to come</span></div>
     </div>
 
-    <div class="card">
-      <p class="label">App and alerts</p>
-      <div class="act">${installBlock()}</div>
-      <div class="act" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)">${alertsBlock()}</div>
-    </div>`;
+</div>`;
 }
 
 function viewTeam() {
@@ -709,55 +726,87 @@ function explainSheet(name) {
   const i = rows.findIndex((r) => r.name === name);
   if (i < 0) return "";
   const p = rows[i];
+  const pos = i + 1;
   const above = rows.slice(0, i);
+  const next = i > 0 ? rows[i - 1] : null;
   const samePct = above.filter((r) => r.set_pct === p.set_pct);
-  const sameGame = samePct.filter((r) => (r.game_pct || 0) === (p.game_pct || 0));
-
+  const detail = ((DATA.our_players || {})[name] || {}).detail || [];
+  const rubbers = detail.flatMap((d) => (d.rubbers || []).map((rb) => ({ ...rb, round: d.round, opp: d.opponent_team })));
+  const totalG = p.games_won + p.games_lost;
   const steps = [];
+  let stepNo = 0;
+  const step = (body) => { stepNo += 1; return `<div class="step"><span class="num">${stepNo}</span><span class="body">${body}</span></div>`; };
 
-  steps.push(`<div class="step"><span class="num">1</span><span class="body">
-    <span class="big">${p.set_pct}% sets</span><br>
-    ${p.sets_won} sets won, ${p.sets_lost} lost across ${p.rubbers} rubbers.
-    Sets won is the first thing the ladder sorts on.</span></div>`);
+  // 1 — this child's own numbers
+  const faced = [...new Set(detail.map((d) => d.opponent_team))];
+  steps.push(step(`<span class="big">${p.sets_won}–${p.sets_lost} sets</span><br>
+    ${p.games_won} of ${totalG} games won — <b>${p.game_pct || 0}%</b> — from ${p.rubbers} rubbers${faced.length ? `, against ${faced.map(esc).join(" and ")}` : ""}.`));
 
+  // 2 — why this exact position
   if (!above.length) {
-    steps.push(`<div class="step"><span class="num">2</span><span class="body">
-      Nobody in the section is ahead on sets won, so this is <b>1st</b>.</span></div>`);
-  } else if (!samePct.length) {
-    steps.push(`<div class="step"><span class="num">2</span><span class="body">
-      ${above.length} ${above.length === 1 ? "player is" : "players are"} ahead on sets won —
-      ${above.slice(0, 3).map((r) => `<b>${esc(first(r.name))}</b> ${r.set_pct}%`).join(", ")}${above.length > 3 ? " and others" : ""} —
-      so this is <b>${i + 1}${ordinal(i + 1)}</b>.</span></div>`);
-  } else {
-    const best = Math.max(...samePct.map((r) => r.game_pct || 0), p.game_pct || 0);
-    steps.push(`<div class="step"><span class="num">2</span><span class="body">
-      <b>${samePct.length}</b> ${samePct.length === 1 ? "player above is" : "players above are"} also on
-      ${p.set_pct}% sets. When sets are level, the ladder falls back to <b>games won percentage</b> —
-      how many of the games played were won.</span></div>`);
-
-    const cmp = rows.slice(0, i + 1).filter((r) => r.set_pct === p.set_pct).map((r, k) => {
+    steps.push(step(`Nobody in the section is ahead of ${esc(first(p.name))} on either measure, so this is <b>1st</b>.`));
+  } else if (samePct.length) {
+    const group = rows.slice(0, i + 1).filter((r) => r.set_pct === p.set_pct);
+    const shown = group.slice(0, 7);
+    const cmp = shown.map((r) => {
       const idx = rows.findIndex((x) => x.name === r.name) + 1;
       return `<div class="cmprow ${r.name === p.name ? "us" : ""}">
         <span class="p">${idx}</span><span class="n">${esc(r.name)}</span>
         <span class="g">${r.games_won}–${r.games_lost} · ${r.game_pct || 0}%</span></div>`;
-    }).join("");
+    }).join("") + (group.length > shown.length ? `<div class="cmprow"><span class="p"></span><span class="n">+${group.length - shown.length} more on ${p.set_pct}%</span><span class="g"></span></div>` : "");
 
-    steps.push(`<div class="step"><span class="num">3</span><span class="body">
-      <b>${esc(first(p.name))}</b> has won ${p.games_won} of ${p.games_won + p.games_lost} games —
-      <b>${p.game_pct || 0}%</b>. The players above on the same set percentage have a higher share.
-      <div class="cmp">${cmp}</div>
-      ${sameGame.length ? "Where games are level too, more rubbers played ranks higher." : ""}
-      </span></div>`);
+    const lowest = group.every((r) => r.name === p.name || (r.game_pct || 0) >= (p.game_pct || 0));
+    const closing = lowest
+      ? `${esc(first(p.name))} has the lowest games percentage of that group.`
+      : `The players above won a higher share of their games.`;
+
+    steps.push(step(`<b>${samePct.length}</b> ${samePct.length === 1 ? "player above" : "players above"} ${samePct.length === 1 ? "is" : "are"} also on
+      ${p.set_pct}% sets — so sets do not separate them. The next thing the ladder checks is
+      <b>games won percentage</b>.
+      <div class="cmp">${cmp}</div>${closing}`));
+  } else {
+    steps.push(step(`${above.length} ${above.length === 1 ? "player is" : "players are"} ahead on <b>sets won percentage</b> —
+      ${above.slice(0, 3).map((r) => `${esc(first(r.name))} ${r.set_pct}%`).join(", ")}${above.length > 3 ? " and others" : ""}.
+      Sets come before games, so this is <b>${pos}${ordinal(pos)}</b>.`));
+  }
+
+  // 3 — what would move this child up
+  if (next) {
+    if (next.set_pct !== p.set_pct) {
+      steps.push(step(`To pass <b>${esc(first(next.name))}</b>, ${esc(first(p.name))} needs a higher sets percentage than
+        ${next.set_pct}% — winning the next rubber does it if ${esc(first(next.name))} loses one.`));
+    } else {
+      const target = next.game_pct || 0;
+      const need = Math.max(0, Math.ceil(((target / 100) * totalG - p.games_won) / (1 - target / 100)));
+      steps.push(step(`${esc(first(next.name))} is one place ahead on ${target}% games. Winning
+        <b>${need} more game${need === 1 ? "" : "s"}</b> without conceding would lift
+        ${esc(first(p.name))} above ${esc(first(next.name))}.`));
+    }
+  }
+
+  // 4 — the sets behind those numbers
+  if (rubbers.length) {
+    const wins = rubbers.filter((r) => r.won).sort((a, b) => (a.ours - a.theirs) - (b.ours - b.theirs));
+    const losses = rubbers.filter((r) => !r.won);
+    const bits = [];
+    const margins = [...new Set(wins.map((w) => `${w.ours}–${w.theirs}`))];
+    if (wins.length) {
+      bits.push(margins.length === 1
+        ? `every set won <b>${margins[0]}</b>`
+        : `closest set <b>${wins[0].ours}–${wins[0].theirs}</b> vs ${esc(wins[0].opp)}`);
+    }
+    if (losses.length) bits.push(`lost <b>${losses.map((l) => `${l.ours}–${l.theirs}`).join(", ")}</b> vs ${esc(losses[0].opp)}`);
+    if (bits.length) steps.push(step(`The detail: ${bits.join("; ")}.`));
   }
 
   return `
     <div class="grab"></div>
     <button class="ovclose" data-close="1" aria-label="Close">×</button>
-    <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${i + 1}${ordinal(i + 1)}</h3>
+    <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${pos}${ordinal(pos)}</h3>
     <p class="ovsub">${esc(p.team)} · Open Triples Green Ball 1</p>
     ${steps.join("")}
-    <p class="ovfoot">The ladder sorts on <b>sets won %</b> first, then <b>games won %</b>, then rubbers played.
-    Winning more rubbers does not move you up on its own — how cleanly you win does.</p>`;
+    <p class="ovfoot">Sort order: <b>sets won %</b>, then <b>games won %</b>, then rubbers played.
+    Winning more rubbers does not move a player up on its own — how cleanly they win does.</p>`;
 }
 
 function viewPlayer(name) {
@@ -790,6 +839,7 @@ function viewPlayer(name) {
       <div class="phead">
         <div class="pname">${esc(p.name)}</div>
         <div class="pteam">${esc(p.team)}${r ? ` · ${r.rank}${ordinal(r.rank)} of ${r.total} in the section` : ""}</div>
+        ${r ? `<button class="whyr" data-explain="${esc(p.name)}">Why ${esc(first(p.name))} is ${r.rank}${ordinal(r.rank)} ›</button>` : ""}
       </div>
       <div style="display:flex;justify-content:center;padding:10px 0 2px">
         ${ring(pctShown, 100, pctShown + "%", "sets won")}
@@ -926,7 +976,8 @@ async function enableAlerts() {
       }
     }
   } catch (e) {}
-  renderAll();
+  if ($("#overlay") && $("#overlay").classList.contains("on")) openSettings();
+  else renderAll();
 }
 
 async function initApp() {
@@ -982,6 +1033,9 @@ function bind() {
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
   });
+  $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
+    b.onclick = () => openSheet(explainSheet(b.dataset.explain));
+  });
   $("#view-squad").querySelectorAll(".lrow").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));
   });
@@ -1002,13 +1056,64 @@ function bind() {
     bind();
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+}
+
+function renderAll() {
+  $("#mastheadSub").textContent = `${DATA.meta.competition} · ${DATA.meta.section.replace(/^Open Triples /, "")}`;
+  $("#view-week").innerHTML = viewWeek();
+  $("#view-team").innerHTML = viewTeam();
+  $("#view-squad").innerHTML = viewSquad();
+  $("#view-season").innerHTML = viewSeason();
+  $("#view-clubs").innerHTML = viewClubs();
+  bind();
+}
+
+let toastTimer = null;
+function showToast(msg) {
+  const t = $("#toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("on"), 2400);
+}
+
+function aboutHTML() {
+  return `<div class="about">
+    ${esc(DATA.meta.section)} · ${esc(DATA.meta.competition)} ${esc(DATA.meta.season)}<br>
+    Waverley District Tennis Association<br><br>
+    Ladder, results, rubbers and fixture from
+    <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>.
+    Roster from the team sheet.<br>
+    Snapshot ${esc(DATA.meta.ladder_loaded)}.<br><br>
+    Unofficial team tool — check TROLS or your club before a match.
+  </div>`;
+}
+
+function settingsSheet() {
+  return `
+    <div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    <h3 class="ovtitle" id="ovTitle">Settings</h3>
+    <p class="ovsub">${APP_NAME} · ${esc(DATA.meta.club)}</p>
+    <div class="setsec"><h4>App</h4><div class="act">${installBlock()}</div></div>
+    <div class="setsec"><h4>Alerts</h4><div class="act">${alertsBlock()}</div></div>
+    <div class="setsec"><h4>About</h4>${aboutHTML()}</div>`;
+}
+
+function openSettings() {
+  openSheet(settingsSheet());
+  bindSheet();
+}
+
+function bindSheet() {
   const ib = $("#installBtn");
   if (ib) ib.onclick = async () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
       try { await deferredPrompt.userChoice; } catch (e) {}
       deferredPrompt = null;
-      renderAll();
+      openSettings();
     } else if (isIOS()) {
       alert('On iPhone: tap Share, then "Add to Home Screen".');
     } else {
@@ -1016,23 +1121,8 @@ function bind() {
     }
   };
   const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
-  const off = $("#alertsOff"); if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); renderAll(); };
-}
-
-function renderAll() {
-  $("#mastheadSub").textContent = `${DATA.meta.competition} · ${DATA.meta.section.replace(/^Open Triples /, "")}`;
-  $("#syncWhen").textContent = DATA.meta.ladder_loaded.replace(/, .*/, "").replace(/\s+\d{4}$/, "");
-  $("#view-week").innerHTML = viewWeek();
-  $("#view-team").innerHTML = viewTeam();
-  $("#view-squad").innerHTML = viewSquad();
-  $("#view-season").innerHTML = viewSeason();
-  $("#view-clubs").innerHTML = viewClubs();
-  bind();
-  $("#foot").innerHTML = `
-    ${APP_NAME} · ${esc(DATA.meta.section)} · ${esc(DATA.meta.competition)} ${esc(DATA.meta.season)} · Waverley District Tennis Association<br>
-    Ladder, results, rubbers and fixture from <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>.
-    Roster from the team sheet. Snapshot ${esc(DATA.meta.ladder_loaded)}.<br>
-    Unofficial team tool — check TROLS or your club before a match.`;
+  const off = $("#alertsOff");
+  if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); openSettings(); };
 }
 
 function openSheet(html) {
@@ -1090,11 +1180,9 @@ async function refreshNow(opts) {
   if (refreshing) return;
   refreshing = true;
   const btn = $("#refreshBtn");
-  const state = $("#syncState");
   if (btn && !silent) btn.classList.add("spin");
-  if (state && !silent) state.textContent = "checking";
 
-  let outcome = "synced";
+  let outcome = null;
   try {
     const res = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
@@ -1106,28 +1194,24 @@ async function refreshNow(opts) {
       Object.assign(DATA, fresh);
       if (fresh.roster) Object.assign(roster, fresh.roster);
       renderAll();
-      outcome = "updated";
+      outcome = "Updated from TROLS";
     } else {
-      outcome = first ? "synced" : "up to date";
+      outcome = first ? null : "Already up to date";
     }
     localStorage.setItem(SIG_KEY, sigOf(fresh));
   } catch (e) {
-    outcome = navigator.onLine === false ? "offline" : "couldn't reach TROLS";
+    outcome = navigator.onLine === false ? "Offline — showing saved data" : "Couldn't reach TROLS";
   } finally {
     refreshing = false;
     if (btn) btn.classList.remove("spin");
-    if (state && !silent) {
-      state.textContent = outcome;
-      setTimeout(() => {
-        const s2 = $("#syncState");
-        if (s2 && s2.textContent === outcome) s2.textContent = "synced";
-      }, 2600);
-    }
+    if (outcome && !silent) showToast(outcome);
   }
 }
 
 const refreshBtn = $("#refreshBtn");
 if (refreshBtn) refreshBtn.onclick = () => refreshNow();
+const settingsBtn = $("#settingsBtn");
+if (settingsBtn) settingsBtn.onclick = () => openSettings();
 
 refreshNow({ silent: true });
 </script>

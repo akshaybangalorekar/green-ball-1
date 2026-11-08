@@ -42,8 +42,11 @@ the round-by-round sets: who they played, with whom, and the score.
 Ranking is by sets won %, then games won % — the same logic the team ladder uses. That
 means a clean 3–0 can sit above a 6–0 that dropped games, which is not obvious on sight,
 so **tapping any player in the section ladder opens a sheet explaining their exact
-position**: their set percentage, how many others are level with them, and a side-by-side
-of games won for everyone tied on sets. The ladder rows also show sets and games inline.
+position**, written for that child specifically: their own sets and games, the opponents
+they faced, how many others are level with them, a side-by-side of games won for everyone
+tied on sets, what it would take to pass the player directly above, and their tightest
+set or only loss. The same sheet is one tap away from their own page. The ladder rows
+show sets and games inline as well.
 
 **Player points come from the official rubbers.** Each match has a pop-up on TROLS
 (`match_popup.php?matchid=…`) listing both sides' players by position and every rubber
@@ -73,12 +76,18 @@ icon-192/512.png       app icons
 apple-touch-icon.png   iOS home-screen icon
 ```
 
+## Settings
+
+The gear in the header opens a sheet with the install control, the alerts toggle and the
+about block (sources, snapshot time, the "unofficial tool" note) — so none of that takes
+up room on a tab. The circular arrow beside it refreshes the data.
+
 ## Refresh
 
 The circular arrow in the header pulls the latest `data.json` straight away — useful on
-match day, when results land while you have the app open. It shows "checking", then
-"updated", "up to date", "offline" or "couldn't reach TROLS", and returns to "synced"
-after a couple of seconds. Opening the app already does the same check silently, so the
+match day, when results land while you have the app open. It reports back in a toast:
+"Updated from TROLS", "Already up to date", "Offline — showing saved data", or
+"Couldn't reach TROLS". Opening the app already does the same check silently, so the
 button is for when you are sitting on the page waiting for a score.
 
 ## Alerts
