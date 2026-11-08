@@ -1,0 +1,57 @@
+{
+  "name": "East Malvern — Green Ball 1",
+  "short_name": "Green Ball 1",
+  "description": "Ladder, results, fixture and squad for East Malvern in the Waverley District Tennis Association, Sunday AM Summer 26/27.",
+  "id": "/green-ball-1/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
+  "background_color": "#f7f4ee",
+  "theme_color": "#14684a",
+  "categories": [
+    "sports",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "This week",
+      "short_name": "This week",
+      "url": "./#week"
+    },
+    {
+      "name": "Squad",
+      "short_name": "Squad",
+      "url": "./#squad"
+    },
+    {
+      "name": "Team dashboard",
+      "short_name": "Team",
+      "url": "./#team"
+    }
+  ]
+}

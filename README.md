@@ -47,13 +47,51 @@ Tapping In / ? / Out on a squad card records a change for the next round. That o
 lives in your phone's browser storage only — nothing is uploaded, and it isn't shared
 between phones. Dave's sheet stays the source of truth in `data.json`.
 
+## It runs as an app, not a browser tab
+
+The site is a PWA. Open it once in the phone's browser, then **Add to Home Screen**
+(iPhone: Share → Add to Home Screen). From then on it launches full screen with its own
+icon, no address bar, and keeps working offline — the last snapshot is cached.
+
+Files that make that work:
+
+```
+manifest.webmanifest   name, icon, standalone display, shortcuts
+sw.js                  service worker: offline shell + update checks
+icon-192/512.png       app icons
+apple-touch-icon.png   iOS home-screen icon
+```
+
+## Alerts
+
+Turning alerts on asks for notification permission. The app then watches for changes
+between what you last saw and what TROLS now says:
+
+- a new round of results posted
+- the ladder reloading (points or positions moved)
+- the fixture or opponent changing
+
+**How it actually fires depends on the phone, and it's worth being precise about it.**
+On Android the service worker registers a periodic background check, so alerts can
+arrive with the app closed. On iPhone, Safari only allows push notifications from a
+server, so there the alert appears the next time you open the app. Nothing is sent to
+a third party in either case — the check is the app fetching `data.json`.
+
+If you want alerts to land on the phone even when the app has not been opened for
+days, that needs a push service (OneSignal, Firebase, or a tiny server). Say the word
+and I'll wire one up; it's a small addition, but it needs an account and a key from you.
+
 ## Files
 
 ```
 index.html                     the whole app (data embedded, so it works offline)
 data.json                      the current snapshot — the app loads this if it's newer
+manifest.webmanifest           PWA manifest
+sw.js                          service worker
+icon-192.png, icon-512.png     app icons
+apple-touch-icon.png           iOS icon
 scrape.py                      refreshes data.json from TROLS (stdlib only)
-.github/workflows/update-data.yml   runs the scraper daily and commits the result
+.github/workflows/update-data.yml   scrapes daily, commits, and deploys Pages
 ```
 
 ## Publish it on GitHub Pages

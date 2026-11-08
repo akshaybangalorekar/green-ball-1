@@ -6,7 +6,12 @@
 <title>East Malvern · Green Ball 1</title>
 <meta name="theme-color" content="#14684a">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314684a'/%3E%3Ccircle cx='16' cy='16' r='7.5' fill='none' stroke='%23f6f3ec' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Green Ball 1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -211,6 +216,16 @@
     font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
   footer a { color: var(--court); text-decoration: none; }
   .tblwrap { overflow-x: auto; margin: 0 -6px; }
+
+  /* ---------- app / alerts ---------- */
+  .act { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .act .txt { flex: 1; min-width: 180px; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+  .act .txt b { color: var(--ink); font-weight: 600; display: block; margin-bottom: 3px; font-size: 13.5px; }
+  .btn { appearance: none; border: 0; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: .07em;
+    text-transform: uppercase; padding: 11px 16px; border-radius: 11px; background: var(--court); color: #f7f4ee; }
+  .btn.ghost { background: var(--surface-2); color: var(--ink); }
+  .btn[disabled] { opacity: .5; cursor: default; }
+  @media (prefers-color-scheme: dark) { .btn { color: #101309; } }
 
   /* ---------- season strip ---------- */
   .strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
@@ -462,6 +477,12 @@ function viewWeek() {
       <p class="label">Season so far</p>
       <div class="strip">${seasonStrip()}</div>
       <div class="legend"><span><i style="background:var(--court)"></i>win</span><span><i style="background:var(--clay)"></i>loss</span><span><i style="background:var(--gold-wash)"></i>wash-out</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>to come</span></div>
+    </div>
+
+    <div class="card">
+      <p class="label">App and alerts</p>
+      <div class="act">${installBlock()}</div>
+      <div class="act" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)">${alertsBlock()}</div>
     </div>`;
 }
 
@@ -688,6 +709,117 @@ function bind() {
   });
 }
 
+/* ---------- app install + alerts ---------- */
+const NOTIFY_KEY = "em-gb1-notify-v1";
+const SIG_KEY = "em-gb1-sig-v1";
+let deferredPrompt = null;
+let swReg = null;
+
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; });
+
+function isStandalone() {
+  return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+}
+function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
+function alertsOn() { return ("Notification" in window) && Notification.permission === "granted" && localStorage.getItem(NOTIFY_KEY) === "1"; }
+
+function installBlock() {
+  if (isStandalone()) {
+    return `<span class="txt"><b>Installed</b>You're using the app version — it opens full screen, no browser bars.</span>
+      <button class="btn ghost" disabled>Installed</button>`;
+  }
+  const hint = isIOS()
+    ? "Tap Share, then <b>Add to Home Screen</b>."
+    : "Tap Install, or use the browser menu → Add to Home screen.";
+  return `<span class="txt"><b>Open it as an app</b>${hint}</span>
+    <button class="btn" id="installBtn">${isIOS() ? "How" : "Install"}</button>`;
+}
+
+function alertsBlock() {
+  if (!("Notification" in window)) {
+    return `<span class="txt"><b>Alerts</b>This browser can't show notifications.</span>`;
+  }
+  if (Notification.permission === "denied") {
+    return `<span class="txt"><b>Alerts blocked</b>Notifications are turned off for this site in your browser settings.</span>`;
+  }
+  if (alertsOn()) {
+    return `<span class="txt"><b>Alerts on</b>Results posted, ladder changes and fixture moves. Checks when you open the app, and in the background on Android.</span>
+      <button class="btn ghost" id="alertsOff">Turn off</button>`;
+  }
+  return `<span class="txt"><b>Alerts</b>Get told when results are posted, the ladder moves or the fixture changes.</span>
+    <button class="btn" id="alertsOn">Turn on</button>`;
+}
+
+async function enableAlerts() {
+  try {
+    const perm = await Notification.requestPermission();
+    if (perm === "granted") {
+      localStorage.setItem(NOTIFY_KEY, "1");
+      const reg = swReg || (navigator.serviceWorker && await navigator.serviceWorker.ready);
+      if (reg) {
+        reg.active && reg.active.postMessage({ type: "check" });
+        reg.showNotification("Alerts on", {
+          body: "We'll tell you when results, the ladder or the fixture change.",
+          icon: "icon-192.png", badge: "icon-192.png", tag: "gb1-welcome",
+        });
+      }
+    }
+  } catch (e) {}
+  renderAll();
+}
+
+async function initApp() {
+  if (!("serviceWorker" in navigator)) return;
+  try {
+    swReg = await navigator.serviceWorker.register("sw.js", { scope: "./" });
+    if (navigator.periodicSync) {
+      try {
+        await navigator.periodicSync.register("check-updates", { minInterval: 12 * 60 * 60 * 1000 });
+      } catch (e) {}
+    }
+  } catch (e) {}
+}
+
+function sigOf(d) {
+  const draw = (d.draw || []).map((x) => x.opponent || "-").join(",");
+  return [d.meta.ladder_loaded, d.results.length, draw].join("|");
+}
+
+async function noteUpdate(fresh) {
+  const prev = localStorage.getItem(SIG_KEY);
+  localStorage.setItem(SIG_KEY, sigOf(fresh));
+  if (!prev || prev === sigOf(fresh) || !alertsOn()) return;
+  const [prevLoad, prevRounds] = prev.split("|");
+  const latest = (fresh.results || [])[0];
+  let body = "Ladder updated";
+  if (prevRounds !== String(fresh.results.length) && latest) body = `Round ${latest.round} results are in`;
+  else if (prevLoad === String(fresh.meta.ladder_loaded)) body = "Fixture updated";
+  try {
+    const reg = swReg || await navigator.serviceWorker.ready;
+    reg.showNotification("Green Ball 1", { body, icon: "icon-192.png", badge: "icon-192.png", tag: "gb1-update" });
+  } catch (e) {}
+}
+
+function bindApp() {
+  const ib = $("#installBtn");
+  if (ib) ib.onclick = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      try { await deferredPrompt.userChoice; } catch (e) {}
+      deferredPrompt = null;
+      renderAll();
+    } else if (isIOS()) {
+      alert("On iPhone: tap the Share button, scroll down, then choose \"Add to Home Screen\".");
+    } else {
+      alert("Open the browser menu and choose \"Add to Home screen\" or \"Install app\".");
+    }
+  };
+  const on = $("#alertsOn");
+  if (on) on.onclick = enableAlerts;
+  const off = $("#alertsOff");
+  if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); renderAll(); };
+}
+
 function renderAll() {
   $("#mastheadSub").textContent = `${DATA.meta.club} · ${DATA.meta.competition}`;
   $("#syncWhen").textContent = DATA.meta.ladder_loaded.replace(/, .*/, "");
@@ -697,6 +829,7 @@ function renderAll() {
   $("#view-season").innerHTML = viewSeason();
   $("#view-clubs").innerHTML = viewClubs();
   bind();
+  bindApp();
   $("#foot").innerHTML = `
     ${esc(DATA.meta.section)} · ${esc(DATA.meta.competition)} ${esc(DATA.meta.season)} · Waverley District Tennis Association<br>
     Ladder, results and fixture from <a href="${esc(DATA.meta.source_ladder)}" target="_blank" rel="noopener">TROLS</a>.
@@ -723,17 +856,20 @@ document.querySelectorAll(".tabs button").forEach((b) => {
 
 renderAll();
 if (location.hash) showTab(location.hash.slice(1));
+initApp();
 
 fetch("data.json?t=" + Date.now(), { cache: "no-store" })
   .then((r) => (r.ok ? r.json() : null))
   .then((fresh) => {
     if (!fresh || !fresh.meta || fresh.meta.ladder_loaded === DATA.meta.ladder_loaded) return;
+    noteUpdate(fresh);
     Object.assign(DATA, fresh);
     if (fresh.roster) Object.assign(roster, fresh.roster);
     $("#syncState").textContent = "updated";
     renderAll();
   })
-  .catch(() => {});
+  .catch(() => {})
+  .finally(() => { if (!localStorage.getItem(SIG_KEY)) localStorage.setItem(SIG_KEY, sigOf(DATA)); });
 </script>
 </body>
 </html>
