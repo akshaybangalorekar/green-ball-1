@@ -74,6 +74,14 @@ icon-192/512.png       app icons
 apple-touch-icon.png   iOS home-screen icon
 ```
 
+## Refresh
+
+The circular arrow in the header pulls the latest `data.json` straight away — useful on
+match day, when results land while you have the app open. It shows "checking", then
+"updated", "up to date", "offline" or "couldn't reach TROLS", and returns to "synced"
+after a couple of seconds. Opening the app already does the same check silently, so the
+button is for when you are sitting on the page waiting for a score.
+
 ## Alerts
 
 Turning alerts on asks for notification permission. The app then watches for changes

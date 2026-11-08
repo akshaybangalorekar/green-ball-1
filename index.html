@@ -68,14 +68,25 @@
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
 
-  .masthead { display: flex; align-items: center; gap: 14px; padding: 30px 0 22px; }
+  .masthead { display: flex; align-items: center; gap: 12px; padding: 30px 0 22px; }
+  .masthead .who { flex: 1; min-width: 0; }
   .crest { width: 50px; height: 50px; flex: 0 0 50px; border-radius: 15px; background: var(--clay); color: #fff8f0;
     display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 17px; }
   @media (prefers-color-scheme: dark) { .crest { color: #17100b; } }
   .masthead h1 { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.05; margin: 0; letter-spacing: -.02em; }
-  .masthead .sub { margin: 4px 0 0; font-size: 12.5px; color: var(--ink-dim); font-family: var(--mono); }
-  .sync { margin-left: auto; text-align: right; font-family: var(--mono); font-size: 10px; line-height: 1.5; color: var(--ink-dim); }
-  .sync b { display: block; color: var(--clay); font-weight: 500; }
+  .masthead .sub { margin: 4px 0 0; font-size: 11.5px; color: var(--ink-dim); font-family: var(--mono);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .sync { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+  .synctext { text-align: right; font-family: var(--mono); font-size: 10px; line-height: 1.5; color: var(--ink-dim); }
+  .synctext b { display: block; color: var(--clay); font-weight: 500; }
+  .refresh { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%; border: 1px solid var(--line);
+    background: var(--surface); color: var(--clay); display: grid; place-items: center; cursor: pointer;
+    transition: background .15s, transform .15s; }
+  .refresh:hover { background: var(--clay-wash); }
+  .refresh:active { transform: scale(.94); }
+  .refresh.spin svg { animation: spin .9s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .refresh.spin svg { animation: none; } }
 
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
     margin: 0 -20px 26px; padding: 10px 20px; background: color-mix(in srgb, var(--bg) 90%, transparent);
@@ -278,11 +289,19 @@
 <div class="wrap">
   <header class="masthead">
     <div class="crest">EM</div>
-    <div>
+    <div class="who">
       <h1>Advantage</h1>
       <p class="sub" id="mastheadSub">Sunday AM · Green Ball 1</p>
     </div>
-    <div class="sync"><b id="syncState">synced</b><span id="syncWhen"></span></div>
+    <div class="sync">
+      <div class="synctext"><b id="syncState">synced</b><span id="syncWhen"></span></div>
+      <button class="refresh" id="refreshBtn" aria-label="Check for latest results" title="Check for latest results">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.1"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <nav class="tabs" role="tablist" aria-label="Sections">
@@ -925,7 +944,7 @@ function bind() {
 
 function renderAll() {
   $("#mastheadSub").textContent = `${DATA.meta.competition} · ${DATA.meta.section.replace(/^Open Triples /, "")}`;
-  $("#syncWhen").textContent = DATA.meta.ladder_loaded.replace(/, .*/, "");
+  $("#syncWhen").textContent = DATA.meta.ladder_loaded.replace(/, .*/, "").replace(/\s+\d{4}$/, "");
   $("#view-week").innerHTML = viewWeek();
   $("#view-team").innerHTML = viewTeam();
   $("#view-squad").innerHTML = viewSquad();
@@ -968,18 +987,53 @@ if (location.hash.startsWith("#player=")) {
 }
 initApp();
 
-fetch("data.json?t=" + Date.now(), { cache: "no-store" })
-  .then((r) => (r.ok ? r.json() : null))
-  .then((fresh) => {
-    if (!fresh || !fresh.meta || fresh.meta.ladder_loaded === DATA.meta.ladder_loaded) return;
-    noteUpdate(fresh);
-    Object.assign(DATA, fresh);
-    if (fresh.roster) Object.assign(roster, fresh.roster);
-    $("#syncState").textContent = "updated";
-    renderAll();
-  })
-  .catch(() => {})
-  .finally(() => { if (!localStorage.getItem(SIG_KEY)) localStorage.setItem(SIG_KEY, sigOf(DATA)); });
+let refreshing = false;
+
+async function refreshNow(opts) {
+  const silent = opts && opts.silent;
+  if (refreshing) return;
+  refreshing = true;
+  const btn = $("#refreshBtn");
+  const state = $("#syncState");
+  if (btn && !silent) btn.classList.add("spin");
+  if (state && !silent) state.textContent = "checking";
+
+  let outcome = "synced";
+  try {
+    const res = await fetch("data.json?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const fresh = await res.json();
+    const changed = sigOf(fresh) !== sigOf(DATA);
+    const first = !localStorage.getItem(SIG_KEY);
+    if (changed && !first) {
+      noteUpdate(fresh);
+      Object.assign(DATA, fresh);
+      if (fresh.roster) Object.assign(roster, fresh.roster);
+      renderAll();
+      outcome = "updated";
+    } else {
+      outcome = first ? "synced" : "up to date";
+    }
+    localStorage.setItem(SIG_KEY, sigOf(fresh));
+  } catch (e) {
+    outcome = navigator.onLine === false ? "offline" : "couldn't reach TROLS";
+  } finally {
+    refreshing = false;
+    if (btn) btn.classList.remove("spin");
+    if (state && !silent) {
+      state.textContent = outcome;
+      setTimeout(() => {
+        const s2 = $("#syncState");
+        if (s2 && s2.textContent === outcome) s2.textContent = "synced";
+      }, 2600);
+    }
+  }
+}
+
+const refreshBtn = $("#refreshBtn");
+if (refreshBtn) refreshBtn.onclick = () => refreshNow();
+
+refreshNow({ silent: true });
 </script>
 </body>
 </html>
