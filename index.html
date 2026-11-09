@@ -18,33 +18,33 @@
 <style>
   :root {
     /* Centre Court: grass green, white, optic yellow */
-    --bg: #0f5132;
-    --bg-2: #17784a;
+    --bg: #1c8a56;
+    --bg-2: #31b073;
     --surface: #ffffff;
-    --surface-2: #eef3ef;
-    --ink: #10241a;
-    --ink-dim: #5f7268;
-    --line: rgba(16, 36, 26, .16);
-    --line-soft: rgba(16, 36, 26, .08);
-    --brand: #0f5132;
-    --brand-deep: #0a3a24;
-    --brand-wash: rgba(15, 81, 50, .10);
-    --ball: #d7e64a;
-    --ball-ink: #1a2410;
-    --ball-wash: rgba(215, 230, 74, .40);
-    --muted: #8ea296;
-    --on-brand: #f5fbf7;
-    --on-brand-dim: rgba(245, 251, 247, .78);
-    --loss: #b4442a;
-    --shadow: 0 2px 4px rgba(6, 30, 18, .16), 0 18px 40px -26px rgba(6, 30, 18, .7);
+    --surface-2: #f1f7f3;
+    --ink: #0d2a1c;
+    --ink-dim: #5b7d69;
+    --line: rgba(13, 42, 28, .16);
+    --line-soft: rgba(13, 42, 28, .08);
+    --brand: #10744b;
+    --brand-deep: #0d5735;
+    --brand-wash: rgba(16, 116, 75, .11);
+    --ball: #e3ee5c;
+    --ball-ink: #1c2608;
+    --ball-wash: rgba(227, 238, 92, .45);
+    --muted: #93a99b;
+    --on-brand: #ffffff;
+    --on-brand-dim: rgba(255, 255, 255, .84);
+    --loss: #bd4a2d;
+    --shadow: 0 2px 4px rgba(8, 40, 24, .14), 0 18px 40px -26px rgba(8, 40, 24, .6);
     --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
     --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #07281a;
-      --bg-2: #0d3f27;
+      --bg: #0a3524;
+      --bg-2: #115234;
       --surface: #14211a;
       --surface-2: #1d2e24;
       --ink: #eef5ef;
@@ -69,9 +69,9 @@
   body {
     margin: 0; font-family: var(--body); font-size: 15px;
     background:
-      radial-gradient(820px 460px at 86% -16%, rgba(215, 230, 74, .16), transparent 68%),
-      radial-gradient(680px 420px at -10% 4%, rgba(255, 255, 255, .07), transparent 62%),
-      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 46%, var(--brand-deep) 100%);
+      radial-gradient(820px 460px at 86% -16%, rgba(227, 238, 92, .22), transparent 68%),
+      radial-gradient(680px 420px at -10% 4%, rgba(255, 255, 255, .10), transparent 62%),
+      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 52%, var(--brand-deep) 100%);
     color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased;
     padding-top: env(safe-area-inset-top, 0px); padding-bottom: 56px;
   }
@@ -142,7 +142,7 @@
   .caption b { color: var(--ink); font-weight: 600; }
 
   .hero { position: relative; overflow: hidden; border-radius: 26px; padding: 28px 24px; margin-bottom: 20px;
-    background: linear-gradient(158deg, #17784a 0%, #0d4a2e 58%, #07281a 100%);
+    background: linear-gradient(158deg, #33b174 0%, #178a56 55%, #0c5c3a 100%);
     color: var(--on-brand); box-shadow: var(--shadow); border: 1px solid rgba(245,251,247,.14); }
   .hero .courtlines { position: absolute; inset: 0; opacity: .16; pointer-events: none; }
   .hero .rd { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
