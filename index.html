@@ -736,6 +736,7 @@ function viewWeek() {
       <p class="label">Season so far</p>
       <div class="strip">${seasonStrip()}</div>
       <div class="legend"><span><i style="background:var(--brand)"></i>win</span><span><i style="background:var(--loss)"></i>loss</span><span><i style="background:var(--muted)"></i>wash-out</span><span><i style="background:var(--surface-2);border:1px solid var(--line)"></i>to come</span></div>
+      ${(DATA.match_details || []).length ? `<p class="caption" style="margin-top:14px">Tap a played round for the match details.</p>` : ""}
     </div>
 
 </div>`;
