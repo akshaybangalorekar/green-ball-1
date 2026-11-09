@@ -12,9 +12,9 @@ availability and selection for each round.
 
 | Tab | What it shows |
 | --- | --- |
-| **This week** | Next round, opponent, venue, the three on court, ladder position, and a season strip |
-| **Team** | One thing only: the gap to the finals line, with the points for each team that matters |
-| **Squad** | Your four — tap a child for every set they have played — plus a ladder of all 31 players in the section |
+| **This week** | A swipeable panel — the next round and who's on court, swipe left for where the four stand — then three numbers and the season strip |
+| **Team** | The gap to the finals line, and the official TROLS ladder beneath it |
+| **Squad** | The player ladder — every child in the section on one bar, tap for their sets |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
 
@@ -43,7 +43,7 @@ the round-by-round sets: who they played, with whom, and the score.
 there is no player ladder on TROLS. These rankings are worked out from the published
 rubbers, and the app says so on the card.
 
-The Squad tab holds **two tables**, switched by a Players | Teams control:
+The Team tab carries the official TROLS ladder; Squad carries the player ladder.
 
 - **Players** — every child in the section, ranked by the share of sets they have won. Each
   row has one bar, so a 3-set record and a 6-set record are on the same scale, with the

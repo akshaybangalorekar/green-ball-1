@@ -165,6 +165,25 @@
   .trio .who.em .av { background: rgba(245, 251, 247, .92); color: var(--brand-deep); }
   .trio .nm { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--on-brand-dim); }
 
+  .swiper { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 14px; }
+  .swiper::-webkit-scrollbar { display: none; }
+  .swiper > * { flex: 0 0 100%; scroll-snap-align: start; }
+  .swiper .hero { margin-bottom: 0; }
+  .dots { display: flex; justify-content: center; gap: 7px; margin: 0 0 20px; }
+  .dots button { width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0;
+    background: rgba(255, 255, 255, .45); cursor: pointer; transition: width .2s, background .2s; }
+  .dots button.on { background: var(--ball); width: 20px; border-radius: 4px; }
+  .fourlist { margin-top: 10px; }
+  .frow { display: flex; align-items: center; gap: 11px; padding: 9px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .16); }
+  .frow:last-child { border-bottom: 0; }
+  .frank { width: 24px; flex: 0 0 24px; font-family: var(--mono); font-size: 12px; color: var(--on-brand-dim); }
+  .fname { flex: 1; font-size: 15.5px; }
+  .fbar { width: 58px; flex: 0 0 58px; height: 7px; border-radius: 4px; background: rgba(255, 255, 255, .2); overflow: hidden; }
+  .fbar i { display: block; height: 100%; border-radius: 4px; background: var(--ball); }
+  .fpct { width: 46px; flex: 0 0 46px; text-align: right; font-family: var(--display); font-weight: 800; font-size: 15px; }
+
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
     text-align: center; box-shadow: var(--shadow); }
@@ -844,7 +863,20 @@ function viewWeek() {
     return `<div class="who ${em ? "em" : ""}"><div class="av">${esc(initials(n))}</div><div class="nm">${esc(first(n))}${em ? " · E" : ""}</div></div>`;
   }).join("")}</div>` : "";
 
+  const four = ladderByRate()
+    .map((p, i) => ({ ...p, rank: i + 1 }))
+    .filter((p) => (roster.players || []).some((r) => r.name === p.name))
+    .sort((a, b) => a.rank - b.rank);
+  const fourRows = four.map((p) => `
+    <div class="frow">
+      <span class="frank">${p.rank}</span>
+      <span class="fname">${esc(first(p.name))}</span>
+      <span class="fbar"><i style="width:${Math.max(4, p.set_pct)}%"></i></span>
+      <span class="fpct">${p.set_pct}%</span>
+    </div>`).join("");
+
   return `
+    <div class="swiper" id="heroSwipe">
     <div class="hero">
       <svg class="courtlines" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true">
         <g stroke="#f5fbf7" stroke-width="1.2" fill="none">
@@ -867,6 +899,18 @@ function viewWeek() {
         ? `<a class="maplink" href="${mapsUrl(place)}" target="_blank" rel="noopener">${PIN}<span>${esc(venueText)}</span></a>`
         : esc(venueText)}</div>
       ${trioHTML}
+    </div>
+
+    <div class="hero four">
+      <div class="rd"><span class="pill">Our four</span><span>Section standing</span></div>
+      <h2 style="font-size:26px">Where they stand</h2>
+      <div class="fourlist">${fourRows}</div>
+      <div class="venue" style="margin-top:12px">Share of sets won, out of ${ladderByRate().length} in the section.</div>
+    </div>
+    </div>
+    <div class="dots" id="heroDots">
+      <button data-slide="0" class="on" aria-label="This week"></button>
+      <button data-slide="1" aria-label="Our four"></button>
     </div>
 
     <div class="kpis">
@@ -925,6 +969,11 @@ function viewTeam() {
         Top four of eight play finals. You are <b>${clear.toFixed(1)} points clear</b> of the cut
         with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
       </p>
+    </div>
+
+    <div class="card">
+      <p class="label">Official ladder</p>
+      ${teamsTable()}
     </div>`;
 }
 
@@ -958,8 +1007,6 @@ function rankOf(name) {
   const i = rows.findIndex((r) => r.name === name);
   return i < 0 ? null : { rank: i + 1, total: rows.length };
 }
-
-let squadTab = "players";
 
 function ladderByRate() {
   return Object.values(DATA.section_players || {})
@@ -1014,12 +1061,8 @@ function viewSquad() {
   if (selectedPlayer) return viewPlayer(selectedPlayer);
   return `
     <div class="card">
-      <p class="label">Section ladder</p>
-      <div class="seg-top" style="margin-bottom:20px">
-        <button data-squad="players" aria-selected="${squadTab === "players"}">Players</button>
-        <button data-squad="teams" aria-selected="${squadTab === "teams"}">Teams</button>
-      </div>
-      ${squadTab === "players" ? playersTable() : teamsTable()}
+      <p class="label">Player ladder</p>
+      ${playersTable()}
     </div>`;
 }
 
@@ -1408,12 +1451,26 @@ function bind() {
   });
   const gu = $("#goUnlock");
   if (gu) gu.onclick = () => openSettings();
-  $("#view-squad").querySelectorAll("[data-squad]").forEach((b) => {
-    b.onclick = () => { squadTab = b.dataset.squad; $("#view-squad").innerHTML = viewSquad(); bind(); };
-  });
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));
   });
+  const swiper = $("#heroSwipe"), dots = $("#heroDots");
+  if (swiper && dots) {
+    const mark = (i) => dots.querySelectorAll("button").forEach((b, bi) => b.classList.toggle("on", bi === i));
+    dots.querySelectorAll("button").forEach((b) => {
+      b.onclick = () => {
+        const i = Number(b.dataset.slide);
+        swiper.scrollTo({ left: i * (swiper.clientWidth + 14), behavior: "smooth" });
+        mark(i);
+      };
+    });
+    if (!swiper.dataset.bound) {
+      swiper.dataset.bound = "1";
+      const sync = () => mark(Math.round(swiper.scrollLeft / (swiper.clientWidth + 14)));
+      swiper.addEventListener("scroll", sync, { passive: true });
+      swiper.addEventListener("scrollend", sync);
+    }
+  }
   $("#view-week").querySelectorAll(".blk[data-round]").forEach((b) => {
     const r = Number(b.dataset.round);
     b.onclick = () => {
