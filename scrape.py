@@ -674,6 +674,8 @@ def main():
     section_matches, section_players = build_section(results)
     section_players = tidy_names(section_players, roster_names)
     ours = {n: section_players[n] for n in roster_names if n in section_players}
+    # full scorecards for our own matches, so the app can draw the scoresheet
+    our_matches = [m for m in section_matches if CLUB in (m["home"], m["away"])]
     print(f"  · rubbers: {len(section_matches)} matches, {len(section_players)} players in section")
 
     loaded = re.search(r"Loaded:?\s*([0-9]{1,2}\w{2}\s+\w+\s+\d{2,4}[^<]*)", ladder_html)
@@ -721,6 +723,7 @@ def main():
         "section_players": section_players or old.get("section_players", {}),
         "our_players": ours or old.get("our_players", {}),
         "match_count": len(section_matches) or old.get("match_count", 0),
+        "match_details": our_matches or old.get("match_details", []),
     }
 
     DATA_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
