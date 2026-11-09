@@ -165,11 +165,10 @@
   .trio .who.em .av { background: rgba(245, 251, 247, .92); color: var(--brand-deep); }
   .trio .nm { font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; color: var(--on-brand-dim); }
 
-  .swiper { display: flex; align-items: flex-start; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none; margin-bottom: 14px; transition: height .25s ease; }
-  .swiper::-webkit-scrollbar { display: none; }
-  .swiper > * { flex: 0 0 100%; scroll-snap-align: start; }
-  .swiper .hero { margin-bottom: 0; }
+  .pager { overflow: hidden; margin-bottom: 14px; transition: height .28s ease; }
+  .pages { display: flex; align-items: flex-start; transition: transform .3s cubic-bezier(.22,.61,.36,1); will-change: transform; }
+  .pages > * { flex: 0 0 100%; min-width: 0; }
+  .pages .card { margin-bottom: 0; }
   .dots { display: flex; justify-content: center; gap: 7px; margin: 0 0 20px; }
   .dots button { width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0;
     background: rgba(255, 255, 255, .45); cursor: pointer; transition: width .2s, background .2s; }
@@ -234,7 +233,9 @@
   .mt { display: flex; align-items: center; gap: 10px; padding: 9px 0; font-size: 13.5px; }
   .mt .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .mt .nm.r { text-align: right; }
-  .mt .sc { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); background: var(--surface-2);
+  .mt .sc { text-align: center; }
+  .mt .sc span { display: block; white-space: nowrap; }
+  .mt .sc { font-family: var(--mono); font-size: 10.5px; line-height: 1.45; color: var(--ink-dim); background: var(--surface-2);
     border-radius: 8px; padding: 4px 10px; white-space: nowrap; }
   .mt.ours .nm { color: var(--brand); font-weight: 700; }
 
@@ -960,7 +961,8 @@ function viewTeam() {
   const clear = us.pts - fourth.pts;
 
   return `
-    <div class="swiper" id="teamSwipe">
+    <div class="pager" id="teamPager">
+    <div class="pages">
     <div class="card">
       <p class="label">Gap to the finals line</p>
       ${rows}
@@ -979,6 +981,7 @@ function viewTeam() {
     <div class="card">
       <p class="label">Official ladder</p>
       ${teamsTable()}
+    </div>
     </div>
     </div>
     <div class="dots" id="teamDots">
@@ -1233,13 +1236,13 @@ function resultsView() {
       const hWin = m.homePts > m.awayPts;
       return `<div class="mt ${ours ? "ours" : ""}">
         <span class="nm" style="${hWin ? "font-weight:700" : ""}">${esc(m.home)}</span>
-        <span class="sc">${m.homePts.toFixed(0)}–${m.awayPts.toFixed(0)} · ${m.homeGames}–${m.awayGames}</span>
+        <span class="sc"><span>${m.homePts.toFixed(0)}–${m.awayPts.toFixed(0)} pts</span><span>${m.homeGames}–${m.awayGames} games</span></span>
         <span class="nm r" style="${!hWin ? "font-weight:700" : ""}">${esc(m.away)}</span></div>`;
     }).join("");
     return `<div class="rnd"><div class="rnd-h"><b>Round ${r.round}</b><span>${fmtLong(r.date)}</span></div>${rows}</div>`;
   }).join("");
   return `<div class="card"><p class="label">Round by round</p>${blocks}
-    <p class="caption">Score reads points then games.</p></div>`;
+    <p class="caption">Points are ladder points — a win is worth 8, a wash-out 4 each. Games are the 6–2s inside the sets.</p></div>`;
 }
 
 function drawView() {
@@ -1465,32 +1468,45 @@ function bind() {
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));
   });
-  document.querySelectorAll(".swiper").forEach((swiper) => {
-    const dots = swiper.nextElementSibling;
-    if (!dots || !dots.classList.contains("dots") || swiper.dataset.bound) return;
-    swiper.dataset.bound = "1";
-    const fit = (i) => {
-      const slide = swiper.children[i];
+  document.querySelectorAll(".pager").forEach((pager) => {
+    if (pager.dataset.bound) return;
+    pager.dataset.bound = "1";
+    const track = pager.querySelector(".pages");
+    const dots = pager.nextElementSibling;
+    if (!track) return;
+    const slides = [...track.children];
+    let index = 0;
+    const fit = () => {
+      const slide = slides[index];
       if (!slide) return;
       const h = slide.getBoundingClientRect().height;
-      if (h > 40) swiper.style.height = h + "px";
+      if (h > 40) pager.style.height = h + "px";
     };
-    const mark = (i) => {
-      dots.querySelectorAll("button").forEach((b, bi) => b.classList.toggle("on", bi === i));
-      requestAnimationFrame(() => fit(i));
+    const go = (i) => {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      track.style.transform = `translateX(${-index * 100}%)`;
+      if (dots && dots.classList.contains("dots")) {
+        dots.querySelectorAll("button").forEach((b, bi) => b.classList.toggle("on", bi === index));
+      }
+      fit();
     };
-    dots.querySelectorAll("button").forEach((b) => {
-      b.onclick = () => {
-        const i = Number(b.dataset.slide);
-        swiper.scrollTo({ left: i * (swiper.clientWidth + 14), behavior: "smooth" });
-        mark(i);
-      };
-    });
-    const sync = () => mark(Math.round(swiper.scrollLeft / (swiper.clientWidth + 14)));
-    swiper.addEventListener("scroll", sync, { passive: true });
-    swiper.addEventListener("scrollend", sync);
-    requestAnimationFrame(() => { fit(0); mark(0); });
-    window.addEventListener("resize", () => fit(Math.round(swiper.scrollLeft / (swiper.clientWidth + 14))));
+    if (dots && dots.classList.contains("dots")) {
+      dots.querySelectorAll("button").forEach((b) => { b.onclick = () => go(Number(b.dataset.slide)); });
+    }
+    let sx = 0, sy = 0, live = false;
+    pager.addEventListener("touchstart", (e) => {
+      const t = e.touches[0];
+      sx = t.clientX; sy = t.clientY; live = true;
+    }, { passive: true });
+    pager.addEventListener("touchend", (e) => {
+      if (!live) return;
+      live = false;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - sx, dy = t.clientY - sy;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) go(index + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+    window.addEventListener("resize", fit);
+    requestAnimationFrame(() => { fit(); go(0); });
   });
   $("#view-week").querySelectorAll(".blk[data-round]").forEach((b) => {
     const r = Number(b.dataset.round);

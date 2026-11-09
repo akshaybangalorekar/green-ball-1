@@ -13,7 +13,7 @@ availability and selection for each round.
 | Tab | What it shows |
 | --- | --- |
 | **This week** | The next round, who's on court and where, then three numbers and the season strip |
-| **Team** | Three swipes: gap to the finals line · our four's own records · the official TROLS ladder |
+| **Team** | Three panels, one per swipe: gap to the finals line · our four's own records · the official TROLS ladder |
 | **Squad** | The player ladder — every child in the section on one bar, tap for their sets |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
@@ -118,6 +118,12 @@ figures off the screen when a phone is being passed around, which is the usual r
 want this on a junior team's app, but it cannot make public data private. If the scores
 genuinely must be secret, the data has to stop being public — which means hosting it
 behind a login rather than on GitHub Pages.
+
+## Swiping
+
+The Team tab pages rather than scrolls: one swipe moves exactly one panel, and the dots can
+be tapped. It is a transform, not a horizontal scroller, so the page's vertical scroll is
+never fighting the swipe.
 
 ## Round by round
 
