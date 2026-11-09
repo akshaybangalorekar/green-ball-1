@@ -12,8 +12,8 @@ availability and selection for each round.
 
 | Tab | What it shows |
 | --- | --- |
-| **This week** | A swipeable panel — the next round and who's on court, swipe left for where the four stand — then three numbers and the season strip |
-| **Team** | The gap to the finals line, and the official TROLS ladder beneath it |
+| **This week** | The next round, who's on court and where, then three numbers and the season strip |
+| **Team** | Three swipes: gap to the finals line · our four's own records · the official TROLS ladder |
 | **Squad** | The player ladder — every child in the section on one bar, tap for their sets |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
