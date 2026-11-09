@@ -147,6 +147,32 @@ The gear in the header opens a sheet with the install control, the alerts toggle
 about block (sources, snapshot time, the "unofficial tool" note) — so none of that takes
 up room on a tab. The circular arrow beside it refreshes the data.
 
+## Notifications
+
+Deliberately few — three, and nothing else:
+
+1. **Results posted** — when the ladder or a round of results changes on TROLS.
+2. **Sunday match** — on Friday from 6pm, naming the opponent, the venue and the three
+   children playing. Sent once per round; Saturday and Sunday morning are covered too, in
+   case the phone was off on Friday night.
+3. **Fixture moved** — only if the draw itself changes (opponent or venue).
+
+Nothing else is sent: no ladder-position chatter, no per-player updates, no reminders on
+days there is no match. A wash-out shows up as part of the results notification.
+
+The limits are the platform's, not the app's. On Android the app registers a periodic
+background check, so these can arrive with the app closed. On iPhone, Safari only delivers
+push from a server, so they arrive the next time the app is opened — the Friday reminder
+will therefore surface when you next open it that weekend, not at 6pm sharp. Real
+scheduled push needs a service like OneSignal or a small server, and an account to go with
+it.
+
+## Visitor count
+
+Settings → About carries a visit counter from visitorbadge.io. It counts page loads, not
+people, and it is a third-party image — if the service is down the badge simply hides.
+If you would rather not have the external request, say so and I'll take it out.
+
 ## Refresh
 
 The circular arrow in the header pulls the latest `data.json` straight away — useful on

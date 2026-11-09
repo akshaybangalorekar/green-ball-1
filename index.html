@@ -113,7 +113,10 @@
   .passrow input:focus { outline: 2px solid var(--brand); outline-offset: -1px; }
   .kid, .lrow { cursor: default; }
   button.kid, button.lrow { cursor: pointer; }
-  .about { font-family: var(--mono); font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
+  .about { font-family: var(--mono); font-size: 11px; line-height: 1.9; color: var(--ink-dim); }
+  .visits { margin-top: 16px; }
+  .visits img { height: 22px; display: block; }
+  .visits img.hide { display: none; }
   .about a { color: var(--brand); text-decoration: none; }
 
   .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
@@ -1277,6 +1280,47 @@ async function initApp() {
   } catch (e) {}
 }
 
+function ymdLocal(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function matchReminderText() {
+  const nr = nextRound();
+  if (!nr || !nr.opponent) return null;
+  const days = Math.round((parseDate(nr.date) - parseDate(ymdLocal(new Date()))) / 86400000);
+  if (days < 0 || days > 3) return null;
+  const now = new Date();
+  const day = now.getDay(), hr = now.getHours();
+  const window_ = (day === 5 && hr >= 18) || day === 6 || (day === 0 && hr < 18);
+  if (!window_) return null;
+  const atHome = nr.homeAway === "H";
+  const opp = clubByName(nr.opponent);
+  const ourClub = clubByName(CLUB);
+  const place = cleanPlace(atHome ? (ourClub && ourClub.venue) : (opp && opp.venue));
+  const trio = playingFor(nr.round).playing.map((n) => first(n)).join(", ");
+  return {
+    round: nr.round,
+    title: `Sunday: ${atHome ? "v" : "at"} ${nr.opponent}`,
+    body: [place, trio].filter(Boolean).join(" · "),
+  };
+}
+
+async function maybeRemind() {
+  if (!alertsOn()) return;
+  const msg = matchReminderText();
+  if (!msg) return;
+  const key = "em-gb1-reminded-" + msg.round;
+  if (localStorage.getItem(key) === "1") return;
+  try {
+    const reg = swReg || await navigator.serviceWorker.ready;
+    reg.showNotification(msg.title, {
+      body: msg.body, icon: "icon-192.png", badge: "icon-192.png",
+      tag: "gb1-match-" + msg.round, data: { url: "./" },
+    });
+    localStorage.setItem(key, "1");
+  } catch (e) {}
+}
+
 function sigOf(d) {
   const draw = (d.draw || []).map((x) => x.opponent || "-").join(",");
   return [d.meta.ladder_loaded, d.results.length, draw].join("|");
@@ -1405,7 +1449,12 @@ function settingsSheet() {
         <b>Games</b> — the 6–2, 6–3 inside each set. The player ladder counts games won.
       </div>
     </div>
-    <div class="setsec"><h4>About</h4>${aboutHTML()}</div>`;
+    <div class="setsec"><h4>About</h4>${aboutHTML()}
+      <div class="visits">
+        <img id="visitBadge" alt="visitor count"
+             src="https://api.visitorbadge.io/api/visitors?path=akshaybangalorekar.github.io%2Fgreen-ball-1&label=visits&countColor=%2310744b&labelColor=%23eef7f1&style=flat">
+      </div>
+    </div>`;
 }
 
 function openSettings() {
@@ -1413,7 +1462,14 @@ function openSettings() {
   bindSheet();
 }
 
+function bindVisitorBadge() {
+  const img = $("#visitBadge");
+  if (!img) return;
+  img.onerror = () => img.classList.add("hide");
+}
+
 function bindSheet() {
+  bindVisitorBadge();
   const ib = $("#installBtn");
   if (ib) ib.onclick = async () => {
     if (deferredPrompt) {
@@ -1548,6 +1604,7 @@ const settingsBtn = $("#settingsBtn");
 if (settingsBtn) settingsBtn.onclick = () => openSettings();
 
 refreshNow({ silent: true });
+setTimeout(maybeRemind, 2500);
 </script>
 </body>
 </html>
