@@ -254,6 +254,7 @@
   .tl li:not(.past) .who { color: var(--brand); }
   .tl li:not(.past) .who small { color: var(--ink-dim); }
   .tl li.today .who { font-weight: 700; }
+  .tl li.next .rn { background: var(--ball); color: var(--ball-ink); font-weight: 700; }
 
   .pcard { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 22px; padding: 24px 22px;
     margin-bottom: 18px; box-shadow: var(--shadow); }
@@ -490,6 +491,8 @@
   .blk.wo { background: var(--muted); color: #ffffff; }
   .blk.today { outline: 2px solid var(--ball); outline-offset: -2px; }
   .blk.up.today { color: var(--ink); font-weight: 600; }
+  .blk.next { background: var(--ball); color: var(--ball-ink); }
+  .blk.next .m { opacity: .75; }
 
   footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line-soft); font-family: var(--mono);
     font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
@@ -722,6 +725,7 @@ function seasonStrip() {
     let cls = "up";
     if (r) cls = r.res === "wo" ? "wo" : r.res;
     if (d.date === t) cls += " today";
+    if (d.round === nextRound().round && d.date >= t) cls += " next";
     const dt = parseDate(d.date);
     return `<button class="blk ${cls}" data-round="${d.round}">
       <span class="d">${dt.getDate()}</span><span class="m">${MONTHS[dt.getMonth()]}</span>
@@ -1232,12 +1236,13 @@ function resultsView() {
 
 function drawView() {
   const t = todayISO();
+  const nextNo = nextRound().round;
   const items = DATA.draw.map((d) => {
-    const past = d.date < t, isToday = d.date === t;
+    const past = d.date < t, isToday = d.date === t, isNext = d.round === nextNo && !past;
     const rr = rosterRound(d.round);
     const trio = rr ? (rr.in || []).map(first).join(", ") : "";
     const who = d.opponent ? `${d.homeAway === "H" ? "vs" : "at"} ${esc(d.opponent)}` : "Opponent TBC";
-    return `<li class="${past ? "past" : ""} ${isToday ? "today" : ""}">
+    return `<li class="${past ? "past" : ""} ${isToday ? "today" : ""} ${isNext ? "next" : ""}">
       <span class="rn">${d.round}</span>
       <span class="who">${who}<small>${fmtDate(d.date)}${d.homeAway ? " · " + (d.homeAway === "H" ? "home" : "away") : ""}${trio ? " · " + esc(trio) : ""}</small></span>
       <span class="res">${d.result ? esc(d.result) : ""}</span></li>`;
