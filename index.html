@@ -261,6 +261,12 @@
   .tl li:not(.past) .who { color: var(--brand); }
   .tl li:not(.past) .who small { color: var(--ink-dim); }
   .tl li.today .who { font-weight: 700; }
+  .pastwrap { margin-top: 6px; border-top: 1px solid var(--line-soft); }
+  .pastwrap summary { list-style: none; cursor: pointer; padding: 16px 0 4px; font-family: var(--mono);
+    font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
+  .pastwrap summary::-webkit-details-marker { display: none; }
+  .pastwrap summary::before { content: "▸ "; }
+  .pastwrap[open] summary::before { content: "▾ "; }
   .tl li.next .rn { background: var(--ball); color: var(--ball-ink); font-weight: 700; }
 
   .pcard { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 22px; padding: 24px 22px;
@@ -957,20 +963,20 @@ function viewTeam() {
   return `
     <div class="pager" id="teamPager">
     <div class="pages">
-    <div class="card">
-      <p class="label">Official ladder</p>
-      ${teamsTable()}
-    </div>
-
     <div class="card fourcard">
       <p class="label">Our four · this season</p>
       <div class="fourlist">${fourRowsHTML()}</div>
     </div>
+
+    <div class="card">
+      <p class="label">Official ladder</p>
+      ${teamsTable()}
+    </div>
     </div>
     </div>
     <div class="dots" id="teamDots">
-      <button data-slide="0" class="on" aria-label="Official ladder"></button>
-      <button data-slide="1" aria-label="Our four"></button>
+      <button data-slide="0" class="on" aria-label="Our four"></button>
+      <button data-slide="1" aria-label="Official ladder"></button>
     </div>`;
 }
 
@@ -1245,7 +1251,7 @@ function resultsView() {
 function drawView() {
   const t = todayISO();
   const nextNo = nextRound().round;
-  const items = DATA.draw.map((d) => {
+  const row = (d) => {
     const past = d.date < t, isToday = d.date === t, isNext = d.round === nextNo && !past;
     const rr = rosterRound(d.round);
     const trio = rr ? (rr.in || []).map(first).join(", ") : "";
@@ -1254,9 +1260,16 @@ function drawView() {
       <span class="rn">${d.round}</span>
       <span class="who">${who}<small>${fmtDate(d.date)}${d.homeAway ? " · " + (d.homeAway === "H" ? "home" : "away") : ""}${trio ? " · " + esc(trio) : ""}</small></span>
       <span class="res">${d.result ? esc(d.result) : ""}</span></li>`;
-  }).join("");
+  };
+  const upcoming = DATA.draw.filter((d) => d.date >= t).map(row).join("");
+  const earlier = DATA.draw.filter((d) => d.date < t).map(row).join("");
   const finals = DATA.finals.map((f) => `<li><span class="rn">—</span><span class="who">${esc(f.label)}<small>${fmtDate(f.date)}</small></span><span class="res"></span></li>`).join("");
-  return `<div class="card"><p class="label">Season draw</p><ul class="tl">${items}${finals}</ul></div>`;
+  const pastCount = DATA.draw.filter((d) => d.date < t).length;
+  return `<div class="card"><p class="label">Season draw</p>
+    <ul class="tl">${upcoming}${finals}</ul>
+    ${pastCount ? `<details class="pastwrap"><summary>Earlier rounds · ${pastCount} played</summary>
+      <ul class="tl">${earlier}</ul></details>` : ""}
+  </div>`;
 }
 
 function viewClubs() {
