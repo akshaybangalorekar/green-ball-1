@@ -181,6 +181,13 @@
   .fgood { display: block; font-family: var(--display); font-weight: 800; font-size: 17px; color: var(--brand); margin-top: 3px; }
   .fnote { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-top: 5px; line-height: 1.55; }
 
+  .install { padding: 18px 20px; }
+  .instrow { display: flex; align-items: center; gap: 14px; }
+  .insttxt { flex: 1; min-width: 0; }
+  .insttxt b { display: block; font-size: 15.5px; font-weight: 600; }
+  .insttxt span { display: block; font-size: 13px; color: var(--ink-dim); margin-top: 3px; line-height: 1.5; text-wrap: pretty; }
+  .install .btn { flex: 0 0 auto; }
+
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
     text-align: center; box-shadow: var(--shadow); }
@@ -916,6 +923,7 @@ function viewWeek() {
       <p class="caption" style="margin-top:14px">Tap a round for the match details, or who is playing.</p>
     </div>
 
+    ${installCard()}
 </div>`;
 }
 
@@ -1271,13 +1279,39 @@ const NOTIFY_KEY = "em-gb1-notify-v1";
 const SIG_KEY = "em-gb1-sig-v1";
 let deferredPrompt = null;
 let swReg = null;
-window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; });
+window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferredPrompt = e; renderAll(); });
+window.addEventListener("appinstalled", () => { deferredPrompt = null; renderAll(); });
 
 function isStandalone() {
   return (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
 }
 function isIOS() { return /iphone|ipad|ipod/i.test(navigator.userAgent); }
 function alertsOn() { return ("Notification" in window) && Notification.permission === "granted" && localStorage.getItem(NOTIFY_KEY) === "1"; }
+
+async function runInstall() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    try { await deferredPrompt.userChoice; } catch (e) {}
+    deferredPrompt = null;
+    renderAll();
+    return;
+  }
+  showToast(isIOS() ? "Share, then Add to Home Screen" : "Menu, then Add to Home screen");
+}
+
+function installCard() {
+  if (isStandalone()) return "";
+  const ios = isIOS();
+  return `<div class="card install">
+    <div class="instrow">
+      <div class="insttxt">
+        <b>Keep it on your phone</b>
+        <span>${ios ? "Tap Share, then Add to Home Screen — it opens full screen and works offline." : "Opens full screen with no browser bars, and keeps working offline."}</span>
+      </div>
+      ${ios ? "" : `<button class="btn" id="installBtnHome">Install</button>`}
+    </div>
+  </div>`;
+}
 
 function installBlock() {
   if (isStandalone()) {
@@ -1453,6 +1487,8 @@ function bind() {
   $("#view-season").querySelectorAll(".seg-top button").forEach((b) => {
     b.onclick = () => { seasonTab = b.dataset.season; $("#view-season").innerHTML = viewSeason(); bind(); };
   });
+  const ih = $("#installBtnHome");
+  if (ih) ih.onclick = runInstall;
   const gu = $("#goUnlock");
   if (gu) gu.onclick = () => openSettings();
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
@@ -1598,16 +1634,7 @@ function bindSheet() {
   bindVisitorBadge();
   const ib = $("#installBtn");
   if (ib) ib.onclick = async () => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      try { await deferredPrompt.userChoice; } catch (e) {}
-      deferredPrompt = null;
-      openSettings();
-    } else if (isIOS()) {
-      alert('On iPhone: tap Share, then "Add to Home Screen".');
-    } else {
-      alert('Open the browser menu and choose "Add to Home screen".');
-    }
+    runInstall();
   };
   const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
   const off = $("#alertsOff");

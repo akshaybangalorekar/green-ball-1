@@ -147,6 +147,14 @@ the phone that made them and never reach anyone else's copy — the roster sheet
 The results come from the match pop-up on TROLS, so a round's scorecard appears once
 results are entered — usually the Monday after play.
 
+## Installing
+
+Anyone opening the site in a browser sees a small **Keep it on your phone** card at the foot
+of This week. Once the app is installed and opened from the home screen, that card is gone
+— the app checks `display-mode: standalone` on every load, so it disappears the moment it is
+installed and only comes back if the app is deleted. Settings shows "Installed" instead of
+the install control in the same way.
+
 ## Settings
 
 The gear in the header opens a sheet with the install control, the alerts toggle and the
