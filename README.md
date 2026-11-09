@@ -43,6 +43,10 @@ the round-by-round sets: who they played, with whom, and the score.
 there is no player ladder on TROLS. These rankings are worked out from the published
 rubbers, and the app says so on the card.
 
+The Squad tab is a single table — rank, player and club, games won–lost, sets played, win
+percentage — with East Malvern's four highlighted. The column meanings sit directly under
+the table, so nothing needs explaining.
+
 The ladder opens in **the website's order**: the eight clubs exactly as they stand on the
 official team ladder, with each club's players listed together (within a club, most games
 won first). That mirrors how the association lists the section, rather than inventing a
