@@ -596,6 +596,57 @@ def tidy_names(players, roster_names):
     return fixed
 
 
+
+# ---- section rating -------------------------------------------------------
+def compute_ratings(matches):
+    """Elo-style rating from every rubber in the section.
+
+    Each rubber is a contest between one or two players a side. The rating is
+    fitted so that the share of games a side actually won matches the share
+    the ratings predicted — so beating someone well moves you further than
+    scraping past them, and a player's number does not depend on how many
+    matches they have played.
+    """
+    players, contests = {}, []
+
+    for m in matches:
+        for r in m["rubbers"]:
+            a = [p for p in positions(r["home_label"]) if p <= len(m["home_players"])]
+            b = [p for p in positions(r["away_label"]) if p <= len(m["away_players"])]
+            side_a = [m["home_players"][i - 1] for i in a]
+            side_b = [m["away_players"][i - 1] for i in b]
+            side_a = [n for n in side_a if not n.lower().startswith("no player")]
+            side_b = [n for n in side_b if not n.lower().startswith("no player")]
+            if not side_a or not side_b:
+                continue
+            if r["home_games"] + r["away_games"] == 0:
+                continue
+            contests.append((side_a, side_b, r["home_games"], r["away_games"]))
+            for n in side_a + side_b:
+                players.setdefault(n, 5.0)
+
+    if not players:
+        return {}
+
+    K, SCALE = 0.30, 2.0
+    for _ in range(600):
+        for side_a, side_b, ga, gb in contests:
+            ra = sum(players[n] for n in side_a) / len(side_a)
+            rb = sum(players[n] for n in side_b) / len(side_b)
+            expect = 1 / (1 + 10 ** ((rb - ra) / SCALE))
+            actual = ga / (ga + gb)
+            delta = K * (actual - expect)
+            for n in side_a:
+                players[n] += delta / len(side_a)
+            for n in side_b:
+                players[n] -= delta / len(side_b)
+        mean = sum(players.values()) / len(players)
+        for n in players:
+            players[n] += (5.0 - mean) * 0.5
+
+    return {n: round(min(10.0, max(1.0, v)), 2) for n, v in players.items()}
+
+
 # ---- main -----------------------------------------------------------------
 def debug_pages(daytime, section):
     """Print what the runner actually receives, so a markup change is obvious."""
@@ -677,6 +728,10 @@ def main():
     # full scorecards for our own matches, so the app can draw the scoresheet
     our_matches = [m for m in section_matches if CLUB in (m["home"], m["away"])]
     print(f"  · rubbers: {len(section_matches)} matches, {len(section_players)} players in section")
+    ratings = compute_ratings(section_matches)
+    if ratings:
+        top = sorted(ratings.items(), key=lambda kv: -kv[1])[:3]
+        print("  · ratings: " + ", ".join(f"{n} {v}" for n, v in top))
 
     loaded = re.search(r"Loaded:?\s*([0-9]{1,2}\w{2}\s+\w+\s+\d{2,4}[^<]*)", ladder_html)
     loaded_txt = loaded.group(1).strip() if loaded else None
@@ -724,6 +779,7 @@ def main():
         "our_players": ours or old.get("our_players", {}),
         "match_count": len(section_matches) or old.get("match_count", 0),
         "match_details": our_matches or old.get("match_details", []),
+        "ratings": ratings or old.get("ratings", {}),
     }
 
     DATA_FILE.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
