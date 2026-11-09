@@ -105,6 +105,17 @@ want this on a junior team's app, but it cannot make public data private. If the
 genuinely must be secret, the data has to stop being public — which means hosting it
 behind a login rather than on GitHub Pages.
 
+## Round by round
+
+The season strip on This week shows each round as a dated tile — day over month — coloured
+green for a win, brick for a loss, grey for a wash-out. Tapping a played tile opens the
+scoresheet for that match: both sides' three players numbered, the six rubbers
+(`2 & 3`, `#1`, `1 & 3`, `#2`, `1 & 2`, `#3`) with their scores, and the game and set
+totals. It is the same layout as the paper Waverley scoresheet.
+
+The data comes from the match pop-up on TROLS, so a round appears here once results are
+entered — usually the Monday after play.
+
 ## Settings
 
 The gear in the header opens a sheet with the install control, the alerts toggle and the
