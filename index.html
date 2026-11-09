@@ -543,42 +543,6 @@ function ring(value, max, label, sub) {
   </svg>`;
 }
 
-function pointsChart() {
-  const rounds = ourResults.slice().sort((a, b) => a.round - b.round);
-  if (!rounds.length) return "";
-  const W = 320, H = 168, pad = 8, top = 26, base = H - 26;
-  const bw = (W - pad * 2) / rounds.length;
-  let cum = 0;
-  const bars = rounds.map((r, i) => {
-    const pts = ourPoints(r); cum += pts;
-    const h = (pts / 8) * (base - top - 18);
-    const x = pad + i * bw + bw * 0.2, w = bw * 0.6;
-    return `<rect x="${x}" y="${base - h}" width="${w}" height="${h}" rx="4" fill="var(--brand)" opacity="${r.res === "wo" ? .35 : .9}"/>
-      <text x="${x + w / 2}" y="${base - h - 9}" text-anchor="middle" style="fill:var(--ink)">${pts.toFixed(0)}</text>
-      <text x="${x + w / 2}" y="${base + 17}" text-anchor="middle">R${r.round}</text>
-      <text x="${x + w / 2}" y="${H - 2}" text-anchor="middle" style="fill:var(--brand)">${cum.toFixed(0)}</text>`;
-  }).join("");
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}"><line x1="${pad}" y1="${base}" x2="${W - pad}" y2="${base}" stroke="var(--line)"/>${bars}</svg>`;
-}
-
-function gamesChart() {
-  const rounds = ourResults.slice().sort((a, b) => a.round - b.round).filter((r) => r.res !== "wo");
-  if (!rounds.length) return "";
-  const W = 320, H = 150, pad = 8, top = 20, base = H - 24;
-  const maxG = Math.max(...rounds.map((r) => Math.max(r.m.homeGames, r.m.awayGames)), 36);
-  const bw = (W - pad * 2) / rounds.length;
-  const bars = rounds.map((r, i) => {
-    const mine = r.m.home === CLUB ? r.m.homeGames : r.m.awayGames;
-    const theirs = r.m.home === CLUB ? r.m.awayGames : r.m.homeGames;
-    const hM = (mine / maxG) * (base - top), hT = (theirs / maxG) * (base - top);
-    const x = pad + i * bw + bw * 0.14, w = bw * 0.34;
-    return `<rect x="${x}" y="${base - hM}" width="${w}" height="${hM}" rx="4" fill="var(--brand)"/>
-      <rect x="${x + w + 4}" y="${base - hT}" width="${w}" height="${hT}" rx="4" fill="var(--ink)" opacity=".35"/>
-      <text x="${x + w}" y="${base + 16}" text-anchor="middle">R${r.round}</text>`;
-  }).join("");
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}"><line x1="${pad}" y1="${base}" x2="${W - pad}" y2="${base}" stroke="var(--line)"/>${bars}</svg>`;
-}
-
 function seasonStrip() {
   const t = todayISO();
   return DATA.draw.map((d) => {
@@ -702,15 +666,7 @@ function viewTeam() {
     </div>`;
 }
 
-const UNLOCK_KEY = "em-gb1-unlocked";
-const PASSCODE = "1981";
-function unlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
-function lockScores() { localStorage.setItem(UNLOCK_KEY, "0"); }
-function unlockScores(code) {
-  if (String(code).trim() !== PASSCODE) return false;
-  localStorage.setItem(UNLOCK_KEY, "1");
-  return true;
-}
+function unlocked() { return true; }
 
 let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
 const teamPos = {};
@@ -763,12 +719,6 @@ function viewSquad() {
   return `
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
-      <div class="seg-top" style="margin-bottom:18px">
-        <button data-sort="team" aria-selected="${ladderSort === "team"}">By team</button>
-        <button data-sort="games" aria-selected="${ladderSort === "games"}">Games</button>
-        <button data-sort="pct" aria-selected="${ladderSort === "pct"}">Win %</button>
-        <button data-sort="sets" aria-selected="${ladderSort === "sets"}">Sets</button>
-      </div>
       <div class="tblwrap"><table class="ltable">
         <thead><tr>
           <th class="pos">#</th><th class="pl">Player</th>
@@ -779,17 +729,79 @@ function viewSquad() {
       <div class="ltnote">
         <b>Games</b> won–lost &nbsp;·&nbsp; <b>Sets</b> played &nbsp;·&nbsp; <b>Win %</b> sets won
       </div>
-      <p class="caption">
-        ${ladderSort === "team"
-          ? "In the website's order: the eight clubs as they stand on the official ladder, each club's players together."
-          : ladderSort === "pct"
-          ? "Ranked by sets won %, then games won %."
-          : ladderSort === "sets"
-          ? "Ranked by sets won, then games won."
-          : "Ranked by games won. Level on games, the better win–loss difference goes higher."}
-        East Malvern in green.${unlocked() ? " Tap a player for their sets." : ""}
-      </p>
+      <p class="caption">In the website's order — the eight clubs as they stand, each club's players together.</p>
     </div>`;
+}
+
+function explainSheet(name) {
+  const rows = ladderRowsAll();
+  const i = rows.findIndex((r) => r.name === name);
+  if (i < 0) return "";
+  const p = rows[i];
+  const pos = i + 1;
+  const above = rows.slice(0, i);
+  const next = i > 0 ? rows[i - 1] : null;
+  const sameGames = above.filter((r) => r.games_won === p.games_won);
+  const detail = ((DATA.our_players || {})[name] || {}).detail || [];
+  const sets = detail.flatMap((d) => (d.rubbers || []).map((rb) => ({ ...rb, round: d.round, opp: d.opponent_team })));
+  const totalG = p.games_won + p.games_lost;
+  const faced = [...new Set(detail.map((d) => d.opponent_team))];
+  const steps = [];
+  let stepNo = 0;
+  const step = (body) => { stepNo += 1; return `<div class="step"><span class="num">${stepNo}</span><span class="body">${body}</span></div>`; };
+
+  steps.push(step(`<span class="big">${p.games_won} games won</span><br>
+    out of ${totalG} played — <b>${p.game_pct || 0}%</b> — across ${p.rubbers} sets${faced.length ? `, against ${faced.map(esc).join(" and ")}` : ""}.
+    ${p.sets_won}–${p.sets_lost} on sets.`));
+
+  if (!above.length) {
+    steps.push(step(`Nobody in the section has won more games, so this is <b>1st</b>.`));
+  } else {
+    const more = above.filter((r) => r.games_won > p.games_won);
+    let line = more.length
+      ? `<b>${more.length}</b> ${more.length === 1 ? "player has" : "players have"} won more games —
+         ${more.slice(0, 3).map((r) => `${esc(first(r.name))} ${r.games_won}`).join(", ")}${more.length > 3 ? " and others" : ""}.`
+      : `Nobody has won more games than ${esc(first(p.name))} (${p.games_won}).`;
+    if (sameGames.length) {
+      line += ` Level on ${p.games_won} games with ${sameGames.map((r) => esc(first(r.name))).join(", ")}, so the better win–loss difference goes higher.`;
+    }
+    line += ` This is <b>${pos}${ordinal(pos)}</b> of ${rows.length}.`;
+    steps.push(step(line));
+  }
+
+  if (next) {
+    if (next.games_won > p.games_won) {
+      const need = next.games_won - p.games_won + 1;
+      steps.push(step(`<b>${need}</b> more game${need === 1 ? "" : "s"} won puts ${esc(first(p.name))} level with
+        ${esc(first(next.name))} (${next.games_won}).`));
+    } else {
+      const gap = (next.games_won - next.games_lost) - (p.games_won - p.games_lost);
+      steps.push(step(`Level with ${esc(first(next.name))} on ${p.games_won} games. Their difference is
+        ${gap > 0 ? "+" + gap : gap}, so winning a few more than them moves ${esc(first(p.name))} ahead.`));
+    }
+  }
+
+  if (sets.length) {
+    const wins = sets.filter((r) => r.won).sort((a, b) => (a.ours - a.theirs) - (b.ours - b.theirs));
+    const losses = sets.filter((r) => !r.won);
+    const bits = [];
+    const margins = [...new Set(wins.map((w) => `${w.ours}–${w.theirs}`))];
+    if (wins.length) {
+      bits.push(margins.length === 1
+        ? `every set won <b>${margins[0]}</b>`
+        : `closest set <b>${wins[0].ours}–${wins[0].theirs}</b> vs ${esc(wins[0].opp)}`);
+    }
+    if (losses.length) bits.push(`lost <b>${losses.map((l) => `${l.ours}–${l.theirs}`).join(", ")}</b> vs ${esc(losses[0].opp)}`);
+    if (bits.length) steps.push(step(`The detail: ${bits.join("; ")}.`));
+  }
+
+  return `
+    <div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    <h3 class="ovtitle" id="ovTitle">Why ${esc(first(p.name))} is ${pos}${ordinal(pos)}</h3>
+    <p class="ovsub">${esc(p.team)} · Open Triples Green Ball 1</p>
+    ${steps.join("")}
+    <p class="ovfoot">The ladder counts <b>games won</b>. A comfortable win is worth more games than a tight one.</p>`;
 }
 
 function viewPlayer(name) {
@@ -815,17 +827,6 @@ function viewPlayer(name) {
       ${rubbers}
     </div>`;
   }).join("");
-
-  if (!unlocked()) {
-    const rr = rankOf(name);
-    return `<div class="card">
-      <button class="back" id="backBtn">‹ Squad</button>
-      <div class="phead">
-        <div class="pname">${esc(p.name)}</div>
-        <div class="pteam">${esc(p.team)}${rr ? ` · ${rr.rank}${ordinal(rr.rank)} of ${rr.total}` : ""}</div>
-      </div>
-    </div>`;
-  }
 
   return `
     <div class="card">
@@ -862,17 +863,22 @@ function viewSeason() {
 
 function ladderView() {
   const rows = DATA.ladder.map((t) => `
-    <tr style="${t.isUs ? "background:var(--brand-wash)" : ""}">
-      <td style="text-align:left">${t.pos}</td>
-      <td style="text-align:left;${t.isUs ? "font-weight:700;color:var(--brand)" : ""}">${esc(t.team)}</td>
-      <td>${t.played}</td><td>${t.pts.toFixed(1)}</td><td>${pct(t.pct)}</td>
+    <tr class="${t.isUs ? "us" : ""}">
+      <td class="pos">${t.pos}</td>
+      <td class="pl">${esc(t.team)}</td>
+      <td class="num">${t.pts.toFixed(1)}</td>
+      <td class="num">${pct(t.pct)}</td>
     </tr>`).join("");
   return `<div class="card">
     <p class="label">Official ladder · after round 3</p>
-    <div class="tblwrap"><table style="font-size:14px">
-      <thead><tr><th style="text-align:left">#</th><th style="text-align:left">Team</th><th>P</th><th>Pts</th><th>%</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>
-    <p class="caption">Points decide the ladder; percentage is games won ÷ games lost. Wash-outs pay 4 points each. Top four play finals.</p>
+    <div class="tblwrap"><table class="ltable">
+      <thead><tr>
+        <th class="pos">#</th><th class="pl">Team</th>
+        <th class="num">Pts</th><th class="num">%</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+    <p class="caption">Points decide the ladder. Percentage is games won ÷ games lost.</p>
   </div>`;
 }
 
@@ -1029,9 +1035,6 @@ function bind() {
   });
   const gu = $("#goUnlock");
   if (gu) gu.onclick = () => openSettings();
-  $("#view-squad").querySelectorAll("[data-sort]").forEach((b) => {
-    b.onclick = () => { ladderSort = b.dataset.sort; $("#view-squad").innerHTML = viewSquad(); bind(); };
-  });
   $("#view-squad").querySelectorAll(".whyr").forEach((b) => {
     b.onclick = () => openSheet(explainSheet(b.dataset.explain));
   });
@@ -1089,12 +1092,6 @@ function aboutHTML() {
   </div>`;
 }
 
-function scoresBlock() {
-  return `<div class="passrow">
-    <input type="password" id="passInput" inputmode="numeric" autocomplete="off" aria-label="Code">
-  </div>`;
-}
-
 function settingsSheet() {
   return `
     <div class="grab"></div>
@@ -1103,7 +1100,6 @@ function settingsSheet() {
     <p class="ovsub">${APP_NAME} · ${esc(DATA.meta.club)}</p>
     <div class="setsec"><h4>App</h4><div class="act">${installBlock()}</div></div>
     <div class="setsec"><h4>Alerts</h4><div class="act">${alertsBlock()}</div></div>
-    <div class="setsec">${scoresBlock()}</div>
     <div class="setsec"><h4>Words used</h4>
       <div class="about">
         <b>Set</b> — one 6-game match. Each child plays three every round: one singles and two doubles.<br>
@@ -1136,18 +1132,6 @@ function bindSheet() {
   const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
   const off = $("#alertsOff");
   if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); openSettings(); };
-  const pi = $("#passInput");
-  if (pi) {
-    const tryIt = () => {
-      const val = pi.value || "";
-      if (!val) return;
-      if (unlockScores(val)) { closeSheet(); renderAll(); }
-      else { pi.value = ""; }
-    };
-    pi.onkeydown = (e) => { if (e.key === "Enter") tryIt(); };
-    pi.onchange = tryIt;
-    pi.onblur = tryIt;
-  }
 }
 
 function openSheet(html) {
