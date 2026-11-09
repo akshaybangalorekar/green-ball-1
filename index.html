@@ -384,6 +384,14 @@
   .club .cn .tag { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
     background: var(--brand); color: #ffffff; border-radius: 5px; padding: 3px 7px; font-weight: 500; }
   .club .vd { font-size: 13px; color: var(--ink-dim); margin-top: 6px; }
+  .maplink { display: inline-flex; align-items: flex-start; gap: 7px; color: inherit; text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, .45); padding-bottom: 2px; }
+  .maplink svg { flex: 0 0 13px; margin-top: 3px; }
+  .maplink:active { opacity: .7; }
+  .maprow { display: inline-flex; align-items: center; gap: 6px; margin-top: 9px; font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--brand);
+    text-decoration: none; border-bottom: 1px solid var(--brand-wash); padding-bottom: 2px; }
+  .maprow:active { opacity: .6; }
   .club .ct { font-family: var(--mono); font-size: 11.5px; color: var(--ink-dim); margin-top: 8px; }
   .club .ct a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(43,21,8,.35); }
 
@@ -514,6 +522,14 @@ function nextRound() {
   return upcoming.length ? upcoming[0] : DATA.draw[DATA.draw.length - 1];
 }
 const clubByName = (name) => DATA.clubs.find((c) => c.name === name) || null;
+const cleanPlace = (v) => String(v || "")
+  .replace(/\s*Club House.*$/i, "")
+  .replace(/\s*Ph\s*:?\s*[\d\s]+$/i, "")
+  .trim();
+const mapsUrl = (place) =>
+  "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(place + ", Victoria, Australia");
+const PIN = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>`;
 
 const rosterRound = (n) => roster.rounds.find((r) => r.round === n) || null;
 function planFor(firstName, n) {
@@ -665,8 +681,11 @@ function viewWeek() {
   const nr = nextRound();
   const isToday = nr.date === todayISO();
   const opp = nr.opponent ? clubByName(nr.opponent) : null;
-  const venue = nr.opponent
-    ? (nr.homeAway === "H" ? "Home · 15 Moira St, Glen Iris" : (opp ? "Away · " + opp.venue : "Away"))
+  const ourClub = clubByName(CLUB);
+  const atHome = nr.homeAway === "H";
+  const place = nr.opponent ? cleanPlace(atHome ? (ourClub && ourClub.venue) : (opp && opp.venue)) : null;
+  const venueText = place
+    ? `${atHome ? "Home" : "Away"} · ${place}`
     : "Venue confirmed once TROLS publishes the round";
   const rr = rosterRound(nr.round);
   const trio = rr ? (rr.in || []) : [];
@@ -695,7 +714,9 @@ function viewWeek() {
       </div>
       <h2><small>${nr.opponent ? (nr.homeAway === "H" ? "Home vs" : "Away vs") : "Opponent"}</small>
         ${nr.opponent ? esc(nr.opponent) : "To be confirmed"}</h2>
-      <div class="venue">${esc(venue)}</div>
+      <div class="venue">${place
+        ? `<a class="maplink" href="${mapsUrl(place)}" target="_blank" rel="noopener">${PIN}<span>${esc(venueText)}</span></a>`
+        : esc(venueText)}</div>
       ${trioHTML}
     </div>
 
@@ -1018,7 +1039,8 @@ function viewClubs() {
     if (!c) return "";
     return `<div class="club">
       <div class="cn">${esc(c.name)}${c.isUs ? `<span class="tag">us</span>` : ""}</div>
-      <div class="vd">${esc(c.venue)} · Melway ${esc(c.melway)}</div>
+      <div class="vd">${esc(cleanPlace(c.venue))} · Melway ${esc(c.melway)}</div>
+      <a class="maprow" href="${mapsUrl(cleanPlace(c.venue))}" target="_blank" rel="noopener">${PIN}<span>Open in Google Maps</span></a>
       <div class="ct">${esc(c.contact)} · <a href="tel:${esc(c.phone.replace(/\s/g, ""))}">${esc(c.phone)}</a></div>
     </div>`;
   }).join("");
