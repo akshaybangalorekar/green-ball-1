@@ -175,14 +175,12 @@
     background: rgba(255, 255, 255, .45); cursor: pointer; transition: width .2s, background .2s; }
   .dots button.on { background: var(--ball); width: 20px; border-radius: 4px; }
   .fourlist { margin-top: 10px; }
-  .frow { display: flex; align-items: center; gap: 11px; padding: 9px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, .16); }
+  .frow { padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, .16); }
   .frow:last-child { border-bottom: 0; }
-  .frank { width: 24px; flex: 0 0 24px; font-family: var(--mono); font-size: 12px; color: var(--on-brand-dim); }
-  .fname { flex: 1; font-size: 15.5px; }
-  .fbar { width: 58px; flex: 0 0 58px; height: 7px; border-radius: 4px; background: rgba(255, 255, 255, .2); overflow: hidden; }
-  .fbar i { display: block; height: 100%; border-radius: 4px; background: var(--ball); }
-  .fpct { width: 46px; flex: 0 0 46px; text-align: right; font-family: var(--display); font-weight: 800; font-size: 15px; }
+  .fbody { display: block; }
+  .fname { display: block; font-size: 15.5px; font-weight: 500; }
+  .fgood { display: block; font-family: var(--display); font-weight: 800; font-size: 17px; color: var(--ball); margin-top: 3px; }
+  .fnote { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--on-brand-dim); margin-top: 4px; }
 
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
@@ -863,17 +861,27 @@ function viewWeek() {
     return `<div class="who ${em ? "em" : ""}"><div class="av">${esc(initials(n))}</div><div class="nm">${esc(first(n))}${em ? " · E" : ""}</div></div>`;
   }).join("")}</div>` : "";
 
-  const four = ladderByRate()
-    .map((p, i) => ({ ...p, rank: i + 1 }))
-    .filter((p) => (roster.players || []).some((r) => r.name === p.name))
-    .sort((a, b) => a.rank - b.rank);
-  const fourRows = four.map((p) => `
-    <div class="frow">
-      <span class="frank">${p.rank}</span>
-      <span class="fname">${esc(first(p.name))}</span>
-      <span class="fbar"><i style="width:${Math.max(4, p.set_pct)}%"></i></span>
-      <span class="fpct">${p.set_pct}%</span>
-    </div>`).join("");
+  const four = (roster.players || []).map((r) => {
+    const rec = (DATA.section_players || {})[r.name];
+    return { name: r.name, rec };
+  });
+  const fourRows = four.map(({ name, rec }) => {
+    if (!rec || !rec.rubbers) {
+      return `<div class="frow"><div class="fbody">
+        <span class="fname">${esc(name)}</span>
+        <span class="fnote">Yet to play this season</span></div></div>`;
+    }
+    const all = rec.sets_lost === 0;
+    const headline = all
+      ? `Unbeaten in ${rec.rubbers} ${rec.rubbers === 1 ? "set" : "sets"}`
+      : `Won ${rec.sets_won} of ${rec.rubbers} sets`;
+    const rounds = (rec.detail || []).length;
+    return `<div class="frow"><div class="fbody">
+      <span class="fname">${esc(name)}</span>
+      <span class="fgood">${headline}</span>
+      <span class="fnote">${rec.games_won} games won${rounds ? ` · ${rounds} ${rounds === 1 ? "round" : "rounds"} played` : ""}</span>
+    </div></div>`;
+  }).join("");
 
   return `
     <div class="swiper" id="heroSwipe">
@@ -902,10 +910,9 @@ function viewWeek() {
     </div>
 
     <div class="hero four">
-      <div class="rd"><span class="pill">Our four</span><span>Section standing</span></div>
-      <h2 style="font-size:26px">Where they stand</h2>
+      <div class="rd"><span class="pill">Our four</span><span>This season</span></div>
+      <h2 style="font-size:26px">Their sets so far</h2>
       <div class="fourlist">${fourRows}</div>
-      <div class="venue" style="margin-top:12px">Share of sets won, out of ${ladderByRate().length} in the section.</div>
     </div>
     </div>
     <div class="dots" id="heroDots">
