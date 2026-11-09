@@ -113,9 +113,14 @@ scoresheet for that match: both sides' three players numbered, the six rubbers
 (`2 & 3`, `#1`, `1 & 3`, `#2`, `1 & 2`, `#3`) with their scores, and the game and set
 totals. It is the same layout as the paper Waverley scoresheet.
 
-Tapping a round that has not been played yet shows who is named to play instead — the
-three from the roster sheet, anyone unavailable, and the venue with its map link. A
-washed-out round shows who was scheduled.
+Tapping a round that has not been played yet shows who is on court instead — the three
+from the roster sheet, anyone sitting out, and the venue with its map link. A washed-out
+round shows who was scheduled.
+
+If a child can't play, each name has a **Can't play** button, and a box underneath takes a
+replacement's name; the trio on This week follows immediately. These changes are stored on
+the phone that made them and never reach anyone else's copy — the roster sheet in
+`data.json` stays the source of truth.
 
 The results come from the match pop-up on TROLS, so a round's scorecard appears once
 results are entered — usually the Monday after play.
