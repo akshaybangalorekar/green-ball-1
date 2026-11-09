@@ -17,22 +17,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    /* clay court + tennis ball */
-    --bg: #faf3ea;
-    --surface: #fffcf7;
-    --surface-2: #f1e5d6;
-    --ink: #241811;
-    --ink-dim: #7d6553;
-    --line: rgba(36, 24, 17, .12);
-    --line-soft: rgba(36, 24, 17, .07);
-    --clay: #b8431f;
-    --clay-deep: #8d3013;
-    --clay-wash: rgba(184, 67, 31, .10);
-    --ball: #d3dd2c;
-    --ball-ink: #2b3005;
-    --ball-wash: rgba(211, 221, 44, .28);
-    --taupe: #a89383;
-    --shadow: 0 1px 2px rgba(36, 24, 17, .05), 0 16px 36px -24px rgba(90, 45, 25, .55);
+    /* clay court + tennis ball, bright */
+    --bg: #fff8f0;
+    --surface: #ffffff;
+    --surface-2: #ffe9d5;
+    --ink: #2b1508;
+    --ink-dim: #8a6a54;
+    --line: rgba(43, 21, 8, .15);
+    --line-soft: rgba(43, 21, 8, .08);
+    --clay: #d9531e;
+    --clay-deep: #b23e0f;
+    --clay-wash: rgba(217, 83, 30, .12);
+    --ball: #d9e332;
+    --ball-ink: #2f3400;
+    --ball-wash: rgba(217, 227, 50, .40);
+    --taupe: #b09279;
+    --shadow: 0 1px 2px rgba(43, 21, 8, .06), 0 18px 38px -24px rgba(150, 60, 20, .55);
     --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
     --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -40,19 +40,19 @@
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #17100b;
-      --surface: #201711;
-      --surface-2: #2b2018;
-      --ink: #f4ece1;
-      --ink-dim: #b39c88;
-      --line: rgba(244, 236, 225, .14);
-      --line-soft: rgba(244, 236, 225, .07);
-      --clay: #e5713f;
-      --clay-deep: #f08a5c;
-      --clay-wash: rgba(229, 113, 63, .15);
-      --ball: #dbe64a;
+      --surface: #241a12;
+      --surface-2: #352416;
+      --ink: #f7efe4;
+      --ink-dim: #c0a68f;
+      --line: rgba(247, 239, 228, .16);
+      --line-soft: rgba(247, 239, 228, .08);
+      --clay: #f2703c;
+      --clay-deep: #ff8b5b;
+      --clay-wash: rgba(242, 112, 60, .18);
+      --ball: #e2ec57;
       --ball-ink: #1a1d04;
-      --ball-wash: rgba(219, 230, 74, .18);
-      --taupe: #8c7869;
+      --ball-wash: rgba(226, 236, 87, .20);
+      --taupe: #9c8471;
       --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 18px 42px -26px rgba(0, 0, 0, .95);
     }
   }
@@ -61,8 +61,8 @@
   body {
     margin: 0; font-family: var(--body); font-size: 15px;
     background:
-      radial-gradient(820px 420px at 88% -10%, var(--clay-wash), transparent 70%),
-      radial-gradient(680px 380px at -6% 6%, var(--ball-wash), transparent 66%),
+      radial-gradient(760px 400px at 90% -12%, var(--clay-wash), transparent 70%),
+      radial-gradient(640px 360px at -8% 4%, var(--ball-wash), transparent 64%),
       var(--bg);
     color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased;
     padding-top: env(safe-area-inset-top, 0px); padding-bottom: 56px;
@@ -97,12 +97,13 @@
   .setsec:first-of-type { border-top: 0; padding-top: 4px; }
   .setsec h4 { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase;
     color: var(--ink-dim); margin: 0 0 12px; font-weight: 400; }
-  .passrow { display: flex; gap: 8px; margin-top: 14px; }
-  .passrow input { flex: 1; min-width: 0; font-family: var(--mono); font-size: 15px; letter-spacing: .22em;
-    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 13px; }
+  .passrow { display: flex; gap: 8px; }
+  .passrow input { flex: 1; min-width: 0; font-family: var(--mono); font-size: 15px; letter-spacing: .3em;
+    color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px;
+    padding: 11px 13px; }
   .passrow input:focus { outline: 2px solid var(--clay); outline-offset: -1px; }
-  .passnote { font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin: 10px 0 0; }
-  .passnote.bad { color: var(--clay); }
+  .kid, .lrow { cursor: default; }
+  button.kid, button.lrow { cursor: pointer; }
   .about { font-family: var(--mono); font-size: 10.5px; line-height: 1.9; color: var(--ink-dim); }
   .about a { color: var(--clay); text-decoration: none; }
 
@@ -113,7 +114,8 @@
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
     font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-dim); padding: 9px 13px;
     border-radius: 9px; white-space: nowrap; transition: color .15s, background .15s; }
-  .tabs button[aria-selected="true"] { color: #fff8f0; background: var(--clay); font-weight: 500; }
+  .tabs button[aria-selected="true"] { color: #fffaf4; background: var(--clay); font-weight: 500;
+    box-shadow: 0 4px 14px -6px rgba(217, 83, 30, .8); }
   @media (prefers-color-scheme: dark) { .tabs button[aria-selected="true"] { color: #17100b; } }
 
   .view { display: none; animation: rise .3s ease both; }
@@ -125,13 +127,13 @@
     box-shadow: var(--shadow); margin-bottom: 20px; }
   .label { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--ink-dim); margin: 0 0 18px; display: flex; align-items: center; gap: 8px; }
-  .label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ball); flex: 0 0 7px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,.08); }
+  .label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ball); flex: 0 0 8px;
+    box-shadow: 0 0 0 1px rgba(43,21,8,.18); }
   .caption { font-size: 13px; color: var(--ink-dim); line-height: 1.6; margin: 16px 0 0; }
   .caption b { color: var(--ink); font-weight: 600; }
 
   .hero { position: relative; overflow: hidden; border-radius: 26px; padding: 28px 24px; margin-bottom: 20px;
-    background: linear-gradient(158deg, var(--clay) 0%, var(--clay-deep) 100%); color: #fff8f0; box-shadow: var(--shadow); }
+    background: linear-gradient(155deg, #ea6a2b 0%, var(--clay) 46%, var(--clay-deep) 100%); color: #fffaf4; box-shadow: var(--shadow); }
   .hero .courtlines { position: absolute; inset: 0; opacity: .18; pointer-events: none; }
   .hero .rd { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: relative; }
@@ -720,36 +722,38 @@ function viewSquad() {
     const right = ladderSort === "pct" ? `${p.set_pct}%`
       : ladderSort === "sets" ? p.sets_won
       : p.games_won;
-    return `<button class="lrow ${mine ? "us" : ""}" data-explain="${esc(p.name)}">
+    const tag = unlocked() ? "button" : "div";
+    return `<${tag} class="lrow ${mine ? "us" : ""}"${unlocked() ? ` data-explain="${esc(p.name)}"` : ""}>
       <span class="r">${i + 1}</span>
       <span class="n">
         <span class="nm2">${esc(p.name)}</span>
         <span class="sub2">${esc(p.team)}${unlocked() ? ` · ${p.games_won}–${p.games_lost} games · ${p.rubbers} sets` : ""}</span>
       </span>
       <span class="pc">${unlocked() ? right : ""}</span>
-    </button>`;
+    </${tag}>`;
   }).join("");
 
   const kids = squad.map((s) => {
     const r = rankOf(s.name);
     const L = s.line;
     const pctShown = L && L.set_pct != null ? L.set_pct : null;
-    return `<button class="kid" data-player="${esc(s.name)}">
+    const tag = unlocked() ? "button" : "div";
+    return `<${tag} class="kid"${unlocked() ? ` data-player="${esc(s.name)}"` : ""}>
       <span class="krank">${r ? r.rank : "—"}</span>
       <span class="kbody">
         <span class="knm">${esc(s.name)}</span>
         <span class="kmeta">${r ? `${r.rank}${ordinal(r.rank)} of ${r.total} by games won` : "no sets yet"}${unlocked() && L ? ` · ${L.games_won}–${L.games_lost} games · ${L.rubbers} sets` : ""}</span>
       </span>
       <span class="kpct">${unlocked() && L ? L.games_won : ""}</span>
-      <span class="karrow">›</span>
-    </button>`;
+      ${unlocked() ? `<span class="karrow">›</span>` : ""}
+    </${tag}>`;
   }).join("");
 
   return `
     <div class="card">
       <p class="label">Your four</p>
       ${kids}
-      <p class="caption">${unlocked() ? "Tap a child to see every set they have played." : "Tap a child for their record — the scores need the passcode."}</p>
+      ${unlocked() ? `<p class="caption">Tap a child to see every set they have played.</p>` : ""}
     </div>
     <div class="card">
       <p class="label">Section ladder · ${rows.length} players</p>
@@ -768,7 +772,7 @@ function viewSquad() {
           : ladderSort === "sets"
           ? "Ranked by sets won, then games won."
           : "Ranked by games won. Level on games, the better win–loss difference goes higher."}
-        Tap anyone for the detail. East Malvern in clay.
+        ${unlocked() ? "Tap anyone for the detail." : ""} East Malvern in clay.
       </p>
       <p class="caption" style="margin-top:10px;opacity:.85">
         Worked out from the individual scores on TROLS. Waverley publishes a team ladder only — that one is in Season, untouched.
@@ -777,14 +781,7 @@ function viewSquad() {
 }
 
 function explainSheet(name) {
-  if (!unlocked()) {
-    return `<div class="grab"></div>
-      <button class="ovclose" data-close="1" aria-label="Close">×</button>
-      <h3 class="ovtitle" id="ovTitle">Scores are hidden</h3>
-      <p class="ovsub">Open Triples Green Ball 1</p>
-      <p class="caption" style="margin:0">Positions are worked out from games and sets, which sit behind a
-      passcode. Enter it in Settings and tap again.</p>`;
-  }
+  if (!unlocked()) return "";
   const rows = ladderRowsAll();
   const i = rows.findIndex((r) => r.name === name);
   if (i < 0) return "";
@@ -873,15 +870,6 @@ function explainSheet(name) {
       : `Games won is a plain count. A comfortable win is worth more games than a tight one, so the total rewards both winning and playing.`}</p>`;
 }
 
-function lockPanel(what) {
-  return `<div class="card">
-    <p class="label">Scores are hidden</p>
-    <p class="caption" style="margin:0 0 16px">${what} sit behind a passcode so the children's results
-    aren't on open display. Enter it in Settings to see them.</p>
-    <button class="btn" id="goUnlock">Enter passcode</button>
-  </div>`;
-}
-
 function viewPlayer(name) {
   const p = (DATA.our_players || {})[name] || (DATA.section_players || {})[name];
   if (!p) return `<div class="card"><p class="caption">No sets recorded for ${esc(name)} yet.</p></div>`;
@@ -912,9 +900,9 @@ function viewPlayer(name) {
       <button class="back" id="backBtn">‹ Squad</button>
       <div class="phead">
         <div class="pname">${esc(p.name)}</div>
-        <div class="pteam">${esc(p.team)}${rr ? ` · ${rr.rank}${ordinal(rr.rank)} of ${rr.total} by games won` : ""}</div>
+        <div class="pteam">${esc(p.team)}${rr ? ` · ${rr.rank}${ordinal(rr.rank)} of ${rr.total}` : ""}</div>
       </div>
-    </div>${lockPanel("Games and sets")}`;
+    </div>`;
   }
 
   return `
@@ -1180,19 +1168,9 @@ function aboutHTML() {
 }
 
 function scoresBlock() {
-  if (unlocked()) {
-    return `<div class="act">
-      <span class="txt"><b>Scores visible</b>Games and sets are showing on this phone.</span>
-      <button class="btn ghost" id="lockBtn">Hide again</button></div>`;
-  }
-  return `<div class="act">
-    <span class="txt"><b>Scores are hidden</b>Games and sets stay covered until the passcode is entered.</span>
-  </div>
-  <div class="passrow">
-    <input type="password" id="passInput" inputmode="numeric" autocomplete="off" placeholder="Passcode" aria-label="Passcode">
-    <button class="btn" id="unlockBtn">Unlock</button>
-  </div>
-  <p class="passnote" id="passNote">Ask the team manager if you don't have it.</p>`;
+  return `<div class="passrow">
+    <input type="password" id="passInput" inputmode="numeric" autocomplete="off" aria-label="Code">
+  </div>`;
 }
 
 function settingsSheet() {
@@ -1203,7 +1181,7 @@ function settingsSheet() {
     <p class="ovsub">${APP_NAME} · ${esc(DATA.meta.club)}</p>
     <div class="setsec"><h4>App</h4><div class="act">${installBlock()}</div></div>
     <div class="setsec"><h4>Alerts</h4><div class="act">${alertsBlock()}</div></div>
-    <div class="setsec"><h4>Scores</h4>${scoresBlock()}</div>
+    <div class="setsec">${scoresBlock()}</div>
     <div class="setsec"><h4>Words used</h4>
       <div class="about">
         <b>Set</b> — one 6-game match. Each child plays three every round: one singles and two doubles.<br>
@@ -1236,20 +1214,18 @@ function bindSheet() {
   const on = $("#alertsOn"); if (on) on.onclick = enableAlerts;
   const off = $("#alertsOff");
   if (off) off.onclick = () => { localStorage.setItem(NOTIFY_KEY, "0"); openSettings(); };
-  const ub = $("#unlockBtn");
-  if (ub) ub.onclick = () => {
-    const val = ($("#passInput") || {}).value || "";
-    if (unlockScores(val)) { openSettings(); renderAll(); showToast("Scores unlocked"); }
-    else {
-      const n = $("#passNote");
-      if (n) { n.textContent = "That passcode doesn't match."; n.classList.add("bad"); }
-      const f = $("#passInput"); if (f) { f.value = ""; f.focus(); }
-    }
-  };
   const pi = $("#passInput");
-  if (pi) pi.onkeydown = (e) => { if (e.key === "Enter") ub && ub.click(); };
-  const lb = $("#lockBtn");
-  if (lb) lb.onclick = () => { lockScores(); openSettings(); renderAll(); showToast("Scores hidden"); };
+  if (pi) {
+    const tryIt = () => {
+      const val = pi.value || "";
+      if (!val) return;
+      if (unlockScores(val)) { closeSheet(); renderAll(); }
+      else { pi.value = ""; }
+    };
+    pi.onkeydown = (e) => { if (e.key === "Enter") tryIt(); };
+    pi.onchange = tryIt;
+    pi.onblur = tryIt;
+  }
 }
 
 function openSheet(html) {

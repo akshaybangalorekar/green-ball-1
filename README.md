@@ -87,17 +87,19 @@ icon-192/512.png       app icons
 apple-touch-icon.png   iOS home-screen icon
 ```
 
-## The scores passcode
+## The scores field
 
-Games and sets are hidden by default. Settings → **Scores** takes a passcode (the team's
-is `1981`); enter it and the scores appear on that phone until you tap "Hide again".
+Games and sets are hidden by default, with no explanation on screen — the app simply shows
+names, clubs and ranks. There is an unlabelled empty field at the bottom of Settings: type
+the team's code (`1981`) and the scores appear on that phone. Nothing announces what the
+field is for, and while it is empty nothing in the app hints that anything is missing.
 
 This is a curtain, not a lock. The app is a static site: `data.json` still contains every
-score and anyone who reads the file, or views the page source, can see them. The passcode
-keeps the figures off the screen when a phone is being passed around — which is the usual
-reason to want it on a junior team's app — but it cannot make public data private. If the
-scores genuinely must be secret, the data has to stop being public, and that means
-hosting it somewhere with a login rather than on GitHub Pages.
+score, and anyone who reads the file or views the page source can see them. It keeps the
+figures off the screen when a phone is being passed around, which is the usual reason to
+want this on a junior team's app, but it cannot make public data private. If the scores
+genuinely must be secret, the data has to stop being public — which means hosting it
+behind a login rather than on GitHub Pages.
 
 ## Settings
 
