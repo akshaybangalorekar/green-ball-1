@@ -118,7 +118,9 @@ from the roster sheet, anyone sitting out, and the venue with its map link. A wa
 round shows who was scheduled.
 
 If a child can't play, each name has a **Can't play** button, and a box underneath takes a
-replacement's name; the trio on This week follows immediately. These changes are stored on
+replacement's name; the trio on This week follows immediately. A name typed in is matched
+against the names on TROLS — so "lucas mescher" lands on the same player the scoresheet
+does — and that player's games and sets appear under their name on the sheet. These changes are stored on
 the phone that made them and never reach anyone else's copy — the roster sheet in
 `data.json` stays the source of truth.
 

@@ -558,6 +558,46 @@ const saveEdits = (o) => { try { localStorage.setItem(EDIT_KEY, JSON.stringify(o
 let roundEdits = loadEdits();
 const editsFor = (r) => roundEdits[r] || { out: [], add: [] };
 
+const normName = (v) => String(v || "").toLowerCase().replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
+
+function nameScore(input, candidate) {
+  const a = normName(input).split(" ").filter(Boolean);
+  const b = normName(candidate).split(" ").filter(Boolean);
+  if (!a.length || !b.length) return 0;
+  const [short, long] = a.length <= b.length ? [a, b] : [b, a];
+  const hit = (w) => long.some((x) => x === w || (w.length >= 3 && x.startsWith(w.slice(0, 3))));
+  if (short.every(hit)) return short.length === long.length ? 1 : 0.9;
+  return short.filter(hit).length / Math.max(a.length, b.length);
+}
+
+function knownNames() {
+  const set = new Set(Object.keys(DATA.section_players || {}));
+  (DATA.match_details || []).forEach((m) => {
+    [...(m.home_players || []), ...(m.away_players || [])].forEach((n) => {
+      if (n && !/^no player/i.test(n)) set.add(n);
+    });
+  });
+  (roster.players || []).forEach((p) => set.add(p.name));
+  return [...set];
+}
+
+function matchName(input) {
+  const target = String(input || "").trim();
+  if (!target) return "";
+  let best = null, score = 0;
+  knownNames().forEach((n) => {
+    const sc = nameScore(target, n);
+    if (sc > score) { score = sc; best = n; }
+  });
+  return score >= 0.8 ? best : target;
+}
+
+function recordFor(name) {
+  const hit = (DATA.section_players || {})[name];
+  if (!hit || !hit.rubbers) return null;
+  return hit;
+}
+
 function playingFor(round) {
   const rr = rosterRound(round);
   if (!rr) return { playing: [], sitting: [], added: [], edited: false };
@@ -656,7 +696,12 @@ function upcomingSheet(round) {
 
   const chips = playing.map((n) => {
     const em = emergency.includes(n) || line.added.includes(n);
-    const sub = line.added.includes(n) ? "filling in" : em ? "emergency" : "";
+    const rec = recordFor((DATA.section_players || {})[n] ? n : matchName(n));
+    const bits = [];
+    if (line.added.includes(n)) bits.push(rec ? "filling in" : "filling in · no record yet");
+    else if (em) bits.push("emergency");
+    if (rec) bits.push(`${rec.games_won}–${rec.games_lost} games · ${rec.rubbers} sets`);
+    const sub = bits.join(" · ");
     return `<div class="who">
       <span class="av">${esc(initials(n))}</span>
       <span class="nm">${esc(n)}${sub ? `<small>${sub}</small>` : ""}</span>
@@ -697,7 +742,7 @@ function scorecardSheet(round) {
   const oppName = atHome ? m.away : m.home;
   const byFirst = {};
   (roster.players || []).forEach((pl) => { byFirst[first(pl.name).toLowerCase()] = pl.name; });
-  const ourName = (n) => byFirst[first(n || "").toLowerCase()] || n;
+  const ourName = (n) => byFirst[first(n || "").toLowerCase()] || (recordFor(n) ? matchName(n) : n);
   const clean = (n) => (/^no player/i.test(n || "") ? "—" : n);
 
   const squadRows = [0, 1, 2].map((i) => `<tr>
@@ -1355,8 +1400,9 @@ function bindRoundSheet(round) {
   const addBtn = $("#addBtn");
   if (addBtn) addBtn.onclick = () => {
     const input = $("#addName");
-    const name = (input && input.value || "").trim();
-    if (!name) return;
+    const typed = (input && input.value || "").trim();
+    if (!typed) return;
+    const name = matchName(typed);
     roundEdits[round] = roundEdits[round] || { out: [], add: [] };
     roundEdits[round].add = [...new Set([...(roundEdits[round].add || []), name])];
     roundEdits[round].out = (roundEdits[round].out || []).filter((n) => n !== name);
