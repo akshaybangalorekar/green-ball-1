@@ -67,7 +67,7 @@
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; font-family: var(--body); font-size: 16.5px;
+    margin: 0; font-family: var(--body); font-size: 17px; text-wrap: pretty;
     background:
       radial-gradient(820px 460px at 86% -16%, rgba(227, 238, 92, .22), transparent 68%),
       radial-gradient(680px 420px at -10% 4%, rgba(255, 255, 255, .10), transparent 62%),
@@ -85,7 +85,7 @@
   .masthead h1 { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1.05; margin: 0;
     letter-spacing: -.02em; color: var(--on-brand); }
   .masthead .sub { margin: 5px 0 0; font-size: 12.5px; color: var(--on-brand-dim); font-family: var(--mono);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    line-height: 1.4; text-wrap: pretty; }
   .hbtns { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
   .hbtn { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; border: 1px solid rgba(245,251,247,.28);
     background: rgba(245, 251, 247, .12); color: var(--on-brand); display: grid; place-items: center; cursor: pointer;
@@ -141,7 +141,7 @@
     color: var(--ink-dim); margin: 0 0 18px; display: flex; align-items: center; gap: 8px; }
   .label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ball); flex: 0 0 8px;
     box-shadow: 0 0 0 1px rgba(16,36,26,.16); }
-  .caption { font-size: 14px; color: var(--ink-dim); line-height: 1.65; margin: 16px 0 0; }
+  .caption { font-size: 14.5px; color: var(--ink-dim); line-height: 1.7; margin: 16px 0 0; text-wrap: pretty; }
   .caption b { color: var(--ink); font-weight: 600; }
 
   .hero { position: relative; overflow: hidden; border-radius: 26px; padding: 28px 24px; margin-bottom: 20px;
@@ -152,11 +152,11 @@
     display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: relative; color: var(--on-brand); }
   .pill { background: rgba(245, 251, 247, .16); border-radius: 999px; padding: 3px 11px; font-size: 10px; letter-spacing: .09em; }
   .pill.today { background: var(--ball); color: var(--ball-ink); font-weight: 600; }
-  .hero h2 { position: relative; font-family: var(--display); font-weight: 800; font-size: clamp(30px, 8.4vw, 42px);
+  .hero h2 { position: relative; font-family: var(--display); font-weight: 800; font-size: clamp(30px, 8.4vw, 42px); text-wrap: balance;
     line-height: 1.02; letter-spacing: -.03em; margin: 18px 0 0; }
   .hero h2 small { display: block; font-family: var(--mono); font-weight: 400; font-size: 11px; letter-spacing: .12em;
     text-transform: uppercase; opacity: .75; margin-bottom: 9px; }
-  .hero .venue { position: relative; font-size: 15px; color: var(--on-brand-dim); margin-top: 12px; }
+  .hero .venue { position: relative; font-size: 15.5px; line-height: 1.5; text-wrap: pretty; color: var(--on-brand-dim); margin-top: 12px; }
 
   .trio { position: relative; display: flex; gap: 14px; margin-top: 24px; }
   .trio .who { text-align: center; flex: 1; }
@@ -177,9 +177,9 @@
   .frow { padding: 13px 0; border-bottom: 1px solid var(--line-soft); }
   .frow:last-child { border-bottom: 0; padding-bottom: 0; }
   .fbody { display: block; }
-  .fname { display: block; font-size: 15.5px; font-weight: 500; color: var(--ink); }
+  .fname { display: block; font-size: 16.5px; font-weight: 500; color: var(--ink); text-wrap: pretty; }
   .fgood { display: block; font-family: var(--display); font-weight: 800; font-size: 17px; color: var(--brand); margin-top: 3px; }
-  .fnote { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 4px; }
+  .fnote { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); margin-top: 5px; line-height: 1.55; }
 
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
@@ -230,7 +230,7 @@
   .rnd-h { display: flex; align-items: baseline; gap: 10px; margin-bottom: 14px; font-family: var(--mono); font-size: 10.5px;
     letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
   .rnd-h b { color: var(--ink); font-weight: 500; }
-  .mt { display: flex; align-items: center; gap: 10px; padding: 9px 0; font-size: 13.5px; }
+  .mt { display: flex; align-items: center; gap: 10px; padding: 10px 0; font-size: 14.5px; }
   .mt .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .mt .nm.r { text-align: right; }
   .mt .sc { text-align: center; }
@@ -245,11 +245,15 @@
   .tl li:first-child { border-top: 0; }
   .tl .rn { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); text-align: center; background: var(--surface-2);
     border-radius: 9px; padding: 7px 0; }
-  .tl .who { font-size: 14px; }
-  .tl .who small { display: block; color: var(--ink-dim); font-size: 11.5px; font-family: var(--mono); margin-top: 4px; }
-  .tl .res { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .tl .who { font-size: 15.5px; line-height: 1.45; text-wrap: pretty; }
+  .tl .who small { display: block; color: var(--ink-dim); font-size: 12px; font-family: var(--mono); margin-top: 5px; line-height: 1.55; }
+  .tl .res { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
   .tl li.today { background: var(--brand-wash); border-radius: 14px; padding-left: 12px; padding-right: 12px; margin: 0 -12px; }
   .tl li.past .who { color: var(--ink-dim); }
+  .tl li.past .who small { color: var(--muted); }
+  .tl li:not(.past) .who { color: var(--brand); }
+  .tl li:not(.past) .who small { color: var(--ink-dim); }
+  .tl li.today .who { font-weight: 700; }
 
   .pcard { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 22px; padding: 24px 22px;
     margin-bottom: 18px; box-shadow: var(--shadow); }
@@ -320,7 +324,7 @@
   @keyframes sheetup { from { transform: translateY(14px); opacity: .6; } to { transform: none; opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
   .grab { width: 38px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 auto 18px; }
-  .ovtitle { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 6px; }
+  .ovtitle { font-family: var(--display); font-weight: 800; font-size: 22px; letter-spacing: -.02em; line-height: 1.15; margin: 0 0 6px; text-wrap: balance; }
   .ovsub { font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-dim); margin: 0 0 18px; }
   .ovclose { position: absolute; top: 14px; right: 16px; width: 34px; height: 34px; border-radius: 50%; border: 0;
     background: var(--surface-2); color: var(--ink-dim); font-size: 19px; line-height: 1; cursor: pointer; }
@@ -350,11 +354,11 @@
   .ptable td { padding: 14px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
   .ptable .pos { width: 30px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); padding-top: 17px; }
   .ptable .pl { padding-right: 12px; }
-  .ptable .pn { display: block; font-size: 16px; font-weight: 500; }
+  .ptable .pn { display: block; font-size: 16.5px; font-weight: 500; text-wrap: pretty; }
   .ptable .pbar { display: block; height: 8px; border-radius: 5px; background: var(--surface-2);
     margin: 8px 0 7px; overflow: hidden; }
   .ptable .pbar i { display: block; height: 100%; border-radius: 5px; background: var(--brand); }
-  .ptable .pmeta { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); line-height: 1.5; }
+  .ptable .pmeta { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); line-height: 1.6; }
   .ptable .rate { width: 62px; text-align: right; font-family: var(--display); font-weight: 800;
     font-size: 19px; padding-top: 14px; font-variant-numeric: tabular-nums; }
   .ptable .num { text-align: right; font-family: var(--mono); font-size: 13px; padding-top: 17px; }
