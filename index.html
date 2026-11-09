@@ -684,8 +684,9 @@ function viewWeek() {
   const ourClub = clubByName(CLUB);
   const atHome = nr.homeAway === "H";
   const place = nr.opponent ? cleanPlace(atHome ? (ourClub && ourClub.venue) : (opp && opp.venue)) : null;
+  const venueClub = nr.opponent ? (atHome ? CLUB : nr.opponent) : null;
   const venueText = place
-    ? `${atHome ? "Home" : "Away"} · ${place}`
+    ? `${venueClub} · ${place}`
     : "Venue confirmed once TROLS publishes the round";
   const rr = rosterRound(nr.round);
   const trio = rr ? (rr.in || []) : [];
@@ -712,7 +713,7 @@ function viewWeek() {
         <span>${fmtLong(nr.date)}</span>
         ${isToday ? `<span class="pill today">Today</span>` : ""}
       </div>
-      <h2><small>${nr.opponent ? (nr.homeAway === "H" ? "Home vs" : "Away vs") : "Opponent"}</small>
+      <h2><small>${nr.opponent ? "vs" : "Opponent"}</small>
         ${nr.opponent ? esc(nr.opponent) : "To be confirmed"}</h2>
       <div class="venue">${place
         ? `<a class="maplink" href="${mapsUrl(place)}" target="_blank" rel="noopener">${PIN}<span>${esc(venueText)}</span></a>`
