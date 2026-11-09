@@ -13,7 +13,7 @@ availability and selection for each round.
 | Tab | What it shows |
 | --- | --- |
 | **This week** | The next round, who's on court and where, then three numbers and the season strip |
-| **Team** | Two panels, one per swipe: our four's own records · the official ladder with the top four marked for finals |
+| **Team** | Sub-tabs: our four's own records · the official ladder with the top four marked for finals |
 | **Squad** | The player ladder — every child in the section on one bar, tap for their sets |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
@@ -119,11 +119,11 @@ want this on a junior team's app, but it cannot make public data private. If the
 genuinely must be secret, the data has to stop being public — which means hosting it
 behind a login rather than on GitHub Pages.
 
-## Swiping
+## Sub-tabs, not swipes
 
-The Team tab pages rather than scrolls: one swipe moves exactly one panel, and the dots can
-be tapped. It is a transform, not a horizontal scroller, so the page's vertical scroll is
-never fighting the swipe.
+Every switch in the app is a visible two-button control in the same style — Results | Draw
+under Season, Our four | Official ladder under Team. Nothing is hidden behind a gesture, so
+nobody has to discover that a screen is swipeable.
 
 ## Round by round
 

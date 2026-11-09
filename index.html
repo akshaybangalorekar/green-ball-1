@@ -959,25 +959,23 @@ function fourRowsHTML() {
   return fourRows;
 }
 
-function viewTeam() {
-  return `
-    <div class="pager" id="teamPager">
-    <div class="pages">
-    <div class="card fourcard">
-      <p class="label">Our four · this season</p>
-      <div class="fourlist">${fourRowsHTML()}</div>
-    </div>
+let teamTab = "four";
 
-    <div class="card">
-      <p class="label">Official ladder</p>
-      ${teamsTable()}
-    </div>
-    </div>
-    </div>
-    <div class="dots" id="teamDots">
-      <button data-slide="0" class="on" aria-label="Our four"></button>
-      <button data-slide="1" aria-label="Official ladder"></button>
+function viewTeam() {
+  const seg = `<div class="seg-top" role="tablist">
+      <button data-team="four" aria-selected="${teamTab === "four"}">Our four</button>
+      <button data-team="ladder" aria-selected="${teamTab === "ladder"}">Official ladder</button>
     </div>`;
+  const body = teamTab === "four"
+    ? `<div class="card">
+        <p class="label">Our four · this season</p>
+        <div class="fourlist">${fourRowsHTML()}</div>
+      </div>`
+    : `<div class="card">
+        <p class="label">Official ladder</p>
+        ${teamsTable()}
+      </div>`;
+  return seg + body;
 }
 
 function unlocked() { return true; }
@@ -1546,6 +1544,9 @@ function bind() {
     }, { passive: true });
     window.addEventListener("resize", fit);
     requestAnimationFrame(() => { fit(); go(0); });
+  });
+  $("#view-team").querySelectorAll("[data-team]").forEach((b) => {
+    b.onclick = () => { teamTab = b.dataset.team; $("#view-team").innerHTML = viewTeam(); bind(); };
   });
   $("#view-week").querySelectorAll(".blk[data-round]").forEach((b) => {
     const r = Number(b.dataset.round);
