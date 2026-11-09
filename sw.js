@@ -1,8 +1,8 @@
 /* East Malvern — Green Ball 1
    Service worker: offline shell, update checks, notifications. */
 
-const SHELL = "gb1-shell-v2";
-const META = "gb1-meta-v2";
+const SHELL = "gb1-shell-v3";
+const META = "gb1-meta-v3";
 const SHELL_FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -103,6 +103,23 @@ async function maybeRemind(data) {
   await cache.put(key, new Response("1"));
 }
 
+function washRounds(d) {
+  const club = d.meta.club;
+  return (d.results || [])
+    .filter((r) => (r.matches || []).some((m) => m.washout && (m.home === club || m.away === club)))
+    .map((r) => r.round);
+}
+
+function finalsSecured(d) {
+  const ladder = [...(d.ladder || [])].sort((a, b) => a.pos - b.pos);
+  const mine = ladder.find((t) => t.isUs);
+  const fifth = ladder[4];
+  if (!mine || !fifth) return false;
+  const played = new Set((d.results || []).map((r) => r.round));
+  const remaining = (d.draw || []).filter((x) => !played.has(x.round)).length;
+  return mine.pts > fifth.pts + 8 * remaining;
+}
+
 async function checkForUpdates() {
   let data;
   try {
@@ -112,23 +129,37 @@ async function checkForUpdates() {
   } catch (e) {
     return;
   }
+
   const sig = signature(data);
   const cache = await caches.open(META);
-  const prevRes = await cache.match("sig");
-  const prev = prevRes ? await prevRes.text() : null;
+  const prevRes = await cache.match("state");
+  let prev = null;
+  if (prevRes) { try { prev = JSON.parse(await prevRes.text()); } catch (e) { prev = null; } }
 
-  if (prev && prev !== sig) {
-    const body = describeChanges(prev, data);
-    await self.registration.showNotification("Advantage", {
-      body,
-      icon: "./icon-192.png",
-      badge: "./icon-192.png",
-      tag: "gb1-update",
-      renotify: true,
-      data: { url: "./#season" },
-    });
+  const wash = washRounds(data);
+  const secured = finalsSecured(data);
+
+  if (prev) {
+    const newWash = wash.filter((r) => !(prev.wash || []).includes(r));
+    const justSecured = secured && !prev.finals;
+    let msg = null;
+    if (newWash.length) {
+      const r = newWash[newWash.length - 1];
+      msg = { body: `Round ${r} washed out — no play.`, tag: "gb1-wash-" + r, url: "./#week" };
+    } else if (justSecured) {
+      msg = { body: "Finals secured — you're in the top four.", tag: "gb1-finals", url: "./#team" };
+    } else if (prev.sig !== sig) {
+      msg = { body: describeChanges(prev.sig, data), tag: "gb1-update", url: "./#season" };
+    }
+    if (msg) {
+      await self.registration.showNotification("Advantage", {
+        body: msg.body, icon: "./icon-192.png", badge: "./icon-192.png",
+        tag: msg.tag, renotify: true, data: { url: msg.url },
+      });
+    }
   }
-  await cache.put("sig", new Response(sig));
+
+  await cache.put("state", new Response(JSON.stringify({ sig, wash, finals: secured })));
   await cache.put("last-check", new Response(new Date().toISOString()));
   await maybeRemind(data);
 }

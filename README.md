@@ -156,9 +156,14 @@ Deliberately few — three, and nothing else:
    children playing. Sent once per round; Saturday and Sunday morning are covered too, in
    case the phone was off on Friday night.
 3. **Fixture moved** — only if the draw itself changes (opponent or venue).
+4. **Wash-out** — the moment a round is called off: "Round 4 washed out — no play."
+5. **Finals secured** — sent once, ever, when you can no longer be caught for a top-four
+   place: every remaining round is worth at most 8 points, so the check is whether your
+   total already beats the fifth-placed team plus 8 for each round left.
 
 Nothing else is sent: no ladder-position chatter, no per-player updates, no reminders on
-days there is no match. A wash-out shows up as part of the results notification.
+days there is no match. Only one notification fires per check, in the order wash-out →
+finals → results, so a wet Sunday does not also produce a "results are in" message.
 
 The limits are the platform's, not the app's. On Android the app registers a periodic
 background check, so these can arrive with the app closed. On iPhone, Safari only delivers

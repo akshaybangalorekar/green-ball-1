@@ -1326,19 +1326,61 @@ function sigOf(d) {
   return [d.meta.ladder_loaded, d.results.length, draw].join("|");
 }
 
+const NSTATE = "em-gb1-notif-state-v1";
+
+function notifState() {
+  try { return JSON.parse(localStorage.getItem(NSTATE) || '{"wash":[],"finals":false}'); }
+  catch (e) { return { wash: [], finals: false }; }
+}
+function saveNotifState(st) { try { localStorage.setItem(NSTATE, JSON.stringify(st)); } catch (e) {} }
+
+function ourWashRounds(d) {
+  return (d.results || [])
+    .filter((r) => (r.matches || []).some((m) => m.washout && (m.home === CLUB || m.away === CLUB)))
+    .map((r) => r.round);
+}
+
+function finalsSecured(d) {
+  const ladder = [...(d.ladder || [])].sort((a, b) => a.pos - b.pos);
+  const mine = ladder.find((t) => t.isUs);
+  const fifth = ladder[4];
+  if (!mine || !fifth) return false;
+  const played = new Set((d.results || []).map((r) => r.round));
+  const remaining = (d.draw || []).filter((x) => !played.has(x.round)).length;
+  return mine.pts > fifth.pts + 8 * remaining;
+}
+
+async function pushNote(body, tag) {
+  try {
+    const reg = swReg || await navigator.serviceWorker.ready;
+    reg.showNotification(APP_NAME, { body, icon: "icon-192.png", badge: "icon-192.png", tag });
+  } catch (e) {}
+}
+
 async function noteUpdate(fresh) {
   const prev = localStorage.getItem(SIG_KEY);
+  const before = notifState();
+  const washNow = ourWashRounds(fresh);
+  const newWash = washNow.filter((r) => !(before.wash || []).includes(r));
+  const securedNow = finalsSecured(fresh);
+  const justSecured = securedNow && !before.finals;
+  saveNotifState({ wash: washNow, finals: securedNow });
+
   localStorage.setItem(SIG_KEY, sigOf(fresh));
   if (!prev || prev === sigOf(fresh) || !alertsOn()) return;
+
+  if (newWash.length) {
+    const r = newWash[newWash.length - 1];
+    return pushNote(`Round ${r} washed out — no play.`, "gb1-wash-" + r);
+  }
+  if (justSecured) return pushNote("Finals secured — you're in the top four.", "gb1-finals");
+
   const [prevLoad, prevRounds] = prev.split("|");
   const latest = (fresh.results || [])[0];
   let body = "Ladder updated";
-  if (prevRounds !== String(fresh.results.length) && latest) body = `Round ${latest.round} results are in`;
+  if (prevRounds !== String((fresh.results || []).length) && latest) body = `Round ${latest.round} results are in`;
   else if (prevLoad === String(fresh.meta.ladder_loaded)) body = "Fixture updated";
-  try {
-    const reg = swReg || await navigator.serviceWorker.ready;
-    reg.showNotification(APP_NAME, { body, icon: "icon-192.png", badge: "icon-192.png", tag: "gb1-update" });
-  } catch (e) {}
+  return pushNote(body, "gb1-update");
 }
 
 /* ---------- state ---------- */
