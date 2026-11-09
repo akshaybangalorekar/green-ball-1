@@ -360,6 +360,14 @@
   .ptable .num { text-align: right; font-family: var(--mono); font-size: 13px; padding-top: 17px; }
   .ptable tbody tr.us .pn, .ptable tbody tr.us .rate { color: var(--brand); font-weight: 700; }
   .ptable tbody tr.us .pbar i { background: var(--brand); }
+  .ptable .pn.inline { display: inline; }
+  .finchip { display: inline-block; margin-left: 8px; padding: 2px 6px; border-radius: 5px;
+    font-family: var(--mono); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+    background: var(--brand-wash); color: var(--brand); vertical-align: 1px; }
+  .cutrow td { padding: 0 !important; border: 0 !important; }
+  .cutrow span { display: block; margin: 6px 0 8px; padding-top: 8px; border-top: 1px dashed var(--line);
+    text-align: center; font-family: var(--mono); font-size: 9px; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink-dim); }
   .ptable tbody tr[data-explain] { cursor: pointer; }
   .ptable tbody tr[data-explain]:active { opacity: .6; }
 
@@ -930,64 +938,23 @@ function fourRowsHTML() {
 }
 
 function viewTeam() {
-  const sorted = DATA.ladder.slice().sort((a, b) => a.pos - b.pos);
-  const top = sorted[0];
-  const fourth = sorted[3];
-  const level = sorted.find((t) => t.pos !== us.pos && t.pts === us.pts);
-
-  const wanted = [top, level, us, fourth]
-    .filter(Boolean)
-    .filter((t, i, arr) => arr.findIndex((x) => x.team === t.team) === i)
-    .sort((a, b) => a.pos - b.pos);
-
-  const maxPts = Math.max(...DATA.ladder.map((t) => t.pts), 1);
-  const roundsLeft = DATA.draw.filter((d) => d.date >= todayISO()).length;
-
-  const rows = wanted.map((t) => {
-    const diff = t.pts - us.pts;
-    const delta = t.isUs ? "you" : diff === 0 ? "level" : (diff > 0 ? `+${diff.toFixed(1)}` : `−${Math.abs(diff).toFixed(1)}`);
-    const cut = t.pos === 4;
-    return `<div class="gap ${t.isUs ? "us" : ""} ${cut ? "cut" : ""}">
-      <div class="gline">
-        <span class="pos">${t.pos}</span>
-        <span class="nm">${esc(t.team)}</span>
-        <span class="pts">${t.pts.toFixed(1)}</span>
-        <span class="d ${!t.isUs && diff > 0 ? "ahead" : ""}">${delta}</span>
-      </div>
-      <div class="gtrack"><i style="width:${Math.max(3, (t.pts / maxPts) * 100)}%"></i></div>
-    </div>`;
-  }).join("");
-
-  const clear = us.pts - fourth.pts;
-
   return `
     <div class="pager" id="teamPager">
     <div class="pages">
     <div class="card">
-      <p class="label">Gap to the finals line</p>
-      ${rows}
-      <div class="cutline"><span>finals cut</span></div>
-      <p class="caption" style="margin-top:18px">
-        Top four of eight play finals. You are <b>${clear.toFixed(1)} points clear</b> of the cut
-        with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
-      </p>
+      <p class="label">Official ladder</p>
+      ${teamsTable()}
     </div>
 
     <div class="card fourcard">
       <p class="label">Our four · this season</p>
       <div class="fourlist">${fourRowsHTML()}</div>
     </div>
-
-    <div class="card">
-      <p class="label">Official ladder</p>
-      ${teamsTable()}
-    </div>
     </div>
     </div>
     <div class="dots" id="teamDots">
-      <button data-slide="0" class="on" aria-label="Gap to finals"></button>
+      <button data-slide="0" class="on" aria-label="Official ladder"></button>
       <button data-slide="1" aria-label="Our four"></button>
-      <button data-slide="2" aria-label="Official ladder"></button>
     </div>`;
 }
 
@@ -1057,18 +1024,32 @@ function playersTable() {
 }
 
 function teamsTable() {
-  const rows = DATA.ladder.map((t) => `
-    <tr class="${t.isUs ? "us" : ""}">
+  const sorted = [...DATA.ladder].sort((a, b) => a.pos - b.pos);
+  const mine = sorted.find((t) => t.isUs);
+  const fourth = sorted[3];
+  const level = sorted.find((t) => t.pos !== mine.pos && t.pts === mine.pts);
+  const roundsLeft = DATA.draw.filter((d) => d.date >= todayISO()).length;
+  const clear = mine.pts - fourth.pts;
+
+  const rows = sorted.map((t) => {
+    const fin = t.pos <= 4;
+    const row = `<tr class="${t.isUs ? "us" : ""}">
       <td class="pos">${t.pos}</td>
-      <td class="pl"><span class="pn">${esc(t.team)}</span></td>
+      <td class="pl"><span class="pn inline">${esc(t.team)}</span>${fin ? `<span class="finchip">finals</span>` : ""}</td>
       <td class="num">${t.pts.toFixed(1)}</td>
       <td class="num">${pct(t.pct)}</td>
-    </tr>`).join("");
+    </tr>`;
+    if (t.pos === 4) return row + `<tr class="cutrow"><td colspan="4"><span>finals cut</span></td></tr>`;
+    return row;
+  }).join("");
+
   return `<div class="tblwrap"><table class="ptable">
       <thead><tr><th class="pos">#</th><th class="pl">Team</th><th class="num">Pts</th><th class="num">%</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
-    <p class="caption">The official ladder from TROLS, unchanged. Points decide it; percentage is games won ÷ games lost.</p>`;
+    <p class="caption">The official ladder from TROLS, with the top four marked for finals. You are
+    <b>${clear.toFixed(1)} points clear</b> of the cut with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
+    Percentage is games won ÷ games lost.</p>`;
 }
 
 function viewSquad() {
