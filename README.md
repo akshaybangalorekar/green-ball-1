@@ -113,8 +113,12 @@ scoresheet for that match: both sides' three players numbered, the six rubbers
 (`2 & 3`, `#1`, `1 & 3`, `#2`, `1 & 2`, `#3`) with their scores, and the game and set
 totals. It is the same layout as the paper Waverley scoresheet.
 
-The data comes from the match pop-up on TROLS, so a round appears here once results are
-entered — usually the Monday after play.
+Tapping a round that has not been played yet shows who is named to play instead — the
+three from the roster sheet, anyone unavailable, and the venue with its map link. A
+washed-out round shows who was scheduled.
+
+The results come from the match pop-up on TROLS, so a round's scorecard appears once
+results are entered — usually the Monday after play.
 
 ## Settings
 
