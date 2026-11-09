@@ -43,11 +43,15 @@ the round-by-round sets: who they played, with whom, and the score.
 there is no player ladder on TROLS. These rankings are worked out from the published
 rubbers, and the app says so on the card.
 
-The Squad tab is a single table — rank, player and club, games won–lost, sets played, win
-percentage — with East Malvern's four highlighted. The column meanings sit directly under
-the table, so nothing needs explaining.
+The Squad tab holds **two tables**, switched by a Players | Teams control:
 
-The ladder opens in **the website's order**: the eight clubs exactly as they stand on the
+- **Players** — every child in the section, ranked by the share of sets they have won. Each
+  row has one bar, so a 3-set record and a 6-set record are on the same scale, with the
+  record in small print underneath ("6 of 6 sets · 36–10 games"). Ties go to the child who
+  has won more sets, so 6 of 6 sits above 3 of 3.
+- **Teams** — the official TROLS ladder, untouched: the eight clubs with Pts and %.
+
+The player table opens in **the website's order**: the eight clubs exactly as they stand on the
 official team ladder, with each club's players listed together (within a club, most games
 won first). That mirrors how the association lists the section, rather than inventing a
 player ranking.
@@ -90,6 +94,16 @@ sw.js                  service worker: offline shell + update checks
 icon-192/512.png       app icons
 apple-touch-icon.png   iOS home-screen icon
 ```
+
+## Why not a UTR-style rating yet
+
+A rating (Elo/Bradley–Terry, the family UTR belongs to) was built and tried: it fits each
+child's strength from every rubber in the section. With two rounds played it produced
+nonsense — a child on 0–6 ranked ninth, a 5–1 child fifteenth — because every player has
+only three or six sets, so the model cannot tell a strong player from a weak opponent.
+The engine stays in `scrape.py` (`compute_ratings`) and writes a `ratings` block into
+`data.json`, but the app does not display it. Revisit around round six, when most children
+have twelve or more sets.
 
 ## The scores field
 
