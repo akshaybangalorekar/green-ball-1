@@ -1190,13 +1190,12 @@ function nearPanel() {
   const evRows = evs.map((e) => `<a class="linkrow" href="${e.url}" target="_blank" rel="noopener">
       <span><b>${esc(e.name)}</b><small>${esc(e.club)} · ${esc(e.suburb)} · ${fmtShort(e.start)}${e.end && e.end !== e.start ? "–" + fmtShort(e.end) : ""}${e.surface ? " · " + esc(e.surface) : ""}</small></span>
       <span class="arrow">→</span></a>`).join("");
-  const evCard = `<div class="card">
+  const evCard = evs.length ? `<div class="card">
       <p class="label">Near 3163 · next four months</p>
-      ${evRows || `<p class="caption" style="margin-top:0">No junior events came back for the suburbs within 20 km.
-        That usually means nothing is scheduled yet — the calendar below is the live source.</p>`}
-      <p class="caption">Junior, coloured-ball and 10–14U events in suburbs within about 20 km of Glen Huntly.
+      ${evRows}
+      <p class="caption">Junior, coloured-ball and 10–14U events within about 20 km of Glen Huntly.
       Refreshed daily${EVENTS.updated ? ` — last checked ${fmtShort(String(EVENTS.updated).slice(0, 10))}` : ""}.</p>
-    </div>`;
+    </div>` : "";
 
   return `${evCard}<div class="card">
       <p class="label">Your competition</p>
