@@ -1,54 +1,43 @@
-"""One-off probe: work out how tournaments.tennis.com.au exposes a filtered list."""
-import json, urllib.request, urllib.parse, datetime, re, sys
+"""Probe 2: find the JSON endpoint the tournament search uses."""
+import json, urllib.request, urllib.parse, re
 
 BASE = "https://tournaments.tennis.com.au"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}
 
 def get(url, timeout=25):
-    req = urllib.request.Request(url, headers=UA)
     try:
+        req = urllib.request.Request(url, headers=UA)
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return r.status, r.read().decode("utf-8", "replace")
     except Exception as e:
         return getattr(e, "code", 0), f"ERR {type(e).__name__}: {e}"
 
-today = datetime.date.today()
-start = today.isoformat()
-end = (today + datetime.timedelta(days=120)).isoformat()
+out = {"scripts": [], "api_hits": [], "tests": []}
 
-def q(**kw):
-    p = {"DateFilterType": "0", "StartDate": start, "EndDate": end, "Distance": "20", "page": "1"}
-    p.update(kw)
-    return BASE + "/find/tournament?" + urllib.parse.urlencode(p)
+status, html = get(BASE + "/find/tournament?Distance=20&page=1")
+scripts = re.findall(r'<script[^>]+src="([^"]+)"', html)
+out["scripts"] = scripts[:20]
 
-out = {"start": start, "end": end, "tests": []}
-
-# 1. does the page render server-side, and which postcode param does it accept?
-variants = {
-    "no_postcode": q(),
-    "Postcode": q(Postcode="3163"),
-    "ZipCode": q(ZipCode="3163"),
-    "PostCode": q(PostCode="3163"),
-    "Location": q(Location="3163"),
-}
-for name, url in variants.items():
-    status, body = get(url)
-    ids = len(re.findall(r"sport/tournament\?id=", body))
-    vics = len(re.findall(r"\b(Toorak|Malvern|Glen Iris|Caulfield|Glen Huntly|Oakleigh|Mentone|Dingley|Bentleigh|Carnegie)\b", body))
-    out["tests"].append({
-        "name": name, "url": url, "status": status, "bytes": len(body),
-        "tournament_links": ids, "vic_suburb_hits": vics,
-        "head": body[:300].replace("\n", " "),
-    })
-
-# 2. any obvious JSON api behind the list?
-for path in ["/api/tournament/find", "/api/find/tournament", "/api/tournaments"]:
-    url = BASE + path + "?" + urllib.parse.urlencode({"postcode": "3163", "distance": "20"})
-    status, body = get(url)
-    out["tests"].append({"name": "api " + path, "url": url, "status": status,
-                         "bytes": len(body), "head": body[:200].replace("\n", " ")})
+needles = ["/api/", "apiUrl", "baseUrl", "tournament/find", "Postcode", "postcode", "Distance"]
+seen = set()
+for src in scripts:
+    url = src if src.startswith("http") else BASE + ("" if src.startswith("/") else "/") + src
+    st, body = get(url)
+    if st != 200 or len(body) < 100:
+        continue
+    for n in needles:
+        for m in re.finditer(re.escape(n), body):
+            s = max(0, m.start() - 90)
+            snip = body[s:m.start() + 110].replace("\n", " ")
+            key = snip[:60]
+            if key in seen:
+                continue
+            seen.add(key)
+            out["api_hits"].append({"needle": n, "script": url.split("/")[-1][:60], "snippet": snip})
+            if len(out["api_hits"]) > 60:
+                break
 
 open("probe.json", "w").write(json.dumps(out, indent=1))
-print("wrote probe.json")
-for t in out["tests"]:
-    print(t.get("name"), t.get("status"), t.get("bytes"), "links=" + str(t.get("tournament_links")), "vic=" + str(t.get("vic_suburb_hits")))
+print("scripts:", len(scripts), "hits:", len(out["api_hits"]))
+for h in out["api_hits"][:25]:
+    print("-", h["needle"], "|", h["snippet"][:120])
