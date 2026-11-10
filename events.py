@@ -93,7 +93,7 @@ def main():
         rows = parse(text)
         pages.append({"page": page, "bytes": len(text), "listings": len(rows),
                       "kept": sum(1 for r in rows if keep(r)),
-                      "sample": text[:180].replace("\n", " ")})
+                      "rows": [(r["name"][:50], r["suburb"]) for r in rows][:40]})
         print(f"  page {page}: {len(rows)} listings")
         if not rows:
             break
