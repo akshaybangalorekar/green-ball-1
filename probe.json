@@ -3,62 +3,162 @@
   {
    "name": "plain",
    "status": 200,
-   "bytes": 252708,
-   "tournament_hrefs": 15,
-   "sample": [
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   "bytes": 16175,
+   "names": [
+    "2026 O3k KDV Sport Open",
+    "2026 JDS CBC Metro Region - Wynnum",
+    "2026 O5K WA Open",
+    "2026 OC Ballarat Regional Tournament",
+    "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
+    "2026 Open & J125 Mullumbimby"
    ],
-   "json_blobs": 0,
-   "postcode_field": 0,
-   "has_results_word": true
+   "places": [
+    [
+     "KDV Sport",
+     "Gold Coast"
+    ],
+    [
+     "Tennis Brisbane",
+     "Wynnum"
+    ],
+    [
+     "Tennis West",
+     "Perth"
+    ],
+    [
+     "Ballarat Regional Tennis Centre",
+     "Wendouree"
+    ],
+    [
+     "Macedon Ranges TA",
+     "Macedon"
+    ],
+    [
+     "Mullumbimby Tennis Association",
+     "Mullumbimby"
+    ]
+   ],
+   "head": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-01&Distance=20&page=1  Markdown Content: Menu  [![Image 1: All T"
   },
   {
    "name": "Postcode",
    "status": 200,
-   "bytes": 252780,
-   "tournament_hrefs": 15,
-   "sample": [
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   "bytes": 16327,
+   "names": [
+    "2026 O3k KDV Sport Open",
+    "2026 JDS CBC Metro Region - Wynnum",
+    "2026 O5K WA Open",
+    "2026 OC Ballarat Regional Tournament",
+    "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
+    "2026 Open & J125 Mullumbimby"
    ],
-   "json_blobs": 0,
-   "postcode_field": 0,
-   "has_results_word": true
+   "places": [
+    [
+     "KDV Sport",
+     "Gold Coast"
+    ],
+    [
+     "Tennis Brisbane",
+     "Wynnum"
+    ],
+    [
+     "Tennis West",
+     "Perth"
+    ],
+    [
+     "Ballarat Regional Tennis Centre",
+     "Wendouree"
+    ],
+    [
+     "Macedon Ranges TA",
+     "Macedon"
+    ],
+    [
+     "Mullumbimby Tennis Association",
+     "Mullumbimby"
+    ]
+   ],
+   "head": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-01&Distance=20&page=1&Postcode=3163  Markdown Content: Menu  [!["
   },
   {
-   "name": "State",
+   "name": "Location",
    "status": 200,
-   "bytes": 252764,
-   "tournament_hrefs": 15,
-   "sample": [
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   "bytes": 16327,
+   "names": [
+    "2026 O3k KDV Sport Open",
+    "2026 JDS CBC Metro Region - Wynnum",
+    "2026 O5K WA Open",
+    "2026 OC Ballarat Regional Tournament",
+    "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
+    "2026 Open & J125 Mullumbimby"
    ],
-   "json_blobs": 0,
-   "postcode_field": 0,
-   "has_results_word": true
+   "places": [
+    [
+     "KDV Sport",
+     "Gold Coast"
+    ],
+    [
+     "Tennis Brisbane",
+     "Wynnum"
+    ],
+    [
+     "Tennis West",
+     "Perth"
+    ],
+    [
+     "Ballarat Regional Tennis Centre",
+     "Wendouree"
+    ],
+    [
+     "Macedon Ranges TA",
+     "Macedon"
+    ],
+    [
+     "Mullumbimby Tennis Association",
+     "Mullumbimby"
+    ]
+   ],
+   "head": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-01&Distance=20&page=1&Location=3163  Markdown Content: Menu  [!["
   },
   {
-   "name": "PostcodeState",
+   "name": "StateVIC",
    "status": 200,
-   "bytes": 252836,
-   "tournament_hrefs": 15,
-   "sample": [
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
-    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   "bytes": 16287,
+   "names": [
+    "2026 O3k KDV Sport Open",
+    "2026 JDS CBC Metro Region - Wynnum",
+    "2026 O5K WA Open",
+    "2026 OC Ballarat Regional Tournament",
+    "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
+    "2026 Open & J125 Mullumbimby"
    ],
-   "json_blobs": 0,
-   "postcode_field": 0,
-   "has_results_word": true
+   "places": [
+    [
+     "KDV Sport",
+     "Gold Coast"
+    ],
+    [
+     "Tennis Brisbane",
+     "Wynnum"
+    ],
+    [
+     "Tennis West",
+     "Perth"
+    ],
+    [
+     "Ballarat Regional Tennis Centre",
+     "Wendouree"
+    ],
+    [
+     "Macedon Ranges TA",
+     "Macedon"
+    ],
+    [
+     "Mullumbimby Tennis Association",
+     "Mullumbimby"
+    ]
+   ],
+   "head": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-01&Distance=20&page=1&State=VIC  Markdown Content: Menu  [![Imag"
   }
  ]
 }
