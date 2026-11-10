@@ -1,72 +1,71 @@
 {
- "start": "2026-11-10",
- "end": "2027-03-10",
- "tests": [
+ "scripts": [
+  "https://www.googletagmanager.com/gtag/js?id=G-B5YV2TX5R3",
+  "//static.tournamentsoftware.com/Content/scripts/dist/jquery-bundle.js?v=20240430131824",
+  "/Content/scripts/dist/vendor-bundle.js?v=20240430131824",
+  "/Content/scripts/dist/functions-bundle.js?v=20261027151551"
+ ],
+ "api_hits": [
   {
-   "name": "no_postcode",
-   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1",
-   "status": 200,
-   "bytes": 252678,
-   "tournament_links": 0,
-   "vic_suburb_hits": 0,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "onent(c)+\"=\"+encodeURIComponent(String(d))}).join(\"&\")},og=function(a,b,c,d,e,f,g,h){this.baseUrl=b;this.endpoint=c;this.destinationId=f;this.eventId=g;this.priorityId=h;this.xa=a.xa;this.ie=a.ie;this"
   },
   {
-   "name": "Postcode",
-   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&Postcode=3163",
-   "status": 200,
-   "bytes": 252750,
-   "tournament_links": 0,
-   "vic_suburb_hits": 0,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "w Error(\"EVENT_TOO_LARGE\"); }; var pg=function(){this.events=[];this.H=\"\";this.xa={};this.baseUrl=\"\";this.P=0;this.K=1;this.endpoint=0};pg.prototype.add=function(a){return this.T(a)?(this.events.push("
   },
   {
-   "name": "ZipCode",
-   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&ZipCode=3163",
-   "status": 200,
-   "bytes": 252746,
-   "tournament_links": 0,
-   "vic_suburb_hits": 0,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "totype.add=function(a){return this.T(a)?(this.events.push(a),this.H=a.K,this.xa=a.xa,this.baseUrl=a.baseUrl,this.P+=a.T,this.K=a.P,this.endpoint=a.endpoint,this.destinationId=a.destinationId,this.X=a."
   },
   {
-   "name": "PostCode",
-   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&PostCode=3163",
-   "status": 200,
-   "bytes": 252750,
-   "tournament_links": 0,
-   "vic_suburb_hits": 0,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "=function(a){return this.T(a)?(this.events.push(a),this.H=a.K,this.xa=a.xa,this.baseUrl=a.baseUrl,this.P+=a.T,this.K=a.P,this.endpoint=a.endpoint,this.destinationId=a.destinationId,this.X=a.eventId,th"
   },
   {
-   "name": "Location",
-   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&Location=3163",
-   "status": 200,
-   "bytes": 252750,
-   "tournament_links": 0,
-   "vic_suburb_hits": 0,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "T=function(a){return this.events.length?this.events.length>=20||a.T+this.P>=16384?!1:this.baseUrl===a.baseUrl&&this.K===a.P&&this.ja(a):!0}; pg.prototype.ja=function(a){return this.H===a.K};var qg={},"
   },
   {
-   "name": "api /api/tournament/find",
-   "url": "https://tournaments.tennis.com.au/api/tournament/find?postcode=3163&distance=20",
-   "status": 200,
-   "bytes": 20436,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "){return this.events.length?this.events.length>=20||a.T+this.P>=16384?!1:this.baseUrl===a.baseUrl&&this.K===a.P&&this.ja(a):!0}; pg.prototype.ja=function(a){return this.H===a.K};var qg={},rg=(qg.uaa=!"
   },
   {
-   "name": "api /api/find/tournament",
-   "url": "https://tournaments.tennis.com.au/api/find/tournament?postcode=3163&distance=20",
-   "status": 200,
-   "bytes": 20436,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "(\"_s=\"+b);sg(a.ie,c);var d=!1;a.H&&(c.push(a.H),d=!0);var e=c.join(\"&\"),f=\"\",g=e.length+a.baseUrl.length+1;d&&g>2048&&(f=c.pop(),e=c.join(\"&\"));return{params:e,body:f}},sg=function(a,b){var c=n(Object"
   },
   {
-   "name": "api /api/tournaments",
-   "url": "https://tournaments.tennis.com.au/api/tournaments?postcode=3163&distance=20",
-   "status": 200,
-   "bytes": 20418,
-   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "l(m,function(){c.flush()}, q)}}else{var r=tg(d,this.T++),t=r.params,u=r.body;g=t;h=u;HS(d.baseUrl,t,u,d.P,{destinationId:a.target.destinationId,endpoint:d.endpoint,eventId:d.eventId,priorityId:d.prior"
+  },
+  {
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "var I=tg(d),J=I.body;g=I.params;h=J}return{targetId:a.target.destinationId,request:{url:d.baseUrl+\"?\"+ g,parameterEncoding:2,postBody:h,endpoint:d.endpoint},yb:e,isBatched:!1}})};l.add=function(a){iN("
+  },
+  {
+   "needle": "baseUrl",
+   "script": "js?id=G-B5YV2TX5R3",
+   "snippet": "db);va.push(db.join(\"&\"))}var nf=va.join(\"\\r\\n\");a={params:Ga,body:nf}}var Xd=a;HS(this.H.baseUrl,Xd.params,Xd.body,this.H.K,{destinationId:this.H.destinationId||\"\",endpoint:this.H.endpoint,eventId:th"
+  },
+  {
+   "needle": "/api/",
+   "script": "functions-bundle.js?v=20261027151551",
+   "snippet": ":\"Add\",UserListTypeID:s,UserListDataTypeID:a,Data1:i,Data2:o,Data3:l};return $.ajax({url:\"/api/UserListAPI/ToggleUserListItem\",type:\"POST\",data:JSON.stringify(c),contentType:\"application/json; charset"
+  },
+  {
+   "needle": "/api/",
+   "script": "functions-bundle.js?v=20261027151551",
+   "snippet": "nalized-allowed\").toString()||\"0\")?\"0\":\"1\";$.ajax({url:\"https://ads.tournamentsoftware.com/api/bannerapi/html?websitezone=\"+e.data(\"wz\")+(void 0===e.data(\"zs\")?\"\":\"&zoneselector=\"+e.data(\"zs\"))+\"&npa="
   }
- ]
+ ],
+ "tests": []
 }
