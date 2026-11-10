@@ -42,7 +42,10 @@ jobs:
             echo "No change today"
           else
             git commit -m "data: refresh from TROLS $(date -u +%Y-%m-%d)"
-            git pull --rebase --autostash origin main
+            git pull --rebase --autostash origin main || {
+              git rebase --abort || true
+              git pull --no-rebase -X theirs origin main
+            }
             git push
           fi
 

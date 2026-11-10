@@ -82,7 +82,7 @@ def main():
     today = datetime.date.today()
     start, end = today.isoformat(), (today + datetime.timedelta(days=120)).isoformat()
     seen, events = set(), []
-    for page in (1, 2, 3):
+    for page in range(1, 9):
         url = (f"{FEED}?DateFilterType=0&StartDate={start}&EndDate={end}"
                f"&Distance=20&page={page}")
         try:
