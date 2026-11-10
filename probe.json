@@ -1,13 +1,64 @@
 {
- "scripts": [
-  "https://www.googletagmanager.com/gtag/js?id=G-B5YV2TX5R3",
-  "/Content/scripts/dist/jquery-bundle.js?v=20240430121207",
-  "/Content/scripts/dist/vendor-bundle.js?v=20240430121207",
-  "/Content/scripts/dist/functions-bundle.js?v=20261027145540"
- ],
- "api_paths": [
-  "/api/UserListAPI/ToggleUserListItem",
-  "/api/bannerapi/html"
- ],
- "search_ctx": []
+ "tests": [
+  {
+   "name": "plain",
+   "status": 200,
+   "bytes": 252708,
+   "tournament_hrefs": 15,
+   "sample": [
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   ],
+   "json_blobs": 0,
+   "postcode_field": 0,
+   "has_results_word": true
+  },
+  {
+   "name": "Postcode",
+   "status": 200,
+   "bytes": 252780,
+   "tournament_hrefs": 15,
+   "sample": [
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   ],
+   "json_blobs": 0,
+   "postcode_field": 0,
+   "has_results_word": true
+  },
+  {
+   "name": "State",
+   "status": 200,
+   "bytes": 252764,
+   "tournament_hrefs": 15,
+   "sample": [
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   ],
+   "json_blobs": 0,
+   "postcode_field": 0,
+   "has_results_word": true
+  },
+  {
+   "name": "PostcodeState",
+   "status": 200,
+   "bytes": 252836,
+   "tournament_hrefs": 15,
+   "sample": [
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Regular/OpenSans-Regular-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/SemiBold/OpenSans-SemiBold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/Content/fonts/open-sans/Bold/OpenSans-Bold-webfont.woff2?v=1.0.0",
+    "//static.tournamentsoftware.com/content/styles/css/themes/ta/styles.css?v=20261021101846"
+   ],
+   "json_blobs": 0,
+   "postcode_field": 0,
+   "has_results_word": true
+  }
+ ]
 }
