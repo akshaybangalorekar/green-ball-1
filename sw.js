@@ -1,8 +1,8 @@
 /* East Malvern — Green Ball 1
    Service worker: offline shell, update checks, notifications. */
 
-const SHELL = "gb1-shell-v3";
-const META = "gb1-meta-v3";
+const SHELL = "gb1-shell-v4";
+const META = "gb1-meta-v4";
 const SHELL_FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {
@@ -19,7 +19,7 @@ self.addEventListener("fetch", (e) => {
   if (url.origin !== location.origin) return;
 
   // Data must be fresh whenever we are online.
-  if (url.pathname.endsWith("data.json")) {
+  if (url.pathname.endsWith("data.json") || url.pathname.endsWith("events.json")) {
     e.respondWith(
       fetch(e.request, { cache: "no-store" }).catch(() => caches.match(e.request))
     );

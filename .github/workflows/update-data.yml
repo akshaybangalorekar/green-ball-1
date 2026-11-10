@@ -30,13 +30,16 @@ jobs:
       - name: Scrape TROLS
         run: python scrape.py
 
+      - name: Events near 3163
+        run: python events.py || echo "events fetch failed — keeping the last file"
+
       - name: Commit the new snapshot
         run: |
           git config user.name  "ladder-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data.json
+          git add data.json events.json 2>/dev/null || git add data.json
           if git diff --staged --quiet; then
-            echo "No change to data.json"
+            echo "No change today"
           else
             git commit -m "data: refresh from TROLS $(date -u +%Y-%m-%d)"
             git pull --rebase --autostash origin main

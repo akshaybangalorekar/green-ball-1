@@ -608,6 +608,7 @@ const parseDate = (iso) => { const [y, m, d] = iso.split("-").map(Number); retur
 const fmtDate = (iso) => { const d = parseDate(iso); return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`; };
 const fmtLong = (iso) => { const d = parseDate(iso); return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`; };
 const todayISO = () => { const n = new Date(); return `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`; };
+const fmtShort = (iso) => { const d = parseDate(iso); return isNaN(d) ? String(iso) : `${d.getDate()} ${MONTHS[d.getMonth()]}`; };
 const pct = (n) => Number(n).toFixed(2).replace(/\.00$/, ".0");
 const first = (n) => String(n).split(" ")[0];
 const initials = (n) => String(n).split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -1103,6 +1104,20 @@ function teamsTable() {
     Percentage is games won ÷ games lost.</p>`;
 }
 
+let EVENTS = { events: [] };
+
+async function loadEvents() {
+  try {
+    const r = await fetch("events.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    EVENTS = await r.json();
+    if (pathUnlocked() && pathTab === "near") {
+      $("#view-pathway").innerHTML = viewPathway();
+      bind();
+    }
+  } catch (e) {}
+}
+
 const UNLOCK_KEY = "em-gb1-pathway";
 const PATH_TICKS = "em-gb1-path-ticks";
 
@@ -1171,7 +1186,19 @@ function nearPanel() {
   ].map(([t, d, u]) => `<a class="linkrow" href="${u}" target="_blank" rel="noopener">
       <span><b>${t}</b><small>${d}</small></span><span class="arrow">→</span></a>`).join("");
 
-  return `<div class="card">
+  const evs = (EVENTS.events || []).slice(0, 14);
+  const evRows = evs.map((e) => `<a class="linkrow" href="${e.url}" target="_blank" rel="noopener">
+      <span><b>${esc(e.name)}</b><small>${esc(e.club)} · ${esc(e.suburb)} · ${fmtShort(e.start)}${e.end && e.end !== e.start ? "–" + fmtShort(e.end) : ""}${e.surface ? " · " + esc(e.surface) : ""}</small></span>
+      <span class="arrow">→</span></a>`).join("");
+  const evCard = `<div class="card">
+      <p class="label">Near 3163 · next four months</p>
+      ${evRows || `<p class="caption" style="margin-top:0">No junior events came back for the suburbs within 20 km.
+        That usually means nothing is scheduled yet — the calendar below is the live source.</p>`}
+      <p class="caption">Junior, coloured-ball and 10–14U events in suburbs within about 20 km of Glen Huntly.
+      Refreshed daily${EVENTS.updated ? ` — last checked ${fmtShort(String(EVENTS.updated).slice(0, 10))}` : ""}.</p>
+    </div>`;
+
+  return `${evCard}<div class="card">
       <p class="label">Your competition</p>
       <p class="caption" style="margin-top:0">Waverley District Tennis Association · Sunday AM · Open Triples Green Ball 1.
       The eight clubs in this section, nearest to postcode 3163 first.</p>
@@ -1948,6 +1975,7 @@ const settingsBtn = $("#settingsBtn");
 if (settingsBtn) settingsBtn.onclick = () => openSettings();
 
 refreshNow({ silent: true });
+loadEvents();
 setTimeout(maybeRemind, 2500);
 </script>
 </body>
