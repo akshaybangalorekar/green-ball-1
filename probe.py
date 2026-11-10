@@ -1,5 +1,5 @@
-"""Probe 3: enumerate every /api/ endpoint in the site's bundles."""
-import json, urllib.request, re
+"""Probe 4: is the result list in the HTML, and which location params work?"""
+import json, urllib.request, urllib.parse, re
 
 BASE = "https://tournaments.tennis.com.au"
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}
@@ -12,26 +12,37 @@ def get(url, timeout=30):
     except Exception as e:
         return getattr(e, "code", 0), f"ERR {type(e).__name__}: {e}"
 
-status, html = get(BASE + "/find/tournament?Distance=20&page=1")
-scripts = re.findall(r'<script[^>]+src="([^"]+)"', html)
+def names(html):
+    found = re.findall(r'href="([^"]*tournament[^"]*)"', html, re.I)
+    return found
 
-paths, search_ctx = set(), []
-for src in scripts:
-    url = src if src.startswith("http") else BASE + ("" if src.startswith("/") else "/") + src
-    if "googletagmanager" in url:
-        continue
+def q(**kw):
+    p = {"DateFilterType": "0", "StartDate": "2026-11-10", "EndDate": "2027-03-01", "Distance": "20", "page": "1"}
+    p.update(kw)
+    return BASE + "/find/tournament?" + urllib.parse.urlencode(p)
+
+out = {"tests": []}
+for name, url in {
+    "plain": q(),
+    "Postcode": q(Postcode="3163"),
+    "State": q(State="VIC"),
+    "PostcodeState": q(Postcode="3163", State="VIC"),
+}.items():
     st, body = get(url)
-    if st != 200:
-        continue
-    for m in re.finditer(r'/api/[A-Za-z0-9_\-/]{2,60}', body):
-        paths.add(m.group(0))
-    for m in re.finditer(r'(?i)(search[a-z]*tournament|tournament[a-z]*search|findTournament|TournamentList)', body):
-        s = max(0, m.start() - 120)
-        search_ctx.append(body[s:m.start() + 160].replace("\n", " "))
+    links = names(body)
+    # any embedded json blob?
+    blobs = re.findall(r'<script[^>]*type="application/(?:ld\+)?json"[^>]*>(.{0,200})', body, re.S)
+    out["tests"].append({
+        "name": name, "status": st, "bytes": len(body),
+        "tournament_hrefs": len(links),
+        "sample": links[:4],
+        "json_blobs": len(blobs),
+        "postcode_field": len(re.findall(r'(?i)name="[^"]*postcode[^"]*"', body)),
+        "has_results_word": "Results" in body,
+    })
 
-out = {"scripts": scripts, "api_paths": sorted(paths)[:120], "search_ctx": search_ctx[:15]}
 open("probe.json", "w").write(json.dumps(out, indent=1))
-print("api paths:", len(paths))
-for p in sorted(paths):
-    if any(k in p.lower() for k in ("tour", "search", "find", "event", "comp")):
-        print("  *", p)
+for t in out["tests"]:
+    print(t["name"], "| status", t["status"], "| hrefs", t["tournament_hrefs"], "| json", t["json_blobs"], "| pcfield", t["postcode_field"])
+    for s in t["sample"]:
+        print("    ", s[:90])
