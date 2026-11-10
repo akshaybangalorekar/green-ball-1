@@ -81,7 +81,7 @@ def iso(d):
 def main():
     today = datetime.date.today()
     start, end = today.isoformat(), (today + datetime.timedelta(days=120)).isoformat()
-    seen, events = set(), []
+    seen, events, pages = set(), [], []
     for page in range(1, 9):
         url = (f"{FEED}?DateFilterType=0&StartDate={start}&EndDate={end}"
                f"&Distance=20&page={page}")
@@ -91,6 +91,9 @@ def main():
             print(f"  page {page}: {type(e).__name__} {e}")
             break
         rows = parse(text)
+        pages.append({"page": page, "bytes": len(text), "listings": len(rows),
+                      "kept": sum(1 for r in rows if keep(r)),
+                      "sample": text[:180].replace("\n", " ")})
         print(f"  page {page}: {len(rows)} listings")
         if not rows:
             break
@@ -108,6 +111,7 @@ def main():
         "postcode": "3163",
         "radius_km": 20,
         "events": events,
+        "debug": pages,
     }, indent=1, ensure_ascii=False))
     print(f"kept {len(events)} events near 3163")
 
