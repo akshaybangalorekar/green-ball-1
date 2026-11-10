@@ -1,0 +1,72 @@
+{
+ "start": "2026-11-10",
+ "end": "2027-03-10",
+ "tests": [
+  {
+   "name": "no_postcode",
+   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1",
+   "status": 200,
+   "bytes": 252678,
+   "tournament_links": 0,
+   "vic_suburb_hits": 0,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+  },
+  {
+   "name": "Postcode",
+   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&Postcode=3163",
+   "status": 200,
+   "bytes": 252750,
+   "tournament_links": 0,
+   "vic_suburb_hits": 0,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+  },
+  {
+   "name": "ZipCode",
+   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&ZipCode=3163",
+   "status": 200,
+   "bytes": 252746,
+   "tournament_links": 0,
+   "vic_suburb_hits": 0,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+  },
+  {
+   "name": "PostCode",
+   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&PostCode=3163",
+   "status": 200,
+   "bytes": 252750,
+   "tournament_links": 0,
+   "vic_suburb_hits": 0,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+  },
+  {
+   "name": "Location",
+   "url": "https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1&Location=3163",
+   "status": 200,
+   "bytes": 252750,
+   "tournament_links": 0,
+   "vic_suburb_hits": 0,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>Tournaments | All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\" />\r   <meta name=\"description\" content=\"tournamentsoftware.co"
+  },
+  {
+   "name": "api /api/tournament/find",
+   "url": "https://tournaments.tennis.com.au/api/tournament/find?postcode=3163&distance=20",
+   "status": 200,
+   "bytes": 20436,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+  },
+  {
+   "name": "api /api/find/tournament",
+   "url": "https://tournaments.tennis.com.au/api/find/tournament?postcode=3163&distance=20",
+   "status": 200,
+   "bytes": 20436,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+  },
+  {
+   "name": "api /api/tournaments",
+   "url": "https://tournaments.tennis.com.au/api/tournaments?postcode=3163&distance=20",
+   "status": 200,
+   "bytes": 20418,
+   "head": "<!DOCTYPE html>\r <html dir=\"ltr\" lang=\"en-AU\">\r <head>\r   <meta charset=\"utf-8\">\r   <title>All Tournaments \u2013 Tennis Australia</title>\r   <meta name=\"viewport\" content=\"width=device-width, initial-scal"
+  }
+ ]
+}
