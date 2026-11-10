@@ -1,6 +1,64 @@
 {
- "updated": "2026-11-10T11:52:52+00:00",
+ "updated": "2026-11-10T11:54:43+00:00",
  "postcode": "3163",
  "radius_km": 20,
- "events": []
+ "events": [],
+ "debug": [
+  {
+   "page": 1,
+   "bytes": 16177,
+   "listings": 19,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=1  Markdown Content: Men"
+  },
+  {
+   "page": 2,
+   "bytes": 29806,
+   "listings": 37,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=2  Markdown Content: Men"
+  },
+  {
+   "page": 3,
+   "bytes": 42941,
+   "listings": 53,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=3  Markdown Content: Men"
+  },
+  {
+   "page": 4,
+   "bytes": 27705,
+   "listings": 2,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=4  Markdown Content: *  "
+  },
+  {
+   "page": 5,
+   "bytes": 35453,
+   "listings": 2,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=5  Markdown Content: *  "
+  },
+  {
+   "page": 6,
+   "bytes": 41994,
+   "listings": 3,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=6  Markdown Content: *  "
+  },
+  {
+   "page": 7,
+   "bytes": 45240,
+   "listings": 3,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=7  Markdown Content: *  "
+  },
+  {
+   "page": 8,
+   "bytes": 53298,
+   "listings": 3,
+   "kept": 0,
+   "sample": "Title: Tournaments  URL Source: https://tournaments.tennis.com.au/find/tournament?DateFilterType=0&StartDate=2026-11-10&EndDate=2027-03-10&Distance=20&page=8  Markdown Content: *  "
+  }
+ ]
 }
