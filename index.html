@@ -124,7 +124,7 @@
     backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(245,251,247,.14); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
-    font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--on-brand-dim); padding: 9px 11px;
+    font-size: 11.5px; letter-spacing: .03em; text-transform: uppercase; color: var(--on-brand-dim); padding: 9px 8px;
     border-radius: 9px; white-space: nowrap; transition: color .15s, background .15s; }
   .tabs button[aria-selected="true"] { color: var(--ball-ink); background: var(--ball); font-weight: 500;
     box-shadow: 0 4px 14px -8px rgba(0, 0, 0, .5); }
@@ -187,6 +187,35 @@
   .insttxt b { display: block; font-size: 15.5px; font-weight: 600; }
   .insttxt span { display: block; font-size: 13px; color: var(--ink-dim); margin-top: 3px; line-height: 1.5; text-wrap: pretty; }
   .install .btn { flex: 0 0 auto; }
+
+  .lvl { display: flex; align-items: baseline; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .lvl:last-of-type { border-bottom: 0; }
+  .lvl .ln { font-size: 16px; font-weight: 500; min-width: 74px; }
+  .lvl .ls { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .lvl.now .ln { color: var(--brand); font-weight: 700; }
+  .lnow { margin-left: auto; font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase;
+    background: var(--ball); color: var(--ball-ink); padding: 3px 7px; border-radius: 5px; }
+  .prow { padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .prow:last-of-type { border-bottom: 0; }
+  .prow b { display: block; font-size: 15.5px; font-weight: 600; }
+  .prow span { display: block; font-size: 13.5px; color: var(--ink-dim); line-height: 1.6; margin-top: 3px; text-wrap: pretty; }
+  .maprow, .linkrow { display: flex; align-items: center; gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line-soft);
+    color: var(--ink); text-decoration: none; }
+  .maprow:last-child, .linkrow:last-of-type { border-bottom: 0; }
+  .maprow span, .linkrow span { flex: 1; min-width: 0; }
+  .maprow small, .linkrow small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim);
+    margin-top: 3px; line-height: 1.5; }
+  .linkrow b { font-size: 15.5px; font-weight: 600; }
+  .linkrow .arrow { flex: 0 0 auto; color: var(--brand); font-size: 17px; }
+  .step { display: flex; gap: 12px; width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+    padding: 13px 0; border-bottom: 1px solid var(--line-soft); font-family: inherit; }
+  .step:last-of-type { border-bottom: 0; }
+  .step .tick { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid var(--line);
+    display: grid; place-items: center; font-size: 13px; color: #fff; margin-top: 2px; }
+  .step.on .tick { background: var(--brand); border-color: var(--brand); }
+  .step .stxt b { display: block; font-size: 15.5px; font-weight: 600; color: var(--ink); }
+  .step.on .stxt b { color: var(--ink-dim); }
+  .step .stxt small { display: block; font-size: 13px; color: var(--ink-dim); line-height: 1.55; margin-top: 3px; text-wrap: pretty; }
 
   .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
   .kpi { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 18px; padding: 20px 14px;
@@ -544,6 +573,7 @@
     <button role="tab" aria-selected="false" data-view="squad">Squad</button>
     <button role="tab" aria-selected="false" data-view="season">Season</button>
     <button role="tab" aria-selected="false" data-view="clubs">Clubs</button>
+    <button role="tab" aria-selected="false" data-view="pathway" style="display:none">Pathway</button>
   </nav>
 
   <main>
@@ -552,6 +582,7 @@
     <section class="view" id="view-squad" role="tabpanel"></section>
     <section class="view" id="view-season" role="tabpanel"></section>
     <section class="view" id="view-clubs" role="tabpanel"></section>
+    <section class="view" id="view-pathway" role="tabpanel"></section>
   </main>
 
 </div>
@@ -978,7 +1009,7 @@ function viewTeam() {
   return seg + body;
 }
 
-function unlocked() { return true; }
+function pathUnlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
 
 let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
 const teamPos = {};
@@ -1070,6 +1101,115 @@ function teamsTable() {
     <p class="caption">The official ladder from TROLS, with the top four marked for finals. You are
     <b>${clear.toFixed(1)} points clear</b> of the cut with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
     Percentage is games won ÷ games lost.</p>`;
+}
+
+const UNLOCK_KEY = "em-gb1-pathway";
+const PATH_TICKS = "em-gb1-path-ticks";
+
+let pathTab = "path";
+
+function pathTicks() {
+  try { return JSON.parse(localStorage.getItem(PATH_TICKS) || "[]"); } catch (e) { return []; }
+}
+
+const PATH_STEPS = [
+  ["pp", "Complete the Competitive Player Profile", "A Tennis Australia profile and a Tennis ID. Without it he cannot enter tournaments at all."],
+  ["utr", "Link that profile to his UTR Sports account", "The Coloured Ball Rating is generated from this link, and the yellow-ball UTR later replaces it."],
+  ["coach", "Get the coach's sign-off on yellow ball", "Tennis Australia recommends talking to the coach before changing colour. No rule stops you, but the coach sees the technique."],
+  ["enter", "Enter one yellow-ball event", "The first yellow-ball match that counts toward UTR is the one that ends the public green rating."],
+  ["weekly", "Keep playing every week", "The rating moves on match performance, not on waiting. Volume is the lever."],
+];
+
+function pathPanel() {
+  const levels = [
+    ["Red", "R1", false],
+    ["Orange", "O1 · O2", false],
+    ["Green", "G1 · G2 · G3", true],
+    ["Yellow", "UTR Rating", false],
+  ];
+  const ladder = levels.map(([name, sub, now]) => `
+    <div class="lvl ${now ? "now" : ""}">
+      <span class="ln">${name}</span><span class="ls">${sub}</span>
+      ${now ? `<span class="lnow">he is here</span>` : ""}
+    </div>`).join("");
+
+  return `<div class="card">
+      <p class="label">The ladder</p>
+      ${ladder}
+      <p class="caption">Green ball runs three levels. Within a colour, match performance decides the level —
+      there is no set rule about how fast a player moves.</p>
+    </div>
+
+    <div class="card">
+      <p class="label">What moves him to yellow</p>
+      <div class="prow"><b>Play yellow-ball matches</b><span>The first yellow-ball result that counts toward UTR ends his public green rating. The green number keeps being calculated quietly in the background.</span></div>
+      <div class="prow"><b>Entry order favours yellow</b><span>In tournaments, yellow-rated players get first acceptance, then green, orange, red. A green-rated player can still enter yellow events.</span></div>
+      <div class="prow"><b>Skill, not paperwork</b><span>No form or approval is required to change colour — but the coach is the person who can say whether the technique is ready.</span></div>
+    </div>
+
+    <div class="card">
+      <p class="label">What comes after green</p>
+      <div class="prow"><b>Junior Development Series</b><span>The Victorian bridge out of coloured ball — supportive matchplay before the ranked tours.</span></div>
+      <div class="prow"><b>De Minaur Junior Tour</b><span>National points start here, with a place in the finals and a scholarship on offer.</span></div>
+      <div class="prow"><b>16U Australian Junior Tour</b><span>Year-round ranking events, then state finals.</span></div>
+      <p class="caption">Source: Tennis Australia and Tennis Victoria pathway pages, linked under Nearby.</p>
+    </div>`;
+}
+
+function nearPanel() {
+  const clubs = (DATA.clubs || []).map((c) => {
+    const place = cleanPlace(c.venue);
+    return `<a class="maprow" href="${mapsUrl(place)}" target="_blank" rel="noopener">
+      ${PIN}<span>${esc(c.name)}<small>${esc(place)}</small></span></a>`;
+  }).join("");
+
+  const links = [
+    ["Tournament calendar", "Every Tennis Australia tournament — filter by postcode and date.", "https://tournaments.tennis.com.au/"],
+    ["Coloured ball competitions", "How green ball competition works, and the Coloured Ball Calendar.", "https://www.tennis.com.au/compete/tournaments/junior/coloured-ball-competitions"],
+    ["UTR Sports", "Events near Melbourne and his rating — sign in with his own account.", "https://www.utrsports.net/"],
+    ["Tennis Victoria", "Find a local tournament, club or coach.", "https://www.tennis.com.au/vic"],
+  ].map(([t, d, u]) => `<a class="linkrow" href="${u}" target="_blank" rel="noopener">
+      <span><b>${t}</b><small>${d}</small></span><span class="arrow">→</span></a>`).join("");
+
+  return `<div class="card">
+      <p class="label">Your competition</p>
+      <p class="caption" style="margin-top:0">Waverley District Tennis Association · Sunday AM · Open Triples Green Ball 1.
+      The eight clubs in this section, nearest to postcode 3163 first.</p>
+      ${clubs}
+    </div>
+    <div class="card">
+      <p class="label">Find more</p>
+      ${links}
+      <p class="caption">Postcode 3163 is Glen Huntly. The calendar filters by postcode, so 3163 plus 20 km covers
+      Caulfield, Malvern, Glen Iris, Oakleigh and out to Mentone and Dingley.</p>
+    </div>`;
+}
+
+function stepsPanel() {
+  const ticks = pathTicks();
+  const rows = PATH_STEPS.map(([id, title, note]) => {
+    const on = ticks.includes(id);
+    return `<button class="step ${on ? "on" : ""}" data-step="${id}">
+      <span class="tick">${on ? "✓" : ""}</span>
+      <span class="stxt"><b>${title}</b><small>${note}</small></span>
+    </button>`;
+  }).join("");
+  return `<div class="card">
+      <p class="label">What to do, in order</p>
+      ${rows}
+      <p class="caption">Ticks are kept on this phone.</p>
+    </div>`;
+}
+
+function viewPathway() {
+  if (!pathUnlocked()) return `<div class="card"><p class="caption" style="margin:0">Locked.</p></div>`;
+  const seg = `<div class="seg-top" role="tablist">
+      <button data-path="path" aria-selected="${pathTab === "path"}">Pathway</button>
+      <button data-path="near" aria-selected="${pathTab === "near"}">Nearby</button>
+      <button data-path="steps" aria-selected="${pathTab === "steps"}">Steps</button>
+    </div>`;
+  const body = pathTab === "near" ? nearPanel() : pathTab === "steps" ? stepsPanel() : pathPanel();
+  return seg + body;
 }
 
 function viewSquad() {
@@ -1545,6 +1685,31 @@ function bind() {
     window.addEventListener("resize", fit);
     requestAnimationFrame(() => { fit(); go(0); });
   });
+  $("#view-pathway").querySelectorAll("[data-path]").forEach((b) => {
+    b.onclick = () => { pathTab = b.dataset.path; $("#view-pathway").innerHTML = viewPathway(); bind(); };
+  });
+  $("#view-pathway").querySelectorAll("[data-step]").forEach((b) => {
+    b.onclick = () => {
+      const id = b.dataset.step;
+      const t = pathTicks();
+      const next = t.includes(id) ? t.filter((x) => x !== id) : [...t, id];
+      localStorage.setItem(PATH_TICKS, JSON.stringify(next));
+      $("#view-pathway").innerHTML = viewPathway();
+      bind();
+    };
+  });
+  const pwGo = $("#pwGo");
+  if (pwGo) pwGo.onclick = () => {
+    const v = ($("#pwInput") && $("#pwInput").value || "").trim();
+    if (v === "1981") {
+      localStorage.setItem(UNLOCK_KEY, "1");
+      closeSheet();
+      renderAll();
+      showToast("Pathway unlocked");
+    } else {
+      showToast("That is not the code");
+    }
+  };
   $("#view-team").querySelectorAll("[data-team]").forEach((b) => {
     b.onclick = () => { teamTab = b.dataset.team; $("#view-team").innerHTML = viewTeam(); bind(); };
   });
@@ -1585,6 +1750,9 @@ function renderAll() {
   $("#view-squad").innerHTML = viewSquad();
   $("#view-season").innerHTML = viewSeason();
   $("#view-clubs").innerHTML = viewClubs();
+  $("#view-pathway").innerHTML = viewPathway();
+  const pwTab = document.querySelector('.tabs button[data-view="pathway"]');
+  if (pwTab) pwTab.style.display = pathUnlocked() ? "" : "none";
   bind();
 }
 
@@ -1624,6 +1792,14 @@ function settingsSheet() {
         <b>Rubber</b> — what Waverley calls that same set on the official scoresheet.<br>
         <b>Games</b> — the 6–2, 6–3 inside each set. The player ladder ranks on the share of sets won.
       </div>
+    </div>
+    <div class="setsec"><h4>Pathway</h4>
+      ${pathUnlocked()
+        ? `<span class="txt"><b>Unlocked</b>The Pathway tab is in the bar above.</span>`
+        : `<div class="addrow" style="margin-top:0">
+             <input id="pwInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter code">
+             <button class="btn" id="pwGo">Unlock</button>
+           </div>`}
     </div>
     <div class="setsec"><h4>About</h4>${aboutHTML()}
       <div class="visits">
@@ -1709,6 +1885,7 @@ function showTab(name) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("on"));
   const view = $("#view-" + name);
   if (view) view.classList.add("on");
+  try { btn.scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) {}
 }
 document.querySelectorAll(".tabs button").forEach((b) => {
   b.onclick = () => {
