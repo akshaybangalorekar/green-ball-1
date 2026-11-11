@@ -1,13 +1,13 @@
 {
- "updated": "2026-11-11T01:11:41+00:00",
+ "updated": "2026-11-11T05:31:24+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
  "debug": [
   {
    "page": 1,
-   "bytes": 16060,
-   "listings": 19,
+   "bytes": 16005,
+   "listings": 20,
    "kept": 0,
    "rows": [
     [
@@ -85,13 +85,17 @@
     [
      "2026 JDS CBC Tea Tree Gully November",
      "Banksia Park"
+    ],
+    [
+     "2026 JDS Gold Coast Region - Queens Park",
+     "Southport"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 29610,
-   "listings": 37,
+   "bytes": 29507,
+   "listings": 38,
    "kept": 0,
    "rows": [
     [
@@ -187,6 +191,10 @@
      "Brisbane"
     ],
     [
+     "2026 OC Victoria Police & Emergency Services Games",
+     "Frankston North"
+    ],
+    [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
     ],
@@ -197,10 +205,6 @@
     [
      "2026 JC Hume Tennis MJTPS #9",
      "Craigieburn"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -217,6 +221,10 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -246,7 +254,7 @@
   },
   {
    "page": 3,
-   "bytes": 19847,
+   "bytes": 19860,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -262,7 +270,7 @@
   },
   {
    "page": 4,
-   "bytes": 27424,
+   "bytes": 27423,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -278,7 +286,7 @@
   },
   {
    "page": 5,
-   "bytes": 35175,
+   "bytes": 35186,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -294,7 +302,7 @@
   },
   {
    "page": 6,
-   "bytes": 41072,
+   "bytes": 41096,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -314,7 +322,7 @@
   },
   {
    "page": 7,
-   "bytes": 45058,
+   "bytes": 45077,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -334,7 +342,7 @@
   },
   {
    "page": 8,
-   "bytes": 52995,
+   "bytes": 52965,
    "listings": 3,
    "kept": 0,
    "rows": [
