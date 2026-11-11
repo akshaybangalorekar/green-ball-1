@@ -290,8 +290,8 @@
   .tl li:not(.past) .who { color: var(--brand); }
   .tl li:not(.past) .who small { color: var(--ink-dim); }
   .tl li.today .who { font-weight: 700; }
-  .pastwrap { margin-top: 6px; border-top: 1px solid var(--line-soft); }
-  .pastwrap summary { list-style: none; cursor: pointer; padding: 16px 0 4px; font-family: var(--mono);
+  .pastwrap { margin-bottom: 6px; border-bottom: 1px solid var(--line-soft); }
+  .pastwrap summary { list-style: none; cursor: pointer; padding: 2px 0 14px; font-family: var(--mono);
     font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); }
   .pastwrap summary::-webkit-details-marker { display: none; }
   .pastwrap summary::before { content: "▸ "; }
@@ -1430,9 +1430,9 @@ function drawView() {
   const finals = DATA.finals.map((f) => `<li><span class="rn">—</span><span class="who">${esc(f.label)}<small>${fmtDate(f.date)}</small></span><span class="res"></span></li>`).join("");
   const pastCount = DATA.draw.filter((d) => d.date < t).length;
   return `<div class="card"><p class="label">Season draw</p>
-    <ul class="tl">${upcoming}${finals}</ul>
     ${pastCount ? `<details class="pastwrap"><summary>Earlier rounds · ${pastCount} played</summary>
       <ul class="tl">${earlier}</ul></details>` : ""}
+    <ul class="tl">${upcoming}${finals}</ul>
   </div>`;
 }
 
