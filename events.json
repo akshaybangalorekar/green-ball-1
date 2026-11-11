@@ -1,103 +1,15 @@
 {
- "updated": "2026-11-10T12:01:12+00:00",
+ "updated": "2026-11-11T01:11:41+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
  "debug": [
   {
    "page": 1,
-   "bytes": 16177,
+   "bytes": 16060,
    "listings": 19,
    "kept": 0,
    "rows": [
-    [
-     "2026 O3k KDV Sport Open",
-     "Gold Coast"
-    ],
-    [
-     "2026 JDS CBC Metro Region - Wynnum",
-     "Wynnum"
-    ],
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 OC Ballarat Regional Tournament",
-     "Wendouree"
-    ],
-    [
-     "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
-     "Macedon"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
-     "2026 JC CBC Green Tullamarine UTR Match Play Tourn",
-     "Tullamarine"
-    ],
-    [
-     "2026 KTC Mixed Doubles Mania. KTC Members Only",
-     "Kew"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Any-Gender Night S",
-     "Brisbane"
-    ],
-    [
-     "2026 O3k Caboolture Open Championships #2",
-     "Caboolture"
-    ],
-    [
-     "2026 CBC Nepean Coloured Ball Series #8",
-     "Penrith"
-    ],
-    [
-     "2026 CBC Red Ball Gala Day",
-     "Brisbane"
-    ],
-    [
-     "2026 CBC South Region - Gatton Tennis Association",
-     "Gatton"
-    ],
-    [
-     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
-     "Altona"
-    ],
-    [
-     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
-     "Essendon"
-    ],
-    [
-     "2026 JC CBC Green Kiama Closed Junior District Cha",
-     "Albion Park Rail"
-    ],
-    [
-     "2026 JC CBC Green South West Junior Series #2 @War",
-     "WARRNAMBOOL"
-    ],
-    [
-     "2026 JC Transition Tennis Junior Head Series @Lara",
-     "Lara"
-    ],
-    [
-     "2026 JDS CBC Mornington Tournament #3",
-     "Mornington"
-    ]
-   ]
-  },
-  {
-   "page": 2,
-   "bytes": 29806,
-   "listings": 37,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O3k KDV Sport Open",
-     "Gold Coast"
-    ],
     [
      "2026 JDS CBC Metro Region - Wynnum",
      "Wynnum"
@@ -173,87 +85,15 @@
     [
      "2026 JDS CBC Tea Tree Gully November",
      "Banksia Park"
-    ],
-    [
-     "2026 JDS Gold Coast Region - Queens Park",
-     "Southport"
-    ],
-    [
-     "2026 OC NANDM All Abilities Tournament 47",
-     "Ringwood"
-    ],
-    [
-     "2026 10U Green Ball Nationals",
-     "Penrith"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Night Singles Fixt",
-     "Brisbane"
-    ],
-    [
-     "2026 OC JC NSW School Boys and School Girls",
-     "Pennant Hills"
-    ],
-    [
-     "2026 OC Parkville Tennis Club Doubles Club Champio",
-     "Parkville"
-    ],
-    [
-     "2026 JC Hume Tennis MJTPS #9",
-     "Craigieburn"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
-    ],
-    [
-     "2026 12u & 14u Australian Grasscourt Championships",
-     "Lyneham"
-    ],
-    [
-     "2026 12u & 14u Australian Grasscourt Championships",
-     "Brisbane"
-    ],
-    [
-     "2026 12u & 14u Australian Grasscourt Championships",
-     "Creswick"
-    ],
-    [
-     "2026 OC Tennis Country Series - Wollongong FINALS",
-     "Gwynneville"
-    ],
-    [
-     "2026 12u & 14u Australian Grasscourt Championships",
-     "TBC"
-    ],
-    [
-     "2026 CBC Vida Season 2 Super Orange #7 Essendon",
-     "Essendon"
-    ],
-    [
-     "2026 JC 360Q Bellarine Masters Drysdale November",
-     "Drysdale"
-    ],
-    [
-     "2026 JC CBC Green GSTA Junior Round Robin Event",
-     "Goolwa"
-    ],
-    [
-     "2026 JC CBC Yellow Vida Truganina Tournament",
-     "Truganina"
     ]
    ]
   },
   {
-   "page": 3,
-   "bytes": 42941,
-   "listings": 53,
+   "page": 2,
+   "bytes": 29610,
+   "listings": 37,
    "kept": 0,
    "rows": [
-    [
-     "2026 O3k KDV Sport Open",
-     "Gold Coast"
-    ],
     [
      "2026 JDS CBC Metro Region - Wynnum",
      "Wynnum"
@@ -401,20 +241,28 @@
     [
      "2026 JC Hume Tennis My First Tournament #17",
      "Craigieburn"
-    ],
+    ]
+   ]
+  },
+  {
+   "page": 3,
+   "bytes": 19847,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
     [
-     "2026 12u & 14u Australian Grasscourt Championships",
-     "Kensington Gardens"
-    ],
-    [
-     "2026 12u & 14u Australian Grasscourt Championships",
+     "2026 O5K WA Open",
      "Perth"
+    ],
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 27705,
+   "bytes": 27424,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -430,7 +278,7 @@
   },
   {
    "page": 5,
-   "bytes": 35453,
+   "bytes": 35175,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -446,7 +294,7 @@
   },
   {
    "page": 6,
-   "bytes": 41994,
+   "bytes": 41072,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -466,7 +314,7 @@
   },
   {
    "page": 7,
-   "bytes": 45240,
+   "bytes": 45058,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -486,7 +334,7 @@
   },
   {
    "page": 8,
-   "bytes": 53298,
+   "bytes": 52995,
    "listings": 3,
    "kept": 0,
    "rows": [
