@@ -397,6 +397,12 @@
   .ptable th .thsub { display: block; font-size: 9.5px; letter-spacing: .05em; text-transform: none;
     color: var(--ink-dim); opacity: .8; margin-top: 3px; font-weight: 400; }
   .ptable td { padding: 14px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .ptable .tpos { width: 26px; padding-top: 13px; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
+  .ptable tr.teamhead td { padding: 18px 0 6px; border-bottom: 1px solid var(--line); }
+  .ptable tr.teamhead .tn { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ink-dim); font-weight: 500; }
+  .ptable tr.teamhead.us .tn { color: var(--brand); font-weight: 700; }
+  .ptable tr.teamhead.us .tpos { color: var(--brand); font-weight: 700; }
   .ptable .pos { width: 30px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); padding-top: 17px; }
   .ptable .pl { padding-right: 12px; }
   .ptable .pn { display: block; font-size: 16.5px; font-weight: 500; text-wrap: pretty; }
@@ -1066,27 +1072,42 @@ function ladderByRate() {
 }
 
 function playersTable() {
-  const rows = ladderByRate();
-  const body = rows.map((p, i) => {
-    const mine = p.team === CLUB;
-    return `<tr class="${mine ? "us" : ""}" data-explain="${esc(p.name)}">
-      <td class="pos">${i + 1}</td>
+  const posOf = {};
+  (DATA.ladder || []).forEach((t) => { posOf[t.team] = t.pos; });
+
+  const rows = Object.values(DATA.section_players || {})
+    .filter((p) => p.rubbers > 0)
+    .sort((a, b) => (posOf[a.team] || 99) - (posOf[b.team] || 99) || a.name.localeCompare(b.name));
+
+  let body = "", team = null;
+  rows.forEach((p) => {
+    if (p.team !== team) {
+      team = p.team;
+      body += `<tr class="teamhead ${team === CLUB ? "us" : ""}">
+        <td class="tpos">${posOf[team] || ""}</td>
+        <td class="pl" colspan="2"><span class="tn">${esc(team)}</span></td>
+      </tr>`;
+    }
+    body += `<tr class="${team === CLUB ? "us" : ""}" data-explain="${esc(p.name)}">
+      <td class="tpos"></td>
       <td class="pl">
         <span class="pn">${esc(p.name)}</span>
         <span class="pbar"><i style="width:${Math.max(2, p.set_pct)}%"></i></span>
-        <span class="pmeta">${esc(p.team)} · ${p.sets_won} of ${p.rubbers} sets · ${p.games_won}–${p.games_lost} games</span>
+        <span class="pmeta">${p.sets_won} of ${p.rubbers} sets · ${p.games_won}–${p.games_lost} games</span>
       </td>
       <td class="rate">${p.set_pct}%</td>
     </tr>`;
-  }).join("");
+  });
+
   return `<div class="tblwrap"><table class="ptable">
       <thead><tr>
-        <th class="pos">#</th><th class="pl">Player<span class="thsub">share of sets won</span></th><th class="rate">Won</th>
+        <th class="tpos"></th><th class="pl">Player<span class="thsub">share of sets won</span></th><th class="rate">Won</th>
       </tr></thead>
       <tbody>${body}</tbody>
     </table></div>
-    <p class="caption">Each bar is the share of sets that child has won, so a 3-set record and a 6-set record
-    sit on the same scale. The line under each name shows how many sets they have played and their games won–lost.</p>`;
+    <p class="caption">Listed in the order of the official ladder — clubs from top to bottom, players
+    alphabetically within each club. The bar is the share of sets that child has won, so a 3-set record and a
+    6-set record sit on the same scale.</p>`;
 }
 
 function teamsTable() {
