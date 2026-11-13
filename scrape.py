@@ -747,6 +747,7 @@ def main():
         "ladder_loaded": loaded_txt or meta.get("ladder_loaded"),
         "results_loaded": loaded_txt or meta.get("results_loaded"),
         "synced": time.strftime("%Y-%m-%d"),
+        "checked_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         "source_ladder": f"{BASE}/ladders.php?daytime={daytime}&section={section}&style=",
         "source_results": f"{BASE}/results.php?daytime={daytime}&section={section}&style=",
         "source_fixture": f"{BASE}/fixture.php?daytime={daytime}&section={section}&style=",

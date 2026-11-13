@@ -2,8 +2,11 @@ name: Update ladder data
 
 on:
   schedule:
-    # 21:00 UTC = 08:00 Melbourne in daylight saving, 07:00 in winter
-    - cron: "0 21 * * *"
+    # every three hours, all week
+    - cron: "0 */3 * * *"
+    # every 30 minutes through the Melbourne afternoon and evening on Sunday and
+    # Monday, when results are actually entered (01:00-12:59 UTC = 12:00-23:59 AEDT)
+    - cron: "*/30 1-12 * * 0,1"
   workflow_dispatch:
   push:
     branches: [main]
