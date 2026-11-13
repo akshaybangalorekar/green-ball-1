@@ -13,8 +13,7 @@ availability and selection for each round.
 | Tab | What it shows |
 | --- | --- |
 | **This week** | The next round, who's on court and where, then three numbers and the season strip |
-| **Team** | Sub-tabs: our four's own records · the official ladder with the top four marked for finals |
-| **Squad** | The player ladder — every child in the section on one bar, tap for their sets |
+| **Team** | Sub-tabs: the official ladder — tap a club to open its players — and our four's own records |
 | **Season** | Ladder / Results / Draw in one tab, switched with a segmented control |
 | **Clubs** | Every club in the section with venue, Melway reference and contact |
 

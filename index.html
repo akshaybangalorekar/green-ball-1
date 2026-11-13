@@ -397,13 +397,22 @@
   .ptable th .thsub { display: block; font-size: 9.5px; letter-spacing: .05em; text-transform: none;
     color: var(--ink-dim); opacity: .8; margin-top: 3px; font-weight: 400; }
   .ptable td { padding: 14px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+  .ptable .caret { display: inline-block; width: 14px; color: var(--ink-dim); font-size: 10px; margin-right: 2px; }
+  .ptable tr.clubrow { cursor: pointer; }
+  .ptable tr.clubrow:active { opacity: .6; }
+  .ptable .pn2 { display: block; font-size: 15px; font-weight: 500; color: var(--ink); }
+  .ptable .rate2 { width: 62px; text-align: right; font-family: var(--mono); font-size: 12.5px; color: var(--ink-dim); padding-top: 16px; }
+  .ptable tr.prow2 { cursor: pointer; }
+  .ptable tr.prow2 td { padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
+  .ptable tr.prow2 .pbar { margin: 6px 0 5px; }
+  .ptable tr.prow2.us .pn2 { color: var(--brand); }
   .ptable .tpos { width: 26px; padding-top: 13px; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); }
   .ptable tr.teamhead td { padding: 18px 0 6px; border-bottom: 1px solid var(--line); }
   .ptable tr.teamhead .tn { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
     text-transform: uppercase; color: var(--ink-dim); font-weight: 500; }
   .ptable tr.teamhead.us .tn { color: var(--brand); font-weight: 700; }
   .ptable tr.teamhead.us .tpos { color: var(--brand); font-weight: 700; }
-  .ptable .pos { width: 30px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); padding-top: 17px; }
+  .ptable .pos { width: 20px; font-family: var(--mono); font-size: 12px; color: var(--ink-dim); padding-top: 17px; }
   .ptable .pl { padding-right: 12px; }
   .ptable .pn { display: block; font-size: 16.5px; font-weight: 500; text-wrap: pretty; }
   .ptable .pbar { display: block; height: 8px; border-radius: 5px; background: var(--surface-2);
@@ -412,12 +421,15 @@
   .ptable .pmeta { display: block; font-family: var(--mono); font-size: 11px; color: var(--ink-dim); line-height: 1.6; }
   .ptable .rate { width: 62px; text-align: right; font-family: var(--display); font-weight: 800;
     font-size: 19px; padding-top: 14px; font-variant-numeric: tabular-nums; }
-  .ptable .num { text-align: right; font-family: var(--mono); font-size: 13px; padding-top: 17px; }
+  .ptable .num { width: 54px; text-align: right; font-family: var(--mono); font-size: 13px; padding-top: 17px; white-space: nowrap; }
+  .ptable th.num { width: 54px; padding-left: 6px; }
+  .ptable tr.clubrow .pn.inline { font-size: 15.5px; }
+  .ptable tr.clubrow .pl { padding-right: 6px; }
   .ptable tbody tr.us .pn, .ptable tbody tr.us .rate { color: var(--brand); font-weight: 700; }
   .ptable tbody tr.us .pbar i { background: var(--brand); }
   .ptable .pn.inline { display: inline; }
-  .finchip { display: inline-block; margin-left: 8px; padding: 2px 6px; border-radius: 5px;
-    font-family: var(--mono); font-size: 8.5px; letter-spacing: .07em; text-transform: uppercase;
+  .finchip { display: inline-block; margin-left: 6px; padding: 1px 5px; border-radius: 4px;
+    font-family: var(--mono); font-size: 8px; white-space: nowrap; letter-spacing: .07em; text-transform: uppercase;
     background: var(--brand-wash); color: var(--brand); vertical-align: 1px; }
   .cutrow td { padding: 0 !important; border: 0 !important; }
   .cutrow span { display: block; margin: 6px 0 8px; padding-top: 8px; border-top: 1px dashed var(--line);
@@ -578,7 +590,6 @@
   <nav class="tabs" role="tablist" aria-label="Sections">
     <button role="tab" aria-selected="true" data-view="week">This week</button>
     <button role="tab" aria-selected="false" data-view="team">Team</button>
-    <button role="tab" aria-selected="false" data-view="squad">Squad</button>
     <button role="tab" aria-selected="false" data-view="season">Season</button>
     <button role="tab" aria-selected="false" data-view="clubs">Clubs</button>
     <button role="tab" aria-selected="false" data-view="pathway" style="display:none">Pathway</button>
@@ -587,7 +598,7 @@
   <main>
     <section class="view on" id="view-week" role="tabpanel"></section>
     <section class="view" id="view-team" role="tabpanel"></section>
-    <section class="view" id="view-squad" role="tabpanel"></section>
+    <section class="view" id="view-squad" role="tabpanel" aria-hidden="true"></section>
     <section class="view" id="view-season" role="tabpanel"></section>
     <section class="view" id="view-clubs" role="tabpanel"></section>
     <section class="view" id="view-pathway" role="tabpanel"></section>
@@ -1011,12 +1022,12 @@ function fourRowsHTML() {
   return fourRows;
 }
 
-let teamTab = "four";
+let teamTab = "ladder";
 
 function viewTeam() {
   const seg = `<div class="seg-top" role="tablist">
-      <button data-team="four" aria-selected="${teamTab === "four"}">Our four</button>
       <button data-team="ladder" aria-selected="${teamTab === "ladder"}">Official ladder</button>
+      <button data-team="four" aria-selected="${teamTab === "four"}">Our four</button>
     </div>`;
   const body = teamTab === "four"
     ? `<div class="card">
@@ -1030,6 +1041,24 @@ function viewTeam() {
   return seg + body;
 }
 
+let EVENTS = { events: [] };
+
+async function loadEvents() {
+  try {
+    const r = await fetch("events.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    EVENTS = await r.json();
+    if (pathUnlocked() && pathTab === "near") {
+      $("#view-pathway").innerHTML = viewPathway();
+      bind();
+    }
+  } catch (e) {}
+}
+
+let pathTab = "path";
+const PATH_TICKS = "em-gb1-path-ticks";
+
+const UNLOCK_KEY = "em-gb1-pathway";
 function pathUnlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
 
 let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
@@ -1110,6 +1139,8 @@ function playersTable() {
     6-set record sit on the same scale.</p>`;
 }
 
+let openClubs = new Set([CLUB]);
+
 function teamsTable() {
   const sorted = [...DATA.ladder].sort((a, b) => a.pos - b.pos);
   const mine = sorted.find((t) => t.isUs);
@@ -1118,45 +1149,53 @@ function teamsTable() {
   const roundsLeft = DATA.draw.filter((d) => d.date >= todayISO()).length;
   const clear = mine.pts - fourth.pts;
 
+  const byTeam = {};
+  Object.values(DATA.section_players || {}).filter((p) => p.rubbers > 0).forEach((p) => {
+    (byTeam[p.team] = byTeam[p.team] || []).push(p);
+  });
+
   const rows = sorted.map((t) => {
     const fin = t.pos <= 4;
-    const row = `<tr class="${t.isUs ? "us" : ""}">
+    const open = openClubs.has(t.team);
+    const players = (byTeam[t.team] || []).sort((a, b) => a.name.localeCompare(b.name));
+
+    let out = `<tr class="clubrow ${t.isUs ? "us" : ""} ${open ? "open" : ""}" data-club="${esc(t.team)}">
       <td class="pos">${t.pos}</td>
-      <td class="pl"><span class="pn inline">${esc(t.team)}</span>${fin ? `<span class="finchip">finals</span>` : ""}</td>
+      <td class="pl"><span class="caret">${open ? "▾" : "▸"}</span><span class="pn inline">${esc(t.team)}</span>${fin ? `<span class="finchip">finals</span>` : ""}</td>
       <td class="num">${t.pts.toFixed(1)}</td>
       <td class="num">${pct(t.pct)}</td>
     </tr>`;
-    if (t.pos === 4) return row + `<tr class="cutrow"><td colspan="4"><span>finals cut</span></td></tr>`;
-    return row;
+
+    if (open) {
+      out += players.map((p) => `<tr class="prow2 ${t.isUs ? "us" : ""}" data-explain="${esc(p.name)}">
+        <td class="pos"></td>
+        <td class="pl">
+          <span class="pn2">${esc(p.name)}</span>
+          <span class="pbar"><i style="width:${Math.max(2, p.set_pct)}%"></i></span>
+          <span class="pmeta">${p.sets_won} of ${p.rubbers} sets · ${p.games_won}–${p.games_lost} games</span>
+        </td>
+        <td class="rate2">${p.set_pct}%</td>
+      </tr>`).join("");
+    }
+
+    if (t.pos === 4) out += `<tr class="cutrow"><td colspan="4"><span>finals cut</span></td></tr>`;
+    return out;
   }).join("");
 
   return `<div class="tblwrap"><table class="ptable">
-      <thead><tr><th class="pos">#</th><th class="pl">Team</th><th class="num">Pts</th><th class="num">%</th></tr></thead>
+      <thead><tr><th class="pos">#</th><th class="pl">Team<span class="thsub">tap a club for its players</span></th><th class="num">Pts</th><th class="num">%</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
-    <p class="caption">The official ladder from TROLS, with the top four marked for finals. You are
-    <b>${clear.toFixed(1)} points clear</b> of the cut with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
+    <p class="caption">The official ladder from TROLS, with the top four marked for finals. Tap a club to see its
+    players. You are <b>${clear.toFixed(1)} points clear</b> of the cut with <b>${roundsLeft} rounds</b> left${level ? `, and level with ${esc(level.team)} on points` : ""}.
     Percentage is games won ÷ games lost.</p>`;
 }
 
-let EVENTS = { events: [] };
-
-async function loadEvents() {
-  try {
-    const r = await fetch("events.json?t=" + Date.now(), { cache: "no-store" });
-    if (!r.ok) return;
-    EVENTS = await r.json();
-    if (pathUnlocked() && pathTab === "near") {
-      $("#view-pathway").innerHTML = viewPathway();
-      bind();
-    }
-  } catch (e) {}
+function playerSheet(name) {
+  return `<div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    ${viewPlayer(name).replace(/<button class="back"[^>]*>[^<]*<\/button>/, "")}`;
 }
-
-const UNLOCK_KEY = "em-gb1-pathway";
-const PATH_TICKS = "em-gb1-path-ticks";
-
-let pathTab = "path";
 
 function pathTicks() {
   try { return JSON.parse(localStorage.getItem(PATH_TICKS) || "[]"); } catch (e) { return []; }
@@ -1771,6 +1810,17 @@ function bind() {
       showToast("That is not the code");
     }
   };
+  document.querySelectorAll("tr.clubrow").forEach((tr) => {
+    tr.onclick = () => {
+      const club = tr.dataset.club;
+      if (openClubs.has(club)) openClubs.delete(club); else openClubs.add(club);
+      $("#view-team").innerHTML = viewTeam();
+      bind();
+    };
+  });
+  document.querySelectorAll("tr.prow2").forEach((tr) => {
+    tr.onclick = () => openSheet(playerSheet(tr.dataset.explain));
+  });
   $("#view-team").querySelectorAll("[data-team]").forEach((b) => {
     b.onclick = () => { teamTab = b.dataset.team; $("#view-team").innerHTML = viewTeam(); bind(); };
   });
@@ -1789,8 +1839,7 @@ function bind() {
     b.onclick = () => {
       selectedPlayer = b.dataset.player;
       if (history.replaceState) history.replaceState(null, "", "#player=" + encodeURIComponent(selectedPlayer));
-      $("#view-squad").innerHTML = viewSquad();
-      bind();
+          bind();
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
   });
@@ -1950,7 +1999,6 @@ function showTab(name) {
 }
 document.querySelectorAll(".tabs button").forEach((b) => {
   b.onclick = () => {
-    if (b.dataset.view === "squad") selectedPlayer = null;
     showTab(b.dataset.view);
     if (history.replaceState) history.replaceState(null, "", "#" + b.dataset.view);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1958,12 +2006,7 @@ document.querySelectorAll(".tabs button").forEach((b) => {
 });
 
 renderAll();
-if (location.hash.startsWith("#player=")) {
-  selectedPlayer = decodeURIComponent(location.hash.slice(8));
-  showTab("squad");
-  $("#view-squad").innerHTML = viewSquad();
-  bind();
-} else if (location.hash) {
+if (location.hash) {
   showTab(location.hash.slice(1));
 }
 initApp();
