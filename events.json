@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-13T13:37:56+00:00",
+ "updated": "2026-11-13T21:06:00+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
@@ -94,7 +94,7 @@
   },
   {
    "page": 2,
-   "bytes": 27983,
+   "bytes": 27829,
    "listings": 38,
    "kept": 0,
    "rows": [
@@ -254,7 +254,7 @@
   },
   {
    "page": 3,
-   "bytes": 17940,
+   "bytes": 17794,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -270,7 +270,7 @@
   },
   {
    "page": 4,
-   "bytes": 25517,
+   "bytes": 25371,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -286,7 +286,7 @@
   },
   {
    "page": 5,
-   "bytes": 33268,
+   "bytes": 33122,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -302,7 +302,7 @@
   },
   {
    "page": 6,
-   "bytes": 39165,
+   "bytes": 39019,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -322,7 +322,7 @@
   },
   {
    "page": 7,
-   "bytes": 43148,
+   "bytes": 43002,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -342,7 +342,7 @@
   },
   {
    "page": 8,
-   "bytes": 51628,
+   "bytes": 51482,
    "listings": 3,
    "kept": 0,
    "rows": [
