@@ -1,19 +1,8 @@
 {
- "updated": "2026-11-13T05:05:23+00:00",
+ "updated": "2026-11-13T05:06:31+00:00",
  "postcode": "3163",
  "radius_km": 20,
- "events": [
-  {
-   "name": "2026 KTC Mixed Doubles Mania. KTC Members Only",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=50D00431-6581-4E6C-B05C-C0368ED9012E",
-   "club": "Kew Tennis Club",
-   "suburb": "Kew",
-   "start": "2026-11-14",
-   "end": "2026-11-14",
-   "surface": "Syn Grass",
-   "tags": "Syn Grass         Open          5          Open          15+      Image 9  2026 JC CBC Yellow Vida Truganina Tournament https //static tournamentsoftware com/c"
-  }
- ],
+ "events": [],
  "debug": [
   {
    "page": 1,
@@ -107,7 +96,7 @@
    "page": 2,
    "bytes": 28096,
    "listings": 38,
-   "kept": 1,
+   "kept": 0,
    "rows": [
     [
      "2026 JDS CBC Metro Region - Wynnum",
