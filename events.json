@@ -1,12 +1,23 @@
 {
- "updated": "2026-11-12T02:12:56+00:00",
+ "updated": "2026-11-13T01:45:24+00:00",
  "postcode": "3163",
  "radius_km": 20,
- "events": [],
+ "events": [
+  {
+   "name": "2026 KTC Mixed Doubles Mania. KTC Members Only",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=50D00431-6581-4E6C-B05C-C0368ED9012E",
+   "club": "Kew Tennis Club",
+   "suburb": "Kew",
+   "start": "2026-11-14",
+   "end": "2026-11-14",
+   "surface": "Syn Grass",
+   "tags": "Syn Grass         Open          5          Open          15+      Image 9  2026 JC CBC Yellow Vida Truganina Tournament https //static tournamentsoftware com/c"
+  }
+ ],
  "debug": [
   {
    "page": 1,
-   "bytes": 15628,
+   "bytes": 15160,
    "listings": 20,
    "kept": 0,
    "rows": [
@@ -47,10 +58,6 @@
      "Caboolture"
     ],
     [
-     "2026 CBC Nepean Coloured Ball Series #8",
-     "Penrith"
-    ],
-    [
      "2026 CBC Red Ball Gala Day",
      "Brisbane"
     ],
@@ -89,14 +96,18 @@
     [
      "2026 JDS Gold Coast Region - Queens Park",
      "Southport"
+    ],
+    [
+     "2026 OC NANDM All Abilities Tournament 47",
+     "Ringwood"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 28406,
+   "bytes": 27938,
    "listings": 38,
-   "kept": 0,
+   "kept": 1,
    "rows": [
     [
      "2026 JDS CBC Metro Region - Wynnum",
@@ -133,10 +144,6 @@
     [
      "2026 O3k Caboolture Open Championships #2",
      "Caboolture"
-    ],
-    [
-     "2026 CBC Nepean Coloured Ball Series #8",
-     "Penrith"
     ],
     [
      "2026 CBC Red Ball Gala Day",
@@ -228,7 +235,11 @@
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
-     "TBC"
+     "Hobart"
+    ],
+    [
+     "2026 CBC Nepean Coloured Ball Series #8",
+     "Penrith"
     ],
     [
      "2026 CBC Vida Season 2 Super Orange #7 Essendon",
@@ -254,7 +265,7 @@
   },
   {
    "page": 3,
-   "bytes": 18551,
+   "bytes": 17940,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -270,7 +281,7 @@
   },
   {
    "page": 4,
-   "bytes": 26114,
+   "bytes": 25517,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -286,7 +297,7 @@
   },
   {
    "page": 5,
-   "bytes": 33877,
+   "bytes": 33268,
    "listings": 2,
    "kept": 0,
    "rows": [
@@ -302,7 +313,7 @@
   },
   {
    "page": 6,
-   "bytes": 39787,
+   "bytes": 39165,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -322,7 +333,7 @@
   },
   {
    "page": 7,
-   "bytes": 43768,
+   "bytes": 43176,
    "listings": 3,
    "kept": 0,
    "rows": [
@@ -342,7 +353,7 @@
   },
   {
    "page": 8,
-   "bytes": 51950,
+   "bytes": 51607,
    "listings": 3,
    "kept": 0,
    "rows": [
