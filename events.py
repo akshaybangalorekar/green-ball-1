@@ -27,7 +27,7 @@ HOME_SUBURBS = {
 }
 
 WANT = re.compile(r"(?i)\b(junior|coloured ball|cbc|green|orange|red ball|jds|de minaur|u/?1[024]|10u|12u|14u)\b")
-DROP = re.compile(r"(?i)\b(invite only|invitation only|cancelled|closed)\b")
+DROP = re.compile(r"(?i)\b(invite only|invitation only|members only|cancelled|closed)\b")
 
 FEED = "https://tournaments.tennis.com.au/find/tournament"
 
@@ -70,7 +70,9 @@ def keep(ev):
     blob = f"{ev['name']} {ev['tags']}"
     if DROP.search(blob):
         return False
-    return bool(WANT.search(blob))
+    if not re.search(r"(?i)\b(junior|coloured ball|cbc|jds|green|orange|red ball|10u|12u|14u|u/?1[024])\b", blob):
+        return False
+    return True
 
 
 def iso(d):
