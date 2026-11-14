@@ -1,22 +1,18 @@
 {
- "updated": "2026-11-13T21:06:00+00:00",
+ "updated": "2026-11-14T03:59:32+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
  "debug": [
   {
    "page": 1,
-   "bytes": 15205,
+   "bytes": 15276,
    "listings": 20,
    "kept": 0,
    "rows": [
     [
      "2026 JDS CBC Metro Region - Wynnum",
      "Wynnum"
-    ],
-    [
-     "2026 O5K WA Open",
-     "Perth"
     ],
     [
      "2026 OC Ballarat Regional Tournament",
@@ -89,22 +85,22 @@
     [
      "2026 OC NANDM All Abilities Tournament 47",
      "Ringwood"
+    ],
+    [
+     "2026 10U Green Ball Nationals",
+     "Penrith"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 27829,
+   "bytes": 28698,
    "listings": 38,
    "kept": 0,
    "rows": [
     [
      "2026 JDS CBC Metro Region - Wynnum",
      "Wynnum"
-    ],
-    [
-     "2026 O5K WA Open",
-     "Perth"
     ],
     [
      "2026 OC Ballarat Regional Tournament",
@@ -249,19 +245,19 @@
     [
      "2026 JC Hume Tennis My First Tournament #17",
      "Craigieburn"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 17794,
-   "listings": 2,
+   "bytes": 18584,
+   "listings": 1,
    "kept": 0,
    "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
     [
      "2026 Open & J125 Mullumbimby",
      "Mullumbimby"
@@ -270,95 +266,10 @@
   },
   {
    "page": 4,
-   "bytes": 25371,
-   "listings": 2,
+   "bytes": 3495,
+   "listings": 0,
    "kept": 0,
-   "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 5,
-   "bytes": 33122,
-   "listings": 2,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 6,
-   "bytes": 39019,
-   "listings": 3,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
-     "2026 O10k Manly Seaside",
-     "Manly"
-    ]
-   ]
-  },
-  {
-   "page": 7,
-   "bytes": 43002,
-   "listings": 3,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
-     "2026 O10k Manly Seaside",
-     "Manly"
-    ]
-   ]
-  },
-  {
-   "page": 8,
-   "bytes": 51482,
-   "listings": 3,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O5K WA Open",
-     "Perth"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
-     "2026 O10k Manly Seaside",
-     "Manly"
-    ]
-   ]
+   "rows": []
   }
  ]
 }
