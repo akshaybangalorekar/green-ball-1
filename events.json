@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T03:59:32+00:00",
+ "updated": "2026-11-14T09:16:35+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
@@ -266,10 +266,63 @@
   },
   {
    "page": 4,
-   "bytes": 3495,
-   "listings": 0,
+   "bytes": 24668,
+   "listings": 1,
    "kept": 0,
-   "rows": []
+   "rows": [
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
+    ]
+   ]
+  },
+  {
+   "page": 5,
+   "bytes": 32299,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
+    ]
+   ]
+  },
+  {
+   "page": 6,
+   "bytes": 38390,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
+    ]
+   ]
+  },
+  {
+   "page": 7,
+   "bytes": 45559,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
+    ]
+   ]
+  },
+  {
+   "page": 8,
+   "bytes": 51064,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 Open & J125 Mullumbimby",
+     "Mullumbimby"
+    ]
+   ]
   }
  ]
 }
