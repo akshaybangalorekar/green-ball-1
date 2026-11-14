@@ -33,6 +33,9 @@ jobs:
       - name: Scrape TROLS
         run: python scrape.py
 
+      - name: Rebuild the page
+        run: python build.py
+
       - name: Events near 3163
         run: python events.py || echo "events fetch failed — keeping the last file"
 
@@ -40,7 +43,7 @@ jobs:
         run: |
           git config user.name  "ladder-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data.json events.json 2>/dev/null || git add data.json
+          git add data.json events.json index.html 2>/dev/null || git add data.json index.html
           if git diff --staged --quiet; then
             echo "No change today"
           else
