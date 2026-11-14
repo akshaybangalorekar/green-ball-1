@@ -1,12 +1,12 @@
 {
- "updated": "2026-11-14T09:16:35+00:00",
+ "updated": "2026-11-14T12:42:38+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
  "debug": [
   {
    "page": 1,
-   "bytes": 15276,
+   "bytes": 15291,
    "listings": 20,
    "kept": 0,
    "rows": [
@@ -94,7 +94,7 @@
   },
   {
    "page": 2,
-   "bytes": 28698,
+   "bytes": 28713,
    "listings": 38,
    "kept": 0,
    "rows": [
