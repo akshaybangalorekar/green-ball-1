@@ -173,6 +173,15 @@
   .dots button { width: 7px; height: 7px; border-radius: 50%; border: 0; padding: 0;
     background: rgba(255, 255, 255, .45); cursor: pointer; transition: width .2s, background .2s; }
   .dots button.on { background: var(--ball); width: 20px; border-radius: 4px; }
+  .race { width: 100%; height: auto; display: block; margin-top: 4px; }
+  .race .ax { font-family: var(--mono); font-size: 7px; fill: var(--ink-dim); }
+  .legendlist { margin-top: 14px; border-top: 1px solid var(--line-soft); }
+  .lg { display: flex; align-items: center; gap: 9px; padding: 7px 0; border-bottom: 1px solid var(--line-soft); }
+  .lg:last-child { border-bottom: 0; }
+  .lg i { width: 10px; height: 3px; border-radius: 2px; flex: 0 0 10px; }
+  .lg span { flex: 1; font-size: 13.5px; }
+  .lg b { font-family: var(--display); font-weight: 800; font-size: 14px; }
+  .lg.us span, .lg.us b { color: var(--brand); font-weight: 700; }
   .fourlist { margin-top: 6px; }
   .frow { padding: 13px 0; border-bottom: 1px solid var(--line-soft); }
   .frow:last-child { border-bottom: 0; padding-bottom: 0; }
@@ -1035,12 +1044,79 @@ function fourRowsHTML() {
 
 let teamTab = "ladder";
 
+function pointsRace() {
+  const rounds = [...new Set((DATA.results || []).map((r) => r.round))].sort((a, b) => a - b);
+  const teams = [...DATA.ladder].sort((a, b) => a.pos - b.pos).map((t) => t.team);
+  const cum = {}, series = {};
+  teams.forEach((t) => { cum[t] = 0; series[t] = []; });
+  rounds.forEach((rd) => {
+    const r = (DATA.results || []).find((x) => x.round === rd);
+    (r && r.matches || []).forEach((m) => {
+      const hp = m.washout ? 4 : (m.homePts || 0);
+      const ap = m.washout ? 4 : (m.awayPts || 0);
+      if (cum[m.home] !== undefined) cum[m.home] += hp;
+      if (cum[m.away] !== undefined) cum[m.away] += ap;
+    });
+    teams.forEach((t) => series[t].push(cum[t]));
+  });
+  return { rounds, teams, series };
+}
+
+function raceChart() {
+  const { rounds, teams, series } = pointsRace();
+  if (rounds.length < 2) {
+    return `<p class="caption" style="margin-top:0">The chart appears once two rounds have been played.</p>`;
+  }
+  const W = 330, H = 190, padL = 24, padR = 8, padT = 10, padB = 22;
+  const maxY = Math.max(8, ...teams.map((t) => series[t][series[t].length - 1]));
+  const x = (i) => padL + (i * (W - padL - padR)) / (rounds.length - 1);
+  const y = (v) => padT + (1 - v / maxY) * (H - padT - padB);
+
+  const grid = [0, Math.round(maxY / 2), maxY].map((v) =>
+    `<line x1="${padL}" y1="${y(v)}" x2="${W - padR}" y2="${y(v)}" stroke="var(--line-soft)" stroke-width="1"/>
+     <text x="${padL - 5}" y="${y(v) + 3}" text-anchor="end" class="ax">${v}</text>`).join("");
+
+  const ticks = rounds.filter((r, i) => rounds.length <= 6 || i % Math.ceil(rounds.length / 5) === 0 || i === rounds.length - 1)
+    .map((r) => `<text x="${x(rounds.indexOf(r))}" y="${H - 6}" text-anchor="middle" class="ax">${r}</text>`).join("");
+
+  const palette = ["#7fb79b", "#a8c7a0", "#c9b98a", "#9bb3c7", "#c7a2a2", "#a9a2c7", "#8fbfb3", "#b8b8a8"];
+  const lines = teams.map((t, i) => {
+    const mine = t === CLUB;
+    const pts = series[t].map((v, j) => `${x(j)},${y(v)}`).join(" ");
+    const colour = mine ? "var(--brand)" : palette[i % palette.length];
+    const last = series[t][series[t].length - 1];
+    return `<polyline points="${pts}" fill="none" stroke="${colour}" stroke-width="${mine ? 3 : 1.6}"
+        stroke-linejoin="round" stroke-linecap="round" opacity="${mine ? 1 : .85}"/>
+      <circle cx="${x(series[t].length - 1)}" cy="${y(last)}" r="${mine ? 3.4 : 2.2}" fill="${colour}"/>`;
+  }).join("");
+
+  const legend = [...teams]
+    .map((t, i) => ({ t, i, last: series[t][series[t].length - 1] }))
+    .sort((a, b) => b.last - a.last)
+    .map(({ t, i, last }) => `<div class="lg ${t === CLUB ? "us" : ""}">
+        <i style="background:${t === CLUB ? "var(--brand)" : palette[i % palette.length]}"></i>
+        <span>${esc(t)}</span><b>${last}</b></div>`).join("");
+
+  return `<svg class="race" viewBox="0 0 ${W} ${H}" role="img" aria-label="Cumulative points by round">
+      ${grid}${ticks}${lines}
+    </svg>
+    <div class="legendlist">${legend}</div>`;
+}
+
 function viewTeam() {
   const seg = `<div class="seg-top" role="tablist">
-      <button data-team="ladder" aria-selected="${teamTab === "ladder"}">Official ladder</button>
+      <button data-team="ladder" aria-selected="${teamTab === "ladder"}">Ladder</button>
+      <button data-team="race" aria-selected="${teamTab === "race"}">Points race</button>
       <button data-team="four" aria-selected="${teamTab === "four"}">Our four</button>
     </div>`;
-  const body = teamTab === "four"
+  const body = teamTab === "race"
+    ? `<div class="card">
+        <p class="label">Points by round</p>
+        ${raceChart()}
+        <p class="caption">Cumulative ladder points after each round — a win is 8, a wash-out 4 each.
+        The ladder's own order comes from these totals.</p>
+      </div>`
+    : teamTab === "four"
     ? `<div class="card">
         <p class="label">Our four · this season</p>
         <div class="fourlist">${fourRowsHTML()}</div>
