@@ -1,12 +1,12 @@
 {
- "updated": "2026-11-14T19:36:00+00:00",
+ "updated": "2026-11-15T00:31:07+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [],
  "debug": [
   {
    "page": 1,
-   "bytes": 15291,
+   "bytes": 15316,
    "listings": 20,
    "kept": 0,
    "rows": [
@@ -15,28 +15,12 @@
      "Wynnum"
     ],
     [
-     "2026 OC Ballarat Regional Tournament",
-     "Wendouree"
-    ],
-    [
      "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
      "Macedon"
     ],
     [
      "2026 Open & J125 Mullumbimby",
      "Mullumbimby"
-    ],
-    [
-     "2026 JC CBC Green Tullamarine UTR Match Play Tourn",
-     "Tullamarine"
-    ],
-    [
-     "2026 KTC Mixed Doubles Mania. KTC Members Only",
-     "Kew"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Any-Gender Night S",
-     "Brisbane"
     ],
     [
      "2026 O3k Caboolture Open Championships #2",
@@ -89,22 +73,34 @@
     [
      "2026 10U Green Ball Nationals",
      "Penrith"
+    ],
+    [
+     "2026 OC UQ Tennis Club November Night Singles Fixt",
+     "Brisbane"
+    ],
+    [
+     "2026 OC Victoria Police & Emergency Services Games",
+     "Frankston North"
+    ],
+    [
+     "2026 OC JC NSW School Boys and School Girls",
+     "Pennant Hills"
+    ],
+    [
+     "2026 OC Parkville Tennis Club Doubles Club Champio",
+     "Parkville"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 28713,
-   "listings": 38,
+   "bytes": 29413,
+   "listings": 36,
    "kept": 0,
    "rows": [
     [
      "2026 JDS CBC Metro Region - Wynnum",
      "Wynnum"
-    ],
-    [
-     "2026 OC Ballarat Regional Tournament",
-     "Wendouree"
     ],
     [
      "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
@@ -113,18 +109,6 @@
     [
      "2026 Open & J125 Mullumbimby",
      "Mullumbimby"
-    ],
-    [
-     "2026 JC CBC Green Tullamarine UTR Match Play Tourn",
-     "Tullamarine"
-    ],
-    [
-     "2026 KTC Mixed Doubles Mania. KTC Members Only",
-     "Kew"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Any-Gender Night S",
-     "Brisbane"
     ],
     [
      "2026 O3k Caboolture Open Championships #2",
@@ -249,12 +233,20 @@
     [
      "2026 12u & 14u Australian Grasscourt Championships",
      "Kensington Gardens"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Perth"
+    ],
+    [
+     "2026 Australian Wheelchair Tennis National Champio",
+     "Melbourne"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 18438,
+   "bytes": 18975,
    "listings": 1,
    "kept": 0,
    "rows": [
@@ -266,7 +258,7 @@
   },
   {
    "page": 4,
-   "bytes": 24521,
+   "bytes": 25439,
    "listings": 1,
    "kept": 0,
    "rows": [
@@ -278,7 +270,7 @@
   },
   {
    "page": 5,
-   "bytes": 32299,
+   "bytes": 33547,
    "listings": 1,
    "kept": 0,
    "rows": [
@@ -290,7 +282,7 @@
   },
   {
    "page": 6,
-   "bytes": 38390,
+   "bytes": 37656,
    "listings": 1,
    "kept": 0,
    "rows": [
@@ -302,7 +294,7 @@
   },
   {
    "page": 7,
-   "bytes": 45559,
+   "bytes": 46762,
    "listings": 1,
    "kept": 0,
    "rows": [
@@ -314,7 +306,7 @@
   },
   {
    "page": 8,
-   "bytes": 51211,
+   "bytes": 48650,
    "listings": 1,
    "kept": 0,
    "rows": [
