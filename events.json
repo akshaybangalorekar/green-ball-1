@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T00:32:30+00:00",
+ "updated": "2026-11-16T07:46:57+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,13 +11,13 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 55  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 56  2026 UWA Clay Court Junior Slide https //static tournamentsoftware com/content/images"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 17275,
+   "bytes": 17270,
    "listings": 18,
    "kept": 0,
    "rows": [
@@ -50,6 +50,10 @@
      "Craigieburn"
     ],
     [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
+    ],
+    [
      "2026 12u & 14u Australian Grasscourt Championships",
      "Lyneham"
     ],
@@ -64,10 +68,6 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -97,8 +97,8 @@
   },
   {
    "page": 2,
-   "bytes": 29418,
-   "listings": 34,
+   "bytes": 29048,
+   "listings": 33,
    "kept": 0,
    "rows": [
     [
@@ -130,6 +130,10 @@
      "Craigieburn"
     ],
     [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
+    ],
+    [
      "2026 12u & 14u Australian Grasscourt Championships",
      "Lyneham"
     ],
@@ -144,10 +148,6 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -232,17 +232,13 @@
     [
      "2026 JDS CBC Seacliff #3",
      "Seacliff"
-    ],
-    [
-     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
-     "Craigieburn"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 44344,
-   "listings": 54,
+   "bytes": 43292,
+   "listings": 53,
    "kept": 1,
    "rows": [
     [
@@ -274,6 +270,10 @@
      "Craigieburn"
     ],
     [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
+    ],
+    [
      "2026 12u & 14u Australian Grasscourt Championships",
      "Lyneham"
     ],
@@ -288,10 +288,6 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -409,7 +405,7 @@
   },
   {
    "page": 4,
-   "bytes": 27567,
+   "bytes": 26779,
    "listings": 0,
    "kept": 0,
    "rows": []
