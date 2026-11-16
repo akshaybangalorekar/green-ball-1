@@ -1,74 +1,29 @@
 {
- "updated": "2026-11-15T18:11:13+00:00",
+ "updated": "2026-11-16T00:32:30+00:00",
  "postcode": "3163",
  "radius_km": 20,
- "events": [],
+ "events": [
+  {
+   "name": "2026 CBC Vida Season 2 Super Orange Masters",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D9B06910-C539-4AF1-B778-FFF0676F85BA",
+   "club": "MCC Glen Iris Valley",
+   "suburb": "Glen Iris",
+   "start": "2026-12-06",
+   "end": "2026-12-06",
+   "surface": "Clay",
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 55  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
+  }
+ ],
  "debug": [
   {
    "page": 1,
-   "bytes": 15316,
-   "listings": 20,
+   "bytes": 17275,
+   "listings": 18,
    "kept": 0,
    "rows": [
     [
-     "2026 JDS CBC Metro Region - Wynnum",
-     "Wynnum"
-    ],
-    [
-     "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
-     "Macedon"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
      "2026 O3k Caboolture Open Championships #2",
      "Caboolture"
-    ],
-    [
-     "2026 CBC Red Ball Gala Day",
-     "Brisbane"
-    ],
-    [
-     "2026 CBC South Region - Gatton Tennis Association",
-     "Gatton"
-    ],
-    [
-     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
-     "Altona"
-    ],
-    [
-     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
-     "Essendon"
-    ],
-    [
-     "2026 JC CBC Green Kiama Closed Junior District Cha",
-     "Albion Park Rail"
-    ],
-    [
-     "2026 JC CBC Green South West Junior Series #2 @War",
-     "WARRNAMBOOL"
-    ],
-    [
-     "2026 JC Transition Tennis Junior Head Series @Lara",
-     "Lara"
-    ],
-    [
-     "2026 JDS CBC Mornington Tournament #3",
-     "Mornington"
-    ],
-    [
-     "2026 JDS CBC Tea Tree Gully",
-     "Banksia Park"
-    ],
-    [
-     "2026 JDS Gold Coast Region - Queens Park",
-     "Southport"
-    ],
-    [
-     "2026 OC NANDM All Abilities Tournament 47",
-     "Ringwood"
     ],
     [
      "2026 10U Green Ball Nationals",
@@ -79,7 +34,7 @@
      "Brisbane"
     ],
     [
-     "2026 OC Victoria Police & Emergency Services Games",
+     "2026 Victoria Police & Emergency Services Games",
      "Frankston North"
     ],
     [
@@ -89,74 +44,66 @@
     [
      "2026 OC Parkville Tennis Club Doubles Club Champio",
      "Parkville"
+    ],
+    [
+     "2026 JC Hume Tennis MJTPS #9",
+     "Craigieburn"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Lyneham"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Brisbane"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Creswick"
+    ],
+    [
+     "2026 OC Tennis Country Series - Wollongong FINALS",
+     "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Hobart"
+    ],
+    [
+     "2026 CBC Nepean Coloured Ball Series #8",
+     "Penrith"
+    ],
+    [
+     "2026 CBC Vida Season 2 Super Orange #7 Essendon",
+     "Essendon"
+    ],
+    [
+     "2026 JC 360Q Bellarine Masters Drysdale November",
+     "Drysdale"
+    ],
+    [
+     "2026 JC CBC Green GSTA Junior Round Robin Event",
+     "Goolwa"
+    ],
+    [
+     "2026 JC CBC Yellow Vida Truganina Tournament",
+     "Truganina"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 29614,
-   "listings": 36,
+   "bytes": 29418,
+   "listings": 34,
    "kept": 0,
    "rows": [
     [
-     "2026 JDS CBC Metro Region - Wynnum",
-     "Wynnum"
-    ],
-    [
-     "2026 OC JC CBC Green Macedon Ranges Centenary Cup",
-     "Macedon"
-    ],
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ],
-    [
      "2026 O3k Caboolture Open Championships #2",
      "Caboolture"
-    ],
-    [
-     "2026 CBC Red Ball Gala Day",
-     "Brisbane"
-    ],
-    [
-     "2026 CBC South Region - Gatton Tennis Association",
-     "Gatton"
-    ],
-    [
-     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
-     "Altona"
-    ],
-    [
-     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
-     "Essendon"
-    ],
-    [
-     "2026 JC CBC Green Kiama Closed Junior District Cha",
-     "Albion Park Rail"
-    ],
-    [
-     "2026 JC CBC Green South West Junior Series #2 @War",
-     "WARRNAMBOOL"
-    ],
-    [
-     "2026 JC Transition Tennis Junior Head Series @Lara",
-     "Lara"
-    ],
-    [
-     "2026 JDS CBC Mornington Tournament #3",
-     "Mornington"
-    ],
-    [
-     "2026 JDS CBC Tea Tree Gully",
-     "Banksia Park"
-    ],
-    [
-     "2026 JDS Gold Coast Region - Queens Park",
-     "Southport"
-    ],
-    [
-     "2026 OC NANDM All Abilities Tournament 47",
-     "Ringwood"
     ],
     [
      "2026 10U Green Ball Nationals",
@@ -167,7 +114,7 @@
      "Brisbane"
     ],
     [
-     "2026 OC Victoria Police & Emergency Services Games",
+     "2026 Victoria Police & Emergency Services Games",
      "Frankston North"
     ],
     [
@@ -241,80 +188,231 @@
     [
      "2026 Australian Wheelchair Tennis National Champio",
      "Melbourne"
+    ],
+    [
+     "2026 J125 NSW State Champion of Champions",
+     "Broadmeadow"
+    ],
+    [
+     "2026 J125 KDV Sport Junior Slam Series - Girls Onl",
+     "Gold Coast"
+    ],
+    [
+     "2026 J125 Samford Junior Championships - Boys Only",
+     "Brisbane"
+    ],
+    [
+     "2026 Qld Blind & Low Vision Open",
+     "East Brisbane"
+    ],
+    [
+     "2026 O3k David Turbayne Tennis Centre Open",
+     "Brisbane"
+    ],
+    [
+     "2026 J1000 18U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 CBC Bolt 2 Brisbane",
+     "Brisbane"
+    ],
+    [
+     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
+     "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
+    ],
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
+     "Craigieburn"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 19119,
-   "listings": 1,
-   "kept": 0,
+   "bytes": 44344,
+   "listings": 54,
+   "kept": 1,
    "rows": [
     [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
+     "2026 O3k Caboolture Open Championships #2",
+     "Caboolture"
+    ],
+    [
+     "2026 10U Green Ball Nationals",
+     "Penrith"
+    ],
+    [
+     "2026 OC UQ Tennis Club November Night Singles Fixt",
+     "Brisbane"
+    ],
+    [
+     "2026 Victoria Police & Emergency Services Games",
+     "Frankston North"
+    ],
+    [
+     "2026 OC JC NSW School Boys and School Girls",
+     "Pennant Hills"
+    ],
+    [
+     "2026 OC Parkville Tennis Club Doubles Club Champio",
+     "Parkville"
+    ],
+    [
+     "2026 JC Hume Tennis MJTPS #9",
+     "Craigieburn"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Lyneham"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Brisbane"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Creswick"
+    ],
+    [
+     "2026 OC Tennis Country Series - Wollongong FINALS",
+     "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Camperdown"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Hobart"
+    ],
+    [
+     "2026 CBC Nepean Coloured Ball Series #8",
+     "Penrith"
+    ],
+    [
+     "2026 CBC Vida Season 2 Super Orange #7 Essendon",
+     "Essendon"
+    ],
+    [
+     "2026 JC 360Q Bellarine Masters Drysdale November",
+     "Drysdale"
+    ],
+    [
+     "2026 JC CBC Green GSTA Junior Round Robin Event",
+     "Goolwa"
+    ],
+    [
+     "2026 JC CBC Yellow Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JC Hume Tennis My First Tournament #17",
+     "Craigieburn"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Perth"
+    ],
+    [
+     "2026 Australian Wheelchair Tennis National Champio",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 NSW State Champion of Champions",
+     "Broadmeadow"
+    ],
+    [
+     "2026 J125 KDV Sport Junior Slam Series - Girls Onl",
+     "Gold Coast"
+    ],
+    [
+     "2026 J125 Samford Junior Championships - Boys Only",
+     "Brisbane"
+    ],
+    [
+     "2026 Qld Blind & Low Vision Open",
+     "East Brisbane"
+    ],
+    [
+     "2026 O3k David Turbayne Tennis Centre Open",
+     "Brisbane"
+    ],
+    [
+     "2026 J1000 18U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 CBC Bolt 2 Brisbane",
+     "Brisbane"
+    ],
+    [
+     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
+     "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
+    ],
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
+     "Craigieburn"
+    ],
+    [
+     "2026 Dave Matthews Seniors Tournament",
+     "Nelson Bay"
+    ],
+    [
+     "2026 Peter Smith IDA/DHOH/Parastanding & Wheelchai",
+     "North Adelaide"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ],
+    [
+     "2026 JC My First Tournament #18 Sunbury",
+     "Sunbury"
+    ],
+    [
+     "2026 OC UQ Tennis Club December Any-Gender Night S",
+     "Brisbane"
+    ],
+    [
+     "2026 JC Keilor Park TC Tournament",
+     "Melbourne"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 25605,
-   "listings": 1,
+   "bytes": 27567,
+   "listings": 0,
    "kept": 0,
-   "rows": [
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 5,
-   "bytes": 33461,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 6,
-   "bytes": 37798,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 7,
-   "bytes": 47051,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
-  },
-  {
-   "page": 8,
-   "bytes": 48939,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 Open & J125 Mullumbimby",
-     "Mullumbimby"
-    ]
-   ]
+   "rows": []
   }
  ]
 }
