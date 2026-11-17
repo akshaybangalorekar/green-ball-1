@@ -233,7 +233,7 @@
   .kpi .n small { font-size: 13px; font-weight: 600; color: var(--ink-dim); letter-spacing: 0; }
   .kpi .k { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); margin-top: 9px; }
 
-  .chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .chart { display: block; width: clamp(92px, 26vw, 120px); height: auto; overflow: visible; margin: 0 auto; }
   .chart text { font-family: var(--mono); font-size: 10px; fill: var(--ink-dim); }
   .chart .big { font-family: var(--display); font-size: 26px; font-weight: 800; fill: var(--ink); }
   .checked { margin: 8px 0 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
@@ -1511,7 +1511,7 @@ function viewPlayer(name) {
         <div class="pteam">${esc(p.team)}${r ? ` · ${r.rank}${ordinal(r.rank)} of ${r.total} in the section` : ""}</div>
         ${r ? `<button class="whyr" data-explain="${esc(p.name)}">Why ${esc(first(p.name))} is ${r.rank}${ordinal(r.rank)} ›</button>` : ""}
       </div>
-      <div style="display:flex;justify-content:center;padding:10px 0 2px">
+      <div style="display:flex;justify-content:center;padding:4px 0 0">
         ${ring(pctShown, 100, pctShown + "%", "sets won")}
       </div>
       <div class="srow"><span class="k">Sets played</span><span class="v">${p.rubbers}</span></div>
