@@ -242,6 +242,15 @@
   .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 
   /* stat rows */
+  .stats { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .stats th { font-family: var(--mono); font-size: 10.5px; letter-spacing: .09em; text-transform: uppercase;
+    color: var(--ink-dim); font-weight: 500; padding: 0 0 10px; border-bottom: 1px solid var(--line); text-align: right; }
+  .stats th:first-child { text-align: left; }
+  .stats td { padding: 13px 0; border-bottom: 1px solid var(--line-soft); }
+  .stats tr:last-child td { border-bottom: 0; }
+  .stats .lbl { font-size: 15px; color: var(--ink); }
+  .stats .num { text-align: right; font-family: var(--display); font-weight: 800; font-size: 19px;
+    font-variant-numeric: tabular-nums; width: 72px; }
   .srow { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line-soft); }
   .srow:first-child { border-top: 0; }
   .srow .k { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-dim); }
@@ -1528,11 +1537,17 @@ function viewPlayer(name) {
       <div style="display:flex;justify-content:center;padding:4px 0 0">
         ${ring(pctShown, 100, pctShown + "%", "sets won")}
       </div>
-      <div class="srow"><span class="k">Sets played</span><span class="v">${p.rubbers}</span></div>
-      <div class="srow"><span class="k">Sets</span><span class="v">${p.sets_won}<small>–${p.sets_lost}</small></span></div>
-      <div class="srow"><span class="k">Games</span><span class="v">${p.games_won}<small>–${p.games_lost}</small></span></div>
-      <div class="srow"><span class="k">Singles</span><span class="v">${p.singles_won}<small>–${p.singles_played - p.singles_won}</small></span></div>
-      <div class="srow"><span class="k">Doubles</span><span class="v">${p.doubles_won}<small>–${p.doubles_played - p.doubles_won}</small></span></div>
+      <table class="stats">
+        <thead><tr><th>His record</th><th>Won</th><th>Lost</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">Sets</td><td class="num">${p.sets_won}</td><td class="num">${p.sets_lost}</td></tr>
+          <tr><td class="lbl">Games</td><td class="num">${p.games_won}</td><td class="num">${p.games_lost}</td></tr>
+          <tr><td class="lbl">Singles</td><td class="num">${p.singles_won}</td><td class="num">${p.singles_played - p.singles_won}</td></tr>
+          <tr><td class="lbl">Doubles</td><td class="num">${p.doubles_won}</td><td class="num">${p.doubles_played - p.doubles_won}</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">A set is first to six games, so the games column counts every individual game across those sets.
+      Won plus lost gives how many he has played.</p>
     </div>
     <div class="card">
       <p class="label">Every set</p>
