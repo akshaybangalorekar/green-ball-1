@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T03:28:05+00:00",
+ "updated": "2026-11-17T05:40:18+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,13 +11,13 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 55  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 56  2026 UWA Clay Court Junior Slide https //static tournamentsoftware com/content/images"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 17289,
+   "bytes": 17293,
    "listings": 18,
    "kept": 0,
    "rows": [
@@ -237,7 +237,7 @@
   },
   {
    "page": 3,
-   "bytes": 43984,
+   "bytes": 43166,
    "listings": 53,
    "kept": 1,
    "rows": [
@@ -386,6 +386,10 @@
      "Wagga Wagga"
     ],
     [
+     "2026 JDS CBC Green Ball Gardiner - Glen Iris Tourn",
+     "Melbourne"
+    ],
+    [
      "2026 JC My First Tournament #18 Sunbury",
      "Sunbury"
     ],
@@ -396,16 +400,12 @@
     [
      "2026 JC Keilor Park TC Tournament",
      "Melbourne"
-    ],
-    [
-     "2026 J125 Tennis Gear Shaw Park Junior Championshi",
-     "Wooloowin"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 27292,
+   "bytes": 26643,
    "listings": 0,
    "kept": 0,
    "rows": []
