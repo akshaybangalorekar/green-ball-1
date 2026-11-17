@@ -251,6 +251,17 @@
   .stats .lbl { font-size: 15px; color: var(--ink); }
   .stats .num { text-align: right; font-family: var(--display); font-weight: 800; font-size: 19px;
     font-variant-numeric: tabular-nums; width: 72px; }
+  .stats .num.won { color: var(--brand); }
+  .stats .num.lost { color: var(--loss); }
+  .stats.sets th:nth-child(2), .stats.sets td.who { text-align: left; }
+  .stats.sets th:nth-child(3), .stats.sets td.score { text-align: right; width: 70px; }
+  .stats.sets .who { font-size: 13.5px; color: var(--ink-dim); line-height: 1.4; padding-right: 8px; }
+  .stats.sets .lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--ink-dim); width: 62px; }
+  .chip { display: inline-block; font-family: var(--mono); font-size: 12.5px; font-weight: 500;
+    padding: 3px 9px; border-radius: 7px; color: #fff; white-space: nowrap; }
+  .chip.w { background: var(--brand); }
+  .chip.l { background: var(--loss); }
   .srow { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line-soft); }
   .srow:first-child { border-top: 0; }
   .srow .k { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-dim); }
@@ -1514,15 +1525,18 @@ function viewPlayer(name) {
       const who = rb.type === "singles"
         ? `vs ${esc(real[0] || "opponent")}`
         : `with ${esc(first(rb.partner || ""))} vs ${real.length ? real.map((o) => esc(first(o))).join(" & ") : "opponent"}`;
-      return `<div class="rub ${rb.won ? "w" : "l"}">
-        <span class="rt">${rb.type === "singles" ? "Singles" : "Doubles"}</span>
-        <span class="rw">${who}</span>
-        <span class="rs">${rb.ours}–${rb.theirs}</span>
-      </div>`;
+      return `<tr>
+        <td class="lbl">${rb.type === "singles" ? "Singles" : "Doubles"}</td>
+        <td class="who">${who}</td>
+        <td class="score"><span class="chip ${rb.won ? "w" : "l"}">${rb.ours}–${rb.theirs}</span></td>
+      </tr>`;
     }).join("");
     return `<div class="pround">
       <div class="prh"><b>Round ${d.round}</b><span>${fmtDate(d.date)} · vs ${esc(d.opponent_team)}</span></div>
-      ${rubbers}
+      <table class="stats sets">
+        <thead><tr><th>Set</th><th>Against</th><th>Score</th></tr></thead>
+        <tbody>${rubbers}</tbody>
+      </table>
     </div>`;
   }).join("");
 
@@ -1538,16 +1552,16 @@ function viewPlayer(name) {
         ${ring(pctShown, 100, pctShown + "%", "sets won")}
       </div>
       <table class="stats">
-        <thead><tr><th>His record</th><th>Won</th><th>Lost</th></tr></thead>
+        <thead><tr><th>Record</th><th>Won</th><th>Lost</th></tr></thead>
         <tbody>
-          <tr><td class="lbl">Sets</td><td class="num">${p.sets_won}</td><td class="num">${p.sets_lost}</td></tr>
-          <tr><td class="lbl">Games</td><td class="num">${p.games_won}</td><td class="num">${p.games_lost}</td></tr>
-          <tr><td class="lbl">Singles</td><td class="num">${p.singles_won}</td><td class="num">${p.singles_played - p.singles_won}</td></tr>
-          <tr><td class="lbl">Doubles</td><td class="num">${p.doubles_won}</td><td class="num">${p.doubles_played - p.doubles_won}</td></tr>
+          <tr><td class="lbl">Sets</td><td class="num won">${p.sets_won}</td><td class="num lost">${p.sets_lost}</td></tr>
+          <tr><td class="lbl">Games</td><td class="num won">${p.games_won}</td><td class="num lost">${p.games_lost}</td></tr>
+          <tr><td class="lbl">Singles</td><td class="num won">${p.singles_won}</td><td class="num lost">${p.singles_played - p.singles_won}</td></tr>
+          <tr><td class="lbl">Doubles</td><td class="num won">${p.doubles_won}</td><td class="num lost">${p.doubles_played - p.doubles_won}</td></tr>
         </tbody>
       </table>
       <p class="caption">A set is first to six games, so the games column counts every individual game across those sets.
-      Won plus lost gives how many he has played.</p>
+      Won plus lost gives how many were played.</p>
     </div>
     <div class="card">
       <p class="label">Every set</p>
