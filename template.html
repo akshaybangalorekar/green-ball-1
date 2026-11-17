@@ -405,11 +405,20 @@
   /* ---------- ladder list ---------- */
   .ptable { width: 100%; border-collapse: collapse; }
   .ptable th { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
-    color: var(--ink-dim); font-weight: 500; text-align: left; padding: 0 0 12px; border-bottom: 1px solid var(--line); }
+    color: var(--ink-dim); font-weight: 500; text-align: left; padding: 0 0 12px; border-bottom: 1px solid var(--line);
+    vertical-align: bottom; }
   .ptable th .thsub { display: block; font-size: 9.5px; letter-spacing: .05em; text-transform: none;
     color: var(--ink-dim); opacity: .8; margin-top: 3px; font-weight: 400; }
   .ptable td { padding: 14px 0; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
-  .ptable .caret { display: inline-block; width: 14px; color: var(--ink-dim); font-size: 10px; margin-right: 2px; }
+  .plinner, .prowinner { display: flex; align-items: center; gap: 8px; }
+  .prowinner { align-items: flex-start; }
+  .pblock { flex: 1; min-width: 0; }
+  .chev { margin-left: auto; flex: 0 0 auto; color: var(--ink-dim); font-size: 13px; line-height: 1;
+    transition: transform .18s ease, color .18s ease; }
+  .prowinner .chev { margin-top: 6px; }
+  .clubrow.open .chev { transform: rotate(90deg); }
+  .clubrow.open .chev, .clubrow:active .chev { color: var(--brand); }
+  .prow2:active .chev { color: var(--brand); }
   .ptable tr.clubrow { cursor: pointer; }
   .ptable tr.clubrow:active { opacity: .6; }
   .ptable .pn2 { display: block; font-size: 15px; font-weight: 500; color: var(--ink); }
@@ -1248,7 +1257,9 @@ function teamsTable() {
 
     let out = `<tr class="clubrow ${t.isUs ? "us" : ""} ${open ? "open" : ""}" data-club="${esc(t.team)}">
       <td class="pos">${t.pos}</td>
-      <td class="pl"><span class="caret">${open ? "▾" : "▸"}</span><span class="pn inline">${esc(t.team)}</span>${fin ? `<span class="finchip">finals</span>` : ""}</td>
+      <td class="pl"><span class="plinner">
+        <span class="pn inline">${esc(t.team)}</span>${fin ? `<span class="finchip">finals</span>` : ""}
+        <span class="chev" aria-hidden="true">▸</span></span></td>
       <td class="num">${t.pts.toFixed(1)}</td>
       <td class="num">${pct(t.pct)}</td>
     </tr>`;
@@ -1256,10 +1267,13 @@ function teamsTable() {
     if (open) {
       out += players.map((p) => `<tr class="prow2 ${t.isUs ? "us" : ""}" data-explain="${esc(p.name)}">
         <td class="pos"></td>
-        <td class="pl">
-          <span class="pn2">${esc(p.name)}</span>
-          <span class="pbar"><i style="width:${Math.max(2, p.set_pct)}%"></i></span>
-          <span class="pmeta">${p.sets_won} of ${p.rubbers} sets · ${p.games_won}–${p.games_lost} games</span>
+        <td class="pl"><span class="prowinner">
+          <span class="pblock">
+            <span class="pn2">${esc(p.name)}</span>
+            <span class="pbar"><i style="width:${Math.max(2, p.set_pct)}%"></i></span>
+            <span class="pmeta">${p.sets_won} of ${p.rubbers} sets · ${p.games_won}–${p.games_lost} games</span>
+          </span>
+          <span class="chev" aria-hidden="true">▸</span></span>
         </td>
         <td class="rate2">${p.set_pct}%</td>
       </tr>`).join("");
@@ -1270,7 +1284,7 @@ function teamsTable() {
   }).join("");
 
   return `<div class="tblwrap"><table class="ptable">
-      <thead><tr><th class="pos">#</th><th class="pl">Team<span class="thsub">tap a club for its players</span></th><th class="num">Pts</th><th class="num">%</th></tr></thead>
+      <thead><tr><th class="pos">#</th><th class="pl">Team<span class="thsub">tap a club, then a player</span></th><th class="num">Pts</th><th class="num">%</th></tr></thead>
       <tbody>${rows}</tbody>
     </table></div>
     <p class="caption">The official ladder from TROLS, with the top four marked for finals. Tap a club to see its
