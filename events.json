@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-16T21:25:49+00:00",
+ "updated": "2026-11-17T03:12:32+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,20 +11,16 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 56  2026 UWA Clay Court Junior Slide https //static tournamentsoftware com/content/images"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 55  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 17133,
+   "bytes": 17289,
    "listings": 18,
    "kept": 0,
    "rows": [
-    [
-     "2026 O3k Caboolture Open Championships #2",
-     "Caboolture"
-    ],
     [
      "2026 10U Green Ball Nationals",
      "Penrith"
@@ -92,19 +88,19 @@
     [
      "2026 JC CBC Yellow Vida Truganina Tournament",
      "Truganina"
+    ],
+    [
+     "2026 JC Hume Tennis My First Tournament #17",
+     "Craigieburn"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 28762,
+   "bytes": 29085,
    "listings": 33,
    "kept": 0,
    "rows": [
-    [
-     "2026 O3k Caboolture Open Championships #2",
-     "Caboolture"
-    ],
     [
      "2026 10U Green Ball Nationals",
      "Penrith"
@@ -232,19 +228,19 @@
     [
      "2026 JDS CBC Seacliff #3",
      "Seacliff"
+    ],
+    [
+     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
+     "Craigieburn"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 43005,
+   "bytes": 43984,
    "listings": 53,
    "kept": 1,
    "rows": [
-    [
-     "2026 O3k Caboolture Open Championships #2",
-     "Caboolture"
-    ],
     [
      "2026 10U Green Ball Nationals",
      "Penrith"
@@ -400,12 +396,16 @@
     [
      "2026 JC Keilor Park TC Tournament",
      "Melbourne"
+    ],
+    [
+     "2026 J125 Tennis Gear Shaw Park Junior Championshi",
+     "Wooloowin"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 26488,
+   "bytes": 27292,
    "listings": 0,
    "kept": 0,
    "rows": []
