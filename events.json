@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T19:44:15+00:00",
+ "updated": "2026-11-19T02:08:25+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -17,7 +17,7 @@
  "debug": [
   {
    "page": 1,
-   "bytes": 16566,
+   "bytes": 16584,
    "listings": 18,
    "kept": 0,
    "rows": [
@@ -97,7 +97,7 @@
   },
   {
    "page": 2,
-   "bytes": 28075,
+   "bytes": 28090,
    "listings": 33,
    "kept": 0,
    "rows": [
@@ -237,7 +237,7 @@
   },
   {
    "page": 3,
-   "bytes": 42154,
+   "bytes": 42141,
    "listings": 53,
    "kept": 1,
    "rows": [
@@ -386,12 +386,12 @@
      "Wagga Wagga"
     ],
     [
-     "2026 JDS CBC Green Ball Gardiner - Glen Iris Tourn",
-     "Melbourne"
-    ],
-    [
      "2026 JC My First Tournament #18 Sunbury",
      "Sunbury"
+    ],
+    [
+     "2026 JDS CBC Green Ball Gardiner - Glen Iris Tourn",
+     "Melbourne"
     ],
     [
      "2026 OC UQ Tennis Club December Any-Gender Night S",
@@ -405,7 +405,7 @@
   },
   {
    "page": 4,
-   "bytes": 25442,
+   "bytes": 25410,
    "listings": 0,
    "kept": 0,
    "rows": []
