@@ -254,14 +254,12 @@
   .stats .num.won { color: var(--brand); }
   .stats .num.lost { color: var(--loss); }
   .stats.sets th:nth-child(2), .stats.sets td.who { text-align: left; }
-  .stats.sets th:nth-child(3), .stats.sets td.score { text-align: right; width: 70px; }
+  .stats.sets th:nth-child(3), .stats.sets td.num,
+  .stats.sets th:nth-child(4) { text-align: right; width: 46px; }
+  .stats.sets .num { font-size: 16px; padding: 13px 0; }
   .stats.sets .who { font-size: 13.5px; color: var(--ink-dim); line-height: 1.4; padding-right: 8px; }
   .stats.sets .lbl { font-family: var(--mono); font-size: 9.5px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ink-dim); width: 62px; }
-  .chip { display: inline-block; font-family: var(--mono); font-size: 12.5px; font-weight: 500;
-    padding: 3px 9px; border-radius: 7px; color: #fff; white-space: nowrap; }
-  .chip.w { background: var(--brand); }
-  .chip.l { background: var(--loss); }
   .srow { display: flex; align-items: baseline; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line-soft); }
   .srow:first-child { border-top: 0; }
   .srow .k { font-family: var(--mono); font-size: 10px; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-dim); }
@@ -1528,13 +1526,14 @@ function viewPlayer(name) {
       return `<tr>
         <td class="lbl">${rb.type === "singles" ? "Singles" : "Doubles"}</td>
         <td class="who">${who}</td>
-        <td class="score"><span class="chip ${rb.won ? "w" : "l"}">${rb.ours}–${rb.theirs}</span></td>
+        <td class="num won">${rb.ours}</td>
+        <td class="num lost">${rb.theirs}</td>
       </tr>`;
     }).join("");
     return `<div class="pround">
       <div class="prh"><b>Round ${d.round}</b><span>${fmtDate(d.date)} · vs ${esc(d.opponent_team)}</span></div>
       <table class="stats sets">
-        <thead><tr><th>Set</th><th>Against</th><th>Score</th></tr></thead>
+        <thead><tr><th>Set</th><th>Against</th><th>Won</th><th>Lost</th></tr></thead>
         <tbody>${rubbers}</tbody>
       </table>
     </div>`;
