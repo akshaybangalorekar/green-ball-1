@@ -1,0 +1,37 @@
+name: Debug match detail
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Inspect result.js and match detail
+        run: |
+          python - <<'PY'
+          import re, urllib.request
+          UA = {"User-Agent": "Mozilla/5.0 (compatible; em-tennis/1.0)"}
+          def get(u):
+              return urllib.request.urlopen(urllib.request.Request(u, headers=UA), timeout=30).read().decode("utf-8", "replace")
+          for path in ("/js/result.js?v=2", "/js/result.js"):
+              try:
+                  js = get("https://trols.org.au/wdta" + path)
+                  print("=== JS", path, len(js))
+                  print(js[:1800])
+                  print("PHP refs:", sorted(set(re.findall(r'[\w./]*\.php[\w?=&]*', js))))
+                  break
+              except Exception as e:
+                  print("ERR", path, e)
+          for guess in ("results_detail.php", "match.php", "result_detail.php", "results_match.php"):
+              u = f"https://trols.org.au/wdta/{guess}"
+              try:
+                  b = get(u)
+                  print("=== ", guess, len(b), "rubber-ish:", b.lower().count("rubber"), "names:", b.count("<td"))
+                  print(b[:400].replace("\n", " "))
+              except Exception as e:
+                  print("ERR", guess, e)
+          PY
