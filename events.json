@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19T19:44:10+00:00",
+ "updated": "2026-11-20T22:15:54+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,13 +11,13 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 56  2026 UWA Clay Court Junior Slide https //static tournamentsoftware com/content/images"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 54  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 16148,
+   "bytes": 16597,
    "listings": 18,
    "kept": 0,
    "rows": [
@@ -30,10 +30,6 @@
      "Brisbane"
     ],
     [
-     "2026 Victoria Police & Emergency Services Games",
-     "Frankston North"
-    ],
-    [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
     ],
@@ -44,10 +40,6 @@
     [
      "2026 JC Hume Tennis MJTPS #9",
      "Craigieburn"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -64,6 +56,10 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -92,12 +88,16 @@
     [
      "2026 JC Hume Tennis My First Tournament #17",
      "Craigieburn"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 27555,
+   "bytes": 28038,
    "listings": 33,
    "kept": 0,
    "rows": [
@@ -110,10 +110,6 @@
      "Brisbane"
     ],
     [
-     "2026 Victoria Police & Emergency Services Games",
-     "Frankston North"
-    ],
-    [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
     ],
@@ -124,10 +120,6 @@
     [
      "2026 JC Hume Tennis MJTPS #9",
      "Craigieburn"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -144,6 +136,10 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -232,12 +228,16 @@
     [
      "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
      "Craigieburn"
+    ],
+    [
+     "2026 Dave Matthews Seniors Tournament",
+     "Nelson Bay"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 41605,
+   "bytes": 42630,
    "listings": 53,
    "kept": 1,
    "rows": [
@@ -250,10 +250,6 @@
      "Brisbane"
     ],
     [
-     "2026 Victoria Police & Emergency Services Games",
-     "Frankston North"
-    ],
-    [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
     ],
@@ -264,10 +260,6 @@
     [
      "2026 JC Hume Tennis MJTPS #9",
      "Craigieburn"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Camperdown"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -284,6 +276,10 @@
     [
      "2026 OC Tennis Country Series - Wollongong FINALS",
      "Gwynneville"
+    ],
+    [
+     "2026 12u & 14u Australian Grass Court Championship",
+     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -400,12 +396,16 @@
     [
      "2026 JC Keilor Park TC Tournament",
      "Melbourne"
+    ],
+    [
+     "2026 J125 Tennis Gear Shaw Park Junior Championshi",
+     "Wooloowin"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 24840,
+   "bytes": 24894,
    "listings": 0,
    "kept": 0,
    "rows": []
