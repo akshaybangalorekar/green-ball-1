@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-20T22:15:54+00:00",
+ "updated": "2026-11-21T04:34:25+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,20 +11,16 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 54  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 53  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 16597,
-   "listings": 18,
+   "bytes": 15726,
+   "listings": 17,
    "kept": 0,
    "rows": [
-    [
-     "2026 10U Green Ball Nationals",
-     "Penrith"
-    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -97,14 +93,10 @@
   },
   {
    "page": 2,
-   "bytes": 28038,
+   "bytes": 28871,
    "listings": 33,
    "kept": 0,
    "rows": [
-    [
-     "2026 10U Green Ball Nationals",
-     "Penrith"
-    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -232,19 +224,19 @@
     [
      "2026 Dave Matthews Seniors Tournament",
      "Nelson Bay"
+    ],
+    [
+     "2026 Peter Smith IDA/DHOH/Parastanding & Wheelchai",
+     "North Adelaide"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 42630,
+   "bytes": 42849,
    "listings": 53,
    "kept": 1,
    "rows": [
-    [
-     "2026 10U Green Ball Nationals",
-     "Penrith"
-    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -400,12 +392,16 @@
     [
      "2026 J125 Tennis Gear Shaw Park Junior Championshi",
      "Wooloowin"
+    ],
+    [
+     "2026 JC CBC Green Tumby Bay Junior Tournament",
+     "Tumby Bay"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 24894,
+   "bytes": 25680,
    "listings": 0,
    "kept": 0,
    "rows": []
