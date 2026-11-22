@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-21T20:42:24+00:00",
+ "updated": "2026-11-22T00:46:19+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,14 +11,14 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 53  2026 J500 Victorian Junior Grasscourt Championships https //static tournamentsoftware"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 52  2026 OC JC CBC ACT Residents Championship https //static tournamentsoftware com/conte"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 15726,
-   "listings": 17,
+   "bytes": 15933,
+   "listings": 16,
    "kept": 0,
    "rows": [
     [
@@ -32,10 +32,6 @@
     [
      "2026 OC Parkville Tennis Club Doubles Club Champio",
      "Parkville"
-    ],
-    [
-     "2026 JC Hume Tennis MJTPS #9",
-     "Craigieburn"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -93,7 +89,7 @@
   },
   {
    "page": 2,
-   "bytes": 28727,
+   "bytes": 28011,
    "listings": 33,
    "kept": 0,
    "rows": [
@@ -108,10 +104,6 @@
     [
      "2026 OC Parkville Tennis Club Doubles Club Champio",
      "Parkville"
-    ],
-    [
-     "2026 JC Hume Tennis MJTPS #9",
-     "Craigieburn"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -228,12 +220,16 @@
     [
      "2026 Peter Smith IDA/DHOH/Parastanding & Wheelchai",
      "North Adelaide"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 42704,
+   "bytes": 42433,
    "listings": 53,
    "kept": 1,
    "rows": [
@@ -248,10 +244,6 @@
     [
      "2026 OC Parkville Tennis Club Doubles Club Champio",
      "Parkville"
-    ],
-    [
-     "2026 JC Hume Tennis MJTPS #9",
-     "Craigieburn"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -396,12 +388,16 @@
     [
      "2026 JC CBC Green Tumby Bay Junior Tournament",
      "Tumby Bay"
+    ],
+    [
+     "2026 JC Hume Tennis HEAD Discovery Final",
+     "Craigieburn"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 25534,
+   "bytes": 25695,
    "listings": 0,
    "kept": 0,
    "rows": []
