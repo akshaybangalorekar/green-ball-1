@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T20:25:48+00:00",
+ "updated": "2026-11-23T22:59:45+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,16 +11,20 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 38  2026 OC Eynesbury Tennis Club Mixed Doubles Tournament https //static tournamentsoftw"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 39  2026 JDS CBC Green Mornington Tournament  5 https //static tournamentsoftware com/con"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 15918,
+   "bytes": 16000,
    "listings": 15,
    "kept": 0,
    "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -76,19 +80,19 @@
     [
      "2026 CBC Vida Essendon Orange Hot Shots Match Play",
      "Essendon"
-    ],
-    [
-     "2026 JC CBC Green Vida Truganina Tournament",
-     "Truganina"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 30415,
+   "bytes": 30025,
    "listings": 35,
    "kept": 1,
    "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -224,19 +228,19 @@
     [
      "2026 JDS CBC Green Mornington Tournament #5",
      "Mornington"
-    ],
-    [
-     "2026 OC Eynesbury Tennis Club Mixed Doubles Tourna",
-     "Eynesbury"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 44410,
+   "bytes": 44275,
    "listings": 54,
    "kept": 1,
    "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
     [
      "2026 OC UQ Tennis Club November Night Singles Fixt",
      "Brisbane"
@@ -392,16 +396,12 @@
     [
      "2026 J500 Victorian Junior Grasscourt Championship",
      "Wangaratta"
-    ],
-    [
-     "2026 Kooyong Lawn TC December Junior Member Tourna",
-     "Kooyong"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 25288,
+   "bytes": 26537,
    "listings": 0,
    "kept": 0,
    "rows": []
