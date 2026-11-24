@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T07:22:25+00:00",
+ "updated": "2026-11-24T19:47:03+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -17,7 +17,7 @@
  "debug": [
   {
    "page": 1,
-   "bytes": 15909,
+   "bytes": 15911,
    "listings": 15,
    "kept": 0,
    "rows": [
@@ -85,7 +85,7 @@
   },
   {
    "page": 2,
-   "bytes": 30234,
+   "bytes": 30094,
    "listings": 34,
    "kept": 1,
    "rows": [
@@ -229,7 +229,7 @@
   },
   {
    "page": 3,
-   "bytes": 44383,
+   "bytes": 44385,
    "listings": 53,
    "kept": 1,
    "rows": [
@@ -397,10 +397,63 @@
   },
   {
    "page": 4,
-   "bytes": 26233,
-   "listings": 0,
+   "bytes": 26979,
+   "listings": 1,
    "kept": 0,
-   "rows": []
+   "rows": [
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 5,
+   "bytes": 34376,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 6,
+   "bytes": 41521,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 7,
+   "bytes": 46312,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 8,
+   "bytes": 51182,
+   "listings": 1,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
   }
  ]
 }
