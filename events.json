@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23T22:59:45+00:00",
+ "updated": "2026-11-24T07:22:25+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -17,7 +17,7 @@
  "debug": [
   {
    "page": 1,
-   "bytes": 16000,
+   "bytes": 15909,
    "listings": 15,
    "kept": 0,
    "rows": [
@@ -32,10 +32,6 @@
     [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -80,13 +76,17 @@
     [
      "2026 CBC Vida Essendon Orange Hot Shots Match Play",
      "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 30025,
-   "listings": 35,
+   "bytes": 30234,
+   "listings": 34,
    "kept": 1,
    "rows": [
     [
@@ -100,10 +100,6 @@
     [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -233,8 +229,8 @@
   },
   {
    "page": 3,
-   "bytes": 44275,
-   "listings": 54,
+   "bytes": 44383,
+   "listings": 53,
    "kept": 1,
    "rows": [
     [
@@ -248,10 +244,6 @@
     [
      "2026 OC JC NSW School Boys and School Girls",
      "Pennant Hills"
-    ],
-    [
-     "2026 12u & 14u Australian Grass Court Championship",
-     "Leumeah"
     ],
     [
      "2026 12u & 14u Australian Grasscourt Championships",
@@ -396,12 +388,16 @@
     [
      "2026 J500 Victorian Junior Grasscourt Championship",
      "Wangaratta"
+    ],
+    [
+     "2026 Kooyong Lawn TC December Junior Member Tourna",
+     "Kooyong"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 26537,
+   "bytes": 26233,
    "listings": 0,
    "kept": 0,
    "rows": []
