@@ -101,6 +101,26 @@
 
 
   /* ---------- iOS-style settings ---------- */
+
+  /* collapsible sections */
+  .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
+  .evkey b { color: var(--ink); font-weight: 600; }
+  .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
+    box-shadow: 0 8px 24px -18px rgba(8, 40, 24, .5); }
+  .fold > summary { display: flex; align-items: center; gap: 10px; padding: 17px 20px; cursor: pointer;
+    list-style: none; }
+  .fold > summary::-webkit-details-marker { display: none; }
+  .ftitle { font-family: var(--display); font-weight: 800; font-size: 17px; letter-spacing: -.01em; }
+  .fsum { margin-left: auto; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--ink-dim); }
+  .fchev { color: var(--ink-dim); font-size: 15px; transition: transform .2s; }
+  .fold[open] .fchev { transform: rotate(90deg); }
+  .fbody { padding: 0 20px 18px; }
+  .fold[open] > summary { border-bottom: 1px solid var(--line-soft); margin-bottom: 12px; }
+  .utrsm { font-size: 15px; font-family: var(--mono); font-weight: 400; letter-spacing: .1em; opacity: .8; }
+  .hero.plan .utrbar { margin-top: 12px; height: 9px; border-radius: 6px; background: rgba(255,255,255,.22); overflow: hidden; }
+  .hero.plan .utrbar i { display: block; height: 100%; background: var(--ball); border-radius: 6px; }
+
   .ios-head { margin: 22px 0 7px; padding-left: 16px; font-size: 12.5px; letter-spacing: .02em;
     text-transform: uppercase; color: var(--ink-dim); }
   .ios-group { background: var(--surface); border-radius: 12px; overflow: hidden;
@@ -208,7 +228,7 @@
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
-    font-size: 12.5px; letter-spacing: .01em; text-transform: uppercase; color: var(--on-brand-dim); padding: 11px 3px;
+    font-size: 11px; letter-spacing: 0; text-transform: uppercase; color: var(--on-brand-dim); padding: 11px 1px;
     border-radius: 9px; white-space: nowrap; transition: color .15s, background .15s;
     flex: 1 1 0; min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; }
   .tabs button[aria-selected="true"] { color: var(--ball-ink); background: var(--ball); font-weight: 500;
@@ -1666,196 +1686,122 @@ function closeLabel(iso) {
   return `<span class="due">closes in ${n}d</span>`;
 }
 
+const PRIORITY = {
+  "Start here": { label: "First", hint: "do this next", cls: "go" },
+  "Target": { label: "Aim", hint: "the ones that count", cls: "tg" },
+  "Optional": { label: "Maybe", hint: "if it suits", cls: "" },
+  "Later": { label: "Later", hint: "not yet", cls: "" },
+};
+
+function fold(id, title, summary, body, open) {
+  return `<details class="fold"${open ? " open" : ""}>
+    <summary><span class="ftitle">${title}</span><span class="fsum">${summary}</span><span class="fchev">›</span></summary>
+    <div class="fbody">${body}</div>
+  </details>`;
+}
+
 function viewPathway() {
   if (!pathUnlocked()) return `<div class="card"><p class="caption" style="margin:0">Locked.</p></div>`;
 
-  const nextWDTA = nextRound();
-  const evs = PLAN_EVENTS
-    .map((e) => ({ ...e, left: daysTo(e.c) }))
-    .sort((a, b) => (a.d < b.d ? -1 : 1));
+  const t = matchTotals();
+  const gap = Math.round((TARGET_UTR - MY_UTR) * 10) / 10;
+  const pctOf = Math.max(4, Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100)));
+  const today = todayISO();
+  const up = PLAN_EVENTS.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : 1));
+  const firsts = up.filter((e) => e.p === "Start here").slice(0, 3);
+  const nextEvent = up[0];
 
-  const byMonth = {};
-  evs.forEach((e) => {
-    const k = `${MONTHS[parseDate(e.d).getMonth()]} ${parseDate(e.d).getFullYear()}`;
-    (byMonth[k] = byMonth[k] || []).push(e);
-  });
+  /* ---- dashboard ---- */
+  const dash = `
+    <div class="hero plan">
+      <div class="kicker">His tennis right now</div>
+      <h2>${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} <span class="utrsm">UTR</span></h2>
+      <div class="utrbar"><i style="width:${pctOf}%"></i></div>
+      <p class="since">${gap > 0
+        ? `<b>${gap.toFixed(1)} to go</b> to his next goal of ${TARGET_UTR.toFixed(1)}.`
+        : `<b>Goal reached.</b> He is past ${TARGET_UTR.toFixed(1)}.`}
+        ${t.n} matches so far: <b>${t.w} won, ${t.l} lost</b>.</p>
+    </div>
 
-  const eventCards = Object.keys(byMonth).map((month) => `
-    <p class="monthh">${month}</p>
-    ${byMonth[month].map((e) => `
-      <div class="ev ${e.p === "Start here" ? "star" : ""}">
-        <div class="evtop">
-          <span class="evdate">${fmtShort(e.d)}</span>
-          <span class="evtier">${esc(e.t)}</span>
-          <span class="evpri ${e.p === "Start here" ? "go" : e.p === "Target" ? "tg" : ""}">${esc(e.p)}</span>
-        </div>
+    <div class="kpis">
+      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}Matches</div></div>
+      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Won</div></div>
+      <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games</div></div>
+    </div>`;
+
+  /* ---- what to do next ---- */
+  const nextBody = firsts.length
+    ? firsts.map((e) => `<div class="ev star">
+        <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span></div>
         <div class="evname">${esc(e.n)}</div>
-        <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} drive</div>
-        <div class="evmeta">${esc(e.e)}</div>
+        <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${esc(e.e)}</div>
         <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
         <div class="evfoot">${closeLabel(e.c)}</div>
-        ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>`
-          : inClubBreak(e) ? `<p class="freeweek">Club competition is in its summer break — this week is free</p>` : ""}
+        ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
         <div class="evlinks">
-          <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}"
-             target="_blank" rel="noopener">Find on Tennis Australia ›</a>
-          <a href="https://www.google.com/search?q=${encodeURIComponent("site:utrsports.net " + e.n)}"
-             target="_blank" rel="noopener">Check on UTR ›</a>
+          <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find &amp; enter ›</a>
         </div>
-      </div>`).join("")}`).join("");
+      </div>`).join("")
+    : `<p class="caption" style="margin-top:0">Nothing open at his level right now — the next calendar lands later in the year.</p>`;
 
-  return `
-    <div class="hero plan">
-      <div class="kicker">The plan</div>
-      <h2>2027 season</h2>
-      <div class="lvlno">Born June 2015 · 12U for 2027 · Carnegie 3163</div>
-      <p class="since">Advanced green ball moving to yellow. One 12U season, and it is this one.
-      Goal: a reliable UTR and 12U results on the De Minaur Junior Tour.</p>
-    </div>
+  /* ---- all events ---- */
+  const evKey = `<p class="evkey"><b>First</b> do this next · <b>Aim</b> the ones that count ·
+    <b>Maybe</b> if it suits · <b>Later</b> not yet</p>`;
+  const evBody = evKey + up.map((e) => {
+    const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
+    return `<div class="ev">
+      <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
+        <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
+      <div class="evname">${esc(e.n)}</div>
+      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)}</div>
+      <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
+      <div class="evfoot">${closeLabel(e.c)}</div>
+      ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
+      <div class="evlinks">
+        <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Tennis Australia ›</a>
+        <a href="https://www.google.com/search?q=${encodeURIComponent("site:utrsports.net " + e.n)}" target="_blank" rel="noopener">UTR ›</a>
+      </div>
+    </div>`;
+  }).join("");
 
-    <div class="card">
-      <p class="label">The short version</p>
-      <ol class="planlist">
-        <li><b>2027 is his only 12U season.</b> Born 2015 puts him in the 12U pool with 2016 and 2017 boys — he is the oldest in his band. From 2028, 14U.</li>
-        <li><b>There is no national junior ranking to chase.</b> Tennis Australia retired it in 2022; entry and seeding run on verified UTR. That is the number to build.</li>
-        <li><b>The weekly competition matters more than the tournaments.</b> A 14-round local season is more matches than six tournaments, and it is a 5–10 minute drive.</li>
-        <li><b>Carnegie is well placed.</b> 13 of the 23 events here are within 30 minutes.</li>
-        <li><b>Do not start with a four-day J125.</b> Two or three yellow-ball round robins first, so he arrives with a UTR instead of being dropped in unrated.</li>
-      </ol>
-    </div>
+  /* ---- matches ---- */
+  const rows = allMatches().slice(0, 20).map((m) => `<div class="mrow">
+      <span class="mres ${m.won ? "w" : "l"}">${m.won ? "W" : "L"}</span>
+      <span class="mtxt"><b>${esc(m.opp || "Opponent")}</b><small>${fmtShort(m.date)}${m.score ? " · " + esc(m.score) : ""}${m.src ? " · " + m.src : ""}</small></span>
+      <span class="mgames">${m.gw}–${m.gl}</span>
+    </div>`).join("");
 
-    <div class="card">
-      <p class="label">This week</p>
-      <div class="prow"><b>Ring two local clubs</b><span>Lauriston in Carnegie and Glen Huntly are closest. Ask the junior coach for a team assessment before the 30 January season entries close.</span></div>
-      <div class="prow"><b>Decide on December</b><span>Dingley J125 closes 17 December if you want a ranked event. Armadale on 19 December is the gentler first yellow-ball hit — confirm its 12U is yellow, not green.</span></div>
-      <div class="prow"><b>Check the paperwork</b><span>Tennis ID and Competitive Player Profile complete. Both the UTR and AJP eligibility depend on it.</span></div>
-      <div class="prow"><b>Ask IMG Discovery</b><span>Whether the 12U draw has a consolation. Four days for one match is a poor first J125.</span></div>
-    </div>
+  const matchBody = `<table class="stats">
+      <thead><tr><th>All matches</th><th>Won</th><th>Lost</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Matches</td><td class="num won">${t.w}</td><td class="num lost">${t.l}</td></tr>
+        <tr><td class="lbl">Sets</td><td class="num won">${t.sw}</td><td class="num lost">${t.sl}</td></tr>
+        <tr><td class="lbl">Games</td><td class="num won">${t.gw}</td><td class="num lost">${t.gl}</td></tr>
+      </tbody>
+    </table>
+    ${rows}
+    <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>`;
 
-    <div class="card">
-      <p class="label">Your competition</p>
-      <p class="caption" style="margin-top:0">Bayside Regional Tennis Association — 130+ clubs, graded sections, February–June and July–December.
-      The February season starts <b>Saturday 30 January 2027</b>, entries close earlier.</p>
-      ${CLUBS_NEAR.map(([n, v]) => `<div class="prow tight"><b>${esc(n)}</b><span>${esc(v)}</span></div>`).join("")}
-      ${nextWDTA ? `<p class="caption">Your current WDTA fixture: round ${nextWDTA.round}${nextWDTA.opponent ? ` v ${esc(nextWDTA.opponent)}` : ""}, ${fmtDate(nextWDTA.date)}.</p>` : ""}
-    </div>
-
-    <div class="card">
-      <p class="label">Entry plan · ${evs.length} events</p>
-      ${eventCards}
-      <p class="caption">Dates marked TBA are last season's week — confirm on the calendar. Entries-close dates marked ~ were estimates off the standard 7–9 day cutoff.</p>
-    </div>
-
-    <div class="card">
-      <p class="label">Where he stands</p>
-      ${MY_UTR == null ? `<p class="caption" style="margin-top:0">Enter his current UTR in Settings and the gap to the
-        first target appears here.</p>` : (() => {
-        const pctOf = Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100));
-        const gap = Math.round((TARGET_UTR - MY_UTR) * 10) / 10;
-        return `<div class="utrnow"><span class="utrnum">${MY_UTR.toFixed(1)}</span>
-            <span class="utrlab">now · target ${TARGET_UTR.toFixed(1)}</span></div>
-          <div class="utrbar"><i style="width:${Math.max(3, pctOf)}%"></i>
-            <span class="mark" style="left:100%"></span></div>
-          <p class="caption" style="margin-top:10px">${gap > 0
-            ? `<b>${gap.toFixed(1)} to go</b> to his target of ${TARGET_UTR.toFixed(1)} — roughly ${Math.ceil(gap / 0.3)} good weeks of yellow-ball matches at his stage.`
-            : `<b>Target reached.</b> He is at ${MY_UTR.toFixed(1)} against a goal of ${TARGET_UTR.toFixed(1)} — set the next one in Settings.`}</p>
-          <p class="caption"><b>Projected.</b> His rating is 36% reliable — UTR firms up after about five or six counting matches.
-          Until then every result moves it sharply, in both directions.</p>
-          <p class="caption">${(() => {
-            const u = UTR_SEED;
-            const w = u.filter((m) => m.won).length, l = u.length - w;
-            const strong = u.filter((m) => /[3-9]\./.test(m.opp)).length;
-            return `His UTR record is <b>${w} wins, ${l} losses</b>, and ${strong} of those ${u.length} were against
-              players rated 3 or higher. Losing to a 4.xx opponent costs him little; a close match against that
-              standard lifts the number faster than a comfortable win lower down.`;
-          })()}</p>`;
-      })()}
-    </div>
-
-    <div class="card">
-      <p class="label">Matches for his UTR</p>
-      ${(() => {
-        const today = todayISO();
-        const up = PLAN_EVENTS.filter((e) => e.d >= today);
-        if (MY_UTR == null) {
-          return `<p class="caption" style="margin-top:0">Enter his UTR in Settings and the events that suit his level
-            are picked out here.</p>`;
-        }
-        const band = MY_UTR < 1.5 ? "start" : MY_UTR < 3 ? "build" : "compete";
-        const allowed = band === "start" ? ["JC", "JDS", "Club comp"]
-          : band === "build" ? ["JC", "JDS", "Club comp", "J125"]
-          : ["J125", "J250", "Club comp", "Qualifying"];
-        const why = band === "start"
-          ? "Under 1.5 the job is matches, not tournaments — community and development events, plus club competition."
-          : band === "build"
-          ? "Between 1.5 and 3.0 he is close to the AJP threshold: keep the JC and JDS events, and take one J125 as the stretch."
-          : "At 3.0 and above he clears the AJP entry threshold, so the ranked J125 and J250 events are the right ones.";
-        const picks = up.filter((e) => allowed.includes(e.t)).slice(0, 6);
-        if (!picks.length) return `<p class="caption" style="margin-top:0">${why} Nothing in the plan is still open at that level — the next calendar drops later in the year.</p>`;
-        return `<p class="caption" style="margin-top:0">${why}</p>
-          ${picks.map((e) => `<div class="pick">
-            <div class="picktop"><span class="evdate">${fmtShort(e.d)}</span>
-              <span class="evtier">${esc(e.t)}</span>
-              <span class="pickdue">${closeLabel(e.c)}</span></div>
-            <div class="evname">${esc(e.n)}</div>
-            <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)}</div>
-            ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
-          </div>`).join("")}
-          <p class="caption">Chosen by level from the plan's own events — not a live feed. Confirm each on the calendar.</p>`;
-      })()}
-    </div>
-
-    <div class="card">
-      <p class="label">Match log</p>
-      ${(() => {
-        const t = matchTotals();
-        if (!t.n) {
-          return `<p class="caption" style="margin-top:0">No matches logged yet. Add one after each yellow-ball
-            match — the record and game count build here, and that is what tells you whether the plan is working.</p>
-            <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>`;
-        }
-        const rows = allMatches().slice(0, 14).map((m) => `<div class="mrow">
-            <span class="mres ${m.won ? "w" : "l"}">${m.won ? "W" : "L"}</span>
-            <span class="mtxt"><b>${esc(m.opp || "Opponent")}</b><small>${fmtShort(m.date)}${m.score ? " · " + esc(m.score) : ""}${m.src ? " · " + m.src : ""}</small></span>
-            <span class="mgames">${m.gw}–${m.gl}</span>
-          </div>`).join("");
-        return `<table class="stats">
-            <thead><tr><th>All matches</th><th>Won</th><th>Lost</th></tr></thead>
-            <tbody>
-              <tr><td class="lbl">Matches</td><td class="num won">${t.w}</td><td class="num lost">${t.l}</td></tr>
-              <tr><td class="lbl">Sets</td><td class="num won">${t.sw}</td><td class="num lost">${t.sl}</td></tr>
-              <tr><td class="lbl">Games</td><td class="num won">${t.gw}</td><td class="num lost">${t.gl}</td></tr>
-            </tbody>
-          </table>
-          ${rows}
-          <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>
-          <p class="caption">Aim for draws where he is mid-pack. A close loss to a stronger player can lift a UTR
-          more than a comfortable win over a weaker one.</p>`;
-      })()}
-    </div>
-
-    <div class="card">
-      <p class="label">Targets</p>
-      <div class="prow"><b>UTR 3.0</b><span>The minimum team average to enter AJP. Treat it as the first real target.</span></div>
-      <div class="prow"><b>AJP grading</b><span>A Grade team average 5.8. Individual 12&amp;U minimum to play up in Boys 14&amp;U is 6.50.</span></div>
-      <div class="prow"><b>Top of 12U</b><span>Tennis Australia's November 2026 indication for the 2027 Finals: the ten accepted players sat between 6.6 and 7.7. A horizon, not a target.</span></div>
-      <div class="prow"><b>How UTR moves</b><span>Built from games won and lost against each opponent's rating, not from win-loss. A close loss to a stronger player can lift it more than a comfortable win over a weaker one.</span></div>
-      <div class="prow"><b>What he sees</b><span>Under 13, Australian players see their UTR to one decimal. Judge progress over a month, not a week.</span></div>
-    </div>
-
-    <div class="card">
-      <p class="label">After this: AJP</p>
-      <div class="prow"><b>Associations Junior Pennant</b><span>Sunday teams, 10 rounds plus finals, graded by UTR, against other associations. The 2026/27 season runs to 28 February 2027, so his target is 2027/28.</span></div>
-      <div class="prow"><b>Eligibility</b><span>A completed Competitive Player Profile plus at least six team matches for a club. A BRTA season from 30 January gives him that.</span></div>
-      <div class="prow"><b>Beyond</b><span>AJL, then the Wayne Arthurs, Alicia Molik and Pat Cash Cups — the more selective Bayside pathways.</span></div>
-    </div>
-
-    <div class="card">
-      <p class="label">Watch for</p>
-      <p class="caption" style="margin:0">The 2027 Australian Competitive Play Junior Regulations and the points-race window. The 2026 edition landed on 22 December 2025, so expect the 2027 set around then — check the points window and the race age table when it does.</p>
-    </div>
-
-    <p class="plansrc">Drive times are estimates from Carnegie 3163. Confirm every entry deadline on the tournament page before paying.</p>`;
+  return dash
+    + fold("next", "What to do next", firsts.length ? `${firsts.length} to enter` : "nothing open", nextBody, true)
+    + fold("events", "All events", `${up.length} ahead`, evBody, false)
+    + fold("matches", "His matches", `${t.w}W · ${t.l}L`, matchBody, false)
+    + fold("target", "Goals", `now ${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} → ${TARGET_UTR.toFixed(1)}`, `
+        <div class="prow"><b>UTR ${TARGET_UTR.toFixed(1)}</b><span>The next goal. Reachable with a season of club competition plus a few tournaments.</span></div>
+        <div class="prow"><b>UTR 3.0</b><span>The entry threshold for Association Junior Pennant.</span></div>
+        <div class="prow"><b>How UTR moves</b><span>Games won and lost against each opponent's rating — not win-loss. A close loss to a strong player can lift it more than an easy win.</span></div>
+        <div class="prow"><b>What he sees</b><span>Under 13, UTR shows one decimal. Judge progress over a month, not a week.</span></div>`, false)
+    + fold("club", "Club competition", `round ${nextRound().round} next`, `
+        <div class="prow"><b>East Malvern · WDTA</b><span>Sunday mornings, 14 rounds. The cheapest and most useful matches he plays — they count toward his UTR.</span></div>
+        <div class="prow"><b>Next</b><span>Round ${nextRound().round}${nextRound().opponent ? ` v ${esc(nextRound().opponent)}` : ""}, ${fmtDate(nextRound().date)}.</span></div>
+        <div class="prow"><b>Summer break</b><span>No club rounds between 14 December and 30 January — the window for tournaments.</span></div>`, false)
+    + fold("ajp", "After this", "AJP", `
+        <div class="prow"><b>Associations Junior Pennant</b><span>Sunday teams, graded by UTR, against other associations. His target is the 2027/28 season.</span></div>
+        <div class="prow"><b>Needs</b><span>A completed Competitive Player Profile plus six team matches for a club — a BRTA season gives him that.</span></div>`, false)
+    + fold("watch", "Watch for", "Dec 2026", `
+        <p class="caption" style="margin-top:0">The 2027 Australian Competitive Play Junior Regulations and the points-race window.
+        The 2026 edition landed on 22 December 2025, so expect the 2027 set around then.</p>`, false)
+    + `<p class="plansrc">Drive times are estimates from Carnegie 3163. Confirm every deadline on the tournament page before paying.</p>`;
 }
 function viewSquad() {
   if (selectedPlayer) return viewPlayer(selectedPlayer);
