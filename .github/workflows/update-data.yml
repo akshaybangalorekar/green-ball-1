@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url || steps.deployment2.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -72,5 +72,14 @@ jobs:
         with:
           path: .
 
+      - name: Let the artifact settle
+        run: sleep 20
+
       - id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
+
+      - name: Retry the deploy
+        if: steps.deployment.outcome == 'failure'
+        id: deployment2
         uses: actions/deploy-pages@v4
