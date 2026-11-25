@@ -104,6 +104,11 @@
 
   /* collapsible sections */
   .journeychart { padding: 20px 16px 16px; }
+  .utrline { margin: 10px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--ink-dim); text-wrap: pretty; }
+  .utrline b { color: var(--ink); }
+  .journeycta { margin: 10px 0 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em;
+    text-transform: uppercase; color: var(--brand); }
+  .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
   .evkey b { color: var(--ink); font-weight: 600; }
@@ -1757,7 +1762,7 @@ function journeySVG() {
 }
 
 function fold(id, title, summary, body, open) {
-  return `<details class="fold"${open ? " open" : ""}>
+  return `<details class="fold" id="fold-${id}"${open ? " open" : ""}>
     <summary><span class="ftitle">${title}</span><span class="fsum">${summary}</span><span class="fchev">›</span></summary>
     <div class="fbody">${body}</div>
   </details>`;
@@ -1776,27 +1781,20 @@ function viewPathway() {
 
   /* ---- dashboard ---- */
   const dash = `
-    <div class="hero plan">
-      <div class="kicker">His tennis right now</div>
-      <h2>${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} <span class="utrsm">UTR</span></h2>
-      <div class="utrbar"><i style="width:${pctOf}%"></i></div>
-      <p class="since">${gap > 0
-        ? `<b>${gap.toFixed(1)} to go</b> to his next goal of ${TARGET_UTR.toFixed(1)}.`
-        : `<b>Goal reached.</b> He is past ${TARGET_UTR.toFixed(1)}.`}
-        ${t.n} matches so far: <b>${t.w} won, ${t.l} lost</b>.</p>
-    </div>
-
-    <div class="card journeychart">
-      <p class="label">His UTR journey</p>
+    <div class="card journeychart" id="journeyCard">
+      <p class="label">UTR Journey</p>
       ${journeySVG()}
-      <p class="caption">The ball is where he is. Each flag is a milestone ahead — it moves as his rating moves,
-        and every match he logs nudges it.</p>
+      <p class="utrline">${gap > 0
+        ? `<b>${gap.toFixed(1)} to go</b> to the goal of ${TARGET_UTR.toFixed(1)}.`
+        : `<b>Goal reached</b> — past ${TARGET_UTR.toFixed(1)}.`}
+        ${t.n} matches so far: <b>${t.w} won, ${t.l} lost</b>.</p>
+      <p class="journeycta">Tap the flags to see which events to enter ›</p>
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}Matches</div></div>
-      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Won</div></div>
-      <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games</div></div>
+      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}Matches played</div></div>
+      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Matches won</div></div>
+      <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games won</div></div>
     </div>`;
 
   /* ---- what to do next ---- */
@@ -2537,6 +2535,11 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
+  const jc = $("#journeyCard");
+  if (jc) jc.onclick = () => {
+    const d = document.querySelector('.fold#fold-next');
+    if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  };
   const addMatch = $("#addMatch");
   if (addMatch) addMatch.onclick = addMatchSheet;
   document.querySelectorAll("[data-theme-id]").forEach((b) => {
