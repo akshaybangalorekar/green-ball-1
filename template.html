@@ -71,7 +71,7 @@
     background:
       radial-gradient(860px 480px at 86% -16%, rgba(233, 245, 109, .34), transparent 70%),
       radial-gradient(680px 420px at -10% 4%, rgba(255, 255, 255, .10), transparent 62%),
-      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 46%, #25ad74 100%);
+      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 100%);
     color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased;
     padding-top: env(safe-area-inset-top, 0px); padding-bottom: 56px;
   }
@@ -120,8 +120,8 @@
   .about a { color: var(--brand); text-decoration: none; }
 
   .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
-    margin: 0 -20px 26px; padding: 10px 20px; background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(245,251,247,.14); }
+    margin: 0 -20px 26px; padding: 10px 20px; background: transparent;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
     font-size: 11px; letter-spacing: .02em; text-transform: uppercase; color: var(--on-brand-dim); padding: 9px 4px;
