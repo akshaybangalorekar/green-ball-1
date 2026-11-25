@@ -1694,7 +1694,7 @@ function viewPathway() {
         <div class="evmeta">${esc(e.e)}</div>
         <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
         <div class="evfoot">${closeLabel(e.c)}</div>
-        ${clubClash(e) ? `<p class="clash">Clashes with club round ${clubClash(e)}</p>`
+        ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>`
           : inClubBreak(e) ? `<p class="freeweek">Club competition is in its summer break — this week is free</p>` : ""}
         <div class="evlinks">
           <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}"
@@ -1799,6 +1799,7 @@ function viewPathway() {
               <span class="pickdue">${closeLabel(e.c)}</span></div>
             <div class="evname">${esc(e.n)}</div>
             <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)}</div>
+            ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
           </div>`).join("")}
           <p class="caption">Chosen by level from the plan's own events — not a live feed. Confirm each on the calendar.</p>`;
       })()}
