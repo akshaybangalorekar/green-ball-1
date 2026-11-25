@@ -1323,7 +1323,14 @@ function clubMatches() {
   }));
   return out;
 }
-const allMatches = () => [...clubMatches(), ...MATCHES].sort((a, b) => (a.date < b.date ? 1 : -1));
+const UTR_SEED = [
+  { date: "2026-07-25", opp: "Sashwat Dara (4.xx)", score: "0-6", won: false, gw: 0, gl: 6, src: "UTR" },
+  { date: "2026-07-24", opp: "Ben Mchale (3.xx)", score: "0-6", won: false, gw: 0, gl: 6, src: "UTR" },
+  { date: "2026-07-05", opp: "Reon Ujihara (3.xx)", score: "1-6 0-6", won: false, gw: 1, gl: 12, src: "UTR" },
+  { date: "2025-11-23", opp: "Oily O'Doherty (1.xx)", score: "4-8", won: false, gw: 4, gl: 8, src: "UTR" },
+  { date: "2025-11-23", opp: "James Ballantine (2.xx)", score: "8-2", won: true, gw: 8, gl: 2, src: "UTR" },
+];
+const allMatches = () => [...clubMatches(), ...MATCHES, ...UTR_SEED].sort((a, b) => (a.date < b.date ? 1 : -1));
 let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { return []; } })();
 const saveMatches = () => { try { localStorage.setItem(LOG_KEY, JSON.stringify(MATCHES)); } catch (e) {} };
 
@@ -1384,7 +1391,7 @@ function applyTheme(id) {
   else delete document.documentElement.dataset.theme;
   try { localStorage.setItem(THEME_KEY, id || "hardcourt"); } catch (e) {}
 }
-let MY_UTR = parseFloat(localStorage.getItem(UTR_KEY) || "") || null;
+let MY_UTR = parseFloat(localStorage.getItem(UTR_KEY) || "") || 1.6;
 function pathUnlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
 
 let ladderSort = "team"; // "team" = the site's order, then games | "games" | "pct" | "sets"
@@ -1683,7 +1690,10 @@ function viewPathway() {
           <p class="caption" style="margin-top:10px">${gap > 0
             ? `<b>${gap.toFixed(1)} to go</b> to his target of ${TARGET_UTR.toFixed(1)} — roughly ${Math.ceil(gap / 0.3)} good weeks of yellow-ball matches at his stage.`
             : `<b>Target reached.</b> He is at ${MY_UTR.toFixed(1)} against a goal of ${TARGET_UTR.toFixed(1)} — set the next one in Settings.`}</p>
-          <p class="caption">Under 13, Australian players see their UTR to one decimal. Judge progress over a month, not a week.</p>`;
+          <p class="caption"><b>Projected.</b> His rating is 36% reliable — UTR firms up after about five or six counting matches.
+          Until then every result moves it sharply, in both directions.</p>
+          <p class="caption">His UTR record so far is 2 wins, 7 losses, mostly against players rated 2 to 4. Close matches
+          against that standard lift the number faster than comfortable wins lower down.</p>`;
       })()}
     </div>
 
