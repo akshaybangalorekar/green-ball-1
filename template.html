@@ -1931,18 +1931,6 @@ function bind() {
       bind();
     };
   });
-  const pwGo = $("#pwGo");
-  if (pwGo) pwGo.onclick = () => {
-    const v = ($("#pwInput") && $("#pwInput").value || "").trim();
-    if (v === "1981") {
-      localStorage.setItem(UNLOCK_KEY, "1");
-      closeSheet();
-      renderAll();
-      showToast("Pathway unlocked");
-    } else {
-      showToast("That is not the code");
-    }
-  };
   document.querySelectorAll("tr.clubrow").forEach((tr) => {
     tr.onclick = () => {
       const club = tr.dataset.club;
@@ -2065,6 +2053,19 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
+  const pwGo = $("#pwGo");
+  if (pwGo) pwGo.onclick = () => {
+    const v = ($("#pwInput") && $("#pwInput").value || "").trim();
+    if (v === "1981") {
+      localStorage.setItem(UNLOCK_KEY, "1");
+      closeSheet();
+      renderAll();
+      revealTab("pathway");
+      showToast("Pathway added to the tabs");
+    } else {
+      showToast("That is not the code");
+    }
+  };
   const ib = $("#installBtn");
   if (ib) ib.onclick = async () => {
     runInstall();
@@ -2119,6 +2120,14 @@ document.addEventListener("click", (e) => {
   if (t && t.dataset && t.dataset.close) closeSheet();
 });
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
+
+function revealTab(name) {
+  const btn = document.querySelector('.tabs button[data-view="' + name + '"]');
+  const nav = document.querySelector("nav.tabs");
+  if (!btn || !nav) return;
+  nav.scrollTo({ left: nav.scrollWidth, behavior: "smooth" });
+  btn.animate ? btn.animate([{ transform: "scale(.92)" }, { transform: "scale(1)" }], { duration: 320 }) : null;
+}
 
 function showTab(name) {
   const btn = document.querySelector('.tabs button[data-view="' + name + '"]');
