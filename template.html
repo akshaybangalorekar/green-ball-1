@@ -1331,6 +1331,13 @@ const UTR_SEED = [
   { date: "2026-07-05", opp: "Reon Ujihara (3.xx)", score: "1-6 0-6", won: false, gw: 1, gl: 12, src: "UTR" },
   { date: "2025-11-23", opp: "Oily O'Doherty (1.xx)", score: "4-8", won: false, gw: 4, gl: 8, src: "UTR" },
   { date: "2025-11-23", opp: "James Ballantine (2.xx)", score: "8-2", won: true, gw: 8, gl: 2, src: "UTR" },
+  { date: "2025-09-20", opp: "Louis Rintoul (4.xx)", score: "0-6", won: false, gw: 0, gl: 6, src: "UTR" },
+  { date: "2025-09-20", opp: "Yash Rastogi (3.xx)", score: "3-6", won: false, gw: 3, gl: 6, src: "UTR" },
+  { date: "2025-09-20", opp: "Ernest Liu (4.xx)", score: "0-6", won: false, gw: 0, gl: 6, src: "UTR" },
+  { date: "2025-09-13", opp: "Lucas Mescher (G1)", score: "2-8", won: false, gw: 2, gl: 8, src: "UTR" },
+  { date: "2025-09-12", opp: "Bodhi Senadipathy (1.xx)", score: "8-3", won: true, gw: 8, gl: 3, src: "UTR" },
+  { date: "2025-08-24", opp: "Sebastian Mak (2.xx)", score: "0-4 2-4", won: false, gw: 2, gl: 8, src: "UTR" },
+  { date: "2025-08-24", opp: "Benjamin Valdes Rosas (3.xx)", score: "2-4 1-4", won: false, gw: 3, gl: 8, src: "UTR" },
 ];
 const allMatches = () => [...clubMatches(), ...MATCHES, ...UTR_SEED].sort((a, b) => (a.date < b.date ? 1 : -1));
 let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { return []; } })();
@@ -1694,8 +1701,14 @@ function viewPathway() {
             : `<b>Target reached.</b> He is at ${MY_UTR.toFixed(1)} against a goal of ${TARGET_UTR.toFixed(1)} — set the next one in Settings.`}</p>
           <p class="caption"><b>Projected.</b> His rating is 36% reliable — UTR firms up after about five or six counting matches.
           Until then every result moves it sharply, in both directions.</p>
-          <p class="caption">His UTR record so far is 2 wins, 7 losses, mostly against players rated 2 to 4. Close matches
-          against that standard lift the number faster than comfortable wins lower down.</p>`;
+          <p class="caption">${(() => {
+            const u = UTR_SEED;
+            const w = u.filter((m) => m.won).length, l = u.length - w;
+            const strong = u.filter((m) => /[3-9]\./.test(m.opp)).length;
+            return `His UTR record is <b>${w} wins, ${l} losses</b>, and ${strong} of those ${u.length} were against
+              players rated 3 or higher. Losing to a 4.xx opponent costs him little; a close match against that
+              standard lifts the number faster than a comfortable win lower down.`;
+          })()}</p>`;
       })()}
     </div>
 
