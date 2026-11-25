@@ -41,6 +41,11 @@
     --on-brand: #ffffff;
     --on-brand-dim: rgba(255, 255, 255, .84);
     --loss: #d4573a;
+    --ctl-bg: rgba(245, 251, 247, .12);
+    --ctl-bg-hover: rgba(245, 251, 247, .22);
+    --ctl-border: rgba(245, 251, 247, .30);
+    --ctl-fg: #ffffff;
+    --tabbar-bg: transparent;
     --shadow: 0 2px 4px rgba(8, 40, 24, .14), 0 18px 40px -26px rgba(8, 40, 24, .6);
     --display: "Bricolage Grotesque", "Trebuchet MS", sans-serif;
     --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -84,8 +89,12 @@
   [data-theme="chalk"] .masthead { color: var(--ink); }
   [data-theme="chalk"] .masthead h1 { color: var(--ink); }
   [data-theme="chalk"] .masthead .sub { color: var(--ink-dim); }
-  [data-theme="chalk"] .iconbtn { border-color: var(--line); background: rgba(255,255,255,.7); color: var(--ink); }
-  [data-theme="chalk"] .tabs { background: rgba(255,255,255,.75); }
+  [data-theme="chalk"] {
+    --ctl-bg: rgba(18, 38, 27, .06); --ctl-bg-hover: rgba(18, 38, 27, .12);
+    --ctl-border: rgba(18, 38, 27, .22); --ctl-fg: #12261b;
+    --tabbar-bg: rgba(255, 255, 255, .8);
+  }
+
   [data-theme="chalk"] .tabs button { color: var(--ink-dim); }
   [data-theme="chalk"] .tabs button[aria-selected="true"] { color: var(--ball-ink); }
   [data-theme="chalk"] .plansrc { color: var(--ink-dim); }
@@ -129,10 +138,10 @@
   .masthead .sub { margin: 5px 0 0; font-size: 12.5px; color: var(--on-brand-dim); font-family: var(--mono);
     line-height: 1.4; text-wrap: pretty; }
   .hbtns { margin-left: auto; display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
-  .hbtn { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; border: 1px solid rgba(245,251,247,.28);
-    background: rgba(245, 251, 247, .12); color: var(--on-brand); display: grid; place-items: center; cursor: pointer;
-    transition: background .15s, transform .15s; }
-  .hbtn:hover { background: rgba(245, 251, 247, .22); }
+  .hbtn { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%;
+    border: 1px solid var(--ctl-border); background: var(--ctl-bg); color: var(--ctl-fg);
+    display: grid; place-items: center; cursor: pointer; transition: background .15s, transform .15s; }
+  .hbtn:hover { background: var(--ctl-bg-hover); }
   .hbtn:active { transform: scale(.94); }
   .hbtn.spin svg { animation: spin .9s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
@@ -162,7 +171,7 @@
   .about a { color: var(--brand); text-decoration: none; }
 
   .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
-    margin: 0 -20px 26px; padding: 10px 20px; background: transparent;
+    margin: 0 -20px 26px; padding: 10px 20px; background: var(--tabbar-bg);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
