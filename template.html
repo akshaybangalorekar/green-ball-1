@@ -21,6 +21,10 @@
     /* Centre Court: grass green, white, optic yellow */
     --bg: #2dbb7f;
     --bg-2: #63e2a3;
+    --bg-3: #1f9f6c;
+    --hero-1: #46cf8b;
+    --hero-2: #1ba468;
+    --hero-3: #12854f;
     --surface: #ffffff;
     --surface-2: #eef7f1;
     --ink: #0a2b1b;
@@ -42,6 +46,59 @@
     --body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
+
+  /* ---------- colour themes ---------- */
+  [data-theme="hardcourt"] {
+    --bg: #2f6fb5; --bg-2: #4f96d8; --bg-3: #1f4f88;
+    --hero-1: #4a90cf; --hero-2: #2c6ba8; --hero-3: #1c4a7a;
+    --surface: #ffffff; --surface-2: #eef4fb;
+    --ink: #0b2137; --ink-dim: #3f5f7d;
+    --line: rgba(11, 33, 55, .16); --line-soft: rgba(11, 33, 55, .08);
+    --brand: #1d6bb5; --brand-deep: #14528c; --brand-wash: rgba(29, 107, 181, .12);
+    --ball: #ffe14d; --ball-ink: #241d00; --ball-wash: rgba(255, 225, 77, .4);
+    --muted: #9fb2c6; --on-brand: #ffffff; --on-brand-dim: rgba(255, 255, 255, .85);
+    --loss: #d9542f;
+  }
+  [data-theme="clay"] {
+    --bg: #c4623f; --bg-2: #dd8a63; --bg-3: #a34c2e;
+    --hero-1: #d0724c; --hero-2: #b0552f; --hero-3: #8d3f22;
+    --surface: #fffaf5; --surface-2: #f7ece3;
+    --ink: #2b1a12; --ink-dim: #7a5a49;
+    --line: rgba(43, 26, 18, .16); --line-soft: rgba(43, 26, 18, .08);
+    --brand: #a44e2c; --brand-deep: #7d3a1f; --brand-wash: rgba(164, 78, 44, .12);
+    --ball: #ffe066; --ball-ink: #2b1a12; --ball-wash: rgba(255, 224, 102, .45);
+    --muted: #c3a795; --on-brand: #ffffff; --on-brand-dim: rgba(255, 255, 255, .88);
+    --loss: #7d3a1f;
+  }
+  [data-theme="chalk"] {
+    --bg: #eef3ee; --bg-2: #ffffff; --bg-3: #dfe9e1;
+    --hero-1: #1f7a52; --hero-2: #176342; --hero-3: #114b32;
+    --surface: #ffffff; --surface-2: #f1f5f1;
+    --ink: #12261b; --ink-dim: #4d6a58;
+    --line: rgba(18, 38, 27, .14); --line-soft: rgba(18, 38, 27, .07);
+    --brand: #157347; --brand-deep: #0f5836; --brand-wash: rgba(21, 115, 71, .10);
+    --ball: #d8e63f; --ball-ink: #1d2508; --ball-wash: rgba(216, 230, 63, .4);
+    --muted: #9db0a3; --on-brand: #ffffff; --on-brand-dim: rgba(255, 255, 255, .86);
+    --loss: #c2492c;
+  }
+  [data-theme="chalk"] .masthead { color: var(--ink); }
+  [data-theme="chalk"] .masthead h1 { color: var(--ink); }
+  [data-theme="chalk"] .masthead .sub { color: var(--ink-dim); }
+  [data-theme="chalk"] .iconbtn { border-color: var(--line); background: rgba(255,255,255,.7); color: var(--ink); }
+  [data-theme="chalk"] .tabs { background: rgba(255,255,255,.75); }
+  [data-theme="chalk"] .tabs button { color: var(--ink-dim); }
+  [data-theme="chalk"] .tabs button[aria-selected="true"] { color: var(--ball-ink); }
+  [data-theme="chalk"] .plansrc { color: var(--ink-dim); }
+
+  /* swatch picker */
+  .swatches { display: flex; gap: 10px; margin-top: 4px; }
+  .sw { flex: 1; appearance: none; border: 2px solid transparent; border-radius: 12px; padding: 0;
+    cursor: pointer; overflow: hidden; background: none; }
+  .sw[aria-pressed="true"] { border-color: var(--brand); }
+  .sw .band { height: 34px; }
+  .sw .nm { display: block; padding: 6px 2px 7px; font-family: var(--mono); font-size: 8.5px;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); text-align: center; }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
   html {
@@ -49,7 +106,7 @@
     background:
       radial-gradient(860px 480px at 86% -16%, rgba(233, 245, 109, .34), transparent 70%),
       radial-gradient(680px 420px at -10% 4%, rgba(255, 255, 255, .10), transparent 62%),
-      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 46%, #1f9f6c 100%);
+      linear-gradient(176deg, var(--bg-2) 0%, var(--bg) 46%, var(--bg-3) 100%);
     background-attachment: fixed, fixed, fixed;
     background-repeat: no-repeat;
     background-size: cover;
@@ -109,7 +166,7 @@
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   .tabs::-webkit-scrollbar { display: none; }
   .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-family: var(--mono);
-    font-size: 11px; letter-spacing: .02em; text-transform: uppercase; color: var(--on-brand-dim); padding: 9px 4px;
+    font-size: 12.5px; letter-spacing: .01em; text-transform: uppercase; color: var(--on-brand-dim); padding: 11px 3px;
     border-radius: 9px; white-space: nowrap; transition: color .15s, background .15s;
     flex: 1 1 0; min-width: 0; text-align: center; overflow: hidden; text-overflow: ellipsis; }
   .tabs button[aria-selected="true"] { color: var(--ball-ink); background: var(--ball); font-weight: 500;
@@ -131,7 +188,7 @@
   .caption b { color: var(--ink); font-weight: 600; }
 
   .hero { position: relative; overflow: hidden; border-radius: 26px; padding: 28px 24px; margin-bottom: 20px;
-    background: linear-gradient(158deg, #46cf8b 0%, #1ba468 55%, #12854f 100%);
+    background: linear-gradient(158deg, var(--hero-1) 0%, var(--hero-2) 55%, var(--hero-3) 100%);
     color: var(--on-brand); box-shadow: var(--shadow); border: 1px solid rgba(245,251,247,.14); }
   .hero .courtlines { position: absolute; inset: 0; opacity: .16; pointer-events: none; }
   .hero .rd { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
@@ -1219,6 +1276,18 @@ const PATH_TICKS = "em-gb1-path-ticks";
 
 const UNLOCK_KEY = "em-gb1-pathway";
 const UTR_KEY = "em-gb1-utr";
+const THEME_KEY = "em-gb1-theme";
+const THEMES = [
+  { id: "court", name: "Centre", band: "linear-gradient(135deg,#63e2a3,#2dbb7f,#1f9f6c)" },
+  { id: "hardcourt", name: "Hard", band: "linear-gradient(135deg,#4f96d8,#2f6fb5,#1f4f88)" },
+  { id: "clay", name: "Clay", band: "linear-gradient(135deg,#dd8a63,#c4623f,#a34c2e)" },
+  { id: "chalk", name: "Chalk", band: "linear-gradient(135deg,#ffffff,#eef3ee,#dfe9e1)" },
+];
+function applyTheme(id) {
+  if (id && id !== "court") document.documentElement.dataset.theme = id;
+  else delete document.documentElement.dataset.theme;
+  try { localStorage.setItem(THEME_KEY, id || "court"); } catch (e) {}
+}
 let MY_UTR = parseFloat(localStorage.getItem(UTR_KEY) || "") || null;
 function pathUnlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
 
@@ -2170,6 +2239,14 @@ function settingsSheet() {
       </div>
       <p class="caption" style="margin-top:8px">Kept on this phone. It sets the gap to the 3.0 AJP threshold.</p>
     </div>` : ""}
+    <div class="setsec"><h4>Colour</h4>
+      <div class="swatches">
+        ${THEMES.map((t) => `<button class="sw" data-theme-id="${t.id}"
+          aria-pressed="${(localStorage.getItem(THEME_KEY) || "court") === t.id}">
+          <span class="band" style="background:${t.band}"></span><span class="nm">${t.name}</span>
+        </button>`).join("")}
+      </div>
+    </div>
     <div class="setsec"><h4>Pathway</h4>
       ${pathUnlocked()
         ? `<span class="txt"><b>Unlocked</b>The Pathway tab is in the bar above.</span>`
@@ -2199,6 +2276,14 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
+  document.querySelectorAll("[data-theme-id]").forEach((b) => {
+    b.onclick = () => {
+      applyTheme(b.dataset.themeId);
+      document.querySelectorAll("[data-theme-id]").forEach((x) =>
+        x.setAttribute("aria-pressed", String(x.dataset.themeId === b.dataset.themeId)));
+      showToast("Colour changed");
+    };
+  });
   const lockNow = $("#lockNow");
   if (lockNow) lockNow.onclick = () => {
     localStorage.removeItem(UNLOCK_KEY);
@@ -2312,6 +2397,7 @@ document.querySelectorAll(".tabs button").forEach((b) => {
   };
 });
 
+applyTheme(localStorage.getItem(THEME_KEY) || "court");
 renderAll();
 if (location.hash) {
   showTab(location.hash.slice(1));
