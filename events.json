@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T19:47:03+00:00",
+ "updated": "2026-11-25T03:52:36+00:00",
  "postcode": "3163",
  "radius_km": 20,
  "events": [
@@ -11,23 +11,19 @@
    "start": "2026-12-06",
    "end": "2026-12-06",
    "surface": "Clay",
-   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 39  2026 JDS CBC Green Mornington Tournament  5 https //static tournamentsoftware com/con"
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 38  2026 OC Eynesbury Tennis Club Mixed Doubles Tournament https //static tournamentsoftw"
   }
  ],
  "debug": [
   {
    "page": 1,
-   "bytes": 15911,
+   "bytes": 15993,
    "listings": 15,
    "kept": 0,
    "rows": [
     [
      "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
      "Altona"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Night Singles Fixt",
-     "Brisbane"
     ],
     [
      "2026 OC JC NSW School Boys and School Girls",
@@ -80,22 +76,22 @@
     [
      "2026 JC CBC Green Vida Truganina Tournament",
      "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
     ]
    ]
   },
   {
    "page": 2,
-   "bytes": 30094,
+   "bytes": 30585,
    "listings": 34,
    "kept": 1,
    "rows": [
     [
      "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
      "Altona"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Night Singles Fixt",
-     "Brisbane"
     ],
     [
      "2026 OC JC NSW School Boys and School Girls",
@@ -224,22 +220,22 @@
     [
      "2026 JDS CBC Green Mornington Tournament #5",
      "Mornington"
+    ],
+    [
+     "2026 OC Eynesbury Tennis Club Mixed Doubles Tourna",
+     "Eynesbury"
     ]
    ]
   },
   {
    "page": 3,
-   "bytes": 44385,
+   "bytes": 44480,
    "listings": 53,
    "kept": 1,
    "rows": [
     [
      "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
      "Altona"
-    ],
-    [
-     "2026 OC UQ Tennis Club November Night Singles Fixt",
-     "Brisbane"
     ],
     [
      "2026 OC JC NSW School Boys and School Girls",
@@ -392,15 +388,23 @@
     [
      "2026 Kooyong Lawn TC December Junior Member Tourna",
      "Kooyong"
+    ],
+    [
+     "2026 OC JC CBC ACT Residents Championship",
+     "Canberra"
     ]
    ]
   },
   {
    "page": 4,
-   "bytes": 26979,
-   "listings": 1,
+   "bytes": 27802,
+   "listings": 2,
    "kept": 0,
    "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
     [
      "2026 O8k J125 Riverina Open",
      "Wagga Wagga"
@@ -409,10 +413,14 @@
   },
   {
    "page": 5,
-   "bytes": 34376,
-   "listings": 1,
+   "bytes": 34507,
+   "listings": 2,
    "kept": 0,
    "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
     [
      "2026 O8k J125 Riverina Open",
      "Wagga Wagga"
@@ -421,39 +429,10 @@
   },
   {
    "page": 6,
-   "bytes": 41521,
-   "listings": 1,
+   "bytes": 3495,
+   "listings": 0,
    "kept": 0,
-   "rows": [
-    [
-     "2026 O8k J125 Riverina Open",
-     "Wagga Wagga"
-    ]
-   ]
-  },
-  {
-   "page": 7,
-   "bytes": 46312,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O8k J125 Riverina Open",
-     "Wagga Wagga"
-    ]
-   ]
-  },
-  {
-   "page": 8,
-   "bytes": 51182,
-   "listings": 1,
-   "kept": 0,
-   "rows": [
-    [
-     "2026 O8k J125 Riverina Open",
-     "Wagga Wagga"
-    ]
-   ]
+   "rows": []
   }
  ]
 }
