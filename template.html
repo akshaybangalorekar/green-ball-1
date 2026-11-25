@@ -646,7 +646,13 @@
 <body>
 <div class="wrap">
   <header class="masthead">
-    <div class="crest">EM</div>
+    <div class="crest" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="46" height="46">
+        <circle cx="20" cy="20" r="18.5" fill="var(--ball)"/>
+        <path d="M7 6.5C19.5 12 19.5 28 7 33.5" stroke="#22300f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M33 6.5C20.5 12 20.5 28 33 33.5" stroke="#22300f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
     <div class="who">
       <h1>Advantage</h1>
       <p class="sub" id="mastheadSub">Sunday AM · Green Ball 1</p>
@@ -881,6 +887,18 @@ function ring(value, max, label, sub) {
   </svg>`;
 }
 
+function ico(name) {
+  const paths = {
+    ladder: '<path d="M3 11V7M7.5 11V4M12 11V8.5"/>',
+    points: '<path d="M8 2.5l1.7 3.5 3.8.5-2.8 2.6.7 3.7L8 11l-3.4 1.8.7-3.7L2.5 6.5l3.8-.5z"/>',
+    sets: '<circle cx="8" cy="8" r="5.6"/><path d="M8 2.4A5.6 5.6 0 0 1 8 13.6z" fill="currentColor" stroke="none"/>',
+    pin: '<path d="M8 14s5-4.6 5-8A5 5 0 0 0 3 6c0 3.4 5 8 5 8z"/><circle cx="8" cy="6" r="1.8"/>',
+    cal: '<rect x="2.5" y="3.5" width="11" height="10" rx="2"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3"/>',
+  };
+  return `<svg class="ico" viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor"
+    stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] || ""}</svg>`;
+}
+
 function seasonStrip() {
   const t = todayISO();
   return DATA.draw.map((d) => {
@@ -1068,9 +1086,9 @@ function viewWeek() {
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="n">${us.pos}<small>/${DATA.ladder.length}</small></div><div class="k">Ladder</div></div>
-      <div class="kpi"><div class="n">${us.pts.toFixed(1)}</div><div class="k">Points</div></div>
-      <div class="kpi"><div class="n">${setPct}<small>%</small></div><div class="k">Sets won</div></div>
+      <div class="kpi"><div class="n">${us.pos}<small>/${DATA.ladder.length}</small></div><div class="k">${ico("ladder")}Ladder</div></div>
+      <div class="kpi"><div class="n">${us.pts.toFixed(1)}</div><div class="k">${ico("points")}Points</div></div>
+      <div class="kpi"><div class="n">${setPct}<small>%</small></div><div class="k">${ico("sets")}Sets won</div></div>
     </div>
 
     <div class="card">
