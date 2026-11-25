@@ -1344,12 +1344,23 @@ let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || 
 const saveMatches = () => { try { localStorage.setItem(LOG_KEY, JSON.stringify(MATCHES)); } catch (e) {} };
 
 function matchTotals() {
-  let w = 0, l = 0, gw = 0, gl = 0;
+  let w = 0, l = 0, gw = 0, gl = 0, sw = 0, sl = 0;
   allMatches().forEach((m) => {
     if (m.won) w++; else l++;
     gw += m.gw || 0; gl += m.gl || 0;
+    const st = parseSets(m.score || "");
+    sw += st.sw; sl += st.sl;
   });
-  return { w, l, gw, gl, n: w + l };
+  return { w, l, gw, gl, sw, sl, n: w + l };
+}
+
+function parseSets(txt) {
+  const nums = String(txt).match(/\d+/g) || [];
+  let sw = 0, sl = 0;
+  for (let i = 0; i + 1 < nums.length; i += 2) {
+    if (Number(nums[i]) > Number(nums[i + 1])) sw++; else sl++;
+  }
+  return { sw, sl };
 }
 
 function parseScore(txt) {
@@ -1758,12 +1769,14 @@ function viewPathway() {
             <span class="mtxt"><b>${esc(m.opp || "Opponent")}</b><small>${fmtShort(m.date)}${m.score ? " · " + esc(m.score) : ""}${m.src ? " · " + m.src : ""}</small></span>
             <span class="mgames">${m.gw}–${m.gl}</span>
           </div>`).join("");
-        return `<div class="mtot">
-            <span><b>${t.w}</b><small>won</small></span>
-            <span><b>${t.l}</b><small>lost</small></span>
-            <span><b>${t.gw}</b><small>games won</small></span>
-            <span><b>${t.gl}</b><small>games lost</small></span>
-          </div>
+        return `<table class="stats">
+            <thead><tr><th>All matches</th><th>Won</th><th>Lost</th></tr></thead>
+            <tbody>
+              <tr><td class="lbl">Matches</td><td class="num won">${t.w}</td><td class="num lost">${t.l}</td></tr>
+              <tr><td class="lbl">Sets</td><td class="num won">${t.sw}</td><td class="num lost">${t.sl}</td></tr>
+              <tr><td class="lbl">Games</td><td class="num won">${t.gw}</td><td class="num lost">${t.gl}</td></tr>
+            </tbody>
+          </table>
           ${rows}
           <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>
           <p class="caption">Aim for draws where he is mid-pack. A close loss to a stronger player can lift a UTR
