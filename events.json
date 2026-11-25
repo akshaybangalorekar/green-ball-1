@@ -1,7 +1,479 @@
 {
- "updated": "2026-11-25T19:29:27+00:00",
+ "updated": "2026-11-25T19:47:41+00:00",
  "postcode": "3163",
  "radius_km": 20,
- "events": [],
- "debug": []
+ "events": [
+  {
+   "name": "2026 CBC Vida Season 2 Super Orange Masters",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D9B06910-C539-4AF1-B778-FFF0676F85BA",
+   "club": "MCC Glen Iris Valley",
+   "suburb": "Glen Iris",
+   "start": "2026-12-06",
+   "end": "2026-12-06",
+   "surface": "Clay",
+   "tags": "Clay         Coloured Ball Comp         Junior          U9      Image 38  2026 OC Eynesbury Tennis Club Mixed Doubles Tournament https //static tournamentsoftw"
+  }
+ ],
+ "debug": [
+  {
+   "page": 1,
+   "bytes": 15695,
+   "listings": 15,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
+    [
+     "2026 OC JC NSW School Boys and School Girls",
+     "Pennant Hills"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Perth"
+    ],
+    [
+     "2026 Australian Wheelchair Tennis National Champio",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 NSW State Champion of Champions",
+     "Broadmeadow"
+    ],
+    [
+     "2026 J125 KDV Sport Junior Slam Series - Girls Onl",
+     "Gold Coast"
+    ],
+    [
+     "2026 J125 Samford Junior Championships - Boys Only",
+     "Brisbane"
+    ],
+    [
+     "2026 Qld Blind & Low Vision Open",
+     "East Brisbane"
+    ],
+    [
+     "2026 O3k David Turbayne Tennis Centre Open",
+     "Brisbane"
+    ],
+    [
+     "2026 J1000 18U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 CBC Bolt 2 Brisbane",
+     "Brisbane"
+    ],
+    [
+     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
+     "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
+    ]
+   ]
+  },
+  {
+   "page": 2,
+   "bytes": 29850,
+   "listings": 34,
+   "kept": 1,
+   "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
+    [
+     "2026 OC JC NSW School Boys and School Girls",
+     "Pennant Hills"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Perth"
+    ],
+    [
+     "2026 Australian Wheelchair Tennis National Champio",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 NSW State Champion of Champions",
+     "Broadmeadow"
+    ],
+    [
+     "2026 J125 KDV Sport Junior Slam Series - Girls Onl",
+     "Gold Coast"
+    ],
+    [
+     "2026 J125 Samford Junior Championships - Boys Only",
+     "Brisbane"
+    ],
+    [
+     "2026 Qld Blind & Low Vision Open",
+     "East Brisbane"
+    ],
+    [
+     "2026 O3k David Turbayne Tennis Centre Open",
+     "Brisbane"
+    ],
+    [
+     "2026 J1000 18U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 CBC Bolt 2 Brisbane",
+     "Brisbane"
+    ],
+    [
+     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
+     "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
+    ],
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
+     "Craigieburn"
+    ],
+    [
+     "2026 Dave Matthews Seniors Tournament",
+     "Nelson Bay"
+    ],
+    [
+     "2026 Peter Smith IDA/DHOH/Parastanding & Wheelchai",
+     "North Adelaide"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ],
+    [
+     "2026 JC My First Tournament #18 Sunbury",
+     "Sunbury"
+    ],
+    [
+     "2026 JDS CBC Green Ball Gardiner - Glen Iris Tourn",
+     "Melbourne"
+    ],
+    [
+     "2026 OC UQ Tennis Club December Any-Gender Night S",
+     "Brisbane"
+    ],
+    [
+     "2026 JC Keilor Park TC Tournament",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 Tennis Gear Shaw Park Junior Championshi",
+     "Wooloowin"
+    ],
+    [
+     "2026 JC CBC Green Tumby Bay Junior Tournament",
+     "Tumby Bay"
+    ],
+    [
+     "2026 JC Hume Tennis HEAD Discovery Final",
+     "Craigieburn"
+    ],
+    [
+     "2026 O3k J125 46th 'C.ex Coffs' Northern NSW Tenni",
+     "Coffs Harbour"
+    ],
+    [
+     "2026 O3K Voyager Open Springfield",
+     "Springfield Central"
+    ],
+    [
+     "2026 CBC Vida Season 2 Super Orange Masters",
+     "Glen Iris"
+    ],
+    [
+     "2026 JC CBC Green Central Park Wimmera Junior Tour",
+     "Haven"
+    ],
+    [
+     "2026 JC CBC Tennis Factory Colour Ball Series & UT",
+     "Perth"
+    ],
+    [
+     "2026 JDS CBC Green Mornington Tournament #5",
+     "Mornington"
+    ],
+    [
+     "2026 OC Eynesbury Tennis Club Mixed Doubles Tourna",
+     "Eynesbury"
+    ]
+   ]
+  },
+  {
+   "page": 3,
+   "bytes": 43753,
+   "listings": 53,
+   "kept": 1,
+   "rows": [
+    [
+     "2026 CBC Vida Altona Red & Orange Hot Shots Match ",
+     "Altona"
+    ],
+    [
+     "2026 OC JC NSW School Boys and School Girls",
+     "Pennant Hills"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Kensington Gardens"
+    ],
+    [
+     "2026 12u & 14u Australian Grasscourt Championships",
+     "Perth"
+    ],
+    [
+     "2026 Australian Wheelchair Tennis National Champio",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 NSW State Champion of Champions",
+     "Broadmeadow"
+    ],
+    [
+     "2026 J125 KDV Sport Junior Slam Series - Girls Onl",
+     "Gold Coast"
+    ],
+    [
+     "2026 J125 Samford Junior Championships - Boys Only",
+     "Brisbane"
+    ],
+    [
+     "2026 Qld Blind & Low Vision Open",
+     "East Brisbane"
+    ],
+    [
+     "2026 O3k David Turbayne Tennis Centre Open",
+     "Brisbane"
+    ],
+    [
+     "2026 J1000 18U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 CBC Bolt 2 Brisbane",
+     "Brisbane"
+    ],
+    [
+     "2026 CBC Vida Essendon Orange Hot Shots Match Play",
+     "Essendon"
+    ],
+    [
+     "2026 JC CBC Green Vida Truganina Tournament",
+     "Truganina"
+    ],
+    [
+     "2026 JDS CBC Mornington Tournament #4",
+     "Mornington"
+    ],
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 OC JC Hume Tennis UTR Junior & Open - Play wi",
+     "Craigieburn"
+    ],
+    [
+     "2026 Dave Matthews Seniors Tournament",
+     "Nelson Bay"
+    ],
+    [
+     "2026 Peter Smith IDA/DHOH/Parastanding & Wheelchai",
+     "North Adelaide"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ],
+    [
+     "2026 JC My First Tournament #18 Sunbury",
+     "Sunbury"
+    ],
+    [
+     "2026 JDS CBC Green Ball Gardiner - Glen Iris Tourn",
+     "Melbourne"
+    ],
+    [
+     "2026 OC UQ Tennis Club December Any-Gender Night S",
+     "Brisbane"
+    ],
+    [
+     "2026 JC Keilor Park TC Tournament",
+     "Melbourne"
+    ],
+    [
+     "2026 J125 Tennis Gear Shaw Park Junior Championshi",
+     "Wooloowin"
+    ],
+    [
+     "2026 JC CBC Green Tumby Bay Junior Tournament",
+     "Tumby Bay"
+    ],
+    [
+     "2026 JC Hume Tennis HEAD Discovery Final",
+     "Craigieburn"
+    ],
+    [
+     "2026 O3k J125 46th 'C.ex Coffs' Northern NSW Tenni",
+     "Coffs Harbour"
+    ],
+    [
+     "2026 O3K Voyager Open Springfield",
+     "Springfield Central"
+    ],
+    [
+     "2026 CBC Vida Season 2 Super Orange Masters",
+     "Glen Iris"
+    ],
+    [
+     "2026 JC CBC Green Central Park Wimmera Junior Tour",
+     "Haven"
+    ],
+    [
+     "2026 JC CBC Tennis Factory Colour Ball Series & UT",
+     "Perth"
+    ],
+    [
+     "2026 JDS CBC Green Mornington Tournament #5",
+     "Mornington"
+    ],
+    [
+     "2026 OC Eynesbury Tennis Club Mixed Doubles Tourna",
+     "Eynesbury"
+    ],
+    [
+     "2026 OC NANDM All Abilities Tournament 48",
+     "Ringwood"
+    ],
+    [
+     "2026 J1000 16U Australian Championships",
+     "Traralgon"
+    ],
+    [
+     "2026 UWA Clay Court Junior Slide",
+     "Perth"
+    ],
+    [
+     "2026 J500 Victorian Junior Grasscourt Championship",
+     "Wangaratta"
+    ],
+    [
+     "2026 Kooyong Lawn TC December Junior Member Tourna",
+     "Kooyong"
+    ],
+    [
+     "2026 OC JC CBC ACT Residents Championship",
+     "Canberra"
+    ]
+   ]
+  },
+  {
+   "page": 4,
+   "bytes": 27069,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 5,
+   "bytes": 33774,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 6,
+   "bytes": 40760,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 7,
+   "bytes": 47420,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  },
+  {
+   "page": 8,
+   "bytes": 51696,
+   "listings": 2,
+   "kept": 0,
+   "rows": [
+    [
+     "2026 JDS CBC Seacliff #3",
+     "Seacliff"
+    ],
+    [
+     "2026 O8k J125 Riverina Open",
+     "Wagga Wagga"
+    ]
+   ]
+  }
+ ]
 }
