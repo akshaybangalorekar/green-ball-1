@@ -100,6 +100,8 @@
   [data-theme="chalk"] .plansrc { color: var(--ink-dim); }
 
   /* swatch picker */
+  .verline { margin: 14px 0 0; font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); cursor: default; user-select: none; }
   .swatches { display: flex; gap: 10px; margin-top: 4px; }
   .sw { flex: 1; appearance: none; border: 2px solid transparent; border-radius: 12px; padding: 0;
     cursor: pointer; overflow: hidden; background: none; }
@@ -2394,15 +2396,9 @@ function settingsSheet() {
         </button>`).join("")}
       </div>
     </div>
-    <div class="setsec"><h4>Pathway</h4>
-      ${pathUnlocked()
-        ? `<span class="txt"><b>Unlocked</b>The Pathway tab is in the bar above.</span>`
-        : `<div class="addrow" style="margin-top:0">
-             <input id="pwInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter code">
-             <button class="btn" id="pwGo">Unlock</button>
-           </div>`}
-    </div>
     <div class="setsec"><h4>About</h4>${aboutHTML()}
+      <div id="codeSlot">${pathUnlocked() ? "" : ""}</div>
+      <p class="verline" id="verLine">Advantage · v1</p>
       <div class="visits">
         <img id="visitBadge" alt="visitor count"
              src="https://api.visitorbadge.io/api/visitors?path=akshaybangalorekar.github.io%2Fgreen-ball-1&label=visits&countColor=%2310744b&labelColor=%23eef7f1&style=flat">
@@ -2459,6 +2455,23 @@ function bindSheet() {
       closeSheet(); renderAll(); showToast(`UTR ${MY_UTR.toFixed(1)} saved`);
     } else {
       showToast("Enter a number between 0 and 16");
+    }
+  };
+  let taps = 0, tapTimer = null;
+  const verLine = $("#verLine");
+  if (verLine) verLine.onclick = () => {
+    taps += 1;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => { taps = 0; }, 1200);
+    if (taps >= 5) {
+      taps = 0;
+      const slot = $("#codeSlot");
+      if (slot && !$("#pwInput")) {
+        slot.innerHTML = `<div class="addrow" style="margin-top:10px">
+            <input id="pwInput" type="password" inputmode="numeric" autocomplete="off" placeholder="Code">
+            <button class="btn" id="pwGo">Go</button></div>`;
+        bindSheet();
+      }
     }
   };
   const pwGo = $("#pwGo");
