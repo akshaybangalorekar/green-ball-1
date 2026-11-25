@@ -304,6 +304,26 @@
   .evname { margin-top: 7px; font-size: 15.5px; font-weight: 500; line-height: 1.35; text-wrap: pretty; }
   .evmeta { margin-top: 3px; font-size: 12.5px; color: var(--ink-dim); line-height: 1.45; }
   .evfoot { margin-top: 7px; }
+  .mtot { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0 14px; }
+  .mtot span { text-align: center; background: var(--surface-2); border-radius: 12px; padding: 10px 4px; }
+  .mtot b { display: block; font-family: var(--display); font-weight: 800; font-size: 19px; }
+  .mtot small { display: block; margin-top: 2px; font-family: var(--mono); font-size: 8.5px;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--ink-dim); }
+  .mrow { display: flex; align-items: center; gap: 11px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
+  .mrow:last-of-type { border-bottom: 0; }
+  .mres { width: 24px; height: 24px; flex: 0 0 24px; border-radius: 7px; display: grid; place-items: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 700; color: #fff; }
+  .mres.w { background: var(--brand); }
+  .mres.l { background: var(--loss); }
+  .mtxt { flex: 1; min-width: 0; }
+  .mtxt b { display: block; font-size: 14.5px; font-weight: 500; }
+  .mtxt small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 2px; }
+  .mgames { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .evwhy { margin: 8px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--ink-dim);
+    border-left: 2px solid var(--brand-wash); padding-left: 9px; text-wrap: pretty; }
+  .evlinks { display: flex; gap: 16px; margin-top: 9px; flex-wrap: wrap; }
+  .evlinks a { font-family: var(--mono); font-size: 10.5px; letter-spacing: .03em; color: var(--brand);
+    text-decoration: none; border-bottom: 1px solid var(--brand-wash); padding-bottom: 1px; }
   .due { font-family: var(--mono); font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase;
     color: var(--ink-dim); }
   .due.now { color: var(--loss); font-weight: 700; }
@@ -1286,6 +1306,56 @@ const PATH_TICKS = "em-gb1-path-ticks";
 const UNLOCK_KEY = "em-gb1-pathway";
 const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
+const LOG_KEY = "em-gb1-matches";
+let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { return []; } })();
+const saveMatches = () => { try { localStorage.setItem(LOG_KEY, JSON.stringify(MATCHES)); } catch (e) {} };
+
+function matchTotals() {
+  let w = 0, l = 0, gw = 0, gl = 0;
+  MATCHES.forEach((m) => {
+    if (m.won) w++; else l++;
+    gw += m.gw || 0; gl += m.gl || 0;
+  });
+  return { w, l, gw, gl, n: MATCHES.length };
+}
+
+function parseScore(txt) {
+  const nums = String(txt).match(/\d+/g) || [];
+  let gw = 0, gl = 0;
+  for (let i = 0; i + 1 < nums.length; i += 2) {
+    gw += Number(nums[i]); gl += Number(nums[i + 1]);
+  }
+  return { gw, gl };
+}
+
+function addMatchSheet() {
+  openSheet(`<div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    <h3>Add a match</h3>
+    <p class="subl">Yellow ball, any event</p>
+    <div class="addrow" style="margin-top:0">
+      <input id="mDate" type="date" value="${todayISO()}">
+    </div>
+    <div class="addrow"><input id="mOpp" type="text" placeholder="Opponent"></div>
+    <div class="addrow"><input id="mScore" type="text" placeholder="Score, e.g. 6-4 3-6 10-7"></div>
+    <div class="addrow">
+      <button class="btn" id="mWin" style="flex:1">Won</button>
+      <button class="btn ghost" id="mLoss" style="flex:1">Lost</button>
+    </div>
+    <p class="caption">Games are counted from the score automatically. Kept on this phone.</p>`);
+  const commit = (won) => {
+    const opp = ($("#mOpp") && $("#mOpp").value || "").trim();
+    const score = ($("#mScore") && $("#mScore").value || "").trim();
+    const date = ($("#mDate") && $("#mDate").value) || todayISO();
+    const { gw, gl } = parseScore(score);
+    MATCHES = [...MATCHES, { date, opp, score, won, gw, gl }];
+    saveMatches();
+    closeSheet(); renderAll();
+    showToast(won ? "Match added · won" : "Match added · lost");
+  };
+  $("#mWin").onclick = () => commit(true);
+  $("#mLoss").onclick = () => commit(false);
+}
 const THEMES = [
   { id: "hardcourt", name: "Hard", band: "linear-gradient(135deg,#4f96d8,#2f6fb5,#1f4f88)" },
   { id: "court", name: "Centre", band: "linear-gradient(135deg,#63e2a3,#2dbb7f,#1f9f6c)" },
@@ -1477,6 +1547,8 @@ const PLAN_EVENTS = [
   { d: "2027-06-26", c: "2027-06-19", n: "Open 3k & J125 Mornington", t: "J125", s: "Mornington", dr: "60 min", e: "12U Singles + Doubles", p: "Optional" },
 ];
 
+const EVENT_WHY = {"JDS": "A first tournament, not a points chase: round-robin with guaranteed matches, so one bad set does not end the day. This is where a UTR starts.", "JC": "Community event — the gentlest way to play yellow ball against strangers. No points on offer, but every match counts toward the rating.", "J125": "The bottom rung of the ranked Junior Series. This is where De Minaur Junior Tour points begin, and draws are graded by UTR so he is not thrown in against the top seed.", "J250": "Double the points of a J125 and a stronger field. Worth entering once he has a few J125s behind him, not as a first ranked event.", "Club comp": "The highest-value item on this list and the cheapest: 14 rounds, 5–10 minutes away, graded by standard. It is what gets him from projected to a real UTR.", "Open": "Not for entering — a chance to watch a stronger standard up close.", "Open/Junior": "Open events sometimes offer a junior draw; check before travelling.", "Qualifying": "Only worth entering once his UTR is competitive with the field; otherwise it is a long day for one match."};
+
 const CLUBS_NEAR = [
   ["Lauriston Tennis Club", "11 Rosanna St, Carnegie 3163"],
   ["Glen Huntly Tennis Club", "Glenhuntly Park, cnr Booran & Neerim Rds"],
@@ -1529,7 +1601,14 @@ function viewPathway() {
         <div class="evname">${esc(e.n)}</div>
         <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} drive</div>
         <div class="evmeta">${esc(e.e)}</div>
+        <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
         <div class="evfoot">${closeLabel(e.c)}</div>
+        <div class="evlinks">
+          <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}"
+             target="_blank" rel="noopener">Find on Tennis Australia ›</a>
+          <a href="https://www.google.com/search?q=${encodeURIComponent("site:utrsports.net " + e.n)}"
+             target="_blank" rel="noopener">Check on UTR ›</a>
+        </div>
       </div>`).join("")}`).join("");
 
   return `
@@ -1620,6 +1699,33 @@ function viewPathway() {
             <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)}</div>
           </div>`).join("")}
           <p class="caption">Chosen by level from the plan's own events — not a live feed. Confirm each on the calendar.</p>`;
+      })()}
+    </div>
+
+    <div class="card">
+      <p class="label">Match log</p>
+      ${(() => {
+        const t = matchTotals();
+        if (!t.n) {
+          return `<p class="caption" style="margin-top:0">No matches logged yet. Add one after each yellow-ball
+            match — the record and game count build here, and that is what tells you whether the plan is working.</p>
+            <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>`;
+        }
+        const rows = [...MATCHES].reverse().slice(0, 12).map((m) => `<div class="mrow">
+            <span class="mres ${m.won ? "w" : "l"}">${m.won ? "W" : "L"}</span>
+            <span class="mtxt"><b>${esc(m.opp || "Opponent")}</b><small>${fmtShort(m.date)}${m.score ? " · " + esc(m.score) : ""}</small></span>
+            <span class="mgames">${m.gw}–${m.gl}</span>
+          </div>`).join("");
+        return `<div class="mtot">
+            <span><b>${t.w}</b><small>won</small></span>
+            <span><b>${t.l}</b><small>lost</small></span>
+            <span><b>${t.gw}</b><small>games won</small></span>
+            <span><b>${t.gl}</b><small>games lost</small></span>
+          </div>
+          ${rows}
+          <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>
+          <p class="caption">Aim for draws where he is mid-pack. A close loss to a stronger player can lift a UTR
+          more than a comfortable win over a weaker one.</p>`;
       })()}
     </div>
 
@@ -2285,6 +2391,8 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
+  const addMatch = $("#addMatch");
+  if (addMatch) addMatch.onclick = addMatchSheet;
   document.querySelectorAll("[data-theme-id]").forEach((b) => {
     b.onclick = () => {
       applyTheme(b.dataset.themeId);
