@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en-AU">
+<html lang="en-AU" data-theme="hardcourt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Advantage · East Malvern Green Ball 1</title>
-<meta name="theme-color" content="#B8431F">
+<meta name="theme-color" content="#2f6fb5">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -1287,15 +1287,15 @@ const UNLOCK_KEY = "em-gb1-pathway";
 const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
 const THEMES = [
-  { id: "court", name: "Centre", band: "linear-gradient(135deg,#63e2a3,#2dbb7f,#1f9f6c)" },
   { id: "hardcourt", name: "Hard", band: "linear-gradient(135deg,#4f96d8,#2f6fb5,#1f4f88)" },
+  { id: "court", name: "Centre", band: "linear-gradient(135deg,#63e2a3,#2dbb7f,#1f9f6c)" },
   { id: "clay", name: "Clay", band: "linear-gradient(135deg,#dd8a63,#c4623f,#a34c2e)" },
   { id: "chalk", name: "Chalk", band: "linear-gradient(135deg,#ffffff,#eef3ee,#dfe9e1)" },
 ];
 function applyTheme(id) {
   if (id && id !== "court") document.documentElement.dataset.theme = id;
   else delete document.documentElement.dataset.theme;
-  try { localStorage.setItem(THEME_KEY, id || "court"); } catch (e) {}
+  try { localStorage.setItem(THEME_KEY, id || "hardcourt"); } catch (e) {}
 }
 let MY_UTR = parseFloat(localStorage.getItem(UTR_KEY) || "") || null;
 function pathUnlocked() { return localStorage.getItem(UNLOCK_KEY) === "1"; }
@@ -2251,7 +2251,7 @@ function settingsSheet() {
     <div class="setsec"><h4>Colour</h4>
       <div class="swatches">
         ${THEMES.map((t) => `<button class="sw" data-theme-id="${t.id}"
-          aria-pressed="${(localStorage.getItem(THEME_KEY) || "court") === t.id}">
+          aria-pressed="${(localStorage.getItem(THEME_KEY) || "hardcourt") === t.id}">
           <span class="band" style="background:${t.band}"></span><span class="nm">${t.name}</span>
         </button>`).join("")}
       </div>
@@ -2406,7 +2406,7 @@ document.querySelectorAll(".tabs button").forEach((b) => {
   };
 });
 
-applyTheme(localStorage.getItem(THEME_KEY) || "court");
+applyTheme(localStorage.getItem(THEME_KEY) || "hardcourt");
 renderAll();
 if (location.hash) {
   showTab(location.hash.slice(1));
