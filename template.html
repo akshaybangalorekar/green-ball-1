@@ -321,6 +321,10 @@
   .mtxt b { display: block; font-size: 14.5px; font-weight: 500; }
   .mtxt small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 2px; }
   .mgames { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .clash { margin: 8px 0 0; font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--loss); font-weight: 700; }
+  .freeweek { margin: 8px 0 0; font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--brand); }
   .evwhy { margin: 8px 0 0; font-size: 12.5px; line-height: 1.55; color: var(--ink-dim);
     border-left: 2px solid var(--brand-wash); padding-left: 9px; text-wrap: pretty; }
   .evlinks { display: flex; gap: 16px; margin-top: 9px; flex-wrap: wrap; }
@@ -1312,7 +1316,7 @@ const LOG_KEY = "em-gb1-matches";
 const TRACK_KEY = "em-gb1-track";
 const TARGET_KEY = "em-gb1-target";
 let TRACKED = localStorage.getItem(TRACK_KEY) || "Atharv Bangalorekar";
-let TARGET_UTR = parseFloat(localStorage.getItem(TARGET_KEY) || "") || 3.0;
+let TARGET_UTR = parseFloat(localStorage.getItem(TARGET_KEY) || "") || 2.5;
 
 function clubMatches() {
   const p = (DATA.our_players || {})[TRACKED] || (DATA.section_players || {})[TRACKED];
@@ -1568,27 +1572,27 @@ const PATH_STEPS = [
 ];
 
 const PLAN_EVENTS = [
-  { d: "2026-12-06", c: "2026-12-02", n: "JDS CBC Green Mornington #5", t: "JDS", s: "Mornington", dr: "60 min", e: "12U Boys Singles (yellow ball)", p: "Optional" },
-  { d: "2026-12-19", c: "2026-12-12", n: "JC CBC Green Netsports Year-End", t: "JC", s: "Armadale", dr: "15 min", e: "12U Boys Singles — confirm yellow ball", p: "Start here" },
-  { d: "2026-12-19", c: "2026-12-12", n: "JC Bulleen Summer Tournament", t: "JC", s: "Templestowe Lower", dr: "30 min", e: "12U Boys Singles", p: "Optional" },
-  { d: "2026-12-27", c: "2026-12-17", n: "J125 Dingley Tournament", t: "J125", s: "Dingley", dr: "30 min", e: "12U Singles + Doubles ($30–55)", p: "Target" },
-  { d: "2027-01-02", c: "2026-12-23", n: "J125 GBS250 FCTC New Year", t: "J125", s: "Frankston North", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
-  { d: "2027-01-07", c: "2026-12-31", n: "O5k MCC Glen Iris Open", t: "Open", s: "Mt Waverley", dr: "20 min", e: "Open — watch, not enter", p: "Later" },
-  { d: "2027-01-10", c: "2027-01-01", n: "J125 GBS125 IMG Discovery Open", t: "J125", s: "East Brighton", dr: "15–20 min", e: "12U Singles + Doubles", p: "Start here" },
-  { d: "2027-01-11", c: "2027-01-04", n: "JDS Vida Junior Development #1", t: "JDS", s: "Altona", dr: "35 min", e: "12U Boys Singles", p: "Optional" },
-  { d: "2027-01-15", c: "2027-01-08", n: "J125 GBS250 PRTC Summer Classic", t: "J125", s: "Pakenham", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
-  { d: "2027-01-19", c: null, n: "JC UP4TENNIS Lauriston #1", t: "JC", s: "Carnegie 3163", dr: "5 min", e: "12U Boys Singles — his local event", p: "Start here" },
-  { d: "2027-01-19", c: "2027-01-12", n: "J125 GBS125 GWSH Summer", t: "J125", s: "Glen Waverley", dr: "25 min", e: "12U Singles + Doubles", p: "Target" },
-  { d: "2027-01-23", c: "2027-01-16", n: "J125 GBS500 MCC Glen Iris Summer Classic", t: "J125", s: "Mt Waverley", dr: "20 min", e: "12U Singles + Doubles", p: "Target" },
-  { d: "2027-01-23", c: "2027-01-16", n: "J125 Taylors Lakes (12s & 14s only)", t: "J125", s: "Taylors Lakes", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
-  { d: "2027-01-23", c: "2027-01-16", n: "J125 GBS125 Rye Australia Day", t: "J125", s: "Rye", dr: "80 min", e: "12U Singles + Doubles", p: "Later" },
-  { d: "2027-01-30", c: "2027-01-10", n: "BRTA junior club competition — Feb–June season", t: "Club comp", s: "Carnegie area", dr: "5–10 min", e: "Join a graded team before entries close", p: "Start here" },
-  { d: "2027-03-20", c: null, n: "Australian Claycourt Champs — VIC Qualifying", t: "Qualifying", s: "Dingley", dr: "30 min", e: "12U qualifying, only if his UTR is competitive", p: "Later" },
-  { d: "2027-03-26", c: "2027-03-19", n: "J250 GBS125 Eastern Region Tennis", t: "J250", s: "North Ringwood", dr: "30 min", e: "12U Singles + Doubles — first J250 when ready", p: "Target" },
-  { d: "2027-03-30", c: "2027-03-23", n: "J125 GBS125 Lauriston Junior", t: "J125", s: "Brighton East", dr: "15 min", e: "12U Singles + Doubles", p: "Target" },
-  { d: "2027-04-08", c: null, n: "O3k Tennis World Melbourne Park #1", t: "Open/Junior", s: "Melbourne", dr: "25 min", e: "12U event if offered", p: "Optional" },
-  { d: "2027-06-11", c: "2027-06-04", n: "J125 & Open 3k Mornington Kings Birthday", t: "J125", s: "Mornington", dr: "60 min", e: "12U Singles + Doubles", p: "Optional" },
-  { d: "2027-06-26", c: "2027-06-19", n: "Open 3k & J125 Mornington", t: "J125", s: "Mornington", dr: "60 min", e: "12U Singles + Doubles", p: "Optional" },
+  { d: "2026-12-06", e2: "2026-12-06", c: "2026-12-02", n: "JDS CBC Green Mornington #5", t: "JDS", s: "Mornington", dr: "60 min", e: "12U Boys Singles (yellow ball)", p: "Optional" },
+  { d: "2026-12-19", e2: "2026-12-20", c: "2026-12-12", n: "JC CBC Green Netsports Year-End", t: "JC", s: "Armadale", dr: "15 min", e: "12U Boys Singles — confirm yellow ball", p: "Start here" },
+  { d: "2026-12-19", e2: "2026-12-20", c: "2026-12-12", n: "JC Bulleen Summer Tournament", t: "JC", s: "Templestowe Lower", dr: "30 min", e: "12U Boys Singles", p: "Optional" },
+  { d: "2026-12-27", e2: "2026-12-29", c: "2026-12-17", n: "J125 Dingley Tournament", t: "J125", s: "Dingley", dr: "30 min", e: "12U Singles + Doubles ($30–55)", p: "Target" },
+  { d: "2027-01-02", e2: "2027-01-05", c: "2026-12-23", n: "J125 GBS250 FCTC New Year", t: "J125", s: "Frankston North", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
+  { d: "2027-01-07", e2: "2027-01-10", c: "2026-12-31", n: "O5k MCC Glen Iris Open", t: "Open", s: "Mt Waverley", dr: "20 min", e: "Open — watch, not enter", p: "Later" },
+  { d: "2027-01-10", e2: "2027-01-13", c: "2027-01-01", n: "J125 GBS125 IMG Discovery Open", t: "J125", s: "East Brighton", dr: "15–20 min", e: "12U Singles + Doubles", p: "Start here" },
+  { d: "2027-01-11", e2: "2027-01-12", c: "2027-01-04", n: "JDS Vida Junior Development #1", t: "JDS", s: "Altona", dr: "35 min", e: "12U Boys Singles", p: "Optional" },
+  { d: "2027-01-15", e2: "2027-01-18", c: "2027-01-08", n: "J125 GBS250 PRTC Summer Classic", t: "J125", s: "Pakenham", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
+  { d: "2027-01-19", e2: "2027-01-20", c: null, n: "JC UP4TENNIS Lauriston #1", t: "JC", s: "Carnegie 3163", dr: "5 min", e: "12U Boys Singles — his local event", p: "Start here" },
+  { d: "2027-01-19", e2: "2027-01-20", c: "2027-01-12", n: "J125 GBS125 GWSH Summer", t: "J125", s: "Glen Waverley", dr: "25 min", e: "12U Singles + Doubles", p: "Target" },
+  { d: "2027-01-23", e2: "2027-01-26", c: "2027-01-16", n: "J125 GBS500 MCC Glen Iris Summer Classic", t: "J125", s: "Mt Waverley", dr: "20 min", e: "12U Singles + Doubles", p: "Target" },
+  { d: "2027-01-23", e2: "2027-01-26", c: "2027-01-16", n: "J125 Taylors Lakes (12s & 14s only)", t: "J125", s: "Taylors Lakes", dr: "45 min", e: "12U Singles + Doubles", p: "Optional" },
+  { d: "2027-01-23", e2: "2027-01-26", c: "2027-01-16", n: "J125 GBS125 Rye Australia Day", t: "J125", s: "Rye", dr: "80 min", e: "12U Singles + Doubles", p: "Later" },
+  { d: "2027-01-30", e2: "2027-01-30", c: "2027-01-10", n: "BRTA junior club competition — Feb–June season", t: "Club comp", s: "Carnegie area", dr: "5–10 min", e: "Join a graded team before entries close", p: "Start here" },
+  { d: "2027-03-20", e2: "2027-03-21", c: null, n: "Australian Claycourt Champs — VIC Qualifying", t: "Qualifying", s: "Dingley", dr: "30 min", e: "12U qualifying, only if his UTR is competitive", p: "Later" },
+  { d: "2027-03-26", e2: "2027-03-29", c: "2027-03-19", n: "J250 GBS125 Eastern Region Tennis", t: "J250", s: "North Ringwood", dr: "30 min", e: "12U Singles + Doubles — first J250 when ready", p: "Target" },
+  { d: "2027-03-30", e2: "2027-04-02", c: "2027-03-23", n: "J125 GBS125 Lauriston Junior", t: "J125", s: "Brighton East", dr: "15 min", e: "12U Singles + Doubles", p: "Target" },
+  { d: "2027-04-08", e2: "2027-04-11", c: null, n: "O3k Tennis World Melbourne Park #1", t: "Open/Junior", s: "Melbourne", dr: "25 min", e: "12U event if offered", p: "Optional" },
+  { d: "2027-06-11", e2: "2027-06-14", c: "2027-06-04", n: "J125 & Open 3k Mornington Kings Birthday", t: "J125", s: "Mornington", dr: "60 min", e: "12U Singles + Doubles", p: "Optional" },
+  { d: "2027-06-26", e2: "2027-06-28", c: "2027-06-19", n: "Open 3k & J125 Mornington", t: "J125", s: "Mornington", dr: "60 min", e: "12U Singles + Doubles", p: "Optional" },
 ];
 
 const EVENT_WHY = {"JDS": "A first tournament, not a points chase: round-robin with guaranteed matches, so one bad set does not end the day. This is where a UTR starts.", "JC": "Community event — the gentlest way to play yellow ball against strangers. No points on offer, but every match counts toward the rating.", "J125": "The bottom rung of the ranked Junior Series. This is where De Minaur Junior Tour points begin, and draws are graded by UTR so he is not thrown in against the top seed.", "J250": "Double the points of a J125 and a stronger field. Worth entering once he has a few J125s behind him, not as a first ranked event.", "Club comp": "The highest-value item on this list and the cheapest: 14 rounds, 5–10 minutes away, graded by standard. It is what gets him from projected to a real UTR.", "Open": "Not for entering — a chance to watch a stronger standard up close.", "Open/Junior": "Open events sometimes offer a junior draw; check before travelling.", "Qualifying": "Only worth entering once his UTR is competitive with the field; otherwise it is a long day for one match."};
@@ -1602,6 +1606,20 @@ const CLUBS_NEAR = [
   ["Glen Eira Tennis Club", "Glen Eira"],
   ["Coatesville · Kings Park · Wattle · Victory Park · Centenary Park", "Glen Eira"],
 ];
+
+function clubClash(ev) {
+  const start = parseDate(ev.d), end = parseDate(ev.e2 || ev.d);
+  const hit = DATA.draw.find((r) => {
+    const rd = parseDate(r.date);
+    return rd >= start && rd <= end;
+  });
+  return hit ? hit.round : null;
+}
+
+function inClubBreak(ev) {
+  const start = parseDate(ev.d);
+  return start >= parseDate("2026-12-14") && start <= parseDate("2027-01-30");
+}
 
 function daysTo(iso) {
   if (!iso) return null;
@@ -1647,6 +1665,8 @@ function viewPathway() {
         <div class="evmeta">${esc(e.e)}</div>
         <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
         <div class="evfoot">${closeLabel(e.c)}</div>
+        ${clubClash(e) ? `<p class="clash">Clashes with club round ${clubClash(e)}</p>`
+          : inClubBreak(e) ? `<p class="freeweek">Club competition is in its summer break — this week is free</p>` : ""}
         <div class="evlinks">
           <a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}"
              target="_blank" rel="noopener">Find on Tennis Australia ›</a>
