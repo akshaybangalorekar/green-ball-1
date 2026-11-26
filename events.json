@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26T08:19:55Z",
+ "generated": "2026-11-26T09:23:39Z",
  "count": 17,
  "utr": 6,
  "ta": 11,
@@ -10,7 +10,9 @@
    "url": "https://app.utrsports.net/events/411159",
    "src": "utr",
    "km": 10,
-   "where": "Brighton East"
+   "where": "Brighton East",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "RSYLTC - Verified Matchplay",
@@ -18,7 +20,9 @@
    "url": "https://app.utrsports.net/events/411160",
    "src": "utr",
    "km": 6,
-   "where": "Toorak"
+   "where": "Toorak",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "2026 Australian Wheelchair Tennis National Championships",
@@ -34,7 +38,9 @@
    "url": "https://app.utrsports.net/events/405979",
    "src": "utr",
    "km": 39,
-   "where": "Aintree"
+   "where": "Aintree",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "Rosanna Tennis Club AO 1 Point Slam Community Event",
@@ -42,7 +48,9 @@
    "url": "https://app.utrsports.net/events/411216",
    "src": "utr",
    "km": 11,
-   "where": "Rosanna"
+   "where": "Rosanna",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "TERM 4 Junior UTR Matchplay",
@@ -50,7 +58,9 @@
    "url": "https://app.utrsports.net/events/402559",
    "src": "utr",
    "km": 8,
-   "where": "Brighton"
+   "where": "Brighton",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
@@ -58,7 +68,9 @@
    "url": "https://app.utrsports.net/events/405469",
    "src": "utr",
    "km": 29,
-   "where": "The Patch"
+   "where": "The Patch",
+   "utrMin": null,
+   "utrMax": null
   },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
