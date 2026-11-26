@@ -213,6 +213,8 @@ def verify_on_page(pg, e):
     return e, f"ages {ages or 'none'}"
 
 
+raw_utr = utr_events()
+raw_ta = ta_events()
 pool = []
 for e in raw_utr + raw_ta:
     if not e["date"]:
