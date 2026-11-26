@@ -111,11 +111,8 @@
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
   .vtop { display: flex; align-items: center; gap: 9px; margin: 2px 0 16px; }
-  .vstats { margin-left: auto; text-align: right; display: flex; flex-direction: column; gap: 3px; }
-  .vstats span { display: flex; align-items: center; justify-content: flex-end; gap: 5px;
-    font-size: 12.5px; color: var(--ink-dim); line-height: 1.35; white-space: nowrap; }
-  .vstats .ico { opacity: .55; }
-  .vstats b { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--ink); }
+  .vline { margin: 0 0 16px; font-size: 14px; line-height: 1.5; color: var(--ink-dim); }
+  .vline b { font-family: var(--display); font-weight: 800; font-size: 17px; color: var(--ink); }
   .vnum { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: -.03em; color: var(--brand); }
   .vlab { font-family: var(--mono); font-size: 9.5px; line-height: 1.3; letter-spacing: .09em;
     text-transform: uppercase; color: var(--ink-dim); }
@@ -1858,12 +1855,8 @@ function viewPathway() {
       <div class="vtop">
         <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
         <span class="vlab">UTR<br>now</span>
-        <div class="vstats">
-          <span>${ico("racket")}<b>${t.n}</b> matches</span>
-          <span>${ico("points")}<b>${t.w}</b> won · <b>${t.l}</b> lost</span>
-          <span>${ico("ball")}<b>${t.gw}</b> games won</span>
-        </div>
       </div>
+      <p class="vline"><b>${t.n}</b> matches · <b>${t.w}</b> won · <b>${t.l}</b> lost · <b>${t.gw}</b> games won</p>
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
           <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
