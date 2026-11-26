@@ -147,6 +147,9 @@
   .vtop .vnum, .vtop .vlab, .vtop .vmini { font-size: 12px !important; }
   .grp { margin: 0 0 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ink-dim); }
+  .fold.mini > summary { padding: 13px 16px; }
+  .fold.mini .ftitle { font-size: 14.5px; }
+  .fold.mini .fbody { padding: 0 16px 14px; }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
   .evkey b { color: var(--ink); font-weight: 600; }
   .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
@@ -1418,7 +1421,12 @@ const UNLOCK_KEY = "em-gb1-pathway";
 const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
 const LOG_KEY = "em-gb1-matches";
-const ENROL_KEY = "em-gb1-entered";
+const PASS_KEY = "em-gb1-passed";
+let PASSED = (() => { try { return JSON.parse(localStorage.getItem(PASS_KEY) || "[]"); } catch (e) { return []; } })();
+const passEvent = (n) => {
+  if (!PASSED.includes(n)) PASSED.push(n);
+  try { localStorage.setItem(PASS_KEY, JSON.stringify(PASSED)); } catch (e) {}
+};
 let ENTERED = (() => { try { return JSON.parse(localStorage.getItem(ENROL_KEY) || "{}"); } catch (e) { return {}; } })();
 const isEntered = (n) => !!ENTERED[n];
 const toggleEntered = (n) => {
@@ -1918,7 +1926,7 @@ function viewPathway() {
   const today = todayISO();
   const SOURCE = liveEvents() || [];
   const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : 0));
-  const ok = up.filter((e) => !e.dropped);          // never recommend what he cannot enter
+  const ok = up.filter((e) => !e.dropped && !PASSED.includes(e.n));   // eligible and not passed over
   const enteredUp = ok.filter((e) => isEntered(e.n));
   const candidates = ok.filter((e) => !isEntered(e.n) && e.p === "Start here");
   const firsts = [...enteredUp, ...candidates].slice(0, 3);
@@ -1958,22 +1966,23 @@ function viewPathway() {
 `;
 
   /* ---- all events ---- */
-  const evKey = `<p class="evkey"><b>How to read this list.</b> Tennis Australia and UTR events, merged and
-    sorted by date — the tag tells you how each one fits.</p>
-    <p class="evkey" style="margin-top:6px"><b>Book now</b> — enter these · <b>Good target</b> — a stretch worth
-    taking · <b>Need more time</b> — too strong today, revisit later · <b>Comfortable</b> — below his level, good
-    for a win and a counting match.</p>
-    <p class="evkey" style="margin-top:6px"><b>Not eligible</b> — shown with the reason rather than hidden, so
-    nothing goes missing. Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
-    <p class="evkey" style="margin-top:6px">Green ball counts toward his UTR only when the event is UTR-listed.</p>
-    <p class="evkey" style="margin:10px 0 6px">Updated ${(() => {
-      const g = window.__eventsStamp;
-      if (!g) return "—";
-      const t = new Date(g);
-      return t.toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
-    })()}</p>
-    <p class="evkey" style="margin:10px 0 14px">These are all Tennis Australia tournaments — their results count
-      for his UTR. <a href="#" id="helpLink">Help ›</a></p>`;
+  const stamp = window.__eventsStamp
+    ? new Date(window.__eventsStamp).toLocaleString("en-AU",
+        { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })
+    : "—";
+  const evKey = `<details class="fold mini">
+    <summary><span class="ftitle">How to read this card</span><span class="fchev">›</span></summary>
+    <div class="fbody">
+      <p class="evkey">Tennis Australia and UTR events, merged and sorted by date — the tag tells you how each one fits.</p>
+      <p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a stretch worth taking ·
+        <b>Need more time</b> — too strong today · <b>Comfortable</b> — below his level, good for a win and a
+        counting match.</p>
+      <p class="evkey"><b>Not eligible</b> — shown with the reason rather than hidden, so nothing goes missing.
+        Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
+      <p class="evkey">Green ball counts toward his UTR only when the event is UTR-listed.</p>
+      <p class="evkey">Updated ${stamp}</p>
+    </div>
+  </details>`;
   const evBody = evKey + up.map((e) => {
     const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
     return `<div class="ev">
@@ -2601,6 +2610,9 @@ function bind() {
   };
   document.querySelectorAll("[data-enrol]").forEach((cb) => {
     cb.onchange = () => { toggleEntered(cb.dataset.enrol); renderAll(); showToast(cb.checked ? "Added to your journey" : "Removed"); };
+  });
+  document.querySelectorAll("[data-pass]").forEach((b) => {
+    b.onclick = (ev) => { ev.stopPropagation(); passEvent(b.dataset.pass); renderAll(); showToast("Passed"); };
   });
   document.querySelectorAll("[data-result]").forEach((b) => {
     b.onclick = (ev) => { ev.stopPropagation(); addMatchSheet(b.dataset.result); };
