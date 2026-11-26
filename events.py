@@ -24,6 +24,27 @@ def jget(url):
         return None
 
 # ---------- UTR (public JSON API) ----------
+def find_band(obj):
+    """Any numeric utrMin/utrMax anywhere in the event, including inside divisions."""
+    lo = hi = None
+    stack = [obj]
+    while stack:
+        o = stack.pop()
+        if isinstance(o, dict):
+            for k, v in o.items():
+                kl = k.lower()
+                if isinstance(v, (int, float)) and "utr" in kl:
+                    if "min" in kl:
+                        lo = v if lo is None else min(lo, v)
+                    elif "max" in kl:
+                        hi = v if hi is None else max(hi, v)
+                elif isinstance(v, (dict, list)):
+                    stack.append(v)
+        elif isinstance(o, list):
+            stack.extend(o)
+    return lo, hi
+
+
 def utr_events():
     out = []
     base = ("https://api.utrsports.net/v2/search/events?top=100&searchOrigin=searchPage"
@@ -42,6 +63,7 @@ def utr_events():
         d = km(HOME, (lat, lng))
         if d > RADIUS_KM:
             continue
+        _b = find_band(src)
         sch = src.get("eventSchedule") or {}
         start = (sch.get("eventStartUtc") or "")[:10] or None
         out.append({
@@ -51,7 +73,7 @@ def utr_events():
             "src": "utr",
             "km": round(d),
             "where": loc.get("cityName") or loc.get("display") or "",
-            "utrMin": src.get("utrMin"), "utrMax": src.get("utrMax"),
+            "utrMin": _b[0], "utrMax": _b[1],
             "regEnd": (sch.get("registrationEndUtc") or "")[:10] or None,
         })
     return out
