@@ -213,6 +213,10 @@ def verify_on_page(pg, e):
     return e, f"ages {ages or 'none'}"
 
 
+def dedupe_key(e):
+    return (re.sub(r"[^a-z0-9]", "", e["name"].lower())[:26], e["date"])
+
+
 raw_utr = utr_events()
 raw_ta = ta_events()
 pool = []
