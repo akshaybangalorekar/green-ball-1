@@ -1789,10 +1789,6 @@ function viewPathway() {
     <div class="card journeychart" id="journeyCard">
       <p class="label">UTR Journey</p>
       ${journeySVG()}
-      <p class="utrline">${gap > 0
-        ? `<b>${gap.toFixed(1)} to go</b> to the goal of ${TARGET_UTR.toFixed(1)}.`
-        : `<b>Goal reached</b> — past ${TARGET_UTR.toFixed(1)}.`}
-        <b>${t.n}</b> matches count toward it: ${t.w} won, ${t.l} lost.</p>
       <p class="journeycta">Tap the flags to see which events to enter ›</p>
       <div class="evlinks" style="margin-top:12px">
         <a href="https://app.utrsports.net/profiles/6114278" target="_blank" rel="noopener">UTR profile ›</a>
