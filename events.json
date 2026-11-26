@@ -1,244 +1,192 @@
 {
- "generated": "2026-11-26T06:18:46Z",
- "count": 34,
+ "generated": "2026-11-26T06:30:53Z",
+ "count": 31,
  "events": [
   {
-   "name": "2027 J125 Metro East GWSH Labour Day",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D3490B04-9D0F-4886-A672-012A9F8E8704",
-   "src": "ta",
-   "near": "2027 J125 Metro East GWSH Labour Day 2027 J125 Metro East GWSH Labour Day Tennis Australia | Glen Waverley 5/03/2027 to 8/03/2027 Junior U12 U14 U16"
-  },
-  {
-   "name": "2027 J250 J125 Tennis World Canberra",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=002D2083-7D06-4805-9362-D5AB60E3B514",
-   "src": "ta",
-   "near": "2027 J250 J125 Tennis World Canberra 2027 J250 J125 Tennis World Canberra Tennis Australia | Canberra 5/03/2027 to 8/03/2027 Junior U12 U14 U16"
-  },
-  {
-   "name": "2027 J250 GBS125 Waverley Tournament",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=61B5CABF-CD00-4976-9179-850196798EEF",
-   "src": "ta",
-   "near": "2027 J250 GBS125 Waverley Tournament 2027 J250 GBS125 Waverley Tournament Doveton TC | Doveton 6/03/2027 to 8/03/2027 Junior U10 U12 U14 U16"
-  },
-  {
-   "name": "2027 12u & 14u Australian Claycourt Championships- WA Qualifying",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=459FB7ED-B31A-4FA2-AB9F-4EF6860E723D",
-   "src": "ta",
-   "near": "2027 12u & 14u Australian Claycourt Championships- WA Qualifying 2027 12u & 14u Australian Claycourt Championships- WA Qualifying Bayswater Tennis Club | Perth "
-  },
-  {
-   "name": "2027 12u & 14u Australian Claycourt Championships - ACT Qualifying",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=427ADA7F-649D-4929-A56D-122AB10048BC",
-   "src": "ta",
-   "near": "2027 12u & 14u Australian Claycourt Championships - ACT Qualifying 2027 12u & 14u Australian Claycourt Championships - ACT Qualifying Tennis Australia | Canberr"
-  },
-  {
-   "name": "2027 J125 Samford Junior Championships - Boys Only",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A35ADFC8-FD4D-4342-8625-30EA5044ECE0",
-   "src": "ta",
-   "near": "2027 J125 Samford Junior Championships - Boys Only 2027 J125 Samford Junior Championships - Boys Only Tennis Australia | Brisbane 13/03/2027 to 14/03/2027 Junio"
-  },
-  {
-   "name": "2027 JC Pardey Shield - Pizzey Cup Qualifying",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=ECAB6E8A-C796-4929-BC84-E9ECE4B16F5A",
-   "src": "ta",
-   "near": "2027 JC Pardey Shield - Pizzey Cup Qualifying 2027 JC Pardey Shield - Pizzey Cup Qualifying Tennis Australia | Launceston 13/03/2027 to 14/03/2027 Junior U18"
-  },
-  {
-   "name": "2027 JDS 12U 14U Oran Park (Boys Only)",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=08D18970-A629-4272-A264-59F0283ED24C",
-   "src": "ta",
-   "near": "2027 JDS 12U 14U Oran Park (Boys Only) 2027 JDS 12U 14U Oran Park (Boys Only) Tennis New South Wales | Oran Park 14/03/2027 Junior U12 U14"
-  },
-  {
-   "name": "2027 12U & 14U Australian Claycourt Championships - NT Qualifying (Closed)",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=76DE1679-C92C-4BCF-9AB5-334F1AE82319",
-   "src": "ta",
-   "near": "2027 12U & 14U Australian Claycourt Championships - NT Qualifying (Closed) 2027 12U & 14U Australian Claycourt Championships - NT Qualifying (Closed) Tennis NT "
-  },
-  {
-   "name": "2027 JC Tennis World #1",
-   "date": "2027-06-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F55D9D2-0C59-4038-A9EE-4DF9A457A527",
-   "src": "ta",
-   "near": "2027 JC Tennis World #1 2027 JC Tennis World #1 Tennis World | Melbourne 20/03/2027 to 21/03/2027 Junior U10 U12 U14 U16 U18"
-  },
-  {
    "name": "2026 OC JC NSW School Boys and School Girls",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=DB11FD43-0C4C-4474-9E57-C2C3B30166D4",
-   "src": "ta",
-   "near": "2026 OC JC NSW School Boys and School Girls 2026 OC JC NSW School Boys and School Girls North West Sydney Tennis | Pennant Hills 19/11/2026 to 27/11/2026 Syn Gr"
+   "src": "ta"
   },
   {
    "name": "2026 12u & 14u Australian Grasscourt Championships - SA Qualifying",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=C41C94F7-DE1C-4576-8801-A02BE64A80FB",
-   "src": "ta",
-   "near": "2026 12u & 14u Australian Grasscourt Championships - SA Qualifying 2026 12u & 14u Australian Grasscourt Championships - SA Qualifying Tennis World Millswood | K"
+   "src": "ta"
   },
   {
    "name": "2026 OC CBC Tennis Gear Adult and Junior Club Championships (Members Only)",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=05111D41-E4C5-4591-9AAC-E127C0EFBB10",
-   "src": "ta",
-   "near": "2026 OC CBC Tennis Gear Adult and Junior Club Championships (Members Only) 2026 OC CBC Tennis Gear Adult and Junior Club Championships (Members Only) TennisGear"
+   "src": "ta"
   },
   {
-   "name": "2026 OC JC Gold Coast District (Adult & Junior) Championships",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=78DAE349-85EB-4836-86FA-F23E17E77E0E",
-   "src": "ta",
-   "near": "2026 OC JC Gold Coast District (Adult & Junior) Championships 2026 OC JC Gold Coast District (Adult & Junior) Championships Tennis Gold Coast | Southport 22/11/"
+   "name": "2026 J125 NSW State Champion of Champions",
+   "date": "2026-11-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6A877AF8-AA15-4A63-8EA9-7C503F260B15",
+   "src": "ta"
   },
   {
-   "name": "2026 12u & 14u Australian Grasscourt Championships - WA Qualifying",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A006EAB5-BE1B-463F-95B2-88A50C3757B6",
-   "src": "ta",
-   "near": "2026 12u & 14u Australian Grasscourt Championships - WA Qualifying 2026 12u & 14u Australian Grasscourt Championships - WA Qualifying Tennis West | Perth 27/11/"
+   "name": "2026 J125 KDV Sport Junior Slam Series - Girls Only",
+   "date": "2026-11-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7FD64387-2648-4F0D-B203-DDC86C697A12",
+   "src": "ta"
   },
   {
-   "name": "2026 OC JC East Coburg Club Champs (Members Only)",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C3E2822-5135-46D3-93A9-930E1F0DD2DC",
-   "src": "ta",
-   "near": "2026 OC JC East Coburg Club Champs (Members Only) 2026 OC JC East Coburg Club Champs (Members Only) East Coburg Tennis Club | Coburg 28/11/2026 to 29/11/2026 Sy"
+   "name": "2026 JC CBC Green Vida Truganina Tournament",
+   "date": "2026-11-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=80D88400-117C-4276-85B8-E462478D1858",
+   "src": "ta"
   },
   {
    "name": "2026 JDS CBC Mornington Tournament #4",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C061085-364C-4A45-A205-4649EC365973",
-   "src": "ta",
-   "near": "2026 JDS CBC Mornington Tournament #4 2026 JDS CBC Mornington Tournament #4 Mornington Tennis Centre | Mornington 29/11/2026 Clay Junior Junior U10 U12 U14 U17 "
-  },
-  {
-   "name": "2027 O5k J125 State Closed Tournament",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F68A870-6C56-498A-A8DE-6598E48025B8",
-   "src": "ta",
-   "near": "2027 O5k J125 State Closed Tournament 2027 O5k J125 State Closed Tournament Tennis West | Perth 26/02/2027 to 1/03/2027 Open 16+ Junior U12 U14 U16 U18"
-  },
-  {
-   "name": "2027 OC JC Beyond Bank Warrnambool Lawn Open",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD19E969-6647-47AA-BED7-50A705DBDDF1",
-   "src": "ta",
-   "near": "2027 OC JC Beyond Bank Warrnambool Lawn Open 2027 OC JC Beyond Bank Warrnambool Lawn Open Warrnambool Lawn | Warrnambool 5/03/2027 to 8/03/2027 Grass Open 17+ 5"
-  },
-  {
-   "name": "2027 JC Vida Altona Yellow Ball Tournament #1",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=B64ED57E-4A54-48D1-9326-E94921D67D34",
-   "src": "ta",
-   "near": "2027 JC Vida Altona Yellow Ball Tournament #1 2027 JC Vida Altona Yellow Ball Tournament #1 Altona Tennis Club | Altona 14/03/2027 Clay Junior U18"
-  },
-  {
-   "name": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=68C4FDCA-B0D7-4287-A9A3-8DA43360F374",
-   "src": "ta",
-   "near": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes 2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes Taylors Lakes Tennis Club | Taylors Lakes 20"
-  },
-  {
-   "name": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=41129375-5FD9-4E0B-820D-C7BB1ABD993B",
-   "src": "ta",
-   "near": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying 2027 12u & 14u Australian Claycourt Championships - VIC Qualifying Tennis Victoria | Dingley "
-  },
-  {
-   "name": "2027 AO Asia Pacific Wildcard Playoff",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=533BB0B0-A211-43A7-8175-4A6D6F78FEC7",
-   "src": "ta",
-   "near": "2027 AO Asia Pacific Wildcard Playoff 2027 AO Asia Pacific Wildcard Playoff Tennis Australia | Chengdu, China 23/11/2026 to 28/11/2026 Hardcourt Open 16+"
+   "src": "ta"
   },
   {
    "name": "2026 Australian Wheelchair Tennis National Championships",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=4653939F-FA10-4684-9210-E636F5483987",
-   "src": "ta",
-   "near": "2026 Australian Wheelchair Tennis National Championships 2026 Australian Wheelchair Tennis National Championships Tennis Australia | Melbourne 27/11/2026 to 29/"
-  },
-  {
-   "name": "2026 Qld Blind & Low Vision Open",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=30B48FA0-0BF8-481F-9691-F3BE7F97EBDE",
-   "src": "ta",
-   "near": "2026 Qld Blind & Low Vision Open 2026 Qld Blind & Low Vision Open Tennis Queensland | East Brisbane 28/11/2026 to 29/11/2026 Hardcourt 9-18 13+ Open 13+"
+   "src": "ta"
   },
   {
    "name": "2026 O3k David Turbayne Tennis Centre Open",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=0746FA9C-1B5C-4726-9D9F-673B71C1DCBD",
-   "src": "ta",
-   "near": "2026 O3k David Turbayne Tennis Centre Open 2026 O3k David Turbayne Tennis Centre Open David Turbayne Tennis Centre | Brisbane 28/11/2026 to 30/11/2026 Hardcourt"
-  },
-  {
-   "name": "2026 J1000 18U Australian Championships",
-   "date": null,
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=37688D4C-9AEF-4004-A57C-CB7BD87B0A0D",
-   "src": "ta",
-   "near": "2026 J1000 18U Australian Championships 2026 J1000 18U Australian Championships Tennis Australia | Traralgon 28/11/2026 to 4/12/2026 Hardcourt Junior Junior 10-"
+   "src": "ta"
   },
   {
    "name": "2026 CBC Bolt 2 Brisbane",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=D29D264C-0776-455F-8AF2-1143276FB050",
-   "src": "ta",
-   "near": "2026 CBC Bolt 2 Brisbane 2026 CBC Bolt 2 Brisbane Tennis Queensland Metropolitan Region | Brisbane 29/11/2026 Hardcourt Junior Junior U10 U11"
+   "src": "ta"
   },
   {
    "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
-   "date": null,
+   "date": "2026-11-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=04F830E8-4387-49E1-892A-369AD0D6B46B",
-   "src": "ta",
-   "near": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10 2026 CBC Vida Essendon Orange Hot Shots Match Play #10 Essendon Tennis Club | Essendon 29/11/2026 Clay Co"
+   "src": "ta"
+  },
+  {
+   "name": "2027 O5k J125 State Closed Tournament",
+   "date": "2027-02-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F68A870-6C56-498A-A8DE-6598E48025B8",
+   "src": "ta"
   },
   {
    "name": "2027 OC City of Busselton March Open",
-   "date": null,
+   "date": "2027-02-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=E8AE2A2A-4BF0-4222-88C2-DBED7D22CA03",
-   "src": "ta",
-   "near": "2027 OC City of Busselton March Open 2027 OC City of Busselton March Open Busselton Tennis Club | Busselton 26/02/2027 to 1/03/2027 Open 16+"
+   "src": "ta"
+  },
+  {
+   "name": "2027 J125 Metro East GWSH Labour Day",
+   "date": "2027-03-05",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D3490B04-9D0F-4886-A672-012A9F8E8704",
+   "src": "ta"
+  },
+  {
+   "name": "2027 J250 J125 Tennis World Canberra",
+   "date": "2027-03-05",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=002D2083-7D06-4805-9362-D5AB60E3B514",
+   "src": "ta"
+  },
+  {
+   "name": "2027 OC JC Beyond Bank Warrnambool Lawn Open",
+   "date": "2027-03-05",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD19E969-6647-47AA-BED7-50A705DBDDF1",
+   "src": "ta"
   },
   {
    "name": "2027 O8k Mooloolaba Open Championships (Open Autumn Swing - Leg 1)",
-   "date": null,
+   "date": "2027-03-05",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=77DBE639-BBE5-4C7C-B0E0-56325C4226FC",
-   "src": "ta",
-   "near": "2027 O8k Mooloolaba Open Championships (Open Autumn Swing - Leg 1) 2027 O8k Mooloolaba Open Championships (Open Autumn Swing - Leg 1) Mooloolaba Tennis Club | M"
+   "src": "ta"
+  },
+  {
+   "name": "2027 J250 GBS125 Waverley Tournament",
+   "date": "2027-03-06",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=61B5CABF-CD00-4976-9179-850196798EEF",
+   "src": "ta"
+  },
+  {
+   "name": "2027 12u & 14u Australian Claycourt Championships- WA Qualifying",
+   "date": "2027-03-12",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=459FB7ED-B31A-4FA2-AB9F-4EF6860E723D",
+   "src": "ta"
+  },
+  {
+   "name": "2027 12u & 14u Australian Claycourt Championships - ACT Qualifying",
+   "date": "2027-03-13",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=427ADA7F-649D-4929-A56D-122AB10048BC",
+   "src": "ta"
+  },
+  {
+   "name": "2027 J125 Samford Junior Championships - Boys Only",
+   "date": "2027-03-13",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A35ADFC8-FD4D-4342-8625-30EA5044ECE0",
+   "src": "ta"
+  },
+  {
+   "name": "2027 JC Pardey Shield - Pizzey Cup Qualifying",
+   "date": "2027-03-13",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=ECAB6E8A-C796-4929-BC84-E9ECE4B16F5A",
+   "src": "ta"
   },
   {
    "name": "2027 World Police & Fire Games",
-   "date": null,
+   "date": "2027-03-13",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=F3E83C93-A3E7-49AC-BFF3-97C7C25489E8",
-   "src": "ta",
-   "near": "2027 World Police & Fire Games 2027 World Police & Fire Games Royal Kings Park Tennis Club | Perth 13/03/2027 to 17/03/2027 Open 16+"
+   "src": "ta"
+  },
+  {
+   "name": "2027 JDS 12U 14U Oran Park (Boys Only)",
+   "date": "2027-03-14",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=08D18970-A629-4272-A264-59F0283ED24C",
+   "src": "ta"
+  },
+  {
+   "name": "2027 JC Vida Altona Yellow Ball Tournament #1",
+   "date": "2027-03-14",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=B64ED57E-4A54-48D1-9326-E94921D67D34",
+   "src": "ta"
   },
   {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #1",
-   "date": null,
+   "date": "2027-03-14",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD76830D-C1F2-4A89-9B57-B97C60B34400",
-   "src": "ta",
-   "near": "2027 CBC Vida Essendon Green Ball Tournament #1 2027 CBC Vida Essendon Green Ball Tournament #1 Essendon Tennis Club | Essendon 14/03/2027 Clay Junior U12"
+   "src": "ta"
   },
   {
    "name": "2027 WA IDA & DHoH Open",
-   "date": null,
+   "date": "2027-03-19",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6B932CAB-7728-479F-8E68-47114498BD82",
-   "src": "ta",
-   "near": "2027 WA IDA & DHoH Open 2027 WA IDA & DHoH Open Tennis West | Perth 19/03/2027 Open 16+ Junior 17-18"
+   "src": "ta"
+  },
+  {
+   "name": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes",
+   "date": "2027-03-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=68C4FDCA-B0D7-4287-A9A3-8DA43360F374",
+   "src": "ta"
+  },
+  {
+   "name": "2027 12U & 14U Australian Claycourt Championships - NT Qualifying (Closed)",
+   "date": "2027-03-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=76DE1679-C92C-4BCF-9AB5-334F1AE82319",
+   "src": "ta"
+  },
+  {
+   "name": "2027 JC Tennis World #1",
+   "date": "2027-03-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F55D9D2-0C59-4038-A9EE-4DF9A457A527",
+   "src": "ta"
+  },
+  {
+   "name": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying",
+   "date": "2027-03-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=41129375-5FD9-4E0B-820D-C7BB1ABD993B",
+   "src": "ta"
   }
  ]
 }
