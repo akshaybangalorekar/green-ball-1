@@ -1974,6 +1974,7 @@ function viewPathway() {
         <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${srcChip(e)}</div>
+      ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
       <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
       <div class="evfoot">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
