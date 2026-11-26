@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-26T07:16:07Z",
- "count": 40,
+ "generated": "2026-11-26T07:46:04Z",
+ "count": 24,
  "utr": 6,
- "ta": 34,
+ "ta": 18,
  "events": [
   {
    "name": "GO PRO Verified Matchplay - Dendy Park Tennis Club",
@@ -25,7 +25,7 @@
    "date": "2026-11-27",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=A006EAB5-BE1B-463F-95B2-88A50C3757B6",
    "src": "ta",
-   "km": null,
+   "km": 7,
    "where": "Perth"
   },
   {
@@ -33,16 +33,8 @@
    "date": "2026-11-27",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=4653939F-FA10-4684-9210-E636F5483987",
    "src": "ta",
-   "km": null,
+   "km": 10,
    "where": "Melbourne"
-  },
-  {
-   "name": "2026 J125 NSW State Champion of Champions",
-   "date": "2026-11-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6A877AF8-AA15-4A63-8EA9-7C503F260B15",
-   "src": "ta",
-   "km": null,
-   "where": "Broadmeadow"
   },
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -77,75 +69,19 @@
    "where": "The Patch"
   },
   {
-   "name": "2026 ACT JDS CBC Champion of Champions (Invitational event)",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=0D9272A7-D6FA-4914-965A-62AC871E32CD",
-   "src": "ta",
-   "km": null,
-   "where": "canberra"
-  },
-  {
-   "name": "2026 J1000 18U Australian Championships",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=37688D4C-9AEF-4004-A57C-CB7BD87B0A0D",
-   "src": "ta",
-   "km": null,
-   "where": "Traralgon"
-  },
-  {
-   "name": "2026 J125 KDV Sport Junior Slam Series - Girls Only",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7FD64387-2648-4F0D-B203-DDC86C697A12",
-   "src": "ta",
-   "km": null,
-   "where": "Gold Coast"
-  },
-  {
-   "name": "2026 J125 Samford Junior Championships - Boys Only #2",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=BB312F72-2706-44F4-9B1E-E2851410C82E",
-   "src": "ta",
-   "km": null,
-   "where": "Brisbane"
-  },
-  {
-   "name": "2026 O3k David Turbayne Tennis Centre Open",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=0746FA9C-1B5C-4726-9D9F-673B71C1DCBD",
-   "src": "ta",
-   "km": null,
-   "where": "Brisbane"
-  },
-  {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
    "date": "2026-11-28",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C3E2822-5135-46D3-93A9-930E1F0DD2DC",
    "src": "ta",
-   "km": null,
+   "km": 14,
    "where": "Coburg"
-  },
-  {
-   "name": "2026 Qld Blind & Low Vision Open",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=30B48FA0-0BF8-481F-9691-F3BE7F97EBDE",
-   "src": "ta",
-   "km": null,
-   "where": "East Brisbane"
-  },
-  {
-   "name": "2026 CBC Bolt 2 Brisbane",
-   "date": "2026-11-29",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D29D264C-0776-455F-8AF2-1143276FB050",
-   "src": "ta",
-   "km": null,
-   "where": "Brisbane"
   },
   {
    "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
    "date": "2026-11-29",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=04F830E8-4387-49E1-892A-369AD0D6B46B",
    "src": "ta",
-   "km": null,
+   "km": 17,
    "where": "Essendon"
   },
   {
@@ -153,7 +89,7 @@
    "date": "2026-11-29",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=80D88400-117C-4276-85B8-E462478D1858",
    "src": "ta",
-   "km": null,
+   "km": 31,
    "where": "Truganina"
   },
   {
@@ -161,7 +97,7 @@
    "date": "2026-11-29",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C061085-364C-4A45-A205-4649EC365973",
    "src": "ta",
-   "km": null,
+   "km": 42,
    "where": "Mornington"
   },
   {
@@ -169,55 +105,23 @@
    "date": "2027-02-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F68A870-6C56-498A-A8DE-6598E48025B8",
    "src": "ta",
-   "km": null,
+   "km": 7,
    "where": "Perth"
-  },
-  {
-   "name": "2027 OC City of Busselton March Open",
-   "date": "2027-02-26",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=E8AE2A2A-4BF0-4222-88C2-DBED7D22CA03",
-   "src": "ta",
-   "km": null,
-   "where": "Busselton"
   },
   {
    "name": "2027 J125 Metro East GWSH Labour Day",
    "date": "2027-03-05",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=D3490B04-9D0F-4886-A672-012A9F8E8704",
    "src": "ta",
-   "km": null,
+   "km": 9,
    "where": "Glen Waverley"
-  },
-  {
-   "name": "2027 J250 J125 Tennis World Canberra",
-   "date": "2027-03-05",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=002D2083-7D06-4805-9362-D5AB60E3B514",
-   "src": "ta",
-   "km": null,
-   "where": "Canberra"
-  },
-  {
-   "name": "2027 O8k Mooloolaba Open Championships (Open Autumn Swing - Leg 1)",
-   "date": "2027-03-05",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=77DBE639-BBE5-4C7C-B0E0-56325C4226FC",
-   "src": "ta",
-   "km": null,
-   "where": "Mountain Creek"
-  },
-  {
-   "name": "2027 OC JC Beyond Bank Warrnambool Lawn Open",
-   "date": "2027-03-05",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD19E969-6647-47AA-BED7-50A705DBDDF1",
-   "src": "ta",
-   "km": null,
-   "where": "Warrnambool"
   },
   {
    "name": "2027 J250 GBS125 Waverley Tournament",
    "date": "2027-03-06",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=61B5CABF-CD00-4976-9179-850196798EEF",
    "src": "ta",
-   "km": null,
+   "km": 22,
    "where": "Doveton"
   },
   {
@@ -225,31 +129,15 @@
    "date": "2027-03-12",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=459FB7ED-B31A-4FA2-AB9F-4EF6860E723D",
    "src": "ta",
-   "km": null,
+   "km": 7,
    "where": "Perth"
-  },
-  {
-   "name": "2027 12u & 14u Australian Claycourt Championships - ACT Qualifying",
-   "date": "2027-03-13",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=427ADA7F-649D-4929-A56D-122AB10048BC",
-   "src": "ta",
-   "km": null,
-   "where": "Canberra"
-  },
-  {
-   "name": "2027 J125 Samford Junior Championships - Boys Only",
-   "date": "2027-03-13",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A35ADFC8-FD4D-4342-8625-30EA5044ECE0",
-   "src": "ta",
-   "km": null,
-   "where": "Brisbane"
   },
   {
    "name": "2027 JC Pardey Shield - Pizzey Cup Qualifying",
    "date": "2027-03-13",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=ECAB6E8A-C796-4929-BC84-E9ECE4B16F5A",
    "src": "ta",
-   "km": null,
+   "km": 18,
    "where": "Launceston"
   },
   {
@@ -257,7 +145,7 @@
    "date": "2027-03-13",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=F3E83C93-A3E7-49AC-BFF3-97C7C25489E8",
    "src": "ta",
-   "km": null,
+   "km": 7,
    "where": "Perth"
   },
   {
@@ -265,7 +153,7 @@
    "date": "2027-03-14",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD76830D-C1F2-4A89-9B57-B97C60B34400",
    "src": "ta",
-   "km": null,
+   "km": 17,
    "where": "Essendon"
   },
   {
@@ -273,39 +161,23 @@
    "date": "2027-03-14",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=B64ED57E-4A54-48D1-9326-E94921D67D34",
    "src": "ta",
-   "km": null,
+   "km": 21,
    "where": "Altona"
-  },
-  {
-   "name": "2027 JDS 12U 14U Oran Park (Boys Only)",
-   "date": "2027-03-14",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=08D18970-A629-4272-A264-59F0283ED24C",
-   "src": "ta",
-   "km": null,
-   "where": "Oran Park"
   },
   {
    "name": "2027 WA IDA & DHoH Open",
    "date": "2027-03-19",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6B932CAB-7728-479F-8E68-47114498BD82",
    "src": "ta",
-   "km": null,
+   "km": 7,
    "where": "Perth"
-  },
-  {
-   "name": "2027 12U & 14U Australian Claycourt Championships - NT Qualifying (Closed)",
-   "date": "2027-03-20",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=76DE1679-C92C-4BCF-9AB5-334F1AE82319",
-   "src": "ta",
-   "km": null,
-   "where": "Marrara"
   },
   {
    "name": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying",
    "date": "2027-03-20",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=41129375-5FD9-4E0B-820D-C7BB1ABD993B",
    "src": "ta",
-   "km": null,
+   "km": 15,
    "where": "Dingley"
   },
   {
@@ -313,7 +185,7 @@
    "date": "2027-03-20",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=68C4FDCA-B0D7-4287-A9A3-8DA43360F374",
    "src": "ta",
-   "km": null,
+   "km": 30,
    "where": "Taylors Lakes"
   },
   {
@@ -321,7 +193,7 @@
    "date": "2027-03-20",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F55D9D2-0C59-4038-A9EE-4DF9A457A527",
    "src": "ta",
-   "km": null,
+   "km": 10,
    "where": "Melbourne"
   }
  ]
