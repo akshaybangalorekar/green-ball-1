@@ -1,6 +1,7 @@
 name: Harvest events
 on:
-  workflow_dispatch:
+  schedule:
+    - cron: "30 4,8,12,16 * * *"   # 10:00, 14:00, 18:00, 22:00 IST
   push:
     paths: ["events.py"]
 permissions:
@@ -13,9 +14,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: pip install playwright && python -m playwright install --with-deps chromium
       - run: python events.py
-        env:
-          JINA_KEY: ${{ secrets.JINA_KEY }}
       - run: |
           git config user.name  "ladder-bot"
           git config user.email "bot@users.noreply.github.com"
