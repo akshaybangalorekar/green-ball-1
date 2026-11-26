@@ -151,6 +151,9 @@
   .evkey b { color: var(--ink); font-weight: 600; }
   .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
     box-shadow: 0 8px 24px -18px rgba(8, 40, 24, .5); }
+  .fold.hasnew > summary::after { content: "NEW"; margin-left: 8px; padding: 2px 6px; border-radius: 5px;
+    background: var(--ball); color: var(--ball-ink); font-family: var(--mono); font-size: 8.5px;
+    font-weight: 700; letter-spacing: .08em; }
   .fold > summary { display: flex; align-items: center; gap: 10px; padding: 17px 20px; cursor: pointer;
     list-style: none; }
   .fold > summary::-webkit-details-marker { display: none; }
@@ -2493,6 +2496,21 @@ function bind() {
   });
   document.querySelectorAll("[data-result]").forEach((b) => {
     b.onclick = (ev) => { ev.stopPropagation(); addMatchSheet(b.dataset.result); };
+  });
+  document.querySelectorAll("details.fold").forEach((d) => {
+    const body = d.querySelector(".fbody");
+    if (!body) return;
+    const sig = String(body.innerHTML.length) + "|" + body.innerHTML.slice(0, 60);
+    let seen = null;
+    try { seen = localStorage.getItem("em-gb1-seen-" + d.id); } catch (e) {}
+    if (seen !== null && seen !== sig) d.classList.add("hasnew");
+    if (seen === null) { try { localStorage.setItem("em-gb1-seen-" + d.id, sig); } catch (e) {} }
+    d.addEventListener("toggle", () => {
+      if (d.open) {
+        d.classList.remove("hasnew");
+        try { localStorage.setItem("em-gb1-seen-" + d.id, sig); } catch (e) {}
+      }
+    });
   });
   const hl = $("#helpLink");
   if (hl) hl.onclick = (ev) => {
