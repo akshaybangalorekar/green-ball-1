@@ -186,6 +186,12 @@ def verify_on_page(pg, e):
     over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", txt, re.I)
     min_age = int(over.group(1)) if over else None
     e["ages"] = ages
+    # the UTR band the event accepts, lowest first — that is his entry point
+    bands = [(float(a), float(b)) for a, b in
+             re.findall(r"UTR[^\d]{0,12}(\d{1,2}(?:\.\d)?)\s*(?:-|–|to)\s*(\d{1,2}(?:\.\d)?)", txt, re.I)]
+    if bands:
+        lo, hi = sorted(bands)[0]
+        e["utrMin"], e["utrMax"] = lo, hi
     e["ball"] = ("green" if re.search(r"green ball", txt, re.I)
                  else "yellow" if re.search(r"yellow ball", txt, re.I) else "?")
     if BAD_PAGE.search(txt) or BAD_PAGE.search(e["name"]):
