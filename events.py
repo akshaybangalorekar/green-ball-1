@@ -28,37 +28,54 @@ def parse_date(txt, year_hint=None):
     except ValueError:
         return None
 
-# ---------- Tennis Australia ----------
-TA_WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
+# ---------- Tennis Australia: read the page's own embedded data ----------
+import gzip, io
+
+def fetch_raw(url, timeout=70):
+    try:
+        req = urllib.request.Request(url, headers={**UA, "Accept-Encoding": "gzip"})
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = r.read()
+            if r.headers.get("Content-Encoding") == "gzip":
+                data = gzip.decompress(data)
+            return data.decode("utf-8", "replace")
+    except Exception as e:
+        return f"ERR {type(e).__name__}: {e}"
+
 ta = {}
+TA_WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
 for start, end in TA_WINDOWS:
-    for page in range(1, 5):
-        url = ("https://tournaments.tennis.com.au/find/tournament"
-               f"?DateFilterType=0&StartDate={start}&EndDate={end}&Distance=25&page={page}")
-        txt = get("https://r.jina.ai/" + url)
-        if txt.startswith("ERR"):
-            break
-        rows = re.findall(r"\[([^\]]{8,140})\]\((https://tournaments\.tennis\.com\.au/sport/tournament\?id=[^\)\s]+)\)", txt)
-        new = 0
-        for label, link in rows:
-            if link in ta:
-                continue
-            dm = re.search(r"(\d{1,2}\s+[A-Za-z]{3}[a-z]*\s*\d{4})", label)
-            date = parse_date(dm.group(1)) if dm else None
-            name = re.sub(r"^\d{1,2}\s+[A-Za-z]{3}[a-z]*\s*\d{4}\s*[•·-]?\s*", "", label).strip()
-            if len(name) < 6:
-                continue
-            ta[link] = {"name": name[:110], "date": date, "url": link, "src": "ta"}
-            new += 1
-        if not new:
-            break
+    url = ("https://tournaments.tennis.com.au/find/tournament"
+           f"?DateFilterType=0&StartDate={start}&EndDate={end}&Distance=25")
+    html = fetch_raw(url)
+    if html.startswith("ERR"):
+        print("TA fetch:", html[:90])
+        continue
+    # every tournament page link, with the surrounding text for a date
+    for m in re.finditer(r'tournament\?id=([0-9A-Fa-f-]{36})', html):
+        gid = m.group(1)
+        link = f"https://tournaments.tennis.com.au/sport/tournament?id={gid}"
+        if link in ta:
+            continue
+        window = html[max(0, m.start() - 700): m.start() + 700]
+        tm = re.search(r'"tournamentName"\s*:\s*"([^"]{5,120})"', window)
+        nm = tm.group(1) if tm else None
+        if not nm:
+            tm2 = re.search(r'"name"\s*:\s*"([^"]{5,120})"', window)
+            nm = tm2.group(1) if tm2 else None
+        if not nm:
+            continue
+        dm = re.search(r'"startDate"\s*:\s*"?(\d{4}-\d{2}-\d{2})', window)
+        ta[link] = {"name": nm[:110], "date": dm.group(1) if dm else None,
+                    "url": link, "src": "ta"}
+print("TA events:", len(ta))
 
 # ---------- UTR ----------
 utr = {}
 utr_url = ("https://app.utrsports.net/search?type=events&sportTypes=tennis"
            "&eventState=open_registration&utrMin=1&utrMax=4&utrType=verified"
            "&distance=25mi&latitude=-37.8447&longitude=145.0694")
-utxt = get("https://r.jina.ai/" + utr_url)
+utxt = fetch_raw(utr_url)
 if not utxt.startswith("ERR"):
     for label, link in re.findall(r"\[([^\]]{10,200})\]\((https://app\.utrsports\.net/events/\d+)\)", utxt):
         if "Australia" not in label:
