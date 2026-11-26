@@ -2736,6 +2736,9 @@ function settingsSheet() {
     <div class="ios-group">
       ${installRow}
       <div class="ios-row"><span class="ios-label">Results source</span><span class="ios-value">TROLS</span></div>
+      <div class="ios-row"><span class="ios-label">Passed events</span>
+        <span class="ios-value">${PASSED.length}</span>
+        <button class="ios-btn" id="resetPass">Reset</button></div>
       <div class="ios-row"><span class="ios-label">Snapshot</span><span class="ios-value">${esc(DATA.meta.ladder_loaded || "—")}</span></div>
     </div>
 
