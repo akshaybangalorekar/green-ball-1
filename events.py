@@ -29,29 +29,42 @@ def scrape_ta(page):
             if key in out:
                 continue
             blob = (c["text"] + " " + c["near"]).replace("\n", " ")
-            dm = re.search(r"(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s*(\d{4})?", blob, re.I)
             date = None
-            if dm:
-                months = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
-                y = int(dm.group(3)) if dm.group(3) else int(start[:4])
-                try:
-                    date = datetime.date(y, months[dm.group(2).lower()[:3]], int(dm.group(1))).isoformat()
-                except ValueError:
-                    date = None
             name = (c["text"] or "").strip().split("\n")[0][:110]
             if len(name) < 6:
                 continue
-            out[key] = {"name": name, "date": date, "url": c["href"], "src": "ta", "near": blob[:160]}
+            out[key] = {"name": name, "date": date, "url": c["href"], "src": "ta"}
     return list(out.values())
+
+
+MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
+
+def date_from_page(page, url):
+    """Open the tournament page and read its own start date."""
+    try:
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        page.wait_for_timeout(2500)
+        txt = page.inner_text("body")[:4000]
+    except Exception:
+        return None
+    for m in re.finditer(r"(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})", txt, re.I):
+        try:
+            return datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
+        except ValueError:
+            continue
+    return None
 
 with sync_playwright() as pw:
     b = pw.chromium.launch(args=["--no-sandbox"])
     pg = b.new_page(viewport={"width": 1280, "height": 1600})
     ta = scrape_ta(pg)
+    print("links found:", len(ta))
+    for e in ta:
+        e["date"] = date_from_page(pg, e["url"])
     b.close()
 
 today = datetime.date.today().isoformat()
-events = [e for e in ta if not e["date"] or e["date"] >= today]
+events = [e for e in ta if e["date"] and e["date"] >= today]
 events.sort(key=lambda e: (e["date"] or "9999", 0 if JUNIOR.search(e["name"]) else 1))
 
 out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
