@@ -1851,9 +1851,7 @@ function viewPathway() {
       <div class="evlinks">${e.u
         ? `<a href="${e.u}" target="_blank" rel="noopener">Open &amp; enter ›</a>`
         : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find it ›</a>`}</div>
-      ${isEntered(e.n)
-        ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>`
-        : `<label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}"><span>I'm entering this</span></label>`}
+
     </div>`;
 
   const dash = `
