@@ -104,7 +104,15 @@ def geocode(place):
 def ta_events():
     """Read the tournament cards: name, venue and DD/MM/YYYY dates are all in the card text."""
     from playwright.sync_api import sync_playwright
-    WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
+    # one month at a time, so a month's results always fit on the first page
+    WINDOWS = []
+    cur = datetime.date.today()
+    for _ in range(9):
+        first = cur.replace(day=1)
+        nxt = (first + datetime.timedelta(days=32)).replace(day=1)
+        WINDOWS.append((max(first, datetime.date.today()).isoformat(),
+                        (nxt - datetime.timedelta(days=1)).isoformat()))
+        cur = nxt
     found = {}
     with sync_playwright() as pw:
         b = pw.chromium.launch(args=["--no-sandbox"])
