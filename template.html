@@ -1760,7 +1760,13 @@ function liveEvents() {
     t: /jds/i.test(e.name) ? "JDS" : /j?250/i.test(e.name) ? "J250"
       : /j?125/i.test(e.name) ? "J125" : /jc\b/i.test(e.name) ? "JC"
       : e.src === "utr" ? "UTR" : "Open",
-    p: "Start here", c: null, e2: e.date,
+    p: (() => {
+      const days = Math.ceil((new Date(e.date) - new Date()) / 86400000);
+      if (days <= 21) return "Start here";
+      if (days <= 60) return "Target";
+      return "Optional";
+    })(),
+    c: null, e2: e.date,
   }));
 }
 
