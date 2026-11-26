@@ -1,129 +1,87 @@
-"""Daily pull of junior tournaments within ~20 km of postcode 3163.
+"""Harvest junior tournament events near Carnegie 3163 from Tennis Australia and UTR."""
+import json, re, urllib.request, pathlib, datetime
 
-The Tennis Australia calendar filters in the browser, so the URL cannot be
-pre-filtered. We render the page through r.jina.ai, parse the list, then keep
-only the suburbs that sit inside the radius and the events that suit a junior
-moving from green to yellow ball.
+UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}
 
-Writes events.json. If anything fails, the previous file is left untouched.
-"""
-import json, re, sys, urllib.request, datetime, pathlib
+def get(url, timeout=70):
+    try:
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.read().decode("utf-8", "replace")
+    except Exception as e:
+        return f"ERR {type(e).__name__}"
 
-HOME_SUBURBS = {
-    # within roughly 20 km of Glen Huntly (3163)
-    "glen huntly", "caulfield", "caulfield south", "caulfield north", "caulfield east",
-    "carnegie", "murrumbeena", "bentleigh", "bentleigh east", "mckinnon", "ormond",
-    "elwood", "st kilda", "st kilda east", "balaclava", "ripponlea", "windsor",
-    "prahan", "prahran", "south yarra", "toorak", "armadale", "malvern", "malvern east",
-    "glen iris", "ashburton", "ashwood", "burwood", "chadstone", "hughesdale",
-    "oakleigh", "oakleigh east", "huntingdale", "clayton", "notting hill",
-    "mount waverley", "wheelers hill", "mulgrave", "glen waverley", "springvale",
-    "noble park", "keysborough", "dingley", "dingley village", "mentone", "parkdale",
-    "mordialloc", "moorabbin", "highett", "cheltenham", "brighton", "brighton east",
-    "hampton", "black rock", "sandringham", "beaumaris", "elsternwick", "elwood",
-    "glenhuntly", "caulfield junction", "glen huntly", "south yarra", "hawthorn",
-    "hawthorn east", "kew", "hawthorn", "balwyn", "canterbury", "surrey hills",
-    "deepdene", "blackburn", "box hill", "mont albert", "forest hill", "nunawading",
-}
+MON = {m: i for i, m in enumerate(
+    "jan feb mar apr may jun jul aug sep oct nov dec".split(), 1)}
 
-WANT = re.compile(r"(?i)\b(junior|coloured ball|cbc|green|orange|red ball|jds|de minaur|u/?1[024]|10u|12u|14u)\b")
-DROP = re.compile(r"(?i)\b(invite only|invitation only|members only|cancelled|closed)\b")
+def parse_date(txt, year_hint=None):
+    txt = txt.strip()
+    m = re.match(r"(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s*(\d{4})?", txt)
+    if not m:
+        return None
+    d, mon = int(m.group(1)), MON.get(m.group(2).lower()[:3])
+    if not mon:
+        return None
+    y = int(m.group(3)) if m.group(3) else (year_hint or datetime.date.today().year)
+    try:
+        return datetime.date(y, mon, d).isoformat()
+    except ValueError:
+        return None
 
-FEED = "https://tournaments.tennis.com.au/find/tournament"
-
-
-def fetch(url, timeout=60):
-    req = urllib.request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)",
-        "Accept": "text/plain",
-    })
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
-
-
-def parse(text):
-    """Pull (name, url, club, suburb, start, end, surface) out of the rendered page."""
-    rows = []
-    # #### [Name](url "...")  then  Club | Suburb 10/11/2026 to 12/11/2026 Hardcourt
-    for m in re.finditer(r"####\s*\[([^\]]+)\]\(([^)\s]+)[^)]*\)\s*\n+\s*([^\n|]+?)\s*\|\s*([A-Za-z '\-\.]+?)\s+"
-                         r"(\d{1,2}/\d{1,2}/\d{4})(?:\s+to\s+(\d{1,2}/\d{1,2}/\d{4}))?", text):
-        name, url, club, suburb, start, end = m.groups()
-        tail = text[m.end():m.end() + 200]
-        surface = ""
-        for s in ("Hardcourt", "Clay", "Syn Grass", "Grass", "Various"):
-            if s.lower() in tail[:120].lower():
-                surface = s
-                break
-        rows.append({
-            "name": name.strip(), "url": url.strip(),
-            "club": club.strip(), "suburb": suburb.strip(),
-            "start": start, "end": end or start, "surface": surface,
-            "tags": " ".join(re.findall(r"[A-Za-z0-9/+ ]+", tail[:200]))[:160].strip(),
-        })
-    return rows
-
-
-def keep(ev):
-    sub = ev["suburb"].lower().strip()
-    if sub not in HOME_SUBURBS:
-        return False
-    blob = f"{ev['name']} {ev['tags']}"
-    if DROP.search(blob):
-        return False
-    if not re.search(r"(?i)\b(junior|coloured ball|cbc|jds|green|orange|red ball|10u|12u|14u|u/?1[024])\b", blob):
-        return False
-    return True
-
-
-def iso(d):
-    day, month, year = d.split("/")
-    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
-
-
-def main():
-    today = datetime.date.today()
-    start, end = today.isoformat(), (today + datetime.timedelta(days=120)).isoformat()
-    seen, events, pages = set(), [], []
-    for page in range(1, 9):
-        url = (f"{FEED}?DateFilterType=0&StartDate={start}&EndDate={end}"
-               f"&Distance=20&page={page}")
-        try:
-            text = fetch("https://r.jina.ai/" + url)
-        except Exception as e:
-            print(f"  page {page}: {type(e).__name__} {e}")
+# ---------- Tennis Australia ----------
+TA_WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
+ta = {}
+for start, end in TA_WINDOWS:
+    for page in range(1, 5):
+        url = ("https://tournaments.tennis.com.au/find/tournament"
+               f"?DateFilterType=0&StartDate={start}&EndDate={end}&Distance=25&page={page}")
+        txt = get("https://r.jina.ai/" + url)
+        if txt.startswith("ERR"):
             break
-        rows = parse(text)
-        pages.append({"page": page, "bytes": len(text), "listings": len(rows),
-                      "kept": sum(1 for r in rows if keep(r)),
-                      "rows": [(r["name"][:50], r["suburb"]) for r in rows][:40]})
-        print(f"  page {page}: {len(rows)} listings")
-        if not rows:
-            break
-        for ev in rows:
-            if ev["name"] in seen or not keep(ev):
+        rows = re.findall(r"\[([^\]]{8,140})\]\((https://tournaments\.tennis\.com\.au/sport/tournament\?id=[^\)\s]+)\)", txt)
+        new = 0
+        for label, link in rows:
+            if link in ta:
                 continue
-            seen.add(ev["name"])
-            ev["start"] = iso(ev["start"])
-            ev["end"] = iso(ev["end"])
-            events.append(ev)
+            dm = re.search(r"(\d{1,2}\s+[A-Za-z]{3}[a-z]*\s*\d{4})", label)
+            date = parse_date(dm.group(1)) if dm else None
+            name = re.sub(r"^\d{1,2}\s+[A-Za-z]{3}[a-z]*\s*\d{4}\s*[•·-]?\s*", "", label).strip()
+            if len(name) < 6:
+                continue
+            ta[link] = {"name": name[:110], "date": date, "url": link, "src": "ta"}
+            new += 1
+        if not new:
+            break
 
-    events.sort(key=lambda e: (e["start"], e["name"]))
-    pathlib.Path("events.json").write_text(json.dumps({
-        "updated": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
-        "postcode": "3163",
-        "radius_km": 20,
-        "events": events,
-        "debug": pages,
-    }, indent=1, ensure_ascii=False))
-    print(f"kept {len(events)} events near 3163")
+# ---------- UTR ----------
+utr = {}
+utr_url = ("https://app.utrsports.net/search?type=events&sportTypes=tennis"
+           "&eventState=open_registration&utrMin=1&utrMax=4&utrType=verified"
+           "&distance=25mi&latitude=-37.8447&longitude=145.0694")
+utxt = get("https://r.jina.ai/" + utr_url)
+if not utxt.startswith("ERR"):
+    for label, link in re.findall(r"\[([^\]]{10,200})\]\((https://app\.utrsports\.net/events/\d+)\)", utxt):
+        if "Australia" not in label:
+            continue
+        if link in utr:
+            continue
+        name = label.split("•")[0].strip()[:110]
+        utr[link] = {"name": name, "date": None, "url": link, "src": "utr"}
 
+# ---------- filter and sort ----------
+today = datetime.date.today().isoformat()
+events = [e for e in list(ta.values()) + list(utr.values())
+          if not e["date"] or e["date"] >= today]
+JUNIOR = re.compile(r"\b(jds|jc|j125|j250|j300|j500|junior|juniors|12u|14u|10u|boys|girls)\b", re.I)
+def score(e):
+    s = 0
+    if JUNIOR.search(e["name"]): s += 3
+    if re.search(r"jds|jc\b", e["name"], re.I): s += 2
+    if e["src"] == "utr": s += 1
+    return s
+events.sort(key=lambda e: (e["date"] or "9999", -score(e)))
 
-if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        rows = parse(pathlib.Path(sys.argv[1]).read_text())
-        print(f"parsed {len(rows)}; kept {sum(1 for r in rows if keep(r))}")
-        for r in rows:
-            if keep(r):
-                print(" -", r["name"][:60], "|", r["suburb"], r["start"])
-    else:
-        main()
+out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+       "count": len(events), "events": events}
+pathlib.Path("events.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+print(f"{len(events)} events ({len(ta)} TA, {len(utr)} UTR)")
