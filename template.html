@@ -111,18 +111,12 @@
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
   .vtop { display: flex; align-items: center; gap: 9px; margin: 2px 0 16px; }
-  .record { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0 14px; }
-  .rstat { background: var(--surface-2); border-radius: 14px; padding: 12px 6px; text-align: center; }
-  .rstat b { display: block; font-family: var(--display); font-weight: 800; font-size: 26px;
-    line-height: 1; letter-spacing: -.02em; color: var(--ink); }
-  .rstat span { display: block; margin-top: 5px; font-family: var(--mono); font-size: 9.5px;
-    letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); line-height: 1.3; }
-  .gamesbar { height: 12px; border-radius: 7px; background: var(--loss); overflow: hidden; }
-  .gamesbar i { display: block; height: 100%; background: var(--brand); border-radius: 7px 0 0 7px; }
-  .gbar-lab { margin: 8px 0 16px; font-size: 13px; color: var(--ink-dim); }
-  .gbar-lab b { color: var(--ink); font-weight: 700; }
+  .vstats { margin-left: auto; text-align: right; display: flex; flex-direction: column; gap: 3px; }
+  .vstats span { font-size: 12.5px; color: var(--ink-dim); line-height: 1.35; white-space: nowrap; }
+  .vstats b { font-family: var(--display); font-weight: 800; font-size: 16px; color: var(--ink); }
   .vnum { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: -.03em; color: var(--brand); }
-  .vlab { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
+  .vlab { font-family: var(--mono); font-size: 9.5px; line-height: 1.3; letter-spacing: .09em;
+    text-transform: uppercase; color: var(--ink-dim); }
   .vtrack { position: relative; padding-left: 34px; }
   .vtrack::before { content: ""; position: absolute; left: 12px; top: 10px; bottom: 26px; width: 2px; background: var(--line); }
   .vnode { position: relative; padding-bottom: 20px; }
@@ -1859,19 +1853,13 @@ function viewPathway() {
       <p class="label">UTR Journey</p>
       <div class="vtop">
         <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
-        <span class="vlab">UTR now</span>
+        <span class="vlab">UTR<br>now</span>
+        <div class="vstats">
+          <span><b>${t.n}</b> matches</span>
+          <span><b>${t.w}</b> won · <b>${t.l}</b> lost</span>
+          <span><b>${t.gw}</b> games won</span>
+        </div>
       </div>
-      <div class="record">
-        <div class="rstat"><b>${t.n}</b><span>matches</span></div>
-        <div class="rstat"><b>${t.w}</b><span>won</span></div>
-        <div class="rstat"><b>${t.l}</b><span>lost</span></div>
-        <div class="rstat"><b>${t.gw}</b><span>games won</span></div>
-      </div>
-      <div class="gamesbar">
-        <i style="width:${Math.max(4, Math.round((t.gw / Math.max(1, t.gw + t.gl)) * 100))}%"></i>
-      </div>
-      <p class="gbar-lab"><b>${t.gw}</b> games won · <b>${t.gl}</b> games lost</p>
-
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
           <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
