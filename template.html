@@ -111,9 +111,16 @@
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
   .vtop { display: flex; align-items: center; gap: 9px; margin: 2px 0 16px; }
-  .vdonut { margin-left: auto; display: flex; align-items: center; gap: 9px; }
-  .vdlab { font-family: var(--mono); font-size: 10px; line-height: 1.5; letter-spacing: .03em;
-    text-transform: uppercase; color: var(--ink-dim); }
+  .record { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0 14px; }
+  .rstat { background: var(--surface-2); border-radius: 14px; padding: 12px 6px; text-align: center; }
+  .rstat b { display: block; font-family: var(--display); font-weight: 800; font-size: 26px;
+    line-height: 1; letter-spacing: -.02em; color: var(--ink); }
+  .rstat span { display: block; margin-top: 5px; font-family: var(--mono); font-size: 9.5px;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--ink-dim); line-height: 1.3; }
+  .gamesbar { height: 12px; border-radius: 7px; background: var(--loss); overflow: hidden; }
+  .gamesbar i { display: block; height: 100%; background: var(--brand); border-radius: 7px 0 0 7px; }
+  .gbar-lab { margin: 8px 0 16px; font-size: 13px; color: var(--ink-dim); }
+  .gbar-lab b { color: var(--ink); font-weight: 700; }
   .vnum { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: -.03em; color: var(--brand); }
   .vlab { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
   .vtrack { position: relative; padding-left: 34px; }
@@ -1855,9 +1862,18 @@ function viewPathway() {
       <div class="vtop">
         <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
         <span class="vlab">UTR now</span>
-        <div class="vdonut">${miniDonut(t.gw, t.gl)}
-          <span class="vdlab">${t.gw} won<br>${t.gl} lost</span></div>
       </div>
+      <div class="record">
+        <div class="rstat"><b>${t.n}</b><span>matches</span></div>
+        <div class="rstat"><b>${t.w}</b><span>won</span></div>
+        <div class="rstat"><b>${t.l}</b><span>lost</span></div>
+        <div class="rstat"><b>${t.gw}</b><span>games won</span></div>
+      </div>
+      <div class="gamesbar">
+        <i style="width:${Math.max(4, Math.round((t.gw / Math.max(1, t.gw + t.gl)) * 100))}%"></i>
+      </div>
+      <p class="gbar-lab"><b>${t.gw}</b> games won · <b>${t.gl}</b> games lost</p>
+
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
           <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
@@ -1875,12 +1891,7 @@ function viewPathway() {
         <a href="https://tournaments.tennis.com.au/player-profile/1db032e5-eae1-4b8c-bf8c-eea7b0537a6e/tournaments" target="_blank" rel="noopener">TA record ›</a>
       </div>
     </div>
-
-    <div class="kpis">
-      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}UTR matches</div></div>
-      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Won</div></div>
-      <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games won</div></div>
-    </div>`;
+`;
 
   /* ---- all events ---- */
   const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
