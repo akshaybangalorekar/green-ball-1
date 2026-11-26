@@ -1,4 +1,4 @@
-"""Find the real tournament URLs for the events in the plan."""
+"""Find the real tournament URLs for the events in the plan. v2"""
 import json, re, urllib.request, urllib.parse, pathlib
 
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}

@@ -1,6 +1,8 @@
 name: Probe events
 on:
   workflow_dispatch:
+  push:
+    paths: ["probe.py"]
 permissions:
   contents: write
 jobs:
