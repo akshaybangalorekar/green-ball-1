@@ -1888,10 +1888,6 @@ function viewPathway() {
         <div class="prow"><b>UTR 3.0</b><span>The entry threshold for Association Junior Pennant.</span></div>
         <div class="prow"><b>How UTR moves</b><span>Games won and lost against each opponent's rating — not win-loss. A close loss to a strong player can lift it more than an easy win.</span></div>
         <div class="prow"><b>What he sees</b><span>Under 13, UTR shows one decimal. Judge progress over a month, not a week.</span></div>`, false)
-    + fold("club", "Club competition", `round ${nextRound().round} next`, `
-        <div class="prow"><b>East Malvern · WDTA</b><span>Sunday mornings, 14 rounds. The cheapest and most useful matches he plays — they count toward his UTR.</span></div>
-        <div class="prow"><b>Next</b><span>Round ${nextRound().round}${nextRound().opponent ? ` v ${esc(nextRound().opponent)}` : ""}, ${fmtDate(nextRound().date)}.</span></div>
-        <div class="prow"><b>Summer break</b><span>No club rounds between 14 December and 30 January — the window for tournaments.</span></div>`, false)
     + fold("ajp", "After this", "AJP", `
         <div class="prow"><b>Associations Junior Pennant</b><span>Sunday teams, graded by UTR, against other associations. His target is the 2027/28 season.</span></div>
         <div class="prow"><b>Needs</b><span>A completed Competitive Player Profile plus six team matches for a club — a BRTA season gives him that.</span></div>`, false)
