@@ -110,7 +110,10 @@
     text-transform: uppercase; color: var(--brand); }
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
-  .vtop { display: flex; align-items: baseline; gap: 9px; margin: 2px 0 16px; }
+  .vtop { display: flex; align-items: center; gap: 9px; margin: 2px 0 16px; }
+  .vdonut { margin-left: auto; display: flex; align-items: center; gap: 9px; }
+  .vdlab { font-family: var(--mono); font-size: 10px; line-height: 1.5; letter-spacing: .03em;
+    text-transform: uppercase; color: var(--ink-dim); }
   .vnum { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: -.03em; color: var(--brand); }
   .vlab { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
   .vtrack { position: relative; padding-left: 34px; }
@@ -1720,6 +1723,22 @@ const PRIORITY = {
 };
 
 
+function miniDonut(w, l) {
+  const total = Math.max(1, w + l);
+  const r = 26, c = 2 * Math.PI * r;
+  const won = (w / total) * c;
+  return `<svg viewBox="0 0 64 64" width="64" height="64" role="img"
+      aria-label="${w} games won, ${l} lost">
+    <circle cx="32" cy="32" r="${r}" fill="none" stroke="var(--loss)" stroke-width="9" opacity=".85"/>
+    <circle cx="32" cy="32" r="${r}" fill="none" stroke="var(--brand)" stroke-width="9" stroke-linecap="round"
+      stroke-dasharray="${won} ${c}" transform="rotate(-90 32 32)"/>
+    <text x="32" y="30" text-anchor="middle" font-size="13" font-weight="800" fill="var(--ink)"
+      font-family="ui-monospace,monospace">${w}</text>
+    <text x="32" y="42" text-anchor="middle" font-size="7.5" fill="var(--ink-dim)"
+      font-family="ui-monospace,monospace">WON</text>
+  </svg>`;
+}
+
 function journeySVG() {
   const W = 340, H = 176, y = 104, x0 = 26, x1 = W - 26, MAX = 6;
   const X = (v) => x0 + (Math.min(v, MAX) / MAX) * (x1 - x0);
@@ -1813,8 +1832,12 @@ function viewPathway() {
   const dash = `
     <div class="card journeychart">
       <p class="label">UTR Journey</p>
-      <div class="vtop"><span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
-        <span class="vlab">UTR now</span></div>
+      <div class="vtop">
+        <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
+        <span class="vlab">UTR now</span>
+        <div class="vdonut">${miniDonut(t.gw, t.gl)}
+          <span class="vdlab">${t.gw} won<br>${t.gl} lost</span></div>
+      </div>
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
           <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
