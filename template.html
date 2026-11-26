@@ -1713,10 +1713,10 @@ function closeLabel(iso) {
 }
 
 const PRIORITY = {
-  "Start here": { label: "First", hint: "do this next", cls: "go" },
-  "Target": { label: "Aim", hint: "the ones that count", cls: "tg" },
-  "Optional": { label: "Maybe", hint: "if it suits", cls: "" },
-  "Later": { label: "Later", hint: "not yet", cls: "" },
+  "Start here": { label: "Book now", hint: "enter these", cls: "go" },
+  "Target": { label: "Good target", hint: "worth entering", cls: "tg" },
+  "Optional": { label: "If it suits", hint: "optional", cls: "" },
+  "Later": { label: "Too early", hint: "not this year", cls: "" },
 };
 
 
@@ -1840,8 +1840,8 @@ function viewPathway() {
     </div>`;
 
   /* ---- all events ---- */
-  const evKey = `<p class="evkey"><b>First</b> do this next · <b>Aim</b> the ones that count ·
-    <b>Maybe</b> if it suits · <b>Later</b> not yet</p>`;
+  const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
+    <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>`;
   const evBody = evKey + up.map((e) => {
     const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
     return `<div class="ev">
