@@ -1,7 +1,7 @@
 name: Harvest events
 on:
   schedule:
-    - cron: "30 4,8,12,16 * * *"   # 10:00, 14:00, 18:00, 22:00 IST
+    - cron: "0 4,8,12,16 * * *"   # 10:00, 14:00, 18:00, 22:00 IST
   push:
     paths: ["events.py"]
 permissions:
