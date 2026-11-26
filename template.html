@@ -121,12 +121,14 @@
   .vtrack { position: relative; padding-left: 34px; }
   .vtrack::before { content: ""; position: absolute; left: 12px; top: 10px; bottom: 26px; width: 2px; background: var(--line); }
   .vnode { position: relative; padding-bottom: 20px; }
-  .vnode b { display: block; font-size: 16px; font-weight: 700; }
+  .vnode > b { display: block; font-size: 16px; font-weight: 700; }
   .vnode small { display: block; margin-top: 3px; font-size: 12.5px; color: var(--ink-dim); line-height: 1.5; }
   .vdot { position: absolute; left: -28px; top: 4px; width: 13px; height: 13px; border-radius: 50%;
     background: var(--surface); border: 2px solid var(--ink-dim); }
   .vnode.now .vdot { left: -30px; width: 17px; height: 17px; background: var(--ball); border: 2px solid var(--brand); }
-  .vnode.now b { color: var(--brand); }
+  .vnode.now b { color: var(--brand); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+  .vutr { font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--ink); letter-spacing: -.01em; }
+  .vnode.now small b { display: inline; color: var(--ink); font-weight: 700; }
   .vev { margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-soft); }
   .vevtop { display: flex; align-items: center; gap: 8px; }
   .enrol { display: flex; align-items: center; gap: 9px; margin-top: 10px; cursor: pointer;
@@ -1869,14 +1871,10 @@ function viewPathway() {
   const dash = `
     <div class="card journeychart">
       <p class="label">UTR Journey</p>
-      <div class="vtop">
-        <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
-        <span class="vlab">UTR</span>
-        <p class="vmini"><b>${t.n}</b> matches · <b>${t.w}</b> won · <b>${t.l}</b> lost · <b>${t.gw}</b> games won</p>
-      </div>
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
-          <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
+          <b>You are here <span class="vutr">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} UTR</span></b>
+          <small><b>${t.n}</b> matches · <b>${t.w}</b> won · <b>${t.l}</b> lost · <b>${t.gw}</b> games won</small>
         </div>
         <div class="vnode goal"><span class="vdot"></span>
           <b>${TARGET_UTR.toFixed(1)} · next goal</b>
