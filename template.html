@@ -110,6 +110,8 @@
     text-transform: uppercase; color: var(--brand); }
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
+  .grp { margin: 0 0 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--ink-dim); }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
   .evkey b { color: var(--ink); font-weight: 600; }
   .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
@@ -1399,13 +1401,12 @@ const UTR_SEED = [
   { date: "2025-08-24", opp: "Sebastian Mak (2.xx)", score: "0-4 2-4", won: false, gw: 2, gl: 8, src: "UTR" },
   { date: "2025-08-24", opp: "Benjamin Valdes Rosas (3.xx)", score: "2-4 1-4", won: false, gw: 3, gl: 8, src: "UTR" },
 ];
-const allMatches = () => [...clubMatches(), ...MATCHES, ...UTR_SEED].sort((a, b) => (a.date < b.date ? 1 : -1));
-let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { return []; } })();
-const saveMatches = () => { try { localStorage.setItem(LOG_KEY, JSON.stringify(MATCHES)); } catch (e) {} };
+const utrMatches = () => [...MATCHES, ...UTR_SEED].sort((a, b) => (a.date < b.date ? 1 : -1));
+const allMatches = () => [...clubMatches(), ...utrMatches()].sort((a, b) => (a.date < b.date ? 1 : -1));
 
-function matchTotals() {
+function totalsFor(list) {
   let w = 0, l = 0, gw = 0, gl = 0, sw = 0, sl = 0;
-  allMatches().forEach((m) => {
+  list.forEach((m) => {
     if (m.won) w++; else l++;
     gw += m.gw || 0; gl += m.gl || 0;
     const st = parseSets(m.score || "");
@@ -1413,6 +1414,10 @@ function matchTotals() {
   });
   return { w, l, gw, gl, sw, sl, n: w + l };
 }
+let MATCHES = (() => { try { return JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); } catch (e) { return []; } })();
+const saveMatches = () => { try { localStorage.setItem(LOG_KEY, JSON.stringify(MATCHES)); } catch (e) {} };
+
+function matchTotals() { return totalsFor(utrMatches()); }
 
 function parseSets(txt) {
   const nums = String(txt).match(/\d+/g) || [];
@@ -1787,7 +1792,7 @@ function viewPathway() {
       <p class="utrline">${gap > 0
         ? `<b>${gap.toFixed(1)} to go</b> to the goal of ${TARGET_UTR.toFixed(1)}.`
         : `<b>Goal reached</b> — past ${TARGET_UTR.toFixed(1)}.`}
-        ${t.n} matches so far: <b>${t.w} won, ${t.l} lost</b>.</p>
+        <b>${t.n}</b> matches count toward it: ${t.w} won, ${t.l} lost.</p>
       <p class="journeycta">Tap the flags to see which events to enter ›</p>
       <div class="evlinks" style="margin-top:12px">
         <a href="https://app.utrsports.net/profiles/6114278" target="_blank" rel="noopener">His UTR profile ›</a>
@@ -1797,8 +1802,8 @@ function viewPathway() {
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}Matches played</div></div>
-      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Matches won</div></div>
+      <div class="kpi"><div class="n">${t.n}</div><div class="k">${ico("sets")}UTR matches</div></div>
+      <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Won</div></div>
       <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games won</div></div>
     </div>`;
 
@@ -1839,22 +1844,25 @@ function viewPathway() {
   }).join("");
 
   /* ---- matches ---- */
-  const rows = allMatches().slice(0, 20).map((m) => `<div class="mrow">
+  const rowHTML = (m) => `<div class="mrow">
       <span class="mres ${m.won ? "w" : "l"}">${m.won ? "W" : "L"}</span>
       <span class="mtxt"><b>${esc(m.opp || "Opponent")}</b><small>${fmtShort(m.date)}${m.score ? " · " + esc(m.score) : ""}${m.src ? " · " + m.src : ""}</small></span>
       <span class="mgames">${m.gw}–${m.gl}</span>
-    </div>`).join("");
+    </div>`;
 
-  const matchBody = `<table class="stats">
-      <thead><tr><th>All matches</th><th>Won</th><th>Lost</th></tr></thead>
-      <tbody>
-        <tr><td class="lbl">Matches</td><td class="num won">${t.w}</td><td class="num lost">${t.l}</td></tr>
-        <tr><td class="lbl">Sets</td><td class="num won">${t.sw}</td><td class="num lost">${t.sl}</td></tr>
-        <tr><td class="lbl">Games</td><td class="num won">${t.gw}</td><td class="num lost">${t.gl}</td></tr>
-      </tbody>
-    </table>
-    ${rows}
-    <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a match</button>`;
+  const cu = totalsFor(utrMatches()), cc = totalsFor(clubMatches());
+  const matchBody = `<p class="grp">Counts toward his UTR · ${cu.n} matches</p>
+    <table class="stats"><thead><tr><th></th><th>Won</th><th>Lost</th></tr></thead><tbody>
+      <tr><td class="lbl">Matches</td><td class="num won">${cu.w}</td><td class="num lost">${cu.l}</td></tr>
+      <tr><td class="lbl">Games</td><td class="num won">${cu.gw}</td><td class="num lost">${cu.gl}</td></tr>
+    </tbody></table>
+    ${utrMatches().slice(0, 20).map(rowHTML).join("")}
+    <button class="btn ghost" id="addMatch" style="margin-top:14px">Add a UTR match</button>
+
+    <p class="grp" style="margin-top:24px">Club competition · ${cc.n} sets, not counted</p>
+    <p class="caption" style="margin-top:0">WDTA sends only yellow-ball results to UTR, so his green-ball club sets
+    do not move the rating. They still count as matches played.</p>
+    ${clubMatches().slice(0, 20).map(rowHTML).join("")}`;
 
   return dash
     + fold("next", "What to do next", firsts.length ? `${firsts.length} to enter` : "nothing open", nextBody, true)
