@@ -2829,6 +2829,14 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
+  const rp = $("#resetPass");
+  if (rp) rp.onclick = () => {
+    PASSED = [];
+    try { localStorage.setItem(PASS_KEY, "[]"); } catch (e) {}
+    showToast("Passed events cleared");
+    openSettings();
+    renderAll();
+  };
   document.querySelectorAll("[data-theme-id]").forEach((b) => {
     b.onclick = () => {
       applyTheme(b.dataset.themeId);
