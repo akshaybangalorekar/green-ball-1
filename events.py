@@ -61,13 +61,17 @@ def geocode(place):
     """Suburb -> lat/lng via OpenStreetMap, cached for the run."""
     if not place or place in _GEO:
         return _GEO.get(place)
-    q = urllib.parse.urlencode({"q": f"{place}, Victoria, Australia", "format": "json", "limit": 1})
+    q = urllib.parse.urlencode({"q": f"{place}, Australia", "format": "json", "limit": 1,
+                                "addressdetails": 1})
     try:
         req = urllib.request.Request(f"https://nominatim.openstreetmap.org/search?{q}",
                                      headers={"User-Agent": "AdvantageApp/1.0 (tennis team app)"})
         with urllib.request.urlopen(req, timeout=30) as r:
             hits = json.loads(r.read().decode())
-        _GEO[place] = (float(hits[0]["lat"]), float(hits[0]["lon"])) if hits else None
+        if hits and "Victoria" in (hits[0].get("display_name") or ""):
+            _GEO[place] = (float(hits[0]["lat"]), float(hits[0]["lon"]))
+        else:
+            _GEO[place] = None
     except Exception:
         _GEO[place] = None
     return _GEO[place]
