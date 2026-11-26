@@ -1939,7 +1939,7 @@ function viewPathway() {
 
   return dash
     + fold("events", "All events", `${up.length} ahead`, evBody, false)
-    + fold("matches", "His matches", `${t.w}W · ${t.l}L`, matchBody, false)
+    + fold("matches", "My Score Card", `${t.w}W · ${t.l}L`, matchBody, false)
     + fold("target", "Goals",
         `now ${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} → ${TARGET_UTR.toFixed(1)}`,
         (() => {
