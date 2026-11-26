@@ -52,6 +52,7 @@ def utr_events():
             "km": round(d),
             "where": loc.get("cityName") or loc.get("display") or "",
             "utrMin": src.get("utrMin"), "utrMax": src.get("utrMax"),
+            "regEnd": (sch.get("registrationEndUtc") or "")[:10] or None,
         })
     return out
 

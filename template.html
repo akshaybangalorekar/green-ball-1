@@ -1761,27 +1761,31 @@ function liveEvents() {
       : /j?125/i.test(e.name) ? "J125" : /jc\b/i.test(e.name) ? "JC"
       : e.src === "utr" ? "UTR" : "Open",
     p: (() => {
-      const days = Math.ceil((new Date(e.date) - new Date()) / 86400000);
       const my = MY_UTR || 0;
-      // how well the event suits him
-      let fit;
       if (e.utrMin != null && e.utrMax != null) {
-        if (my >= e.utrMin && my <= e.utrMax) fit = 1;
-        else {
-          const off = my < e.utrMin ? e.utrMin - my : my - e.utrMax;
-          fit = Math.max(0, 1 - off / 2);
+        if (my >= e.utrMin && my <= e.utrMax) return "Start here";        // fits now
+        if (my < e.utrMin) {
+          const short = e.utrMin - my;
+          return short <= 1 ? "Target" : "Later";                          // slightly high / far off
         }
-      } else if (e.src === "utr") fit = 0.8;
-      else if (/jds|jc\b/i.test(e.name)) fit = 0.9;
-      else if (/j?125/i.test(e.name)) fit = 0.6;
-      else if (/j?250/i.test(e.name)) fit = 0.4;
-      else fit = 0.3;
-      // how soon it is
-      const urgency = days <= 7 ? 1 : days <= 21 ? 0.7 : days <= 60 ? 0.4 : 0.2;
-      const score = fit * 0.6 + urgency * 0.4;
-      if (score >= 0.72) return "Start here";
-      if (score >= 0.48) return "Target";
-      return "Optional";
+        return "Target";                                                   // above the band: a stretch down
+      }
+      if (e.src === "utr") return "Start here";
+      if (/jds|jc\b/i.test(e.name)) return "Start here";
+      if (/j?125/i.test(e.name)) return "Target";
+      return "Later";
+    })(),
+    fit: (() => {
+      const my = MY_UTR || 0;
+      if (e.utrMin != null && e.utrMax != null) {
+        if (my >= e.utrMin && my <= e.utrMax) return 100;
+        const off = my < e.utrMin ? e.utrMin - my : my - e.utrMax;
+        return Math.max(0, 100 - off * 40);
+      }
+      if (e.src === "utr") return 80;
+      if (/jds|jc\b/i.test(e.name)) return 85;
+      if (/j?125/i.test(e.name)) return 55;
+      return 30;
     })(),
     c: null, e2: e.date,
   }));
@@ -1804,7 +1808,7 @@ const PRIORITY = {
   "Start here": { label: "Book now", hint: "enter these", cls: "go" },
   "Target": { label: "Good target", hint: "worth entering", cls: "tg" },
   "Optional": { label: "If it suits", hint: "optional", cls: "" },
-  "Later": { label: "Too early", hint: "not this year", cls: "" },
+  "Later": { label: "Need more time", hint: "too strong for now", cls: "" },
 };
 
 
@@ -1906,7 +1910,7 @@ function viewPathway() {
   const pctOf = Math.max(4, Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100)));
   const today = todayISO();
   const SOURCE = liveEvents() || PLAN_EVENTS;
-  const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : 1));
+  const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => ((b.fit || 0) - (a.fit || 0)) || (a.d < b.d ? -1 : 1));
   const enteredUp = up.filter((e) => isEntered(e.n));
   const candidates = up.filter((e) => !isEntered(e.n) && e.p === "Start here");
   const firsts = [...enteredUp, ...candidates].slice(0, 3);
@@ -1915,7 +1919,7 @@ function viewPathway() {
   /* ---- dashboard ---- */
   const evRow = (e) => `<div class="vev">
       <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
-        <span class="pickdue">${e.c ? closeLabel(e.c) : ""}</span></div>
+        <span class="pickdue">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
@@ -1964,7 +1968,7 @@ function viewPathway() {
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${srcChip(e)}</div>
       <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
-      <div class="evfoot">${e.c ? closeLabel(e.c) : ""}</div>
+      <div class="evfoot">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
       <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
         <span>I'm entering this</span></label>
