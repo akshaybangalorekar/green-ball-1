@@ -162,8 +162,38 @@ def ta_events():
     return kept
 
 today = datetime.date.today().isoformat()
-events = [e for e in (utr_events() + ta_events()) if e["date"] and e["date"] >= today]
+
+# --- eligibility: junior, enterable by an 11-year-old ---
+BAD = re.compile(r"wheelchair|police|fire games|veteran|senior|invitational|walking tennis|"
+                 r"blind|deaf|special olympics|masters|\b1[68]u\b|\bopen age\b", re.I)
+GOOD = re.compile(r"\bjds\b|\bjc\b|j\d{3}|junior|juniors|\b1[024]u\b|\b\d{2}u\b|boys|girls|"
+                  r"matchplay|match play|green ball|coloured ball|hot shots|development", re.I)
+GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|hot shots", re.I)
+
+def eligible(e):
+    n = e["name"]
+    if BAD.search(n):
+        return False
+    if GOOD.search(n):
+        return True
+    return e["src"] == "utr"          # UTR results are already filtered to his band
+
+def ball_of(e):
+    return "green" if GREEN.search(e["name"]) else "yellow"
+
+def dedupe_key(e):
+    return (re.sub(r"[^a-z0-9]", "", e["name"].lower())[:26], e["date"])
+
+pool = [e for e in (utr_events() + ta_events()) if e["date"] and e["date"] >= today]
+kept = {}
+for e in sorted(pool, key=lambda x: x["src"] != "utr"):   # prefer UTR: it has band and regEnd
+    if not eligible(e):
+        continue
+    e["ball"] = ball_of(e)
+    kept.setdefault(dedupe_key(e), e)
+events = list(kept.values())
 events.sort(key=lambda e: (e["date"], e["src"] != "utr", e["name"]))
+print("after eligibility + dedupe:", len(events), "of", len(pool))
 
 out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
        "count": len(events),
