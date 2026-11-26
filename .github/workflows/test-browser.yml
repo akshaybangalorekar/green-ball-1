@@ -1,7 +1,7 @@
 name: Test browser harvest
 on:
   push:
-    paths: ["test_ta.py"]
+    paths: ["test_verify.py"]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright && python -m playwright install --with-deps chromium
-      - run: python test_ta.py
+      - run: python test_verify.py
