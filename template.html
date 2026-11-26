@@ -1958,8 +1958,14 @@ function viewPathway() {
 `;
 
   /* ---- all events ---- */
-  const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
-    <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>
+  const evKey = `<p class="evkey"><b>How to read this list.</b> Tennis Australia and UTR events, merged and
+    sorted by date — the tag tells you how each one fits.</p>
+    <p class="evkey" style="margin-top:6px"><b>Book now</b> — enter these · <b>Good target</b> — a stretch worth
+    taking · <b>Need more time</b> — too strong today, revisit later · <b>Comfortable</b> — below his level, good
+    for a win and a counting match.</p>
+    <p class="evkey" style="margin-top:6px"><b>Not eligible</b> — shown with the reason rather than hidden, so
+    nothing goes missing. Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
+    <p class="evkey" style="margin-top:6px">Green ball counts toward his UTR only when the event is UTR-listed.</p>
     <p class="evkey" style="margin:10px 0 6px">Updated ${(() => {
       const g = window.__eventsStamp;
       if (!g) return "—";
