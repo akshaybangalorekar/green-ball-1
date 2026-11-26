@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-26T07:46:04Z",
- "count": 24,
+ "generated": "2026-11-26T08:19:55Z",
+ "count": 17,
  "utr": 6,
- "ta": 18,
+ "ta": 11,
  "events": [
   {
    "name": "GO PRO Verified Matchplay - Dendy Park Tennis Club",
@@ -19,14 +19,6 @@
    "src": "utr",
    "km": 6,
    "where": "Toorak"
-  },
-  {
-   "name": "2026 12u & 14u Australian Grasscourt Championships - WA Qualifying",
-   "date": "2026-11-27",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A006EAB5-BE1B-463F-95B2-88A50C3757B6",
-   "src": "ta",
-   "km": 7,
-   "where": "Perth"
   },
   {
    "name": "2026 Australian Wheelchair Tennis National Championships",
@@ -93,22 +85,6 @@
    "where": "Truganina"
   },
   {
-   "name": "2026 JDS CBC Mornington Tournament #4",
-   "date": "2026-11-29",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C061085-364C-4A45-A205-4649EC365973",
-   "src": "ta",
-   "km": 42,
-   "where": "Mornington"
-  },
-  {
-   "name": "2027 O5k J125 State Closed Tournament",
-   "date": "2027-02-26",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6F68A870-6C56-498A-A8DE-6598E48025B8",
-   "src": "ta",
-   "km": 7,
-   "where": "Perth"
-  },
-  {
    "name": "2027 J125 Metro East GWSH Labour Day",
    "date": "2027-03-05",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=D3490B04-9D0F-4886-A672-012A9F8E8704",
@@ -125,30 +101,6 @@
    "where": "Doveton"
   },
   {
-   "name": "2027 12u & 14u Australian Claycourt Championships- WA Qualifying",
-   "date": "2027-03-12",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=459FB7ED-B31A-4FA2-AB9F-4EF6860E723D",
-   "src": "ta",
-   "km": 7,
-   "where": "Perth"
-  },
-  {
-   "name": "2027 JC Pardey Shield - Pizzey Cup Qualifying",
-   "date": "2027-03-13",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=ECAB6E8A-C796-4929-BC84-E9ECE4B16F5A",
-   "src": "ta",
-   "km": 18,
-   "where": "Launceston"
-  },
-  {
-   "name": "2027 World Police & Fire Games",
-   "date": "2027-03-13",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=F3E83C93-A3E7-49AC-BFF3-97C7C25489E8",
-   "src": "ta",
-   "km": 7,
-   "where": "Perth"
-  },
-  {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #1",
    "date": "2027-03-14",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=CD76830D-C1F2-4A89-9B57-B97C60B34400",
@@ -163,14 +115,6 @@
    "src": "ta",
    "km": 21,
    "where": "Altona"
-  },
-  {
-   "name": "2027 WA IDA & DHoH Open",
-   "date": "2027-03-19",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6B932CAB-7728-479F-8E68-47114498BD82",
-   "src": "ta",
-   "km": 7,
-   "where": "Perth"
   },
   {
    "name": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying",
