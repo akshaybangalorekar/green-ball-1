@@ -1898,7 +1898,7 @@ function viewPathway() {
   /* ---- dashboard ---- */
   const evRow = (e) => `<div class="vev">
       <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
-        <span class="pickdue">${closeLabel(e.c)}</span></div>
+        <span class="pickdue">${e.c ? closeLabel(e.c) : ""}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
@@ -1947,7 +1947,7 @@ function viewPathway() {
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${srcChip(e)}</div>
       <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
-      <div class="evfoot">${closeLabel(e.c)}</div>
+      <div class="evfoot">${e.c ? closeLabel(e.c) : ""}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
       <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
         <span>I'm entering this</span></label>
