@@ -179,6 +179,8 @@ GOOD = re.compile(r"\bjds\b|\bjc\b|j\d{3}|junior|juniors|\b1[024]u\b|\b\d{2}u\b|
 GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|hot shots", re.I)
 
 AGE = 11          # his age now
+ADAPTIVE = re.compile(r"wheelchair|walking tennis|blind|deaf|all abilities|para[- ]|"
+                      r"special olympics|intellectual", re.I)
 BAD_PAGE = re.compile(r"members only|invitation only|invitational|1 point slam|wheelchair|"
                       r"walking tennis|police|fire games|veterans|masters", re.I)
 
@@ -232,15 +234,20 @@ with sync_playwright() as _pw:
     for e in sorted(pool, key=lambda x: x["src"] != "utr"):
         e, why = verify_on_page(_pg, e)
         if why:
-            print(f"DROP ({why}):", e["name"][:52]); continue
+            if ADAPTIVE.search(e["name"]) or ADAPTIVE.search(str(why)):
+                print(f"HIDE adaptive: {e['name'][:50]}")
+                continue
+            e["dropped"] = why
+            print(f"TAGGED dropped ({why}):", e["name"][:48])
         kept.setdefault(dedupe_key(e), e)
     _b.close()
 events = list(kept.values())
-events.sort(key=lambda e: (e["date"], e["src"] != "utr", e["name"]))
+events.sort(key=lambda e: (e["date"], e["src"] != "utr", e["name"]))  # by date, merged
 print("after eligibility + dedupe:", len(events), "of", len(pool))
 
 out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
        "count": len(events),
+       "dropped": sum(1 for e in events if e.get("dropped")),
        "utr": sum(1 for e in events if e["src"] == "utr"),
        "ta": sum(1 for e in events if e["src"] == "ta"),
        "events": events}
