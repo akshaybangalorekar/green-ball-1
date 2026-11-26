@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-26T09:54:04Z",
- "count": 14,
- "utr": 4,
- "ta": 10,
+ "generated": "2026-11-26T10:33:46Z",
+ "count": 10,
+ "utr": 2,
+ "ta": 8,
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -14,19 +14,8 @@
    "utrMin": null,
    "utrMax": null,
    "regEnd": "2026-11-28",
-   "ball": "yellow"
-  },
-  {
-   "name": "Rosanna Tennis Club AO 1 Point Slam Community Event",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/411216",
-   "src": "utr",
-   "km": 11,
-   "where": "Rosanna",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "ball": "yellow"
+   "ages": [],
+   "ball": "?"
   },
   {
    "name": "TERM 4 Junior UTR Matchplay",
@@ -38,28 +27,8 @@
    "utrMin": null,
    "utrMax": null,
    "regEnd": "2026-11-27",
-   "ball": "yellow"
-  },
-  {
-   "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/405469",
-   "src": "utr",
-   "km": 29,
-   "where": "The Patch",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "ball": "yellow"
-  },
-  {
-   "name": "2026 OC JC East Coburg Club Champs (Members Only)",
-   "date": "2026-11-28",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C3E2822-5135-46D3-93A9-930E1F0DD2DC",
-   "src": "ta",
-   "km": 14,
-   "where": "Coburg",
-   "ball": "yellow"
+   "ages": [],
+   "ball": "?"
   },
   {
    "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
@@ -68,6 +37,7 @@
    "src": "ta",
    "km": 17,
    "where": "Essendon",
+   "ages": [],
    "ball": "green"
   },
   {
@@ -77,16 +47,10 @@
    "src": "ta",
    "km": 31,
    "where": "Truganina",
-   "ball": "yellow"
-  },
-  {
-   "name": "2027 J125 Metro East GWSH Labour Day",
-   "date": "2027-03-05",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D3490B04-9D0F-4886-A672-012A9F8E8704",
-   "src": "ta",
-   "km": 9,
-   "where": "Glen Waverley",
-   "ball": "yellow"
+   "ages": [
+    14
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 J250 GBS125 Waverley Tournament",
@@ -95,7 +59,13 @@
    "src": "ta",
    "km": 22,
    "where": "Doveton",
-   "ball": "yellow"
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
   },
   {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #1",
@@ -104,6 +74,9 @@
    "src": "ta",
    "km": 17,
    "where": "Essendon",
+   "ages": [
+    12
+   ],
    "ball": "green"
   },
   {
@@ -113,7 +86,10 @@
    "src": "ta",
    "km": 21,
    "where": "Altona",
-   "ball": "yellow"
+   "ages": [
+    18
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 12u & 14u Australian Claycourt Championships - VIC Qualifying",
@@ -122,7 +98,8 @@
    "src": "ta",
    "km": 15,
    "where": "Dingley",
-   "ball": "yellow"
+   "ages": [],
+   "ball": "?"
   },
   {
    "name": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes",
@@ -131,7 +108,11 @@
    "src": "ta",
    "km": 30,
    "where": "Taylors Lakes",
-   "ball": "yellow"
+   "ages": [
+    10,
+    14
+   ],
+   "ball": "?"
   },
   {
    "name": "2027 JC Tennis World #1",
@@ -140,7 +121,14 @@
    "src": "ta",
    "km": 10,
    "where": "Melbourne",
-   "ball": "yellow"
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "?"
   }
  ]
 }
