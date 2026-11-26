@@ -2234,7 +2234,7 @@ async function refreshEvents() {
   const btn = $("#harvestBtn");
   if (btn) { btn.disabled = true; btn.textContent = "Checking…"; }
   try {
-    const r = await fetch(`events_map.json?t=${Date.now()}`, { cache: "no-store" });
+    const r = await fetch(`https://raw.githubusercontent.com/akshaybangalorekar/green-ball-1/main/events_map.json?t=${Date.now()}`, { cache: "no-store" });
     if (!r.ok) throw new Error("no map");
     const map = (await r.json()).events || {};
     let filled = 0;
