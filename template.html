@@ -1750,6 +1750,33 @@ function closeLabel(iso) {
   return `<span class="due">closes in ${n}d</span>`;
 }
 
+let LIVE = null;
+function liveEvents() {
+  if (!LIVE) return null;
+  return LIVE.map((e) => ({
+    n: e.name, d: e.date, u: e.url, src: e.src,
+    s: e.where || "", dr: e.km != null ? `${e.km} km` : "",
+    e: e.src === "utr" ? "UTR event" : "Tennis Australia",
+    t: /jds/i.test(e.name) ? "JDS" : /j?250/i.test(e.name) ? "J250"
+      : /j?125/i.test(e.name) ? "J125" : /jc\b/i.test(e.name) ? "JC"
+      : e.src === "utr" ? "UTR" : "Open",
+    p: "Start here", c: null, e2: e.date,
+  }));
+}
+
+async function loadLive() {
+  try {
+    const r = await fetch("https://raw.githubusercontent.com/akshaybangalorekar/green-ball-1/main/events.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) return;
+    const d = await r.json();
+    if (d && Array.isArray(d.events) && d.events.length) {
+      LIVE = d.events;
+      window.__eventsStamp = d.generated;
+      renderAll();
+    }
+  } catch (e) {}
+}
+
 const PRIORITY = {
   "Start here": { label: "Book now", hint: "enter these", cls: "go" },
   "Target": { label: "Good target", hint: "worth entering", cls: "tg" },
@@ -1855,7 +1882,8 @@ function viewPathway() {
   const gap = Math.round((TARGET_UTR - MY_UTR) * 10) / 10;
   const pctOf = Math.max(4, Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100)));
   const today = todayISO();
-  const up = PLAN_EVENTS.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : 1));
+  const SOURCE = liveEvents() || PLAN_EVENTS;
+  const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : 1));
   const enteredUp = up.filter((e) => isEntered(e.n));
   const candidates = up.filter((e) => !isEntered(e.n) && e.p === "Start here");
   const firsts = [...enteredUp, ...candidates].slice(0, 3);
@@ -1897,7 +1925,12 @@ function viewPathway() {
   /* ---- all events ---- */
   const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
     <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>
-    <button class="iosbtn" id="harvestBtn">Refresh events</button>
+    <p class="evkey" style="margin:10px 0 6px">Updated ${(() => {
+      const g = window.__eventsStamp;
+      if (!g) return "—";
+      const t = new Date(g);
+      return t.toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+    })()}</p>
     <p class="evkey" style="margin:10px 0 14px">These are all Tennis Australia tournaments — their results count
       for his UTR. <a href="#" id="helpLink">Help ›</a></p>`;
   const evBody = evKey + up.map((e) => {
@@ -2554,8 +2587,6 @@ function bind() {
       if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 220);
   };
-  const hb = $("#harvestBtn");
-  if (hb) hb.onclick = refreshEvents;
   const addMatch = $("#addMatch");
   if (addMatch) addMatch.onclick = addMatchSheet;
   const foldNext = document.querySelector(".fold#fold-next");
@@ -2889,6 +2920,7 @@ document.querySelectorAll(".tabs button").forEach((b) => {
 
 applyTheme(localStorage.getItem(THEME_KEY) || "hardcourt");
 renderAll();
+loadLive();
 if (location.hash) {
   showTab(location.hash.slice(1));
 }
