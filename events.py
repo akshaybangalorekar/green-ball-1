@@ -1,5 +1,21 @@
 """Harvest junior tournament events near Carnegie 3163 from Tennis Australia and UTR."""
-import json, re, urllib.request, pathlib, datetime
+import json, re, urllib.request, pathlib, datetime, os
+
+JINA = os.environ.get("JINA_KEY", "").strip()
+HDRS = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}
+if JINA:
+    HDRS["Authorization"] = f"Bearer {JINA}"
+
+def render(url, timeout=90):
+    """Render a JavaScript page through Jina and return its markdown."""
+    if not JINA:
+        return "ERR no JINA_KEY"
+    try:
+        req = urllib.request.Request("https://r.jina.ai/" + url, headers=HDRS)
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.read().decode("utf-8", "replace")
+    except Exception as e:
+        return f"ERR {type(e).__name__}: {e}"
 
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)"}
 
@@ -47,7 +63,7 @@ TA_WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
 for start, end in TA_WINDOWS:
     url = ("https://tournaments.tennis.com.au/find/tournament"
            f"?DateFilterType=0&StartDate={start}&EndDate={end}&Distance=25")
-    html = fetch_raw(url)
+    html = render(url)
     if html.startswith("ERR"):
         print("TA fetch:", html[:90])
         continue
@@ -75,7 +91,7 @@ utr = {}
 utr_url = ("https://app.utrsports.net/search?type=events&sportTypes=tennis"
            "&eventState=open_registration&utrMin=1&utrMax=4&utrType=verified"
            "&distance=25mi&latitude=-37.8447&longitude=145.0694")
-utxt = fetch_raw(utr_url)
+utxt = render(utr_url)
 if not utxt.startswith("ERR"):
     for label, link in re.findall(r"\[([^\]]{10,200})\]\((https://app\.utrsports\.net/events/\d+)\)", utxt):
         if "Australia" not in label:
