@@ -127,6 +127,10 @@
   .vnode.now b { color: var(--brand); }
   .vev { margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-soft); }
   .vevtop { display: flex; align-items: center; gap: 8px; }
+  .enrol { display: flex; align-items: center; gap: 9px; margin-top: 10px; cursor: pointer;
+    font-size: 13.5px; color: var(--ink-dim); }
+  .enrol input { width: 18px; height: 18px; accent-color: var(--brand); }
+  .btn.small { width: auto; padding: 8px 14px; font-size: 13px; }
   .grp { margin: 0 0 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ink-dim); }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
@@ -1388,6 +1392,13 @@ const UNLOCK_KEY = "em-gb1-pathway";
 const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
 const LOG_KEY = "em-gb1-matches";
+const ENROL_KEY = "em-gb1-entered";
+let ENTERED = (() => { try { return JSON.parse(localStorage.getItem(ENROL_KEY) || "{}"); } catch (e) { return {}; } })();
+const isEntered = (n) => !!ENTERED[n];
+const toggleEntered = (n) => {
+  if (ENTERED[n]) delete ENTERED[n]; else ENTERED[n] = todayISO();
+  try { localStorage.setItem(ENROL_KEY, JSON.stringify(ENTERED)); } catch (e) {}
+};
 const TRACK_KEY = "em-gb1-track";
 const TARGET_KEY = "em-gb1-target";
 let TRACKED = localStorage.getItem(TRACK_KEY) || "Atharv Bangalorekar";
@@ -1454,7 +1465,7 @@ function parseScore(txt) {
   return { gw, gl };
 }
 
-function addMatchSheet() {
+function addMatchSheet(eventName) {
   openSheet(`<div class="grab"></div>
     <button class="ovclose" data-close="1" aria-label="Close">×</button>
     <h3>Add a match</h3>
@@ -1462,6 +1473,7 @@ function addMatchSheet() {
     <div class="addrow" style="margin-top:0">
       <input id="mDate" type="date" value="${todayISO()}">
     </div>
+    ${eventName ? `<p class="caption" style="margin:0 0 10px">${esc(eventName)}</p>` : ""}
     <div class="addrow"><input id="mOpp" type="text" placeholder="Opponent"></div>
     <div class="addrow"><input id="mScore" type="text" placeholder="Score, e.g. 6-4 3-6 10-7"></div>
     <div class="addrow">
@@ -1814,7 +1826,9 @@ function viewPathway() {
   const pctOf = Math.max(4, Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100)));
   const today = todayISO();
   const up = PLAN_EVENTS.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : 1));
-  const firsts = up.filter((e) => e.p === "Start here").slice(0, 3);
+  const enteredUp = up.filter((e) => isEntered(e.n));
+  const candidates = up.filter((e) => !isEntered(e.n) && e.p === "Start here");
+  const firsts = [...enteredUp, ...candidates].slice(0, 3);
   const nextEvent = up[0];
 
   /* ---- dashboard ---- */
@@ -1827,6 +1841,9 @@ function viewPathway() {
       <div class="evlinks">${e.u
         ? `<a href="${e.u}" target="_blank" rel="noopener">Open &amp; enter ›</a>`
         : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find it ›</a>`}</div>
+      ${isEntered(e.n)
+        ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>`
+        : `<label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}"><span>I'm entering this</span></label>`}
     </div>`;
 
   const dash = `
@@ -1879,6 +1896,9 @@ function viewPathway() {
         ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Open on Tennis Australia ›</a>`
           : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find on Tennis Australia ›</a>`}
       </div>
+      <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
+        <span>I'm entering this</span></label>
+      ${isEntered(e.n) ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>` : ""}
     </div>`;
   }).join("");
 
@@ -2435,6 +2455,12 @@ function bind() {
     const d = document.querySelector('.fold#fold-next');
     if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); }
   };
+  document.querySelectorAll("[data-enrol]").forEach((cb) => {
+    cb.onchange = () => { toggleEntered(cb.dataset.enrol); renderAll(); showToast(cb.checked ? "Added to your journey" : "Removed"); };
+  });
+  document.querySelectorAll("[data-result]").forEach((b) => {
+    b.onclick = (ev) => { ev.stopPropagation(); addMatchSheet(b.dataset.result); };
+  });
   const addMatch = $("#addMatch");
   if (addMatch) addMatch.onclick = addMatchSheet;
   const foldNext = document.querySelector(".fold#fold-next");
