@@ -1939,7 +1939,10 @@ function viewPathway() {
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
-
+      <div class="evlinks">
+        <button class="btn ghost small" data-pass="${esc(e.n)}">Pass</button>
+        ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Enter ›</a>` : ""}
+      </div>
     </div>`;
 
   const dash = `
