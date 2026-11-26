@@ -56,21 +56,23 @@ def utr_events():
 
 # ---------- Tennis Australia (needs a browser) ----------
 def ta_events():
+    """Read the tournament cards: name, venue and DD/MM/YYYY dates are all in the card text."""
     from playwright.sync_api import sync_playwright
     WINDOWS = [("2026-11-26", "2027-02-28"), ("2027-03-01", "2027-06-30")]
-    MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
     found = {}
     with sync_playwright() as pw:
         b = pw.chromium.launch(args=["--no-sandbox"])
         pg = b.new_page(viewport={"width": 1280, "height": 1600})
-        for start, end in WINDOWS:
+        for start_d, end_d in WINDOWS:
             url = ("https://tournaments.tennis.com.au/find/tournament"
-                   f"?DateFilterType=0&StartDate={start}&EndDate={end}&Distance=25")
+                   f"?DateFilterType=0&StartDate={start_d}&EndDate={end_d}&Distance=25")
             try:
                 pg.goto(url, wait_until="domcontentloaded", timeout=90000)
                 pg.wait_for_timeout(7000)
-                cards = pg.eval_on_selector_all("a[href*='tournament?id=']",
-                    "els => els.map(e => ({href: e.href, text: (e.innerText||'').trim()}))")
+                cards = pg.eval_on_selector_all("a[href*='tournament?id=']", """els => els.map(e => ({
+                    href: e.href,
+                    card: (e.closest('li,div,article')?.innerText || '').trim()
+                }))""")
             except Exception as e:
                 print("TA list failed:", type(e).__name__)
                 continue
@@ -78,42 +80,28 @@ def ta_events():
                 gid = re.search(r"id=([0-9A-Fa-f-]{36})", c["href"])
                 if not gid or gid.group(1) in found:
                     continue
-                found[gid.group(1)] = {"name": (c["text"] or "").split("\n")[0][:110], "url": c["href"]}
-        for e in found.values():
-            try:
-                pg.goto(e["url"], wait_until="domcontentloaded", timeout=60000)
-                pg.wait_for_timeout(2500)
-                txt = pg.inner_text("body")[:6000]
-                html = pg.content()
-                title = pg.title()
-            except Exception:
-                continue
-            # name: page title, minus the site suffix
-            nm = re.split(r"\s+[–|-]\s+Tennis Australia", title)[0].strip()
-            if len(nm) > 5:
-                e["name"] = nm[:110]
-            # date: structured data first
-            for pat in (r'"startDate"\s*:\s*"(\d{4}-\d{2}-\d{2})',
-                        r'"start_date"\s*:\s*"(\d{4}-\d{2}-\d{2})',
-                        r'"eventStartDate"\s*:\s*"(\d{4}-\d{2}-\d{2})'):
-                m = re.search(pat, html)
-                if m:
-                    e["date"] = m.group(1); break
-            if not e.get("date"):
-                m = re.search(r"(?:Dates?|When)[^\n]{0,40}?(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})", txt, re.I)
-                if m:
+                lines = [l.strip() for l in c["card"].split("\n") if l.strip()]
+                if not lines:
+                    continue
+                name = lines[0][:110]
+                venue = ""
+                for l in lines[1:3]:
+                    if "|" in l:
+                        venue = l.split("|")[-1].strip()
+                        break
+                dm = re.search(r"(\d{1,2})/(\d{1,2})/(\d{4})", c["card"])
+                date = None
+                if dm:
                     try:
-                        e["date"] = datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
+                        date = datetime.date(int(dm.group(3)), int(dm.group(2)), int(dm.group(1))).isoformat()
                     except ValueError:
-                        pass
+                        date = None
+                if not date:
+                    continue
+                found[gid.group(1)] = {"name": name, "date": date, "url": c["href"],
+                                       "src": "ta", "km": None, "where": venue or "Melbourne"}
         b.close()
-    out = []
-    for e in found.values():
-        if not e.get("date"):
-            continue
-        out.append({"name": e["name"], "date": e["date"], "url": e["url"], "src": "ta",
-                    "km": None, "where": "Melbourne"})
-    return out
+    return list(found.values())
 
 today = datetime.date.today().isoformat()
 events = [e for e in (utr_events() + ta_events()) if e["date"] and e["date"] >= today]
