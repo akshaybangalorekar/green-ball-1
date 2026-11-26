@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-26T09:23:39Z",
+ "generated": "2026-11-26T09:28:27Z",
  "count": 17,
  "utr": 6,
  "ta": 11,
@@ -12,7 +12,8 @@
    "km": 10,
    "where": "Brighton East",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-26"
   },
   {
    "name": "RSYLTC - Verified Matchplay",
@@ -22,7 +23,8 @@
    "km": 6,
    "where": "Toorak",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-26"
   },
   {
    "name": "2026 Australian Wheelchair Tennis National Championships",
@@ -40,7 +42,8 @@
    "km": 39,
    "where": "Aintree",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-28"
   },
   {
    "name": "Rosanna Tennis Club AO 1 Point Slam Community Event",
@@ -50,7 +53,8 @@
    "km": 11,
    "where": "Rosanna",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-27"
   },
   {
    "name": "TERM 4 Junior UTR Matchplay",
@@ -60,7 +64,8 @@
    "km": 8,
    "where": "Brighton",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-27"
   },
   {
    "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
@@ -70,7 +75,8 @@
    "km": 29,
    "where": "The Patch",
    "utrMin": null,
-   "utrMax": null
+   "utrMax": null,
+   "regEnd": "2026-11-27"
   },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
