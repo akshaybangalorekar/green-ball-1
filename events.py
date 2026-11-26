@@ -183,45 +183,36 @@ BAD_PAGE = re.compile(r"members only|invitation only|invitational|1 point slam|w
                       r"walking tennis|police|fire games|veterans|masters", re.I)
 
 def verify_on_page(pg, e):
-    """Open the event page and read what it actually allows."""
+    """Read the event's own block. Include only if a junior division he can enter is listed."""
     try:
         pg.goto(e["url"], wait_until="domcontentloaded", timeout=45000)
         pg.wait_for_timeout(2200)
-        txt = pg.inner_text("body")[:12000]
+        block = pg.evaluate("""() => {
+            const pick = document.querySelector('main, [class*="event-detail"], [class*="tournament"]');
+            return (pick ? pick.innerText : document.body.innerText).slice(0, 6000);
+        }""")
     except Exception:
         return e, "page failed"
-    ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", txt)})
-    over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", txt, re.I)
+    ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", block)})
+    over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", block, re.I)
     min_age = int(over.group(1)) if over else None
     e["ages"] = ages
-    # the UTR band the event accepts, lowest first — that is his entry point
-    bands = [(float(a), float(b)) for a, b in
-             re.findall(r"UTR[^\d]{0,12}(\d{1,2}(?:\.\d)?)\s*(?:-|–|to)\s*(\d{1,2}(?:\.\d)?)", txt, re.I)]
-    if bands:
-        lo, hi = sorted(bands)[0]
-        e["utrMin"], e["utrMax"] = lo, hi
-    e["ball"] = ("green" if re.search(r"green ball", txt, re.I)
-                 else "yellow" if re.search(r"yellow ball", txt, re.I) else "?")
-    if BAD_PAGE.search(txt) or BAD_PAGE.search(e["name"]):
-        return e, "not for him"
+    e["ball"] = ("green" if re.search(r"green ball", block, re.I)
+                 else "yellow" if re.search(r"yellow ball", block, re.I) else "?")
+    # exclusions, scoped to the event block only
+    bad = BAD_PAGE.search(block)
+    if bad:
+        return e, f'not for him: "{bad.group(0)}"'
     if min_age is not None and AGE < min_age:
         return e, f"needs {min_age}+"
-    if ages and not ({12, 14, 16, 18} & set(ages)):
-        return e, f"ages {ages} only"
-    if not ages and not GOOD.search(e["name"]):
-        return e, "no junior age group"
-    return e, None
+    # positive test: a division he can enter
+    if {12, 14, 16, 18} & set(ages):
+        return e, None
+    if not ages and GOOD.search(e["name"]):
+        return e, None          # no division published yet, but it is a junior event
+    return e, f"ages {ages or 'none'}"
 
-def ball_of(e):
-    return "green" if GREEN.search(e["name"]) else "yellow"
 
-def dedupe_key(e):
-    return (re.sub(r"[^a-z0-9]", "", e["name"].lower())[:26], e["date"])
-
-raw_utr = utr_events()
-raw_ta = ta_events()
-for e in raw_utr:
-    print(f"UTR seen: {e['date']} {e.get('km')}km {e['name'][:50]}")
 pool = []
 for e in raw_utr + raw_ta:
     if not e["date"]:

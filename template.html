@@ -1764,13 +1764,13 @@ function liveEvents() {
     ball: e.ball || "yellow",
     p: (() => {
       const my = MY_UTR || 0;
+      const TOL = my < 2 ? 1.0 : my < 3 ? 1.2 : my < 4 ? 1.4 : my < 5 ? 1.6 : 1.8;
       if (e.utrMin != null && e.utrMax != null) {
         if (my >= e.utrMin && my <= e.utrMax) return "Start here";        // fits now
         if (my < e.utrMin) {
-          const short = e.utrMin - my;
-          return short <= 1 ? "Target" : "Later";                          // slightly high / far off
+          return (e.utrMin - my) <= TOL ? "Target" : "Later";              // stretch grows with him
         }
-        return "Target";                                                   // above the band: a stretch down
+        return "Target";
       }
       if (e.src === "utr") return "Start here";
       if (/jds|jc\b/i.test(e.name)) return "Start here";
