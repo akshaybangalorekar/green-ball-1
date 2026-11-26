@@ -170,13 +170,33 @@ GOOD = re.compile(r"\bjds\b|\bjc\b|j\d{3}|junior|juniors|\b1[024]u\b|\b\d{2}u\b|
                   r"matchplay|match play|green ball|coloured ball|hot shots|development", re.I)
 GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|hot shots", re.I)
 
-def eligible(e):
-    n = e["name"]
-    if BAD.search(n):
-        return False
-    if GOOD.search(n):
-        return True
-    return e["src"] == "utr"          # UTR results are already filtered to his band
+AGE = 11          # his age now
+BAD_PAGE = re.compile(r"members only|invitation only|invitational|1 point slam|wheelchair|"
+                      r"walking tennis|police|fire games|veterans|masters", re.I)
+
+def verify_on_page(pg, e):
+    """Open the event page and read what it actually allows."""
+    try:
+        pg.goto(e["url"], wait_until="domcontentloaded", timeout=45000)
+        pg.wait_for_timeout(2200)
+        txt = pg.inner_text("body")[:12000]
+    except Exception:
+        return e, "page failed"
+    ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", txt)})
+    over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", txt, re.I)
+    min_age = int(over.group(1)) if over else None
+    e["ages"] = ages
+    e["ball"] = ("green" if re.search(r"green ball", txt, re.I)
+                 else "yellow" if re.search(r"yellow ball", txt, re.I) else "?")
+    if BAD_PAGE.search(txt) or BAD_PAGE.search(e["name"]):
+        return e, "not for him"
+    if min_age is not None and AGE < min_age:
+        return e, f"needs {min_age}+"
+    if ages and not ({12, 14, 16, 18} & set(ages)):
+        return e, f"ages {ages} only"
+    if not ages and not GOOD.search(e["name"]):
+        return e, "no junior age group"
+    return e, None
 
 def ball_of(e):
     return "green" if GREEN.search(e["name"]) else "yellow"
@@ -196,11 +216,16 @@ for e in raw_utr + raw_ta:
         print("DROP past:", e["date"], e["name"][:50]); continue
     pool.append(e)
 kept = {}
-for e in sorted(pool, key=lambda x: x["src"] != "utr"):   # prefer UTR: it has band and regEnd
-    if not eligible(e):
-        print("DROP ineligible:", e["name"][:50]); continue
-    e["ball"] = ball_of(e)
-    kept.setdefault(dedupe_key(e), e)
+from playwright.sync_api import sync_playwright
+with sync_playwright() as _pw:
+    _b = _pw.chromium.launch(args=["--no-sandbox"])
+    _pg = _b.new_page()
+    for e in sorted(pool, key=lambda x: x["src"] != "utr"):
+        e, why = verify_on_page(_pg, e)
+        if why:
+            print(f"DROP ({why}):", e["name"][:52]); continue
+        kept.setdefault(dedupe_key(e), e)
+    _b.close()
 events = list(kept.values())
 events.sort(key=lambda e: (e["date"], e["src"] != "utr", e["name"]))
 print("after eligibility + dedupe:", len(events), "of", len(pool))
