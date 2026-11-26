@@ -1893,7 +1893,10 @@ function viewPathway() {
 
   /* ---- all events ---- */
   const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
-    <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>`;
+    <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>
+    <p class="evkey" style="margin-top:8px">Every event here is a <b>Tennis Australia</b> tournament, and Tennis Australia
+    sends the results to UTR — so these do move his rating. UTR's own matchplay is a second route: several matches per
+    entry, matched on level. Both count; the TA ones also earn ranking points.</p>`;
   const evBody = evKey + up.map((e) => {
     const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
     return `<div class="ev">
