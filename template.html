@@ -110,6 +110,20 @@
     text-transform: uppercase; color: var(--brand); }
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
+  .vtop { display: flex; align-items: baseline; gap: 9px; margin: 2px 0 16px; }
+  .vnum { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: -.03em; color: var(--brand); }
+  .vlab { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-dim); }
+  .vtrack { position: relative; padding-left: 34px; }
+  .vtrack::before { content: ""; position: absolute; left: 12px; top: 10px; bottom: 26px; width: 2px; background: var(--line); }
+  .vnode { position: relative; padding-bottom: 20px; }
+  .vnode b { display: block; font-size: 16px; font-weight: 700; }
+  .vnode small { display: block; margin-top: 3px; font-size: 12.5px; color: var(--ink-dim); line-height: 1.5; }
+  .vdot { position: absolute; left: -28px; top: 4px; width: 13px; height: 13px; border-radius: 50%;
+    background: var(--surface); border: 2px solid var(--ink-dim); }
+  .vnode.now .vdot { left: -30px; width: 17px; height: 17px; background: var(--ball); border: 2px solid var(--brand); }
+  .vnode.now b { color: var(--brand); }
+  .vev { margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-soft); }
+  .vevtop { display: flex; align-items: center; gap: 8px; }
   .grp { margin: 0 0 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ink-dim); }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
@@ -1785,17 +1799,37 @@ function viewPathway() {
   const nextEvent = up[0];
 
   /* ---- dashboard ---- */
+  const evRow = (e) => `<div class="vev">
+      <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
+        <span class="pickdue">${closeLabel(e.c)}</span></div>
+      <div class="evname">${esc(e.n)}</div>
+      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away</div>
+      ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
+      <div class="evlinks">${e.u
+        ? `<a href="${e.u}" target="_blank" rel="noopener">Open &amp; enter ›</a>`
+        : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find it ›</a>`}</div>
+    </div>`;
+
   const dash = `
-    <div class="card journeychart" id="journeyCard">
+    <div class="card journeychart">
       <p class="label">UTR Journey</p>
-      ${journeySVG()}
-      <p class="journeycta">Tap the flags to see which events to enter ›</p>
-      <div class="evlinks" style="margin-top:12px">
+      <div class="vtop"><span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
+        <span class="vlab">UTR now</span></div>
+      <div class="vtrack">
+        <div class="vnode now"><span class="vdot"></span>
+          <b>You are here</b><small>${t.w} won, ${t.l} lost in the ${t.n} matches that count</small>
+        </div>
+        <div class="vnode goal"><span class="vdot"></span>
+          <b>${TARGET_UTR.toFixed(1)} · next goal</b>
+          <small>${gap > 0 ? `${gap.toFixed(1)} to go` : "reached"} — the events that get him there</small>
+          ${firsts.length ? firsts.map(evRow).join("") : `<p class="caption">Nothing open right now.</p>`}
+        </div>
+        <div class="vnode"><span class="vdot"></span><b>3.0 · AJP</b><small>Association Junior Pennant entry</small></div>
+        <div class="vnode"><span class="vdot"></span><b>5.8 · A Grade</b><small>A long way off — a horizon, not a target</small></div>
+      </div>
+      <div class="evlinks" style="margin-top:6px">
         <a href="https://app.utrsports.net/profiles/6114278" target="_blank" rel="noopener">UTR profile ›</a>
-        <a href="https://tournaments.tennis.com.au/player-profile/1db032e5-eae1-4b8c-bf8c-eea7b0537a6e/tournaments"
-           target="_blank" rel="noopener">Tennis Australia record ›</a>
-        <a href="https://app.utrsports.net/search?type=events&sportTypes=tennis&eventState=open_registration&utrMin=1&utrMax=2.5&utrType=verified&distance=25mi"
-           target="_blank" rel="noopener">UTR events at his level ›</a>
+        <a href="https://tournaments.tennis.com.au/player-profile/1db032e5-eae1-4b8c-bf8c-eea7b0537a6e/tournaments" target="_blank" rel="noopener">TA record ›</a>
       </div>
     </div>
 
@@ -1804,22 +1838,6 @@ function viewPathway() {
       <div class="kpi"><div class="n">${t.w}</div><div class="k">${ico("points")}Won</div></div>
       <div class="kpi"><div class="n">${t.gw}</div><div class="k">${ico("ladder")}Games won</div></div>
     </div>`;
-
-  /* ---- what to do next ---- */
-  const nextBody = firsts.length
-    ? firsts.map((e) => `<div class="ev star">
-        <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span></div>
-        <div class="evname">${esc(e.n)}</div>
-        <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${esc(e.e)}</div>
-        <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
-        <div class="evfoot">${closeLabel(e.c)}</div>
-        ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
-        <div class="evlinks">
-          ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Open &amp; enter on Tennis Australia ›</a>`
-            : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find on Tennis Australia ›</a>`}
-        </div>
-      </div>`).join("")
-    : `<p class="caption" style="margin-top:0">Nothing open at his level right now — the next calendar lands later in the year.</p>`;
 
   /* ---- all events ---- */
   const evKey = `<p class="evkey"><b>First</b> do this next · <b>Aim</b> the ones that count ·
@@ -1863,7 +1881,6 @@ function viewPathway() {
     ${clubMatches().slice(0, 20).map(rowHTML).join("")}`;
 
   return dash
-    + fold("next", "What to do next", firsts.length ? `${firsts.length} to enter` : "nothing open", nextBody, true)
     + fold("events", "All events", `${up.length} ahead`, evBody, false)
     + fold("matches", "His matches", `${t.w}W · ${t.l}L`, matchBody, false)
     + fold("target", "Goals", `now ${MY_UTR != null ? MY_UTR.toFixed(1) : "—"} → ${TARGET_UTR.toFixed(1)}`, `
