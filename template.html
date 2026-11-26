@@ -422,6 +422,7 @@
   .mtxt b { display: block; font-size: 14.5px; font-weight: 500; }
   .mtxt small { display: block; font-family: var(--mono); font-size: 10.5px; color: var(--ink-dim); margin-top: 2px; }
   .mgames { font-family: var(--mono); font-size: 12px; color: var(--ink-dim); }
+  .evnote { margin: 7px 0 0; font-size: 12px; line-height: 1.5; color: var(--ink-dim); font-style: italic; }
   .clash { margin: 8px 0 0; font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
     text-transform: uppercase; color: var(--loss); font-weight: 700; }
   .freeweek { margin: 8px 0 0; font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
@@ -1760,6 +1761,7 @@ function liveEvents() {
     t: /jds/i.test(e.name) ? "JDS" : /j?250/i.test(e.name) ? "J250"
       : /j?125/i.test(e.name) ? "J125" : /jc\b/i.test(e.name) ? "JC"
       : e.src === "utr" ? "UTR" : "Open",
+    ball: e.ball || "yellow",
     p: (() => {
       const my = MY_UTR || 0;
       if (e.utrMin != null && e.utrMax != null) {
