@@ -1917,7 +1917,7 @@ function viewPathway() {
   const pctOf = Math.max(4, Math.min(100, Math.round((MY_UTR / TARGET_UTR) * 100)));
   const today = todayISO();
   const SOURCE = liveEvents() || [];
-  const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => ((b.fit || 0) - (a.fit || 0)) || (a.d < b.d ? -1 : 1));
+  const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : 0));
   const enteredUp = up.filter((e) => isEntered(e.n));
   const candidates = up.filter((e) => !isEntered(e.n) && e.p === "Start here");
   const firsts = [...enteredUp, ...candidates].slice(0, 3);
