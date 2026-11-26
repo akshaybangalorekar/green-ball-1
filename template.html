@@ -1918,8 +1918,9 @@ function viewPathway() {
   const today = todayISO();
   const SOURCE = liveEvents() || [];
   const up = SOURCE.filter((e) => e.d >= today).sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : 0));
-  const enteredUp = up.filter((e) => isEntered(e.n));
-  const candidates = up.filter((e) => !isEntered(e.n) && e.p === "Start here");
+  const ok = up.filter((e) => !e.dropped);          // never recommend what he cannot enter
+  const enteredUp = ok.filter((e) => isEntered(e.n));
+  const candidates = ok.filter((e) => !isEntered(e.n) && e.p === "Start here");
   const firsts = [...enteredUp, ...candidates].slice(0, 3);
   const nextEvent = up[0];
 
