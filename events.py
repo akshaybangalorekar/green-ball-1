@@ -187,12 +187,10 @@ def verify_on_page(pg, e):
     try:
         pg.goto(e["url"], wait_until="domcontentloaded", timeout=45000)
         pg.wait_for_timeout(2200)
-        block = pg.evaluate("""() => {
-            const pick = document.querySelector('main, [class*="event-detail"], [class*="tournament"]');
-            return (pick ? pick.innerText : document.body.innerText).slice(0, 6000);
-        }""")
-    except Exception:
-        return e, "page failed"
+        block = pg.inner_text("body")[:8000]
+    except Exception as ex:
+        e["unverified"] = True
+        return e, None          # a technical failure must not delete an event
     ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", block)})
     over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", block, re.I)
     min_age = int(over.group(1)) if over else None
