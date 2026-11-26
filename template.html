@@ -137,6 +137,10 @@
     cursor: pointer; }
   .iosbtn:active { opacity: .85; }
   .iosbtn:disabled { opacity: .6; }
+  .chip { display: inline-block; padding: 2px 7px; border-radius: 6px; font-family: var(--mono);
+    font-size: 9.5px; font-weight: 700; letter-spacing: .06em; text-decoration: none; vertical-align: 1px; }
+  .chip.ta { background: var(--brand-wash); color: var(--brand); }
+  .chip.utr { background: var(--ball-wash); color: var(--ball-ink); }
   .grp { margin: 0 0 10px; font-family: var(--mono); font-size: 10px; letter-spacing: .07em;
     text-transform: uppercase; color: var(--ink-dim); }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
@@ -1823,6 +1827,13 @@ function journeySVG() {
   </svg>`;
 }
 
+function srcChip(e) {
+  const utr = e.src === "utr";
+  const href = e.u || `https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}`;
+  return `<a class="chip ${utr ? "utr" : "ta"}" href="${href}" target="_blank" rel="noopener"
+    title="${utr ? "Open on UTR Sports" : "Open on Tennis Australia"}">${utr ? "UTR" : "TA"}</a>`;
+}
+
 function fold(id, title, summary, body, open) {
   return `<details class="fold" id="fold-${id}"${open ? " open" : ""}>
     <summary><span class="ftitle">${title}</span><span class="fsum">${summary}</span><span class="fchev">›</span></summary>
@@ -1848,9 +1859,7 @@ function viewPathway() {
       <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         <span class="pickdue">${closeLabel(e.c)}</span></div>
       <div class="evname">${esc(e.n)}</div>
-      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${e.u
-        ? `<a href="${e.u}" target="_blank" rel="noopener">Enter ›</a>`
-        : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find it ›</a>`}</div>
+      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
 
     </div>`;
@@ -1886,20 +1895,15 @@ function viewPathway() {
   const evKey = `<p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a bigger step, worth it ·
     <b>If it suits</b> — optional · <b>Too early</b> — not this year</p>
     <button class="iosbtn" id="harvestBtn">Refresh events</button>
-    <p class="caption" style="margin:8px 0 14px">Pulls the latest tournament list and fills in direct links.
-    The scrape itself runs on a schedule, so this shows whatever the last run found.</p>
-    <p class="evkey" style="margin-top:8px">Every event here is a <b>Tennis Australia</b> tournament, and Tennis Australia
-    sends the results to UTR — so these do move his rating. UTR's own matchplay is a second route: several matches per
-    entry, matched on level. Both count; the TA ones also earn ranking points.</p>`;
+    <p class="evkey" style="margin:10px 0 14px">These are all Tennis Australia tournaments — their results count
+      for his UTR. <a href="#" id="helpLink">Help ›</a></p>`;
   const evBody = evKey + up.map((e) => {
     const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
     return `<div class="ev">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
-      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${e.u
-        ? `<a href="${e.u}" target="_blank" rel="noopener">Open ›</a>`
-        : `<a href="https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}" target="_blank" rel="noopener">Find ›</a>`}</div>
+      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${srcChip(e)}</div>
       <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
       <div class="evfoot">${closeLabel(e.c)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
@@ -2490,6 +2494,15 @@ function bind() {
   document.querySelectorAll("[data-result]").forEach((b) => {
     b.onclick = (ev) => { ev.stopPropagation(); addMatchSheet(b.dataset.result); };
   });
+  const hl = $("#helpLink");
+  if (hl) hl.onclick = (ev) => {
+    ev.preventDefault();
+    openSettings();
+    setTimeout(() => {
+      const t = $("#helpSec");
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 220);
+  };
   const hb = $("#harvestBtn");
   if (hb) hb.onclick = refreshEvents;
   const addMatch = $("#addMatch");
@@ -2615,6 +2628,23 @@ function settingsSheet() {
       <div class="ios-row"><span class="ios-label">Lock now</span>
         <button class="ios-btn" id="lockNow">Lock</button></div>
     </div>` : ""}
+
+    <p class="ios-head" id="helpSec">Help</p>
+    <div class="ios-group">
+      <div class="ios-row col"><b>Why these events</b>
+        <small>Every event in the list is a Tennis Australia tournament — JDS, JC, J125, J250 and the Opens.
+        Tennis Australia sends those results to UTR, so playing them moves his rating. The list is not filtered
+        by his age or rating; it is simply the plan built from Tennis Australia's calendar. UTR's own matchplay
+        is a second route: several matches per entry, matched on level, no ranking points.</small></div>
+      <div class="ios-row col"><b>TA and UTR marks</b>
+        <small><b>TA</b> opens the tournament page on Tennis Australia. <b>UTR</b> opens it on UTR Sports.</small></div>
+      <div class="ios-row col"><b>Refresh events</b>
+        <small>Pulls the latest harvested tournament list and fills in direct links. The scrape runs on a schedule,
+        so it shows whatever the last run found.</small></div>
+      <div class="ios-row col"><b>What counts for UTR</b>
+        <small>Only matches UTR records. His WDTA club sets are green ball, which Waverley does not submit, so they
+        are counted separately and do not move the rating.</small></div>
+    </div>
 
     <p class="ios-head">Words used</p>
     <div class="ios-group">
