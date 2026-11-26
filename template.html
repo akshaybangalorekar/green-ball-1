@@ -110,9 +110,11 @@
     text-transform: uppercase; color: var(--brand); }
   .journeychart { cursor: pointer; }
   .journey { display: block; width: 100%; height: auto; margin: 2px 0 4px; }
-  .vtop { display: flex; align-items: baseline; gap: 6px; margin: 2px 0 16px; flex-wrap: nowrap; }
-  .vmini { margin: 0; font-family: var(--display); font-weight: 600; font-size: 12px;
-    line-height: 1.3; letter-spacing: -.02em; color: var(--brand); opacity: .9; white-space: nowrap; }
+  .vtop { display: flex; align-items: baseline; gap: 8px; margin: 2px 0 16px; }
+  .vmini { margin: 0 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; gap: 1px;
+    font-family: var(--display); font-weight: 600; font-size: 24px; line-height: 1.15;
+    letter-spacing: -.03em; color: var(--brand); opacity: .9; }
+  .vmini span { white-space: nowrap; }
   .vmini b { font-weight: 800; opacity: 1; }
   .vnum { font-family: var(--display); font-weight: 800; font-size: 30px; flex: 0 0 auto; letter-spacing: -.03em; color: var(--brand); }
   .vlab { font-family: var(--mono); font-size: 9.5px; line-height: 1.3; letter-spacing: .09em;
@@ -1870,7 +1872,9 @@ function viewPathway() {
       <div class="vtop">
         <span class="vnum">${MY_UTR != null ? MY_UTR.toFixed(1) : "—"}</span>
         <span class="vlab">UTR</span>
-        <p class="vmini"><b>${t.n}</b> matches · <b>${t.w}</b> won · <b>${t.l}</b> lost · <b>${t.gw}</b> games won</p>
+        <p class="vmini"><span><b>${t.n}</b> matches</span>
+          <span><b>${t.w}</b> won · <b>${t.l}</b> lost</span>
+          <span><b>${t.gw}</b> games won</span></p>
       </div>
       <div class="vtrack">
         <div class="vnode now"><span class="vdot"></span>
