@@ -1,5 +1,5 @@
 """Harvest junior tournaments near Carnegie 3163 from UTR and Tennis Australia."""
-import json, re, math, pathlib, datetime, urllib.request
+import json, re, math, pathlib, datetime, urllib.request, urllib.parse, time
 
 HOME = (-37.8447, 145.0694)   # Carnegie 3163
 MY_UTR = float(__import__("os").environ.get("MY_UTR", "1.6"))
@@ -55,6 +55,24 @@ def utr_events():
     return out
 
 # ---------- Tennis Australia (needs a browser) ----------
+_GEO = {}
+
+def geocode(place):
+    """Suburb -> lat/lng via OpenStreetMap, cached for the run."""
+    if not place or place in _GEO:
+        return _GEO.get(place)
+    q = urllib.parse.urlencode({"q": f"{place}, Victoria, Australia", "format": "json", "limit": 1})
+    try:
+        req = urllib.request.Request(f"https://nominatim.openstreetmap.org/search?{q}",
+                                     headers={"User-Agent": "AdvantageApp/1.0 (tennis team app)"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            hits = json.loads(r.read().decode())
+        _GEO[place] = (float(hits[0]["lat"]), float(hits[0]["lon"])) if hits else None
+    except Exception:
+        _GEO[place] = None
+    return _GEO[place]
+
+
 def ta_events():
     """Read the tournament cards: name, venue and DD/MM/YYYY dates are all in the card text."""
     from playwright.sync_api import sync_playwright
@@ -101,7 +119,19 @@ def ta_events():
                 found[gid.group(1)] = {"name": name, "date": date, "url": c["href"],
                                        "src": "ta", "km": None, "where": venue or "Melbourne"}
         b.close()
-    return list(found.values())
+    kept = []
+    for e in found.values():
+        time.sleep(1.1)
+        pt = geocode(e["where"])
+        if not pt:
+            continue
+        d = km(HOME, pt)
+        if d > RADIUS_KM:
+            continue
+        e["km"] = round(d)
+        kept.append(e)
+    print("TA within radius:", len(kept), "of", len(found))
+    return kept
 
 today = datetime.date.today().isoformat()
 events = [e for e in (utr_events() + ta_events()) if e["date"] and e["date"] >= today]
