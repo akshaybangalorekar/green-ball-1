@@ -1767,6 +1767,7 @@ function liveEvents() {
       const TOL = my < 2 ? 1.0 : my < 3 ? 1.2 : my < 4 ? 1.4 : my < 5 ? 1.6 : 1.8;
       if (e.utrMin != null && e.utrMax != null) {
         if (my >= e.utrMin && my <= e.utrMax) return "Start here";        // fits now
+        if (my > e.utrMax && my - e.utrMax >= 0.5) return "Easy";          // comfortably below him
         if (my < e.utrMin) {
           return (e.utrMin - my) <= TOL ? "Target" : "Later";              // stretch grows with him
         }
@@ -1811,6 +1812,7 @@ const PRIORITY = {
   "Target": { label: "Good target", hint: "worth entering", cls: "tg" },
   "Optional": { label: "If it suits", hint: "optional", cls: "" },
   "Later": { label: "Need more time", hint: "too strong for now", cls: "" },
+  "Easy": { label: "Comfortable", hint: "below his level", cls: "" },
 };
 
 
