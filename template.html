@@ -2388,6 +2388,16 @@ function bind() {
   $("#view-team").querySelectorAll("[data-team]").forEach((b) => {
     b.onclick = () => { teamTab = b.dataset.team; $("#view-team").innerHTML = viewTeam(); bind(); };
   });
+  const jc = $("#journeyCard");
+  if (jc) jc.onclick = () => {
+    const d = document.querySelector('.fold#fold-next');
+    if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); }
+  };
+  const addMatch = $("#addMatch");
+  if (addMatch) addMatch.onclick = addMatchSheet;
+  const foldNext = document.querySelector(".fold#fold-next");
+  if (foldNext) foldNext.open = foldNext.open;
+
   $("#view-week").querySelectorAll(".blk[data-round]").forEach((b) => {
     const r = Number(b.dataset.round);
     b.onclick = () => {
@@ -2541,13 +2551,6 @@ function bindVisitorBadge() {
 
 function bindSheet() {
   bindVisitorBadge();
-  const jc = $("#journeyCard");
-  if (jc) jc.onclick = () => {
-    const d = document.querySelector('.fold#fold-next');
-    if (d) { d.open = true; d.scrollIntoView({ behavior: "smooth", block: "start" }); }
-  };
-  const addMatch = $("#addMatch");
-  if (addMatch) addMatch.onclick = addMatchSheet;
   document.querySelectorAll("[data-theme-id]").forEach((b) => {
     b.onclick = () => {
       applyTheme(b.dataset.themeId);
