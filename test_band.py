@@ -18,7 +18,7 @@ with sync_playwright() as pw:
         txt = pg.inner_text("body")
         hits = [m.group(0) for m in re.finditer(r"UTR[^\n]{0,40}", txt)][:6]
         print("  page UTR mentions:", hits)
-        for u in dict.fromkeys([c for c in calls if "utrsports" in c])[:8]:
+        for u in list(dict.fromkeys([c for c in calls if "utrsports" in c]))[:8]:
             print("  XHR:", u[:150])
 
     for e in ta:
