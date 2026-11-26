@@ -2,6 +2,9 @@
 import json, re, math, pathlib, datetime, urllib.request
 
 HOME = (-37.8447, 145.0694)   # Carnegie 3163
+MY_UTR = float(__import__("os").environ.get("MY_UTR", "1.6"))
+UTR_MIN = max(0.0, round(MY_UTR - 1.0, 1))
+UTR_MAX = round(MY_UTR + 2.0, 1)
 RADIUS_KM = 60
 UA = {"User-Agent": "Mozilla/5.0 (compatible; AdvantageApp/1.0)", "Accept": "application/json"}
 
@@ -25,7 +28,7 @@ def utr_events():
     out = []
     base = ("https://api.utrsports.net/v2/search/events?top=100&searchOrigin=searchPage"
             "&showTennisContent=true&showPickleballContent=false&eventState=open_registration"
-            "&utrMin=1&utrMax=5&utrType=verified&utrTeamType=singles"
+            f"&utrMin={UTR_MIN}&utrMax={UTR_MAX}&utrType=verified&utrTeamType=singles"
             f"&latitude={HOME[0]}&longitude={HOME[1]}&distance=50")
     data = jget(base)
     if not data:
@@ -79,16 +82,30 @@ def ta_events():
         for e in found.values():
             try:
                 pg.goto(e["url"], wait_until="domcontentloaded", timeout=60000)
-                pg.wait_for_timeout(2000)
-                txt = pg.inner_text("body")[:5000]
+                pg.wait_for_timeout(2500)
+                txt = pg.inner_text("body")[:6000]
+                html = pg.content()
+                title = pg.title()
             except Exception:
                 continue
-            for m in re.finditer(r"(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})", txt, re.I):
-                try:
-                    e["date"] = datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
-                    break
-                except ValueError:
-                    continue
+            # name: page title, minus the site suffix
+            nm = re.split(r"\s+[–|-]\s+Tennis Australia", title)[0].strip()
+            if len(nm) > 5:
+                e["name"] = nm[:110]
+            # date: structured data first
+            for pat in (r'"startDate"\s*:\s*"(\d{4}-\d{2}-\d{2})',
+                        r'"start_date"\s*:\s*"(\d{4}-\d{2}-\d{2})',
+                        r'"eventStartDate"\s*:\s*"(\d{4}-\d{2}-\d{2})'):
+                m = re.search(pat, html)
+                if m:
+                    e["date"] = m.group(1); break
+            if not e.get("date"):
+                m = re.search(r"(?:Dates?|When)[^\n]{0,40}?(\d{1,2})\s+(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+(\d{4})", txt, re.I)
+                if m:
+                    try:
+                        e["date"] = datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
+                    except ValueError:
+                        pass
         b.close()
     out = []
     for e in found.values():
@@ -109,3 +126,5 @@ out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "
        "events": events}
 pathlib.Path("events.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
 print(f"{len(events)} events: {out['utr']} UTR, {out['ta']} TA")
+for e in events[:5]:
+    print("  ", e["date"], e["src"], (e["name"] or "<blank>")[:60])
