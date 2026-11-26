@@ -1762,8 +1762,25 @@ function liveEvents() {
       : e.src === "utr" ? "UTR" : "Open",
     p: (() => {
       const days = Math.ceil((new Date(e.date) - new Date()) / 86400000);
-      if (days <= 21) return "Start here";
-      if (days <= 60) return "Target";
+      const my = MY_UTR || 0;
+      // how well the event suits him
+      let fit;
+      if (e.utrMin != null && e.utrMax != null) {
+        if (my >= e.utrMin && my <= e.utrMax) fit = 1;
+        else {
+          const off = my < e.utrMin ? e.utrMin - my : my - e.utrMax;
+          fit = Math.max(0, 1 - off / 2);
+        }
+      } else if (e.src === "utr") fit = 0.8;
+      else if (/jds|jc\b/i.test(e.name)) fit = 0.9;
+      else if (/j?125/i.test(e.name)) fit = 0.6;
+      else if (/j?250/i.test(e.name)) fit = 0.4;
+      else fit = 0.3;
+      // how soon it is
+      const urgency = days <= 7 ? 1 : days <= 21 ? 0.7 : days <= 60 ? 0.4 : 0.2;
+      const score = fit * 0.6 + urgency * 0.4;
+      if (score >= 0.72) return "Start here";
+      if (score >= 0.48) return "Target";
       return "Optional";
     })(),
     c: null, e2: e.date,

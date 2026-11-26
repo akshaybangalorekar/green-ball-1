@@ -51,6 +51,7 @@ def utr_events():
             "src": "utr",
             "km": round(d),
             "where": loc.get("cityName") or loc.get("display") or "",
+            "utrMin": src.get("utrMin"), "utrMax": src.get("utrMax"),
         })
     return out
 
