@@ -184,11 +184,21 @@ def ball_of(e):
 def dedupe_key(e):
     return (re.sub(r"[^a-z0-9]", "", e["name"].lower())[:26], e["date"])
 
-pool = [e for e in (utr_events() + ta_events()) if e["date"] and e["date"] >= today]
+raw_utr = utr_events()
+raw_ta = ta_events()
+for e in raw_utr:
+    print(f"UTR seen: {e['date']} {e.get('km')}km {e['name'][:50]}")
+pool = []
+for e in raw_utr + raw_ta:
+    if not e["date"]:
+        print("DROP no date:", e["name"][:50]); continue
+    if e["date"] < today:
+        print("DROP past:", e["date"], e["name"][:50]); continue
+    pool.append(e)
 kept = {}
 for e in sorted(pool, key=lambda x: x["src"] != "utr"):   # prefer UTR: it has band and regEnd
     if not eligible(e):
-        continue
+        print("DROP ineligible:", e["name"][:50]); continue
     e["ball"] = ball_of(e)
     kept.setdefault(dedupe_key(e), e)
 events = list(kept.values())
