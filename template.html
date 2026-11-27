@@ -2041,7 +2041,9 @@ function viewPathway() {
           <span><b>Club round</b>${clubClash(e) ? "round " + clubClash(e) + " that day" : "none that day"}</span>
           <span><b>Level</b>${e.utrMin != null ? e.utrMin + "–" + e.utrMax : "not published"}</span>
         </div>
-        <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
+        ${e.dropped
+          ? `<p class="evwhy">He cannot enter this one — ${esc(e.dropped)}.</p>`
+          : `<p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>`}
         <div class="evlinks">
           ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Open the event ›</a>` : ""}
         </div>
