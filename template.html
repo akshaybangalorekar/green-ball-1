@@ -129,6 +129,14 @@
   .vnode.now b { color: var(--brand); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .vutr { font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--ink); letter-spacing: -.01em; }
   .vnode.now small b { display: inline; color: var(--ink); font-weight: 700; }
+  .passbtn { margin-left: 8px; appearance: none; border: 1px solid var(--line); background: transparent;
+    color: var(--ink-dim); font-family: var(--mono); font-size: 9.5px; letter-spacing: .05em;
+    text-transform: uppercase; padding: 3px 8px; border-radius: 6px; cursor: pointer; }
+  .passbtn:active { background: var(--surface-2); }
+  .evname.tappable { cursor: pointer; text-decoration: underline; text-decoration-color: var(--line);
+    text-underline-offset: 3px; }
+  .ev.flash { animation: flash 1.8s ease; }
+  @keyframes flash { 0%, 100% { background: transparent; } 20% { background: rgba(233,245,109,.35); } }
   .vev { margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line-soft); }
   .vevtop { display: flex; align-items: center; gap: 8px; }
   .enrol { display: flex; align-items: center; gap: 9px; margin-top: 10px; cursor: pointer;
@@ -2014,14 +2022,11 @@ function viewPathway() {
   /* ---- dashboard ---- */
   const evRow = (e) => `<div class="vev">
       <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
+        <button class="passbtn" data-pass="${esc(e.n)}">Pass</button>
         <span class="pickdue">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</span></div>
-      <div class="evname">${esc(e.n)}</div>
+      <div class="evname tappable" data-goto="${esc(e.n)}">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
-      <div class="evlinks">
-        <button class="btn ghost small" data-pass="${esc(e.n)}">Pass</button>
-        ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Enter ›</a>` : ""}
-      </div>
     </div>`;
 
   const dash = `
@@ -2086,7 +2091,7 @@ function viewPathway() {
     const pr = e.dropped ? { label: "Not eligible", cls: "no" }
       : e.note ? { label: "Members only", cls: "no" }
       : (PRIORITY[e.p] || { label: e.p, cls: "" });
-    return `<div class="ev">
+    return `<div class="ev" data-evname="${esc(e.n)}">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         <span class="evpri ${pr.cls}" data-whybtn="1" role="button" tabindex="0">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
@@ -2730,6 +2735,19 @@ function bind() {
     b.onclick = () => {
       const box = b.closest(".ev").querySelector(".evbox");
       if (box) box.open = !box.open;
+    };
+  });
+  document.querySelectorAll("[data-goto]").forEach((el2) => {
+    el2.onclick = () => {
+      const want = el2.dataset.goto;
+      const foldEl = document.getElementById("fold-events");
+      if (foldEl) foldEl.open = true;
+      const card = [...document.querySelectorAll("[data-evname]")].find((c) => c.dataset.evname === want);
+      if (card) {
+        card.scrollIntoView({ behavior: "smooth", block: "center" });
+        card.classList.add("flash");
+        setTimeout(() => card.classList.remove("flash"), 1800);
+      }
     };
   });
   document.querySelectorAll("[data-pass]").forEach((b) => {
