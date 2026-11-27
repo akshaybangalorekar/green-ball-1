@@ -184,6 +184,12 @@ GOOD = re.compile(r"\bjds\b|\bjc\b|j\d{3}|junior|juniors|\b1[024]u\b|\b\d{2}u\b|
 GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|hot shots", re.I)
 
 AGE = 11          # his age now
+# anything from here down is other tournaments, not this one
+CUT = re.compile(r"\n\s*(other events|other tournaments|related events|you may also like|"
+                 r"nearby events|more events|other competitions|similar events)\s*\n", re.I)
+
+def this_event_only(text):
+    return CUT.split(text)[0]
 ADAPTIVE_NAME = re.compile(r"wheelchair|walking tennis|blind|deaf|all abilities|para[- ]|"
                            r"special olympics|intellectual|police|fire games|veterans|masters", re.I)
 ADAPTIVE_PAGE = re.compile(r"wheelchair tennis|walking tennis|all abilities|special olympics|"
@@ -209,7 +215,7 @@ def verify_on_page(pg, e):
                     clicked.append(label)
             except Exception:
                 continue
-        block = "\n".join(dict.fromkeys(texts))[:20000]
+        block = "\n".join(dict.fromkeys(this_event_only(t) for t in texts))[:20000]
         # did we actually reach a page that lists divisions?
         e["saw_divisions"] = bool(
             re.search(r"\bdivision", block, re.I)
