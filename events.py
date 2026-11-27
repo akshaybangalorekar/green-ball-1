@@ -199,15 +199,16 @@ def verify_on_page(pg, e):
     e["ages"] = ages
     e["ball"] = ("green" if re.search(r"green ball", block, re.I)
                  else "yellow" if re.search(r"yellow ball", block, re.I) else "?")
-    # exclusions, scoped to the event block only
+    # a published junior division wins: the event is open to him, whatever else the page says
+    if {12, 14, 16, 18} & set(ages):
+        if re.search(r"members only|invitation only|invitational", block, re.I):
+            e["note"] = "member or invitation event — check before entering"
+        return e, None
     bad = BAD_PAGE.search(block)
     if bad:
         return e, "page says: " + bad.group(0)
     if min_age is not None and AGE < min_age:
         return e, f"only {min_age} years and over"
-    # positive test: a division he can enter
-    if {12, 14, 16, 18} & set(ages):
-        return e, None
     if not ages and GOOD.search(e["name"]):
         return e, None          # no division published yet, but it is a junior event
     if ages:
