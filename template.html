@@ -176,6 +176,8 @@
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
   .fresh.warn { background: rgba(217,114,47,.12); color: #9c4d18; }
   .fresh.bad { background: rgba(196,57,43,.12); color: #a33124; font-weight: 600; }
+  .filters { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 8px;
+    padding: 12px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
   .tagtable { width: 100%; border-collapse: collapse; margin: 4px 0 12px; }
   .tagtable td { padding: 6px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px;
     color: var(--ink-dim); vertical-align: top; line-height: 1.45; }
@@ -1467,6 +1469,9 @@ const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
 const LOG_KEY = "em-gb1-matches";
 const PASS_KEY = "em-gb1-passed";
+const HIDE_KEY = "em-gb1-hide";
+let HIDE = (() => { try { return JSON.parse(localStorage.getItem(HIDE_KEY) || "{}"); } catch (e) { return {}; } })();
+const setHide = (k, v) => { HIDE[k] = v; try { localStorage.setItem(HIDE_KEY, JSON.stringify(HIDE)); } catch (e) {} };
 let PASSED = (() => { try { return JSON.parse(localStorage.getItem(PASS_KEY) || "[]"); } catch (e) { return []; } })();
 const passEvent = (n) => {
   if (!PASSED.includes(n)) PASSED.push(n);
@@ -2144,6 +2149,12 @@ function viewPathway() {
       <p class="evkey"><b>Not eligible</b> — shown with the reason rather than hidden, so nothing goes missing.
         Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
       <p class="evkey">Green ball counts toward his UTR only when the event is UTR-listed.</p>
+      <div class="filters">
+        <label class="enrol"><input type="checkbox" data-hide="closed" ${HIDE.closed ? "checked" : ""}>
+          <span>Hide entries closed</span></label>
+        <label class="enrol"><input type="checkbox" data-hide="ineligible" ${HIDE.ineligible ? "checked" : ""}>
+          <span>Hide events he cannot enter</span></label>
+      </div>
       <p class="evkey">Updated ${stamp} Melbourne time</p>
     </div>
   </details>`;
@@ -2160,7 +2171,15 @@ function viewPathway() {
   const runChip = running
     ? `<p class="fresh running">Harvester running — the list below is the last completed one. Check back in a few minutes.</p>`
     : "";
-  const evBody = runChip + (freshness.text && !running ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + up.map((e) => {
+  const shown = up.filter((e) => {
+    if (HIDE.closed && e.closed) return false;
+    if (HIDE.ineligible && (e.dropped || e.note)) return false;
+    return true;
+  });
+  const hiddenNote = (up.length !== shown.length)
+    ? `<p class="evkey" style="margin:0 0 10px">${up.length - shown.length} hidden by your filters.</p>` : "";
+
+  const evBody = runChip + (freshness.text && !running ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + hiddenNote + shown.map((e) => {
     const pr = e.closed ? { label: "Entries closed", cls: "no" }
       : e.dropped ? { label: "Not eligible", cls: "no" }
       : e.note ? { label: "Members only", cls: "no" }
@@ -2817,6 +2836,9 @@ function bind() {
       const box = b.closest(".ev").querySelector(".evbox");
       if (box) box.hidden = !box.hidden;
     };
+  });
+  document.querySelectorAll("[data-hide]").forEach((cb) => {
+    cb.onchange = () => { setHide(cb.dataset.hide, cb.checked); renderAll(); };
   });
   document.querySelectorAll("[data-mile]").forEach((n) => {
     n.onclick = () => milestoneSheet(n.dataset.mile);
