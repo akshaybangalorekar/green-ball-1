@@ -245,12 +245,12 @@ def verify_on_page(pg, e):
     if not ages and GOOD.search(e["name"]):
         return e, None          # no division published yet, but it is a junior event
     if ages:
-        return e, "only a " + "/".join(str(a) for a in ages) + "-and-under draw"
+        return e, "only " + "/".join(str(a) + "U" for a in ages) + " divisions — nothing he can enter"
     if not e.get("saw_divisions"):
         # we never reached a page that lists divisions — do not call it ineligible
         e["note"] = "divisions not shown on the event pages — check before entering"
         return e, None
-    return e, "no age groups listed — check the event page"
+    return e, "no 12U, 14U or 16U division — nothing he can enter"
 
 
 def dedupe_key(e):

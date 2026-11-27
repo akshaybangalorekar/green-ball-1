@@ -2121,8 +2121,7 @@ function viewPathway() {
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</div>
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
-      ${e.dropped && /no age groups/.test(e.dropped)
-        ? `<p class="evnote">This does not always mean adults only — it means the page did not list its age groups, so check before ruling it out.</p>` : ""}
+
       ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
       <div class="evbox" hidden>
         <div class="evfacts">
