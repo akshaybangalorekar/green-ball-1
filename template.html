@@ -415,6 +415,7 @@
     background: var(--surface-2); color: var(--ink-dim); padding: 3px 6px; border-radius: 4px; }
   .evpri { margin-left: auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ink-dim); }
+  .evpri.no { background: var(--loss); color: #fff; padding: 3px 7px; border-radius: 4px; }
   .evpri.go { background: var(--brand); color: #fff; padding: 3px 7px; border-radius: 4px; }
   .evpri.tg { background: var(--brand-wash); color: var(--brand); padding: 3px 7px; border-radius: 4px; font-weight: 700; }
   .evname { margin-top: 7px; font-size: 15.5px; font-weight: 500; line-height: 1.35; text-wrap: pretty; }
@@ -2024,7 +2025,7 @@ function viewPathway() {
     </div>
   </details>`;
   const evBody = evKey + up.map((e) => {
-    const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
+    const pr = e.dropped ? { label: "Not eligible", cls: "no" } : (PRIORITY[e.p] || { label: e.p, cls: "" });
     return `<div class="ev">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         <span class="evpri ${pr.cls}" data-whybtn="1" role="button" tabindex="0">${esc(pr.label)}</span></div>
