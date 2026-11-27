@@ -25,7 +25,7 @@ const EVENTS = [
 ];
 api.setLIVE(EVENTS);
 const html = api.viewPathway();
-const cards = html.split('<div class="ev">').slice(1);
+const cards = html.split(/<div class="ev"[ >]/).slice(1);
 
 let fails = 0;
 const check = (label, ok) => { if (!ok) { fails++; console.log("FAIL", label); } };
