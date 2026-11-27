@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-27T02:18:19Z",
- "count": 60,
- "dropped": 26,
+ "generated": "2026-11-27T02:29:23Z",
+ "count": 61,
+ "dropped": 16,
  "utr": 4,
- "ta": 56,
+ "ta": 57,
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -71,7 +71,7 @@
     18
    ],
    "ball": "?",
-   "dropped": "page says: Members Only"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
@@ -108,7 +108,7 @@
     14
    ],
    "ball": "?",
-   "dropped": "page says: invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2026 JC Keilor Park TC Tournament",
@@ -123,7 +123,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2026 JC My First Tournament #18 Sunbury",
@@ -151,7 +151,8 @@
     14,
     16
    ],
-   "ball": "?"
+   "ball": "green",
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2026 JDS CBC Green Ball Gardiner - Glen Iris Tournament",
@@ -177,6 +178,21 @@
    "ages": [],
    "ball": "?",
    "dropped": "no age groups published"
+  },
+  {
+   "name": "2027 J125 GBS250 FCTC New Year Tournament",
+   "date": "2027-01-02",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=3DBEFE2A-8468-4FB1-8297-203C9867988E",
+   "src": "ta",
+   "km": 32,
+   "where": "Frankston North",
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 O3k J125 GBS125 Hume Tennis Head Discovery #1",
@@ -260,7 +276,7 @@
     18
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 OC JC Kooyong Lawn Tennis Club Championships",
@@ -275,7 +291,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Open Championships Taylors Lakes",
@@ -335,7 +351,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 J250 GBS125 Waverley Tournament",
@@ -526,7 +542,7 @@
     18
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 GBS250 GWSH Easter Tournament",
@@ -564,7 +580,7 @@
     12
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #2",
@@ -618,7 +634,7 @@
     12
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 CBC Vida Altona Green Ball Tournament #2",
@@ -776,7 +792,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "page says: Invitational"
+   "note": "member or invitation event — check before entering"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #9 Essendon",
