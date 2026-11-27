@@ -126,6 +126,8 @@
   .vdot { position: absolute; left: -28px; top: 4px; width: 13px; height: 13px; border-radius: 50%;
     background: var(--surface); border: 2px solid var(--ink-dim); }
   .vnode.now .vdot { left: -30px; width: 17px; height: 17px; background: var(--ball); border: 2px solid var(--brand); }
+  .vnode.tap { cursor: pointer; }
+  .vnode.tap .more { color: var(--ink-dim); font-weight: 400; }
   .vnode.now b { color: var(--brand); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .vutr { font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--ink); letter-spacing: -.01em; }
   .vnode.now small b { display: inline; color: var(--ink); font-weight: 700; }
@@ -2008,6 +2010,49 @@ function nextSync() {
   return "—";
 }
 
+const MILES = {
+  ajp: {
+    title: "3.0 · Association Junior Pennant",
+    lead: "Sunday teams, graded by UTR, playing other associations. The first representative level.",
+    needs: [
+      ["Rating", "3.0 UTR or above"],
+      ["Profile", "A completed Competitive Player Profile"],
+      ["Matches", "Six team matches for a club"],
+      ["Nomination", "Your club puts his name forward"],
+    ],
+    events: "Yellow-ball club competition weekly, JDS and JC events for volume, one J125 a month once he is winning rounds.",
+    skills: "Serve landing 60%+, rallies of six or more, winning the points he should win, and staying calm at 4–4.",
+  },
+  agrade: {
+    title: "5.8 · A Grade",
+    lead: "The average rating of an A Grade Pennant side — the top of Victorian junior tennis.",
+    needs: [
+      ["Rating", "5.8 UTR or above"],
+      ["Competition", "Two or more seasons of Pennant"],
+      ["Results", "Consistent wins at J250 and above"],
+      ["Training", "Four or more sessions a week"],
+    ],
+    events: "J250, J500 and graded matchplay against 4.5+ fields. Travel to state-level events becomes normal.",
+    skills: "A weapon he can rely on, point construction rather than retrieval, physical durability across three-set matches.",
+  },
+};
+
+function milestoneSheet(key) {
+  const m = MILES[key];
+  if (!m) return;
+  openSheet(`<div class="grab"></div>
+    <button class="ovclose" data-close="1" aria-label="Close">×</button>
+    <h3>${esc(m.title)}</h3>
+    <p class="subl">${esc(m.lead)}</p>
+    <p class="label" style="margin-top:18px">What it takes</p>
+    ${m.needs.map(([k, v]) => `<div class="prow"><b>${esc(k)}</b><span>${esc(v)}</span></div>`).join("")}
+    <p class="label" style="margin-top:18px">Events that get him there</p>
+    <p class="caption" style="margin-top:4px">${esc(m.events)}</p>
+    <p class="label" style="margin-top:18px">Skills</p>
+    <p class="caption" style="margin-top:4px">${esc(m.skills)}</p>`);
+  bindSheet();
+}
+
 function srcChip(e) {
   const utr = e.src === "utr";
   const href = e.u || `https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}`;
@@ -2060,8 +2105,12 @@ function viewPathway() {
           <small>${gap > 0 ? `${gap.toFixed(1)} to go` : "reached"} — the events that get him there</small>
           ${firsts.length ? firsts.map(evRow).join("") : `<p class="caption">Nothing open right now.</p>`}
         </div>
-        <div class="vnode"><span class="vdot"></span><b>3.0 · AJP</b><small>Association Junior Pennant entry</small></div>
-        <div class="vnode"><span class="vdot"></span><b>5.8 · A Grade</b><small>A long way off — a horizon, not a target</small></div>
+        <div class="vnode tap" data-mile="ajp"><span class="vdot"></span>
+          <b>3.0 · AJP <span class="more">›</span></b>
+          <small>Junior Pennant — ${MY_UTR != null ? (Math.max(0, 3 - MY_UTR)).toFixed(1) + " to go" : "the entry threshold"}</small></div>
+        <div class="vnode tap" data-mile="agrade"><span class="vdot"></span>
+          <b>5.8 · A Grade <span class="more">›</span></b>
+          <small>A Grade team average — ${MY_UTR != null ? (Math.max(0, 5.8 - MY_UTR)).toFixed(1) + " to go" : "the A Grade mark"}</small></div>
       </div>
       <div class="evlinks" style="margin-top:6px">
         <a href="https://app.utrsports.net/profiles/6114278" target="_blank" rel="noopener">UTR profile ›</a>
@@ -2761,6 +2810,9 @@ function bind() {
       const box = b.closest(".ev").querySelector(".evbox");
       if (box) box.hidden = !box.hidden;
     };
+  });
+  document.querySelectorAll("[data-mile]").forEach((n) => {
+    n.onclick = () => milestoneSheet(n.dataset.mile);
   });
   document.querySelectorAll("[data-goto]").forEach((el2) => {
     el2.onclick = () => {
