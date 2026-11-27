@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-27T21:46:21Z",
- "count": 61,
- "dropped": 11,
+ "generated": "2026-11-27T22:18:14Z",
+ "count": 104,
+ "dropped": 20,
  "utr": 4,
- "ta": 57,
+ "ta": 100,
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -277,6 +277,285 @@
    "note": "divisions not shown on the event pages — check before entering"
   },
   {
+   "name": "2026 Kooyong Lawn TC December Junior Member Tournament",
+   "date": "2026-12-10",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=75E47481-0AE0-453D-8C19-55AB96508129",
+   "src": "ta",
+   "km": 3,
+   "where": "Kooyong",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 5,
+   "ages": [],
+   "ball": "?"
+  },
+  {
+   "name": "2026 JC Hume Tennis My First Tournament #19",
+   "date": "2026-12-12",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=CF778867-EE18-453C-AB76-D4BD672D80EE",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    15
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2026 JC Maribyrnong Park Tennis Club Junior Club Champs (members only)",
+   "date": "2026-12-12",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=65AF0C97-21A8-46A8-96E6-11F67E6949D4",
+   "src": "ta",
+   "km": 16,
+   "where": "Moonee Ponds",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 4,
+   "ages": [
+    18
+   ],
+   "ball": "?",
+   "note": "members only — check before entering"
+  },
+  {
+   "name": "2026 CBC Vida Altona Green Ball Tournament #4",
+   "date": "2026-12-13",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=3E204A64-D40A-4ED2-A185-E9B21EFFE90E",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 2,
+   "ages": [
+    11
+   ],
+   "ball": "green",
+   "dropped": "only 11U divisions — nothing he can enter"
+  },
+  {
+   "name": "2026 JC Fawkner TC UTR Event 4",
+   "date": "2026-12-13",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=8D1D5C58-F2DA-46C8-A590-1F3B3D174284",
+   "src": "ta",
+   "km": 17,
+   "where": "Fawkner",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 2,
+   "ages": [
+    15
+   ],
+   "ball": "?",
+   "dropped": "only 15U divisions — nothing he can enter"
+  },
+  {
+   "name": "2026 JC Victorian School Boys and School Girls",
+   "date": "2026-12-14",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=20DA961A-3D77-4F99-8591-9BDEC2CD0841",
+   "src": "ta",
+   "km": 10,
+   "where": "Melbourne",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 12,
+   "ages": [],
+   "ball": "?"
+  },
+  {
+   "name": "2026 Kooyong Lawn TC December Match Play",
+   "date": "2026-12-18",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=252248A2-49D8-48D2-B98A-961B71ECC4A5",
+   "src": "ta",
+   "km": 3,
+   "where": "Kooyong",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 4,
+   "ages": [],
+   "ball": "?"
+  },
+  {
+   "name": "2026 J125 GBS 125 Tennis Coaches Australia Tournament",
+   "date": "2026-12-19",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D01F0E34-658A-42AF-A717-9BCA09A4F5B7",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2026 JC Vida Altona Yellow Ball Tournament #4",
+   "date": "2026-12-19",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7400570C-8D48-4D57-ABF0-CA242002EBD5",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 2,
+   "ages": [
+    18
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2026 OC JC Bulleen Tennis Club Summer Tournament",
+   "date": "2026-12-19",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=C5416E2D-0024-4CA7-ACD5-0C0E95E8A3D3",
+   "src": "ta",
+   "km": 10,
+   "where": "Templestowe Lower",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 3,
+   "ages": [
+    12,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2026 JC Fawkner Tennis Club Classic",
+   "date": "2026-12-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=8872CB21-D135-49F1-87CA-09228E2663BF",
+   "src": "ta",
+   "km": 17,
+   "where": "Fawkner",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 6,
+   "ages": [
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2026 J125 Dingley Tournament",
+   "date": "2026-12-27",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=51AA92E9-EA13-4BDC-A1B9-009CAFD1EB4F",
+   "src": "ta",
+   "km": 15,
+   "where": "Dingley",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 12,
+   "ages": [
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2026 JDS CBC MPTC Boxing Day Junior Tournament",
+   "date": "2026-12-27",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=2E2AB99B-B5B3-42A8-9449-8CF0DE1FA957",
+   "src": "ta",
+   "km": 19,
+   "where": "Boronia",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2026 O3k J125 Hume Tennis HEAD Discovery #10 Christmas",
+   "date": "2026-12-27",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=AF175409-277A-429F-A7AC-CAA3D1688F86",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 18,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
    "name": "2027 J125 & GBS250 FCTC New Year Tournament",
    "date": "2027-01-02",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=3DBEFE2A-8468-4FB1-8297-203C9867988E",
@@ -402,6 +681,417 @@
    "note": "divisions not shown on the event pages — check before entering"
   },
   {
+   "name": "2027 GBS250 VIDA Altona",
+   "date": "2027-01-10",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=F534517B-A32E-4854-A1BD-1EBA884406BC",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-03",
+   "divisionCount": 2,
+   "ages": [
+    10
+   ],
+   "ball": "green",
+   "dropped": "only 10U divisions — nothing he can enter"
+  },
+  {
+   "name": "2027 J125 GBS125 IMG Discovery Open",
+   "date": "2027-01-10",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=CB3E9A8D-5CF8-4133-9719-742B99BBD0B8",
+   "src": "ta",
+   "km": 9,
+   "where": "East Brighton",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-01",
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 JC Fawkner Tennis Club Classic #1",
+   "date": "2027-01-10",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=BE2DB94E-AE8F-4DC1-A336-A337781A12F6",
+   "src": "ta",
+   "km": 17,
+   "where": "Fawkner",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "divisionCount": 6,
+   "ages": [
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JDS Vida Junior Development Series #1 Altona",
+   "date": "2027-01-11",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=82803A76-E1D5-4B52-9A35-F1FE19235BED",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-04",
+   "divisionCount": 6,
+   "ages": [
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JDS Vida Junior Development Series #2 Essendon",
+   "date": "2027-01-14",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A7816180-9956-4259-A515-9B885091D21A",
+   "src": "ta",
+   "km": 17,
+   "where": "Essendon",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-07",
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 J125 GBS250 PRTC Summer Classic",
+   "date": "2027-01-15",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=3BA8F53B-96E8-4586-8EB9-BFB6D78FD64A",
+   "src": "ta",
+   "km": 45,
+   "where": "Pakenham",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-05",
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 O3k Overport Park January Tournament",
+   "date": "2027-01-15",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=5DFA5B2C-A1C8-4D84-91E3-8342B4D50868",
+   "src": "ta",
+   "km": 37,
+   "where": "Frankston South",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-05",
+   "divisionCount": 4,
+   "ages": [],
+   "ball": "?",
+   "dropped": "page says: MEMBERS ONLY"
+  },
+  {
+   "name": "2027 OC JC Phillips Tennis UTR Event #2",
+   "date": "2027-01-18",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=91C84903-F2F2-43A2-A6E8-B45AE326E067",
+   "src": "ta",
+   "km": 14,
+   "where": "Ringwood",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-11",
+   "divisionCount": 16,
+   "ages": [
+    10,
+    12,
+    14
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 J125 GBS125 GWSH Summer Tournament",
+   "date": "2027-01-19",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7CDE28C9-3132-464F-AF1F-CF133D3D5406",
+   "src": "ta",
+   "km": 9,
+   "where": "Glen Waverley",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-09",
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 Open 3K & J250 FCTC January Tournament",
+   "date": "2027-01-19",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=28D82F8B-F4A1-44F7-A707-4D4994CC0C8E",
+   "src": "ta",
+   "km": 32,
+   "where": "Frankston North",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-05",
+   "divisionCount": 16,
+   "ages": [
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 GBS125 VIDA Essendon",
+   "date": "2027-01-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=ABFE0DBE-8021-4F1F-BCE9-5D80555D0A89",
+   "src": "ta",
+   "km": 17,
+   "where": "Essendon",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-09",
+   "divisionCount": 2,
+   "ages": [
+    10
+   ],
+   "ball": "green",
+   "dropped": "only 10U divisions — nothing he can enter"
+  },
+  {
+   "name": "2027 GBS125 Vida Essendon Tournament",
+   "date": "2027-01-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=15753D59-3463-4D12-84D2-4DAB97CC4ECF",
+   "src": "ta",
+   "km": 17,
+   "where": "Essendon",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-11",
+   "divisionCount": 2,
+   "ages": [
+    10
+   ],
+   "ball": "green",
+   "dropped": "only 10U divisions — nothing he can enter"
+  },
+  {
+   "name": "2027 JDS Vida Junior Development Series #3 Epping",
+   "date": "2027-01-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7141340B-8C2B-4777-AD1C-E3D5FD889BF5",
+   "src": "ta",
+   "km": 22,
+   "where": "Epping",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-14",
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "yellow"
+  },
+  {
+   "name": "2027 $10K Ace Classic Tennis Tournament",
+   "date": "2027-01-23",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=69BCEEA2-7A79-467F-AC82-F7218A7A8D38",
+   "src": "ta",
+   "km": 45,
+   "where": "Pakenham",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-13",
+   "divisionCount": 4,
+   "ages": [],
+   "ball": "?",
+   "note": "divisions not shown on the event pages — check before entering"
+  },
+  {
+   "name": "2027 GBS125 @ FCTC (Green Ball Series)",
+   "date": "2027-01-23",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=5421B66D-8C10-41DC-A27E-E275AC5862FD",
+   "src": "ta",
+   "km": 32,
+   "where": "Frankston North",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-13",
+   "divisionCount": 2,
+   "ages": [
+    10
+   ],
+   "ball": "green",
+   "dropped": "only 10U divisions — nothing he can enter"
+  },
+  {
+   "name": "2027 GBS125 Caroline Springs January Tournament",
+   "date": "2027-01-23",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6BD589DA-8EC7-4631-AE2B-65133AFD5B34",
+   "src": "ta",
+   "km": 32,
+   "where": "Caroline Springs",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-13",
+   "divisionCount": 2,
+   "ages": [
+    10
+   ],
+   "ball": "?",
+   "dropped": "only 10U divisions — nothing he can enter"
+  },
+  {
+   "name": "2027 J125 GBS500 MCC Glen Iris Summer Classic",
+   "date": "2027-01-23",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=28777AFC-2F34-4BAD-A82D-CFDFCED084D0",
+   "src": "ta",
+   "km": 6,
+   "where": "Mt Waverley",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-13",
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 J125 Taylor Lakes - 12s & 14s only",
+   "date": "2027-01-23",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=9FEEDCB9-93EE-4970-B3CA-BACDC6B4BED0",
+   "src": "ta",
+   "km": 30,
+   "where": "Taylors Lakes",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-13",
+   "divisionCount": 8,
+   "ages": [
+    12,
+    14
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 JC My First Tournament #1",
+   "date": "2027-01-30",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=083BA5BD-DFFD-41E8-A92D-314064183EB6",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-01-25",
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    15
+   ],
+   "ball": "?"
+  },
+  {
    "name": "2027 OC JC RSYLTC Club Championships",
    "date": "2027-02-11",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=54AB1D74-3B31-4CE8-96C4-ADD62AB91785",
@@ -522,6 +1212,50 @@
    "ages": [],
    "ball": "green",
    "dropped": "page says: Invitational"
+  },
+  {
+   "name": "2027 JC Gisborne Junior Club Championships #1",
+   "date": "2027-02-28",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=416E72E0-E115-4CC7-8A00-D4FC278CDCF5",
+   "src": "ta",
+   "km": 58,
+   "where": "Gisborne",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-02-24",
+   "opens": "2027-02-10",
+   "divisionCount": 12,
+   "ages": [
+    12,
+    14,
+    18
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Vida Truganina Green Ball Tournament #1",
+   "date": "2027-02-28",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=BED1D1ED-A67C-4D89-BFCB-BDA256CBEF43",
+   "src": "ta",
+   "km": 31,
+   "where": "Truganina",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-02-24",
+   "opens": "2027-01-11",
+   "divisionCount": 2,
+   "ages": [
+    12
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 J125 Metro East GWSH Labour Day",
@@ -675,6 +1409,71 @@
     14,
     16,
     18
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 CBC Vida Altona Green Ball Tournament #1",
+   "date": "2027-03-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=23F87E5D-A862-4E79-B6B3-11B91E78A52F",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-17",
+   "opens": "2027-02-08",
+   "divisionCount": 2,
+   "ages": [
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 OC Gisborne Open Club Championships",
+   "date": "2027-03-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=953DF6B4-CA24-4343-9BF7-67A3005ED0A1",
+   "src": "ta",
+   "km": 58,
+   "where": "Gisborne",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-17",
+   "opens": "2027-03-03",
+   "divisionCount": 4,
+   "ages": [],
+   "ball": "green",
+   "dropped": "page says: Invitational"
+  },
+  {
+   "name": "2027 J250 GBS125 Eastern Region Tennis Association Tournament",
+   "date": "2027-03-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=FF4AC022-7C34-4A45-889E-7D6FD187E053",
+   "src": "ta",
+   "km": 15,
+   "where": "North Ringwood",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-12",
+   "opens": "2027-01-26",
+   "divisionCount": 14,
+   "ages": [
+    10,
+    12,
+    14,
+    16
    ],
    "ball": "?"
   },
@@ -903,6 +1702,55 @@
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
+  },
+  {
+   "name": "2027 JC OC Hume Tennis UTR #1",
+   "date": "2027-04-11",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=C62AAAE1-D0BC-46A0-8946-12A1996A393A",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-06",
+   "opens": "2027-02-01",
+   "divisionCount": 10,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 JC Tennis World #2",
+   "date": "2027-04-17",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=B6F817A2-B92D-4DD9-A733-DCF4579EBC27",
+   "src": "ta",
+   "km": 10,
+   "where": "Melbourne",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-04-07",
+   "opens": "2027-02-15",
+   "divisionCount": 20,
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "?"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
@@ -1167,6 +2015,30 @@
    "ball": "green"
   },
   {
+   "name": "2027 JDS Vida Junior Development Series #8 Altona",
+   "date": "2027-06-28",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=F42D6DE2-B256-4D07-AF0C-3F11F76016BA",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-06-21",
+   "opens": "2027-04-26",
+   "divisionCount": 8,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
    "name": "2027 GBS125 Doveton Tournament",
    "date": "2027-06-30",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=67EF5CFB-7371-4963-8755-29CE247EEF2E",
@@ -1323,6 +2195,53 @@
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
+  },
+  {
+   "name": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes #4",
+   "date": "2027-07-24",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D22580AD-4C9C-4C3B-AF0C-9C6AAFB4DED7",
+   "src": "ta",
+   "km": 30,
+   "where": "Taylors Lakes",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-07-21",
+   "opens": "2027-01-01",
+   "divisionCount": 6,
+   "ages": [
+    10,
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Tennis World #4",
+   "date": "2027-07-24",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=11E1FB80-C4F3-4E94-8DBA-BE07F48C735E",
+   "src": "ta",
+   "km": 10,
+   "where": "Melbourne",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-07-14",
+   "opens": "2027-05-17",
+   "divisionCount": 20,
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "?"
   }
  ]
 }
