@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-27T12:33:18Z",
+ "generated": "2026-11-27T13:48:11Z",
  "count": 61,
- "dropped": 17,
+ "dropped": 16,
  "utr": 4,
  "ta": 57,
  "events": [
@@ -777,11 +777,7 @@
    "src": "ta",
    "km": 32,
    "where": "Caroline Springs",
-   "ages": [
-    10
-   ],
-   "ball": "green",
-   "dropped": "page says: Invitational"
+   "unverified": true
   },
   {
    "name": "2027 J125 GBS500 41st Annual North Ringwood Junior Tournament",
@@ -819,13 +815,7 @@
    "src": "ta",
    "km": 17,
    "where": "Essendon",
-   "ages": [
-    10,
-    12,
-    14,
-    16
-   ],
-   "ball": "green"
+   "unverified": true
   },
   {
    "name": "2027 O3k Tennis World Melbourne Park & Albert Reserve Tournament #3",
