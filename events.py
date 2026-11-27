@@ -227,6 +227,25 @@ def verify_on_page(pg, e):
         return e, None          # a technical failure must not delete an event
     if ADAPTIVE_NAME.search(e["name"]) or ADAPTIVE_PAGE.search(block):
         return e, "adaptive or police event"
+    # the page states its own dates in the timeline block
+    MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
+    def grab(label):
+        m = re.search(label + r"[^\d]{0,60}(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(\d{4})", block, re.I)
+        if not m:
+            return None
+        try:
+            return datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
+        except (ValueError, KeyError):
+            return None
+    close = grab(r"closing deadline")
+    if close:
+        e["regEnd"] = close
+    opens = grab(r"entry opens")
+    if opens:
+        e["opens"] = opens
+    nm = re.search(r"\bevents\b[^\d]{0,20}(\d{1,2})\s*\n", block, re.I)
+    if nm:
+        e["divisionCount"] = int(nm.group(1))
     ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", block)})
     over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", block, re.I)
     min_age = int(over.group(1)) if over else None
