@@ -199,10 +199,14 @@ def verify_on_page(pg, e):
     e["ages"] = ages
     e["ball"] = ("green" if re.search(r"green ball", block, re.I)
                  else "yellow" if re.search(r"yellow ball", block, re.I) else "?")
-    # a published junior division wins: the event is open to him, whatever else the page says
+    # invitation language means he cannot enter, whatever divisions exist
+    invite = re.search(r"invitation only|invitational|do not sign up until|by invitation", block, re.I)
+    if invite:
+        return e, "by invitation only — " + invite.group(0).lower()
+    # a published junior division wins over members-only wording
     if {12, 14, 16, 18} & set(ages):
-        if re.search(r"members only|invitation only|invitational", block, re.I):
-            e["note"] = "member or invitation event — check before entering"
+        if re.search(r"members only", block, re.I):
+            e["note"] = "members only — check before entering"
         return e, None
     bad = BAD_PAGE.search(block)
     if bad:
