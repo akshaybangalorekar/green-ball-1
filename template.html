@@ -1950,6 +1950,25 @@ function matchesOf(e) {
   return "unknown";
 }
 
+const MEL = "Australia/Melbourne";
+function melTime(iso) {
+  const d = iso ? new Date(iso) : new Date();
+  return d.toLocaleString("en-AU", { timeZone: MEL, day: "numeric", month: "short",
+    hour: "numeric", minute: "2-digit", hour12: true });
+}
+
+function nextSync() {
+  const now = new Date();
+  const hours = [20, 0, 4, 8];          // UTC hours of the schedule
+  for (let d = 0; d < 2; d++) {
+    for (const h of hours) {
+      const t = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + d, h, 0, 0));
+      if (t > now) return melTime(t.toISOString());
+    }
+  }
+  return "—";
+}
+
 function srcChip(e) {
   const utr = e.src === "utr";
   const href = e.u || `https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}`;
@@ -2016,10 +2035,7 @@ function viewPathway() {
 `;
 
   /* ---- all events ---- */
-  const stamp = window.__eventsStamp
-    ? new Date(window.__eventsStamp).toLocaleString("en-AU",
-        { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })
-    : "—";
+  const stamp = window.__eventsStamp ? melTime(window.__eventsStamp) : "—";
   const evKey = `<details class="fold mini">
     <summary><span class="ftitle">How to read this card</span><span class="fchev">›</span></summary>
     <div class="fbody">
@@ -2030,7 +2046,7 @@ function viewPathway() {
       <p class="evkey"><b>Not eligible</b> — shown with the reason rather than hidden, so nothing goes missing.
         Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
       <p class="evkey">Green ball counts toward his UTR only when the event is UTR-listed.</p>
-      <p class="evkey">Updated ${stamp}</p>
+      <p class="evkey">Updated ${stamp} Melbourne time</p>
     </div>
   </details>`;
   const evBody = evKey + up.map((e) => {
@@ -2881,19 +2897,9 @@ function settingsSheet() {
         </div>
       </details>
       <div class="ios-row"><span class="ios-label">Last sync</span>
-        <span class="ios-value">${(() => {
-          const g = window.__eventsStamp;
-          return g ? new Date(g).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : "—";
-        })()}</span></div>
+        <span class="ios-value">${window.__eventsStamp ? melTime(window.__eventsStamp) : "—"}</span></div>
       <div class="ios-row"><span class="ios-label">Next sync</span>
-        <span class="ios-value">${(() => {
-          const now = new Date(), hrs = [10, 14, 18, 22];
-          for (let d = 0; d < 2; d++) for (const h of hrs) {
-            const t2 = new Date(now); t2.setDate(now.getDate() + d); t2.setHours(h, 0, 0, 0);
-            if (t2 > now) return t2.toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
-          }
-          return "—";
-        })()}</span></div>
+        <span class="ios-value">${nextSync()}</span></div>
       <div class="ios-row col"><b>What counts for UTR</b>
         <small>Only matches UTR records. His WDTA club sets are green ball, which Waverley does not submit, so they
         are counted separately and do not move the rating.</small></div>
