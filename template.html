@@ -1825,6 +1825,7 @@ function liveEvents() {
       : e.src === "utr" ? "UTR" : "Open",
     ball: e.ball || "yellow",
     dropped: e.dropped || null,
+    info: e.info || null,
     note: e.note || null,
     p: (() => {
       const my = MY_UTR || 0;
@@ -2174,12 +2175,15 @@ function viewPathway() {
       ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
       <div class="evbox" hidden>
         <div class="evfacts">
-          <span><b>Format</b>${esc(fmtOf(e))}</span>
-          <span><b>Matches</b>${esc(matchesOf(e))}</span>
+          <span><b>Format</b>${esc((e.info && e.info.format) || fmtOf(e))}</span>
+          <span><b>Matches</b>${esc((e.info && e.info.matches) || matchesOf(e))}</span>
           <span><b>UTR</b>${e.ball === "green" ? "green ball — counts only if UTR-listed" : "counts"}</span>
           <span><b>Enter by</b>${e.regEnd ? fmtShort(e.regEnd) : "not published"}</span>
           <span><b>Club round</b>${clubClash(e) ? "round " + clubClash(e) + " that day" : "none that day"}</span>
-          <span><b>Level</b>${e.utrMin != null ? e.utrMin + "–" + e.utrMax : "not published"}</span>
+          <span><b>Level</b>${e.utrMin != null ? e.utrMin + "–" + e.utrMax : (e.info && e.info.standard ? esc(e.info.standard) : "not published")}</span>
+          ${e.info && e.info.time ? `<span><b>Time</b>${esc(e.info.time)}</span>` : ""}
+          ${e.info && e.info.age ? `<span><b>Age</b>${esc(e.info.age)}</span>` : ""}
+          ${e.info && e.info.verified ? `<span><b>Verified</b>counts as a verified UTR result</span>` : ""}
         </div>
         ${e.dropped
           ? `<p class="evwhy">He cannot enter this one — ${esc(e.dropped)}.</p>`

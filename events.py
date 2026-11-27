@@ -66,8 +66,22 @@ def utr_events():
         _b = find_band(src)
         sch = src.get("eventSchedule") or {}
         start = (sch.get("eventStartUtc") or "")[:10] or None
+        details = src.get("details") or ""
+        info = {}
+        m = re.search(r"number of matches\s*:?\s*([^\n]{3,60})", details, re.I)
+        if m: info["matches"] = m.group(1).strip()[:60]
+        m = re.search(r"\bformat\s*:?\s*([^\n]{3,120})", details, re.I)
+        if m: info["format"] = m.group(1).strip()[:120]
+        m = re.search(r"\bage\s*:?\s*([^\n]{2,40})", details, re.I)
+        if m: info["age"] = m.group(1).strip()[:40]
+        m = re.search(r"\btime\s*:?\s*([^\n]{3,40})", details, re.I)
+        if m: info["time"] = m.group(1).strip()[:40]
+        m = re.search(r"\bstandard\s*:?\s*([^\n]{3,160})", details, re.I)
+        if m: info["standard"] = m.group(1).strip()[:160]
+        if re.search(r"verified", details, re.I): info["verified"] = True
         out.append({
             "name": (src.get("name") or "Event")[:110],
+            **({"info": info} if info else {}),
             "date": start,
             "url": f"https://app.utrsports.net/events/{src.get('id')}",
             "src": "utr",
