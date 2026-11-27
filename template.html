@@ -160,6 +160,9 @@
   .evfacts { margin: 10px 0 0; display: grid; gap: 5px; }
   .evfacts span { font-size: 12.5px; color: var(--ink-dim); display: flex; gap: 6px; }
   .evfacts b { color: var(--ink); font-weight: 600; min-width: 68px; }
+  .fresh { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; font-size: 13px; line-height: 1.5; }
+  .fresh.warn { background: rgba(217,114,47,.12); color: #9c4d18; }
+  .fresh.bad { background: rgba(196,57,43,.12); color: #a33124; font-weight: 600; }
   .tagtable { width: 100%; border-collapse: collapse; margin: 4px 0 12px; }
   .tagtable td { padding: 6px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px;
     color: var(--ink-dim); vertical-align: top; line-height: 1.45; }
@@ -2070,7 +2073,16 @@ function viewPathway() {
       <p class="evkey">Updated ${stamp} Melbourne time</p>
     </div>
   </details>`;
-  const evBody = evKey + up.map((e) => {
+  const freshness = (() => {
+    const g = window.__eventsStamp;
+    if (!g) return { cls: "bad", text: "No event list loaded — showing nothing until the next sync." };
+    const hrs = (Date.now() - new Date(g).getTime()) / 3600000;
+    if (hrs < 14) return { cls: "ok", text: "" };
+    if (hrs < 30) return { cls: "warn", text: `List is ${Math.round(hrs)} hours old — the last sync may have failed.` };
+    return { cls: "bad", text: `List is ${Math.round(hrs / 24)} days old — sync has been failing. Treat these dates with care.` };
+  })();
+
+  const evBody = (freshness.text ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + up.map((e) => {
     const pr = e.dropped ? { label: "Not eligible", cls: "no" }
       : e.note ? { label: "Members only", cls: "no" }
       : (PRIORITY[e.p] || { label: e.p, cls: "" });
