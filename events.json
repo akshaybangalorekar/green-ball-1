@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-27T14:08:16Z",
- "count": 49,
- "dropped": 16,
+ "generated": "2026-11-27T19:44:30Z",
+ "count": 61,
+ "dropped": 17,
  "utr": 4,
- "ta": 45,
+ "ta": 57,
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -574,6 +574,174 @@
    "ages": [],
    "ball": "?",
    "dropped": "no age groups published"
+  },
+  {
+   "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
+   "date": "2027-05-01",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=9A4C78C2-B851-4980-820E-FC81874CCB51",
+   "src": "ta",
+   "km": 30,
+   "where": "Taylors Lakes",
+   "ages": [
+    10,
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 CBC Vida Essendon Green Ball Tournament #2",
+   "date": "2027-05-02",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=C2E25239-E3B3-4170-A492-7385CA633E83",
+   "src": "ta",
+   "km": 17,
+   "where": "Essendon",
+   "ages": [
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Vida Truganina Green Ball Tournament #2",
+   "date": "2027-05-02",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=214F1E76-C398-4197-B04E-1B4B0ACF5CB1",
+   "src": "ta",
+   "km": 31,
+   "where": "Truganina",
+   "ages": [
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Tennis World #3",
+   "date": "2027-05-22",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=54F6C492-776E-4A6C-9E02-30031B60FEC2",
+   "src": "ta",
+   "km": 10,
+   "where": "Melbourne",
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "?"
+  },
+  {
+   "name": "2027 JC Bendigo Bank Future Aces Junior Cup Taylors Lakes #3",
+   "date": "2027-06-05",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6FBD0A4D-7433-4525-8548-B493EEDB1027",
+   "src": "ta",
+   "km": 30,
+   "where": "Taylors Lakes",
+   "ages": [
+    10,
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 CBC Vida Altona Green Ball Tournament #2",
+   "date": "2027-06-06",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A87AA058-907E-4D06-923A-F341773C7E86",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "ages": [
+    12
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Vida Essendon Yellow Ball Tournament #1",
+   "date": "2027-06-06",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=7BB3F565-02FE-4E6E-8116-FFBA74A06351",
+   "src": "ta",
+   "km": 17,
+   "where": "Essendon",
+   "ages": [
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 J125 GBS125 Dendy #1",
+   "date": "2027-06-11",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=9AA47216-95C0-4C05-B6F2-296090126942",
+   "src": "ta",
+   "km": 9,
+   "where": "Brighton East",
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 JC Vida Epping Yellow Ball Tournament #1",
+   "date": "2027-06-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=9302B395-D320-4118-96B3-8C7FE8080431",
+   "src": "ta",
+   "km": 22,
+   "where": "Epping",
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "yellow"
+  },
+  {
+   "name": "2027 JC Vida Truganina Yellow Ball Tournament #2",
+   "date": "2027-06-20",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=B2889BF8-C046-465F-8183-1FCC8A16323D",
+   "src": "ta",
+   "km": 31,
+   "where": "Truganina",
+   "ages": [
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "green"
+  },
+  {
+   "name": "2027 GBS250 Tennis World",
+   "date": "2027-06-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6D48A726-4936-43FE-893E-1B29DCD4939D",
+   "src": "ta",
+   "km": 10,
+   "where": "Melbourne",
+   "ages": [
+    10
+   ],
+   "ball": "?",
+   "dropped": "only a 10-and-under draw"
+  },
+  {
+   "name": "2027 JC Vida Altona Yellow Ball Tournament #2",
+   "date": "2027-06-27",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=4FC8B51D-9903-4764-90B7-E111EC725B10",
+   "src": "ta",
+   "km": 21,
+   "where": "Altona",
+   "ages": [
+    10,
+    12,
+    14,
+    16,
+    18
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 GBS125 Doveton Tournament",
