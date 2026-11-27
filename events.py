@@ -204,6 +204,8 @@ def verify_on_page(pg, e):
     except Exception as ex:
         e["unverified"] = True
         return e, None          # a technical failure must not delete an event
+    if ADAPTIVE.search(e["name"]) or ADAPTIVE.search(block[:3000]):
+        return e, "adaptive or police event"
     ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", block)})
     over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", block, re.I)
     min_age = int(over.group(1)) if over else None
@@ -252,7 +254,7 @@ with sync_playwright() as _pw:
     for e in sorted(pool, key=lambda x: x["src"] != "utr"):
         e, why = verify_on_page(_pg, e)
         if why:
-            if ADAPTIVE.search(e["name"]) or ADAPTIVE.search(str(why)):
+            if "adaptive" in str(why):
                 print(f"HIDE adaptive: {e['name'][:50]}")
                 continue
             e["dropped"] = why
