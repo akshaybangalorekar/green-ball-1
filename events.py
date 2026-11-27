@@ -120,16 +120,21 @@ def ta_events():
         for start_d, end_d in WINDOWS:
             url = ("https://tournaments.tennis.com.au/find/tournament"
                    f"?DateFilterType=0&StartDate={start_d}&EndDate={end_d}&Distance=25")
-            try:
-                pg.goto(url, wait_until="domcontentloaded", timeout=90000)
-                pg.wait_for_timeout(7000)
-                cards = pg.eval_on_selector_all("a[href*='tournament?id=']", """els => els.map(e => ({
-                    href: e.href,
-                    card: (e.closest('li,div,article')?.innerText || '').trim()
-                }))""")
-            except Exception as e:
-                print("TA list failed:", type(e).__name__)
-                continue
+            cards = []
+            for attempt in range(2):          # retry a month once if it comes back empty
+                try:
+                    pg.goto(url, wait_until="domcontentloaded", timeout=90000)
+                    pg.wait_for_timeout(7000 + attempt * 6000)
+                    cards = pg.eval_on_selector_all("a[href*='tournament?id=']", """els => els.map(e => ({
+                        href: e.href,
+                        card: (e.closest('li,div,article')?.innerText || '').trim()
+                    }))""")
+                except Exception as e:
+                    print("TA list failed:", type(e).__name__)
+                    cards = []
+                if cards:
+                    break
+            print(f"  month {start_d[:7]}: {len(cards)} cards")
             for c in cards:
                 gid = re.search(r"id=([0-9A-Fa-f-]{36})", c["href"])
                 if not gid or gid.group(1) in found:
@@ -273,7 +278,7 @@ try:
     prev = json.loads(pathlib.Path("events.json").read_text())
 except Exception:
     pass
-if prev and prev.get("count", 0) >= 20 and len(events) < prev["count"] * 0.5:
+if prev and prev.get("count", 0) >= 20 and len(events) < prev["count"] * 0.75:
     print(f"ABORT: harvest found {len(events)} events, previous file had {prev['count']}. "
           "Keeping the previous list.")
     raise SystemExit(0)
