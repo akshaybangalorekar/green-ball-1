@@ -129,10 +129,12 @@
   .vnode.now b { color: var(--brand); display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
   .vutr { font-family: var(--display); font-weight: 800; font-size: 15px; color: var(--ink); letter-spacing: -.01em; }
   .vnode.now small b { display: inline; color: var(--ink); font-weight: 700; }
-  .passbtn { margin-left: 8px; appearance: none; border: 1px solid var(--line); background: transparent;
-    color: var(--ink-dim); font-family: var(--mono); font-size: 9.5px; letter-spacing: .05em;
-    text-transform: uppercase; padding: 3px 8px; border-radius: 6px; cursor: pointer; }
-  .passbtn:active { background: var(--surface-2); }
+  .passbtn { margin-left: 2px; appearance: none; border: 1px solid rgba(47,111,181,.45);
+    background: rgba(47,111,181,.12); color: #245d9b; font-family: var(--mono); font-size: 9.5px;
+    font-weight: 700; letter-spacing: .05em; text-transform: uppercase; padding: 3px 9px;
+    border-radius: 6px; cursor: pointer; }
+  .passbtn:active { background: rgba(47,111,181,.25); }
+  .vwhere { font-weight: 400; font-size: 13px; color: var(--ink-dim); }
   .evname.tappable { cursor: pointer; text-decoration: underline; text-decoration-color: var(--line);
     text-underline-offset: 3px; }
   .ev.flash { animation: flash 1.8s ease; }
@@ -2020,10 +2022,10 @@ function viewPathway() {
   /* ---- dashboard ---- */
   const evRow = (e) => `<div class="vev">
       <div class="vevtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
+        ${srcChip(e)}
         <button class="passbtn" data-pass="${esc(e.n)}">Pass</button>
         <span class="pickdue">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</span></div>
-      <div class="evname tappable" data-goto="${esc(e.n)}">${esc(e.n)}</div>
-      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} away · ${srcChip(e)}</div>
+      <div class="evname tappable" data-goto="${esc(e.n)}">${esc(e.n)}${e.s ? ` — <span class="vwhere">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</span>` : ""}</div>
       ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
     </div>`;
 
