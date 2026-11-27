@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-27T06:11:54Z",
- "count": 63,
- "dropped": 27,
- "utr": 5,
- "ta": 58,
+ "generated": "2026-11-27T09:44:58Z",
+ "count": 53,
+ "dropped": 8,
+ "utr": 6,
+ "ta": 47,
  "events": [
   {
    "name": "2026 Australian Wheelchair Tennis National Championships",
@@ -12,7 +12,11 @@
    "src": "ta",
    "km": 10,
    "where": "Melbourne",
-   "unverified": true
+   "ages": [
+    14,
+    18
+   ],
+   "ball": "green"
   },
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -89,17 +93,25 @@
    "src": "ta",
    "km": 14,
    "where": "Coburg",
-   "unverified": true
+   "ages": [
+    12,
+    18
+   ],
+   "ball": "?",
+   "note": "members only — check before entering"
   },
   {
-   "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
+   "name": "Hume Tennis UTR #7 - Junior & Open",
    "date": "2026-11-29",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=04F830E8-4387-49E1-892A-369AD0D6B46B",
-   "src": "ta",
-   "km": 17,
-   "where": "Essendon",
+   "url": "https://app.utrsports.net/events/411117",
+   "src": "utr",
+   "km": 33,
+   "where": "Craigieburn",
+   "utrMin": null,
+   "utrMax": null,
+   "regEnd": "2026-11-27",
    "ages": [],
-   "ball": "green"
+   "ball": "?"
   },
   {
    "name": "2026 JC CBC Green Vida Truganina Tournament",
@@ -109,6 +121,7 @@
    "km": 31,
    "where": "Truganina",
    "ages": [
+    10,
     14
    ],
    "ball": "green"
@@ -126,7 +139,7 @@
     14
    ],
    "ball": "?",
-   "dropped": "by invitation only — invitational"
+   "dropped": "by invitation only — do not sign up until"
   },
   {
    "name": "2026 JC Keilor Park TC Tournament",
@@ -140,8 +153,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2026 JC My First Tournament #18 Sunbury",
@@ -153,7 +165,8 @@
    "ages": [
     10,
     12,
-    15
+    15,
+    16
    ],
    "ball": "green"
   },
@@ -169,8 +182,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2026 JDS CBC Green Ball Gardiner - Glen Iris Tournament",
@@ -182,20 +194,10 @@
    "ages": [
     10,
     12,
-    14
+    14,
+    16
    ],
    "ball": "green"
-  },
-  {
-   "name": "2026 OC Eynesbury Tennis Club Mixed Doubles Tournament",
-   "date": "2026-12-06",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=C7275943-EA6F-4AEE-B462-3D6E916F4DAF",
-   "src": "ta",
-   "km": 45,
-   "where": "Eynesbury",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
   },
   {
    "name": "2027 J125 & GBS250 FCTC New Year Tournament",
@@ -239,7 +241,7 @@
     12,
     14
    ],
-   "ball": "?"
+   "ball": "green"
   },
   {
    "name": "2027 J125 GBS250 Hume Tennis Head Discovery #2",
@@ -257,30 +259,6 @@
    "ball": "green"
   },
   {
-   "name": "2027 GBS125 GWSH January Tournament",
-   "date": "2027-01-07",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=21BE75EB-D9EB-47F9-902B-589C0B6A91A8",
-   "src": "ta",
-   "km": 9,
-   "where": "Glen Waverley",
-   "ages": [
-    10
-   ],
-   "ball": "?",
-   "dropped": "only a 10-and-under draw"
-  },
-  {
-   "name": "2027 O5k MCC Glen Iris Open",
-   "date": "2027-01-07",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=AF4613C4-BE7C-401E-920D-521D5B62204E",
-   "src": "ta",
-   "km": 6,
-   "where": "Mt Waverley",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
-  },
-  {
    "name": "2027 OC JC RSYLTC Club Championships",
    "date": "2027-02-11",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=54AB1D74-3B31-4CE8-96C4-ADD62AB91785",
@@ -293,8 +271,7 @@
     16,
     18
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 OC JC Kooyong Lawn Tennis Club Championships",
@@ -308,8 +285,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Open Championships Taylors Lakes",
@@ -320,7 +296,7 @@
    "where": "Taylors Lakes",
    "ages": [],
    "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 JC Vida Truganina Yellow Ball Tournament #1",
@@ -330,20 +306,12 @@
    "km": 31,
    "where": "Truganina",
    "ages": [
+    12,
+    14,
+    16,
     18
    ],
    "ball": "green"
-  },
-  {
-   "name": "2027 OC Epping Tennis Club",
-   "date": "2027-02-19",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=A3FED5C7-3152-4A0F-94FD-B4E99B1A165A",
-   "src": "ta",
-   "km": 22,
-   "where": "Epping",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC Eynesbury Tennis Club",
@@ -354,7 +322,7 @@
    "where": "EYNESBURY",
    "ages": [],
    "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 J125 Metro East GWSH Labour Day",
@@ -368,8 +336,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 J250 GBS125 Waverley Tournament",
@@ -406,6 +373,9 @@
    "km": 21,
    "where": "Altona",
    "ages": [
+    12,
+    14,
+    16,
     18
    ],
    "ball": "green"
@@ -417,7 +387,10 @@
    "src": "ta",
    "km": 15,
    "where": "Dingley",
-   "ages": [],
+   "ages": [
+    12,
+    14
+   ],
    "ball": "?"
   },
   {
@@ -429,9 +402,10 @@
    "where": "Taylors Lakes",
    "ages": [
     10,
+    12,
     14
    ],
-   "ball": "?"
+   "ball": "green"
   },
   {
    "name": "2027 JC Tennis World #1",
@@ -462,18 +436,7 @@
     14,
     16
    ],
-   "ball": "?"
-  },
-  {
-   "name": "2027 O3k Maher's Total Tennis Services",
-   "date": "2027-03-30",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=EFE06AD3-8F7F-40EB-9B68-D67D101DCAA3",
-   "src": "ta",
-   "km": 15,
-   "where": "North Ringwood",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
+   "ball": "green"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #4 Truganina Slam",
@@ -503,20 +466,7 @@
     14,
     16
    ],
-   "ball": "yellow"
-  },
-  {
-   "name": "2027 GBS125 Chadstone",
-   "date": "2027-04-03",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=B1DFB907-85BE-4B00-B92F-C96FBCE14D5C",
-   "src": "ta",
-   "km": 4,
-   "where": "Malvern East",
-   "ages": [
-    10
-   ],
-   "ball": "?",
-   "dropped": "only a 10-and-under draw"
+   "ball": "green"
   },
   {
    "name": "2027 OC JC North Ringwood Tennis Club UTR Event",
@@ -559,8 +509,7 @@
     14,
     18
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 GBS250 GWSH Easter Tournament",
@@ -573,18 +522,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "by invitation only — invitational"
-  },
-  {
-   "name": "2027 O3k Tennis World Melbourne Park & Albert Reserve Tournament #1",
-   "date": "2027-04-08",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=03F9BA71-B615-4BCC-93F1-1F7444CCF1AF",
-   "src": "ta",
-   "km": 10,
-   "where": "Melbourne",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
@@ -597,8 +535,7 @@
     10,
     12
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #2",
@@ -651,8 +588,7 @@
     10,
     12
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 CBC Vida Altona Green Ball Tournament #2",
@@ -674,6 +610,9 @@
    "km": 17,
    "where": "Essendon",
    "ages": [
+    12,
+    14,
+    16,
     18
    ],
    "ball": "green"
@@ -691,7 +630,7 @@
     14,
     16
    ],
-   "ball": "?"
+   "ball": "green"
   },
   {
    "name": "2027 JC Vida Epping Yellow Ball Tournament #1",
@@ -701,6 +640,10 @@
    "km": 22,
    "where": "Epping",
    "ages": [
+    10,
+    12,
+    14,
+    16,
     18
    ],
    "ball": "yellow"
@@ -713,22 +656,12 @@
    "km": 31,
    "where": "Truganina",
    "ages": [
+    12,
+    14,
+    16,
     18
    ],
    "ball": "green"
-  },
-  {
-   "name": "2027 GBS250 Tennis World",
-   "date": "2027-06-26",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6D48A726-4936-43FE-893E-1B29DCD4939D",
-   "src": "ta",
-   "km": 10,
-   "where": "Melbourne",
-   "ages": [
-    10
-   ],
-   "ball": "?",
-   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 JC Vida Altona Yellow Ball Tournament #2",
@@ -738,22 +671,13 @@
    "km": 21,
    "where": "Altona",
    "ages": [
+    10,
+    12,
+    14,
+    16,
     18
    ],
    "ball": "green"
-  },
-  {
-   "name": "2027 GBS125 Doveton Tournament",
-   "date": "2027-06-30",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=67EF5CFB-7371-4963-8755-29CE247EEF2E",
-   "src": "ta",
-   "km": 22,
-   "where": "Doveton",
-   "ages": [
-    10
-   ],
-   "ball": "?",
-   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 J125 Tennis World Melbourne Park & Albert Reserve Tournament #2",
@@ -780,7 +704,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 J125 GBS500 41st Annual North Ringwood Junior Tournament",
@@ -809,8 +733,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "by invitation only — invitational"
+   "ball": "green"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #9 Essendon",
@@ -826,17 +749,6 @@
     16
    ],
    "ball": "green"
-  },
-  {
-   "name": "2027 O3k Tennis World Melbourne Park & Albert Reserve Tournament #3",
-   "date": "2027-07-08",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=89ECEA0F-DCE1-4DA6-B7C9-611FB290828F",
-   "src": "ta",
-   "km": 10,
-   "where": "Melbourne",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
   }
  ]
 }
