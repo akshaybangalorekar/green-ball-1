@@ -189,7 +189,18 @@ def verify_on_page(pg, e):
     try:
         pg.goto(e["url"], wait_until="domcontentloaded", timeout=45000)
         pg.wait_for_timeout(2200)
-        block = pg.inner_text("body")[:8000]
+        texts = [pg.inner_text("body")]
+        # open the tabs that carry divisions and entry conditions
+        for label in ("Events", "Factsheet", "Divisions", "Overview"):
+            try:
+                el = pg.query_selector(f"text={label}")
+                if el:
+                    el.click(timeout=3000)
+                    pg.wait_for_timeout(1500)
+                    texts.append(pg.inner_text("body"))
+            except Exception:
+                continue
+        block = "\n".join(dict.fromkeys(texts))[:16000]
     except Exception as ex:
         e["unverified"] = True
         return e, None          # a technical failure must not delete an event

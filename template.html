@@ -2876,6 +2876,20 @@ function settingsSheet() {
             so "Worth entering" means honestly unknown — never a guess.</p>
         </div>
       </details>
+      <div class="ios-row"><span class="ios-label">Last sync</span>
+        <span class="ios-value">${(() => {
+          const g = window.__eventsStamp;
+          return g ? new Date(g).toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }) : "—";
+        })()}</span></div>
+      <div class="ios-row"><span class="ios-label">Next sync</span>
+        <span class="ios-value">${(() => {
+          const now = new Date(), hrs = [10, 14, 18, 22];
+          for (let d = 0; d < 2; d++) for (const h of hrs) {
+            const t2 = new Date(now); t2.setDate(now.getDate() + d); t2.setHours(h, 0, 0, 0);
+            if (t2 > now) return t2.toLocaleString("en-AU", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" });
+          }
+          return "—";
+        })()}</span></div>
       <div class="ios-row col"><b>What counts for UTR</b>
         <small>Only matches UTR records. His WDTA club sets are green ball, which Waverley does not submit, so they
         are counted separately and do not move the rating.</small></div>
