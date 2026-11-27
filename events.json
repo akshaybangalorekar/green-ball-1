@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T21:10:15Z",
+ "generated": "2026-11-27T21:46:21Z",
  "count": 61,
  "dropped": 11,
  "utr": 4,
@@ -7,6 +7,14 @@
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
+   "info": {
+    "matches": "TWO Verified Singles Matches",
+    "format": "One Set first to 6 games. Tie break at 5 all. Deuce two sudden death.",
+    "age": "18 AND UNDER Juniors",
+    "time": "3:30pm - 5:00pm",
+    "standard": "It is suitable for juniors playing in local competitions. Green and yellow Balls are okay. It would not be suitable for orange or red ball players. We will sort",
+    "verified": true
+   },
    "date": "2026-11-28",
    "url": "https://app.utrsports.net/events/405979",
    "src": "utr",
@@ -74,6 +82,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 18,
    "ages": [
     12,
     18
@@ -83,6 +92,14 @@
   },
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
+   "info": {
+    "matches": "TWO Verified Singles Matches",
+    "format": "One Set first to 6 games. Tie break at 5 all. Deuce two sudden death.",
+    "age": "18 AND UNDER Juniors",
+    "time": "3:30pm - 5:00pm",
+    "standard": "It is suitable for juniors playing in local competitions. Green and yellow Balls are okay. It would not be suitable for orange or red ball players. We will sort",
+    "verified": true
+   },
    "date": "2026-11-29",
    "url": "https://app.utrsports.net/events/405980",
    "src": "utr",
@@ -112,6 +129,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 2,
    "ages": [],
    "ball": "green"
   },
@@ -128,6 +146,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 3,
    "ages": [
     14
    ],
@@ -146,6 +165,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 6,
    "ages": [
     10,
     12,
@@ -167,6 +187,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 12,
    "ages": [
     12,
     14,
@@ -187,6 +208,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 8,
    "ages": [
     10,
     12,
@@ -207,6 +229,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 6,
    "ages": [
     12,
     14,
@@ -227,6 +250,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 6,
    "ages": [
     10,
     12,
@@ -247,6 +271,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 2,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
@@ -264,6 +289,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -285,6 +311,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 18,
    "ages": [
     10,
     12,
@@ -306,6 +333,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 16,
    "ages": [
     10,
     12,
@@ -326,6 +354,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -347,6 +376,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 4,
    "ages": [
     10
    ],
@@ -366,6 +396,7 @@
     "Matches",
     "Players"
    ],
+   "divisionCount": 4,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
@@ -383,6 +414,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-04",
+   "divisionCount": 25,
    "ages": [
     12,
     14,
@@ -404,6 +437,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-01-28",
+   "divisionCount": 20,
    "ages": [
     12,
     14,
@@ -424,6 +459,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-10",
+   "divisionCount": 4,
    "ages": [],
    "ball": "green",
    "dropped": "page says: Invitational"
@@ -441,6 +478,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-10",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -459,6 +498,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-12",
+   "divisionCount": 50,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
@@ -476,6 +517,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-17",
+   "divisionCount": 1,
    "ages": [],
    "ball": "green",
    "dropped": "page says: Invitational"
@@ -493,6 +536,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-23",
+   "opens": "2027-01-05",
+   "divisionCount": 12,
    "ages": [
     12,
     14,
@@ -513,6 +559,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-02-20",
+   "opens": "2027-01-04",
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -534,6 +583,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-10",
+   "opens": "2027-01-11",
+   "divisionCount": 2,
    "ages": [
     12
    ],
@@ -552,6 +604,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-10",
+   "opens": "2027-02-08",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -570,6 +625,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-10",
+   "opens": "2027-02-01",
+   "divisionCount": 4,
    "ages": [],
    "ball": "?"
   },
@@ -586,6 +644,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-17",
+   "opens": "2027-01-01",
+   "divisionCount": 6,
    "ages": [
     10,
     14
@@ -605,6 +666,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-10",
+   "opens": "2027-01-18",
+   "divisionCount": 18,
    "ages": [
     10,
     12,
@@ -627,6 +691,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-20",
+   "opens": "2027-01-30",
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -648,6 +715,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-21",
+   "opens": "2027-01-30",
+   "divisionCount": 4,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
@@ -665,6 +735,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-25",
+   "opens": "2027-02-15",
+   "divisionCount": 8,
    "ages": [
     10,
     12,
@@ -686,6 +759,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-24",
+   "opens": "2027-02-15",
+   "divisionCount": 8,
    "ages": [
     10,
     12,
@@ -707,6 +783,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-24",
+   "opens": "2027-02-08",
+   "divisionCount": 2,
    "ages": [
     10
    ],
@@ -726,6 +805,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-28",
+   "opens": "2027-02-01",
+   "divisionCount": 16,
    "ages": [
     10,
     12,
@@ -746,6 +828,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-30",
+   "opens": "2027-02-22",
+   "divisionCount": 8,
    "ages": [
     10,
     12,
@@ -767,6 +852,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-04-03",
+   "opens": "2027-03-17",
+   "divisionCount": 6,
    "ages": [
     12,
     14,
@@ -787,6 +875,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-29",
+   "opens": "2027-02-08",
+   "divisionCount": 2,
    "ages": [
     10
    ],
@@ -806,6 +897,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-03-29",
+   "opens": "2027-02-16",
+   "divisionCount": 4,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
@@ -823,6 +917,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-01-01",
+   "opens": "2027-01-01",
+   "divisionCount": 6,
    "ages": [
     10,
     12
@@ -842,6 +939,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-04-28",
+   "opens": "2027-03-08",
+   "divisionCount": 2,
    "ages": [
     12
    ],
@@ -860,6 +960,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-04-28",
+   "opens": "2027-02-01",
+   "divisionCount": 2,
    "ages": [
     12
    ],
@@ -878,6 +981,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-05-12",
+   "opens": "2027-03-15",
+   "divisionCount": 20,
    "ages": [
     10,
     12,
@@ -900,6 +1006,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-02",
+   "opens": "2027-01-01",
+   "divisionCount": 6,
    "ages": [
     10,
     12
@@ -919,6 +1028,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-02",
+   "opens": "2027-04-19",
+   "divisionCount": 2,
    "ages": [
     12
    ],
@@ -937,6 +1049,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-02",
+   "opens": "2027-04-19",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -955,6 +1070,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-02",
+   "opens": "2027-04-11",
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -976,6 +1094,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-16",
+   "opens": "2027-04-26",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -994,6 +1115,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-16",
+   "opens": "2027-04-01",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -1012,6 +1136,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-16",
+   "opens": "2027-04-01",
+   "divisionCount": 2,
    "ages": [
     10
    ],
@@ -1031,6 +1158,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-23",
+   "opens": "2027-04-12",
+   "divisionCount": 2,
    "ages": [
     18
    ],
@@ -1049,6 +1179,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-20",
+   "opens": "2027-04-30",
+   "divisionCount": 2,
    "ages": [
     10
    ],
@@ -1068,6 +1201,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-20",
+   "opens": "2027-05-03",
+   "divisionCount": 12,
    "ages": [
     12,
     14,
@@ -1088,6 +1224,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-25",
+   "opens": "2027-05-05",
+   "divisionCount": 2,
    "ages": [
     10
    ],
@@ -1107,6 +1246,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-28",
+   "opens": "2027-05-08",
+   "divisionCount": 14,
    "ages": [
     10,
     12,
@@ -1128,6 +1270,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-24",
+   "opens": "2027-05-08",
+   "divisionCount": 12,
    "ages": [
     12,
     14,
@@ -1148,6 +1293,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-07-01",
+   "opens": "2027-05-24",
+   "divisionCount": 8,
    "ages": [
     10,
     12,
@@ -1169,6 +1317,9 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2027-06-28",
+   "opens": "2027-05-10",
+   "divisionCount": 4,
    "ages": [],
    "ball": "?",
    "note": "divisions not shown on the event pages — check before entering"
