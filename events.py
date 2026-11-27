@@ -202,15 +202,17 @@ def verify_on_page(pg, e):
     # exclusions, scoped to the event block only
     bad = BAD_PAGE.search(block)
     if bad:
-        return e, f'not for him: "{bad.group(0)}"'
+        return e, "page says: " + bad.group(0)
     if min_age is not None and AGE < min_age:
-        return e, f"needs {min_age}+"
+        return e, f"only {min_age} years and over"
     # positive test: a division he can enter
     if {12, 14, 16, 18} & set(ages):
         return e, None
     if not ages and GOOD.search(e["name"]):
         return e, None          # no division published yet, but it is a junior event
-    return e, f"ages {ages or 'none'}"
+    if ages:
+        return e, "only a " + "/".join(str(a) for a in ages) + "-and-under draw"
+    return e, "no age groups published"
 
 
 def dedupe_key(e):
