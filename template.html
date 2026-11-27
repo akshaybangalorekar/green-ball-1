@@ -160,6 +160,11 @@
   .evfacts { margin: 10px 0 0; display: grid; gap: 5px; }
   .evfacts span { font-size: 12.5px; color: var(--ink-dim); display: flex; gap: 6px; }
   .evfacts b { color: var(--ink); font-weight: 600; min-width: 68px; }
+  .tagtable { width: 100%; border-collapse: collapse; margin: 4px 0 12px; }
+  .tagtable td { padding: 6px 0; border-bottom: 1px solid var(--line-soft); font-size: 12.5px;
+    color: var(--ink-dim); vertical-align: top; line-height: 1.45; }
+  .tagtable td:first-child { padding-right: 10px; white-space: nowrap; width: 1%; }
+  .tagtable tr:last-child td { border-bottom: 0; }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
   .evkey b { color: var(--ink); font-weight: 600; }
   .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
@@ -2040,6 +2045,17 @@ function viewPathway() {
     <summary><span class="ftitle">How to read this card</span><span class="fchev">›</span></summary>
     <div class="fbody">
       <p class="evkey">Tennis Australia and UTR events, merged and sorted by date — the tag tells you how each one fits.</p>
+      <table class="tagtable">
+        <tbody>
+          <tr><td><span class="evpri go">Book now</span></td><td>He fits the level — UTR matchplay, JDS, JC, or a band he sits inside.</td></tr>
+          <tr><td><span class="evpri tg">Good target</span></td><td>Ranked J125 to J1000, or a band up to 1.0 above his rating.</td></tr>
+          <tr><td><span class="evpri">Level not published</span></td><td>Neither site states the standard. Check the divisions before entering.</td></tr>
+          <tr><td><span class="evpri">Comfortable</span></td><td>Below his level — hot shots, red or orange ball, or a band well under him.</td></tr>
+          <tr><td><span class="evpri">Need more time</span></td><td>A published band more than 1.0 above him.</td></tr>
+          <tr><td><span class="evpri no">Not eligible</span></td><td>He cannot enter, and the reason is shown underneath.</td></tr>
+          <tr><td><span class="evpri no">Members only</span></td><td>A junior event, but only for club members.</td></tr>
+        </tbody>
+      </table>
       <p class="evkey"><b>Book now</b> — enter these · <b>Good target</b> — a stretch worth taking ·
         <b>Need more time</b> — too strong today · <b>Comfortable</b> — below his level, good for a win and a
         counting match.</p>
