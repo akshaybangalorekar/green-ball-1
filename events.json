@@ -1,9 +1,9 @@
 {
- "generated": "2026-11-26T18:18:10Z",
- "count": 62,
- "dropped": 29,
+ "generated": "2026-11-27T01:00:20Z",
+ "count": 60,
+ "dropped": 27,
  "utr": 4,
- "ta": 58,
+ "ta": 56,
  "events": [
   {
    "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
@@ -169,17 +169,6 @@
    "ball": "green"
   },
   {
-   "name": "2026 CBC Vida Season 2 Super Orange Masters",
-   "date": "2026-12-06",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=D9B06910-C539-4AF1-B778-FFF0676F85BA",
-   "src": "ta",
-   "km": 2,
-   "where": "Glen Iris",
-   "ages": [],
-   "ball": "?",
-   "dropped": "not for him: \"Masters\""
-  },
-  {
    "name": "2026 OC Eynesbury Tennis Club Mixed Doubles Tournament",
    "date": "2026-12-06",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=C7275943-EA6F-4AEE-B462-3D6E916F4DAF",
@@ -189,22 +178,6 @@
    "ages": [],
    "ball": "?",
    "dropped": "ages none"
-  },
-  {
-   "name": "2027 J125 GBS250 FCTC New Year Tournament",
-   "date": "2027-01-02",
-   "url": "https://tournaments.tennis.com.au/sport/tournament?id=3DBEFE2A-8468-4FB1-8297-203C9867988E",
-   "src": "ta",
-   "km": 32,
-   "where": "Frankston North",
-   "ages": [
-    10,
-    12,
-    14,
-    16
-   ],
-   "ball": "green",
-   "dropped": "not for him: \"Police\""
   },
   {
    "name": "2027 O3k J125 GBS125 Hume Tennis Head Discovery #1",
