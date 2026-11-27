@@ -1805,8 +1805,7 @@ function liveEvents() {
       if (/red ball|orange ball|hot shots/i.test(e.name)) return "Easy";   // younger-ball events, below him
       if (e.src === "utr") return "Start here";
       if (/jds|\bjc\b/i.test(e.name)) return "Start here";
-      if (/\bj250\b/i.test(e.name)) return "Target";
-      if (/\bj125\b/i.test(e.name)) return "Target";
+      if (/\bj(125|250|300|500|1000)\b/i.test(e.name)) return "Target";
       return "Open";                                                // unknown level, not "too strong"
     })(),
     fit: (() => {

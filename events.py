@@ -180,7 +180,7 @@ GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|ho
 
 AGE = 11          # his age now
 ADAPTIVE = re.compile(r"wheelchair|walking tennis|blind|deaf|all abilities|para[- ]|"
-                      r"special olympics|intellectual", re.I)
+                      r"special olympics|intellectual|police|fire games|veterans|masters", re.I)
 BAD_PAGE = re.compile(r"members only|invitation only|invitational|1 point slam|wheelchair|"
                       r"walking tennis|police|fire games|veterans|masters", re.I)
 
