@@ -200,7 +200,7 @@ def verify_on_page(pg, e):
     e["ball"] = ("green" if re.search(r"green ball", block, re.I)
                  else "yellow" if re.search(r"yellow ball", block, re.I) else "?")
     # invitation language means he cannot enter, whatever divisions exist
-    invite = re.search(r"invitation only|invitational|do not sign up until|by invitation", block, re.I)
+    invite = re.search(r"do not sign up until|by invitation only|invitation only|entry by invitation", block, re.I)
     if invite:
         return e, "by invitation only — " + invite.group(0).lower()
     # a published junior division wins over members-only wording
