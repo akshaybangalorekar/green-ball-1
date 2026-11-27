@@ -276,3 +276,5 @@ pathlib.Path("events.json").write_text(json.dumps(out, indent=1, ensure_ascii=Fa
 print(f"{len(events)} events: {out['utr']} UTR, {out['ta']} TA")
 for e in events[:5]:
     print("  ", e["date"], e["src"], (e["name"] or "<blank>")[:60])
+
+# run
