@@ -11,4 +11,4 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright && python -m playwright install --with-deps chromium
-      - run: python test_scope.py
+      - run: python tests/harvest_check.py
