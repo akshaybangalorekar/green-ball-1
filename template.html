@@ -158,13 +158,11 @@
   .fold.mini > summary { padding: 13px 16px; }
   .fold.mini .ftitle { font-size: 14.5px; }
   .fold.mini .fbody { padding: 0 16px 14px; }
-  .evpri[data-whybtn] { cursor: pointer; }
-  .evbox { margin-top: 8px; }
-  .evbox > summary { list-style: none; cursor: pointer; font-family: var(--mono); font-size: 10px;
-    letter-spacing: .05em; text-transform: uppercase; color: var(--brand); }
-  .evbox > summary::-webkit-details-marker { display: none; }
-  .evbox > summary::after { content: " ›"; }
-  .evbox[open] > summary::after { content: " ⌄"; }
+  .evbox { margin-top: 10px; }
+  .whybtn { appearance: none; border: 1px solid var(--line); background: transparent; cursor: pointer;
+    font-family: var(--mono); font-size: 9px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-dim); padding: 3px 8px; border-radius: 6px; }
+  .whybtn:active { background: var(--surface-2); }
   .evfacts { margin: 10px 0 0; display: grid; gap: 5px; }
   .evfacts span { font-size: 12.5px; color: var(--ink-dim); display: flex; gap: 6px; }
   .evfacts b { color: var(--ink); font-weight: 600; min-width: 68px; }
@@ -433,11 +431,11 @@
     text-transform: uppercase; color: var(--ink-dim); }
   .ev { padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
   .ev:last-of-type { border-bottom: 0; }
-  .evtop { display: flex; align-items: center; gap: 8px; }
+  .evtop { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
   .evdate { font-family: var(--display); font-weight: 800; font-size: 15px; }
   .evtier { font-family: var(--mono); font-size: 9.5px; font-weight: 700; letter-spacing: .07em;
     text-transform: uppercase; background: #14351f; color: #ffffff; padding: 4px 8px; border-radius: 5px; }
-  .evpri { margin-left: auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em;
+  .evpri { margin-left: auto; flex: 0 0 auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ink-dim); }
   .evpri.go { background: #d9722f; color: #fff; }
   .evpri.tg { background: rgba(217,114,47,.15); color: #b45a1e; }
@@ -2093,12 +2091,14 @@ function viewPathway() {
       : (PRIORITY[e.p] || { label: e.p, cls: "" });
     return `<div class="ev" data-evname="${esc(e.n)}">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
-        <span class="evpri ${pr.cls}" data-whybtn="1" role="button" tabindex="0">${esc(pr.label)}</span></div>
+        ${srcChip(e)}
+        <button class="whybtn" data-whybtn="1">Why</button>
+        <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
-      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${srcChip(e)}</div>
+      <div class="evmeta">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</div>
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
       ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
-      <details class="evbox"><summary>Why this one?</summary>
+      <div class="evbox" hidden>
         <div class="evfacts">
           <span><b>Format</b>${esc(fmtOf(e))}</span>
           <span><b>Matches</b>${esc(matchesOf(e))}</span>
@@ -2116,7 +2116,7 @@ function viewPathway() {
         <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
           <span>I'm entering this</span></label>
         ${isEntered(e.n) ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>` : ""}
-      </details>
+      </div>
     </div>`;
   }).join("");
 
@@ -2734,7 +2734,7 @@ function bind() {
   document.querySelectorAll("[data-whybtn]").forEach((b) => {
     b.onclick = () => {
       const box = b.closest(".ev").querySelector(".evbox");
-      if (box) box.open = !box.open;
+      if (box) box.hidden = !box.hidden;
     };
   });
   document.querySelectorAll("[data-goto]").forEach((el2) => {
