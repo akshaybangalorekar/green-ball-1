@@ -150,6 +150,16 @@
   .fold.mini > summary { padding: 13px 16px; }
   .fold.mini .ftitle { font-size: 14.5px; }
   .fold.mini .fbody { padding: 0 16px 14px; }
+  .evpri[data-whybtn] { cursor: pointer; }
+  .evbox { margin-top: 8px; }
+  .evbox > summary { list-style: none; cursor: pointer; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .05em; text-transform: uppercase; color: var(--brand); }
+  .evbox > summary::-webkit-details-marker { display: none; }
+  .evbox > summary::after { content: " ›"; }
+  .evbox[open] > summary::after { content: " ⌄"; }
+  .evfacts { margin: 10px 0 0; display: grid; gap: 5px; }
+  .evfacts span { font-size: 12.5px; color: var(--ink-dim); display: flex; gap: 6px; }
+  .evfacts b { color: var(--ink); font-weight: 600; min-width: 68px; }
   .evkey { margin: 0 0 6px; font-size: 12px; line-height: 1.6; color: var(--ink-dim); }
   .evkey b { color: var(--ink); font-weight: 600; }
   .fold { background: var(--surface); border-radius: 20px; margin-bottom: 14px; overflow: hidden;
@@ -1903,6 +1913,24 @@ function journeySVG() {
   </svg>`;
 }
 
+function fmtOf(e) {
+  if (/matchplay|match play|round robin|round-robin/i.test(e.n)) return "Round robin";
+  if (/\d+ matches?/i.test(e.n)) return "Round robin";
+  if (/jds|jc\b/i.test(e.n)) return "Pool then knockout";
+  if (/j\d{3}/i.test(e.n)) return "Single elimination";
+  return "Not published";
+}
+
+function matchesOf(e) {
+  const m = e.n.match(/(\d+)\s+matches/i);
+  if (m) return m[1] + " guaranteed";
+  const f = fmtOf(e);
+  if (f === "Round robin") return "3–4";
+  if (f === "Pool then knockout") return "2–3";
+  if (f === "Single elimination") return "1–2";
+  return "unknown";
+}
+
 function srcChip(e) {
   const utr = e.src === "utr";
   const href = e.u || `https://www.google.com/search?q=${encodeURIComponent("site:tournaments.tennis.com.au " + e.n)}`;
@@ -1990,16 +2018,27 @@ function viewPathway() {
     const pr = PRIORITY[e.p] || { label: e.p, cls: "" };
     return `<div class="ev">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
-        <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
+        <span class="evpri ${pr.cls}" data-whybtn="1" role="button" tabindex="0">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
-      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${esc(e.e)} · ${srcChip(e)}</div>
+      <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${srcChip(e)}</div>
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
-      <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
-      <div class="evfoot">${e.regEnd ? "Register by " + fmtShort(e.regEnd) : (e.c ? closeLabel(e.c) : "")}</div>
-      ${clubClash(e) ? `<p class="clash">Also club round ${clubClash(e)} that day</p>` : ""}
-      <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
-        <span>I'm entering this</span></label>
-      ${isEntered(e.n) ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>` : ""}
+      <details class="evbox"><summary>Why this one?</summary>
+        <div class="evfacts">
+          <span><b>Format</b>${esc(fmtOf(e))}</span>
+          <span><b>Matches</b>${esc(matchesOf(e))}</span>
+          <span><b>UTR</b>${e.ball === "green" ? "green ball — counts only if UTR-listed" : "counts"}</span>
+          <span><b>Enter by</b>${e.regEnd ? fmtShort(e.regEnd) : "not published"}</span>
+          <span><b>Club round</b>${clubClash(e) ? "round " + clubClash(e) + " that day" : "none that day"}</span>
+          <span><b>Level</b>${e.utrMin != null ? e.utrMin + "–" + e.utrMax : "not published"}</span>
+        </div>
+        <p class="evwhy">${esc(EVENT_WHY[e.t] || "")}</p>
+        <div class="evlinks">
+          ${e.u ? `<a href="${e.u}" target="_blank" rel="noopener">Open the event ›</a>` : ""}
+        </div>
+        <label class="enrol"><input type="checkbox" data-enrol="${esc(e.n)}" ${isEntered(e.n) ? "checked" : ""}>
+          <span>I'm entering this</span></label>
+        ${isEntered(e.n) ? `<button class="btn ghost small" data-result="${esc(e.n)}" style="margin-top:8px">Add a result</button>` : ""}
+      </details>
     </div>`;
   }).join("");
 
@@ -2613,6 +2652,12 @@ function bind() {
   };
   document.querySelectorAll("[data-enrol]").forEach((cb) => {
     cb.onchange = () => { toggleEntered(cb.dataset.enrol); renderAll(); showToast(cb.checked ? "Added to your journey" : "Removed"); };
+  });
+  document.querySelectorAll("[data-whybtn]").forEach((b) => {
+    b.onclick = () => {
+      const box = b.closest(".ev").querySelector(".evbox");
+      if (box) box.open = !box.open;
+    };
   });
   document.querySelectorAll("[data-pass]").forEach((b) => {
     b.onclick = (ev) => { ev.stopPropagation(); passEvent(b.dataset.pass); renderAll(); showToast("Passed"); };
