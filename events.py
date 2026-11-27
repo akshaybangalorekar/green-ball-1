@@ -179,8 +179,10 @@ GOOD = re.compile(r"\bjds\b|\bjc\b|j\d{3}|junior|juniors|\b1[024]u\b|\b\d{2}u\b|
 GREEN = re.compile(r"green ball|green-ball|coloured ball|red ball|orange ball|hot shots", re.I)
 
 AGE = 11          # his age now
-ADAPTIVE = re.compile(r"wheelchair|walking tennis|blind|deaf|all abilities|para[- ]|"
-                      r"special olympics|intellectual|police|fire games|veterans|masters", re.I)
+ADAPTIVE_NAME = re.compile(r"wheelchair|walking tennis|blind|deaf|all abilities|para[- ]|"
+                           r"special olympics|intellectual|police|fire games|veterans|masters", re.I)
+ADAPTIVE_PAGE = re.compile(r"wheelchair tennis|walking tennis|all abilities|special olympics|"
+                           r"blind tennis|deaf tennis|intellectual disability", re.I)
 BAD_PAGE = re.compile(r"members only|invitation only|invitational|1 point slam", re.I)
 
 def verify_on_page(pg, e):
@@ -203,7 +205,7 @@ def verify_on_page(pg, e):
     except Exception as ex:
         e["unverified"] = True
         return e, None          # a technical failure must not delete an event
-    if ADAPTIVE.search(e["name"]) or ADAPTIVE.search(block):
+    if ADAPTIVE_NAME.search(e["name"]) or ADAPTIVE_PAGE.search(block):
         return e, "adaptive or police event"
     ages = sorted({int(a) for a in re.findall(r"\b(?:U|Under\s?)(\d{2})\b", block)})
     over = re.search(r"(\d{1,2})\s*(?:years?|yrs?)\s*(?:and|&)\s*over", block, re.I)
