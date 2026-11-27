@@ -1826,6 +1826,7 @@ function liveEvents() {
     ball: e.ball || "yellow",
     dropped: e.dropped || null,
     info: e.info || null,
+    closed: !!(e.regEnd && e.regEnd < new Date().toISOString().slice(0, 10)),
     note: e.note || null,
     p: (() => {
       const my = MY_UTR || 0;
@@ -2160,7 +2161,8 @@ function viewPathway() {
     ? `<p class="fresh running">Harvester running — the list below is the last completed one. Check back in a few minutes.</p>`
     : "";
   const evBody = runChip + (freshness.text && !running ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + up.map((e) => {
-    const pr = e.dropped ? { label: "Not eligible", cls: "no" }
+    const pr = e.closed ? { label: "Entries closed", cls: "no" }
+      : e.dropped ? { label: "Not eligible", cls: "no" }
       : e.note ? { label: "Members only", cls: "no" }
       : (PRIORITY[e.p] || { label: e.p, cls: "" });
     return `<div class="ev" data-evname="${esc(e.n)}">
@@ -2170,6 +2172,7 @@ function viewPathway() {
         <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</div>
+      ${e.closed ? `<p class="evdrop">Entries closed ${fmtShort(e.regEnd)} — the tournament may already be under way</p>` : ""}
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
 
       ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
