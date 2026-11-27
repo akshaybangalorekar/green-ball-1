@@ -1794,10 +1794,11 @@ function liveEvents() {
         }
         return "Target";
       }
+      if (/red ball|orange ball/i.test(e.name)) return "Easy";      // younger-ball events, below him
       if (e.src === "utr") return "Start here";
       if (/jds|jc\b/i.test(e.name)) return "Start here";
       if (/j?125/i.test(e.name)) return "Target";
-      return "Later";
+      return "Open";                                                // unknown level, not "too strong"
     })(),
     fit: (() => {
       const my = MY_UTR || 0;
@@ -1834,6 +1835,7 @@ const PRIORITY = {
   "Optional": { label: "If it suits", hint: "optional", cls: "" },
   "Later": { label: "Need more time", hint: "too strong for now", cls: "" },
   "Easy": { label: "Comfortable", hint: "below his level", cls: "" },
+  "Open": { label: "Worth entering", hint: "level not published", cls: "" },
 };
 
 
