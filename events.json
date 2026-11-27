@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T19:44:30Z",
+ "generated": "2026-11-27T20:35:59Z",
  "count": 61,
  "dropped": 17,
  "utr": 4,
@@ -30,7 +30,7 @@
    "regEnd": "2026-11-27",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
@@ -44,7 +44,7 @@
    "regEnd": "2026-11-27",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
@@ -178,7 +178,7 @@
    "where": "Eynesbury",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2027 J125 & GBS250 FCTC New Year Tournament",
@@ -261,7 +261,7 @@
    "where": "Mt Waverley",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2027 OC JC RSYLTC Club Championships",
@@ -327,7 +327,7 @@
    "where": "Epping",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2027 OC Eynesbury Tennis Club",
@@ -463,7 +463,7 @@
    "where": "North Ringwood",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #4 Truganina Slam",
@@ -573,7 +573,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
@@ -836,7 +836,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "no age groups published"
+   "dropped": "no age groups listed — check the event page"
   }
  ]
 }
