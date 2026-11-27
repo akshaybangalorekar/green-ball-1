@@ -196,17 +196,26 @@ def verify_on_page(pg, e):
         pg.goto(e["url"], wait_until="domcontentloaded", timeout=45000)
         pg.wait_for_timeout(2200)
         texts = [pg.inner_text("body")]
-        # open the tabs that carry divisions and entry conditions
-        for label in ("Events", "Factsheet", "Divisions", "Overview"):
+        # walk every one of the event's own tabs before deciding anything
+        TABS = ("Overview", "Matches", "Players", "Draws", "Events", "Factsheet")
+        clicked = []
+        for label in TABS:
             try:
                 el = pg.query_selector(f"text={label}")
                 if el:
-                    el.click(timeout=3000)
-                    pg.wait_for_timeout(1500)
+                    el.click(timeout=4000)
+                    pg.wait_for_timeout(1800)
                     texts.append(pg.inner_text("body"))
+                    clicked.append(label)
             except Exception:
                 continue
-        block = "\n".join(dict.fromkeys(texts))[:16000]
+        block = "\n".join(dict.fromkeys(texts))[:20000]
+        # did we actually reach a page that lists divisions?
+        e["saw_divisions"] = bool(
+            re.search(r"\bdivision", block, re.I)
+            or re.search(r"\b(?:U|Under\s?)(?:1[02468])\b", block)
+        )
+        e["tabs_read"] = clicked
     except Exception as ex:
         e["unverified"] = True
         return e, None          # a technical failure must not delete an event
@@ -237,6 +246,10 @@ def verify_on_page(pg, e):
         return e, None          # no division published yet, but it is a junior event
     if ages:
         return e, "only a " + "/".join(str(a) for a in ages) + "-and-under draw"
+    if not e.get("saw_divisions"):
+        # we never reached a page that lists divisions — do not call it ineligible
+        e["note"] = "divisions not shown on the event pages — check before entering"
+        return e, None
     return e, "no age groups listed — check the event page"
 
 
