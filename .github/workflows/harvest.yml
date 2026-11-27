@@ -6,6 +6,9 @@ on:
     paths: ["events.py"]
 permissions:
   contents: write
+concurrency:
+  group: harvest
+  cancel-in-progress: false
 jobs:
   harvest:
     runs-on: ubuntu-latest

@@ -266,6 +266,17 @@ events = list(kept.values())
 events.sort(key=lambda e: (e["date"], e["src"] != "utr", e["name"]))  # by date, merged
 print("after eligibility + dedupe:", len(events), "of", len(pool))
 
+# --- safety guard: never replace a good list with a much smaller one ---
+prev = None
+try:
+    prev = json.loads(pathlib.Path("events.json").read_text())
+except Exception:
+    pass
+if prev and prev.get("count", 0) >= 20 and len(events) < prev["count"] * 0.5:
+    print(f"ABORT: harvest found {len(events)} events, previous file had {prev['count']}. "
+          "Keeping the previous list.")
+    raise SystemExit(0)
+
 out = {"generated": datetime.datetime.utcnow().isoformat(timespec="seconds") + "Z",
        "count": len(events),
        "dropped": sum(1 for e in events if e.get("dropped")),
@@ -276,5 +287,3 @@ pathlib.Path("events.json").write_text(json.dumps(out, indent=1, ensure_ascii=Fa
 print(f"{len(events)} events: {out['utr']} UTR, {out['ta']} TA")
 for e in events[:5]:
     print("  ", e["date"], e["src"], (e["name"] or "<blank>")[:60])
-
-# run
