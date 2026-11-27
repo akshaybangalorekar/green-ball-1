@@ -149,6 +149,35 @@ def ta_events():
                 if cards:
                     break
             print(f"  month {start_d[:7]}: {len(cards)} cards")
+            # 40 is the page cap — a full page means the month is truncated, so split it into weeks
+            if len(cards) >= 40:
+                d0 = datetime.date.fromisoformat(start_d)
+                d1 = datetime.date.fromisoformat(end_d)
+                weeks = []
+                cur = d0
+                while cur <= d1:
+                    wk_end = min(cur + datetime.timedelta(days=6), d1)
+                    weeks.append((cur.isoformat(), wk_end.isoformat()))
+                    cur = wk_end + datetime.timedelta(days=1)
+                extra = []
+                for ws, we in weeks:
+                    wurl = ("https://tournaments.tennis.com.au/find/tournament"
+                            f"?DateFilterType=0&StartDate={ws}&EndDate={we}&Distance=25")
+                    try:
+                        pg.goto(wurl, wait_until="domcontentloaded", timeout=90000)
+                        pg.wait_for_timeout(6000)
+                        wk = pg.eval_on_selector_all("a[href*='tournament?id=']", """els => els.map(e => ({
+                            href: e.href,
+                            card: (e.closest('li,div,article')?.innerText || '').trim()
+                        }))""")
+                    except Exception:
+                        wk = []
+                    extra.extend(wk)
+                seen = {c["href"] for c in cards}
+                added = [c for c in extra if c["href"] not in seen]
+                if added:
+                    print(f"    week split recovered {len(added)} more")
+                    cards.extend(added)
             for c in cards:
                 gid = re.search(r"id=([0-9A-Fa-f-]{36})", c["href"])
                 if not gid or gid.group(1) in found:
