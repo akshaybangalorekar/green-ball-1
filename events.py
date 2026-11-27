@@ -273,13 +273,24 @@ def verify_on_page(pg, e):
     # the page states its own dates in the timeline block
     MONTHS = dict(jan=1, feb=2, mar=3, apr=4, may=5, jun=6, jul=7, aug=8, sep=9, oct=10, nov=11, dec=12)
     def grab(label):
-        m = re.search(label + r"[^\d]{0,60}(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(\d{4})", block, re.I)
+        m = re.search(label + r"[^\d]{0,60}(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s*(\d{4})?", block, re.I)
         if not m:
             return None
-        try:
-            return datetime.date(int(m.group(3)), MONTHS[m.group(2).lower()[:3]], int(m.group(1))).isoformat()
-        except (ValueError, KeyError):
+        mon = MONTHS.get(m.group(2).lower()[:3])
+        if not mon:
             return None
+        year = int(m.group(3)) if m.group(3) else int((e.get("date") or "2027-01-01")[:4])
+        try:
+            d = datetime.date(year, mon, int(m.group(1)))
+        except ValueError:
+            return None
+        # a deadline without a year is almost always before the tournament
+        if not m.group(3) and e.get("date") and d.isoformat() > e["date"]:
+            try:
+                d = datetime.date(year - 1, mon, int(m.group(1)))
+            except ValueError:
+                return None
+        return d.isoformat()
     close = grab(r"closing deadline")
     if close:
         e["regEnd"] = close
