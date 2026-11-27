@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-27T22:18:14Z",
- "count": 104,
- "dropped": 20,
- "utr": 4,
+ "generated": "2026-11-27T23:59:14Z",
+ "count": 103,
+ "dropped": 19,
+ "utr": 3,
  "ta": 100,
  "events": [
   {
@@ -30,25 +30,6 @@
    ],
    "ages": [],
    "ball": "?"
-  },
-  {
-   "name": "Rosanna Tennis Club AO 1 Point Slam Community Event",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/411216",
-   "src": "utr",
-   "km": 11,
-   "where": "Rosanna",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "saw_divisions": true,
-   "tabs_read": [
-    "Players",
-    "Events"
-   ],
-   "ages": [],
-   "ball": "?",
-   "dropped": "no 12U, 14U or 16U division — nothing he can enter"
   },
   {
    "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
@@ -82,6 +63,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-10-28",
+   "opens": "2026-10-07",
    "divisionCount": 18,
    "ages": [
     12,
@@ -129,6 +112,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-11-25",
+   "opens": "2026-08-01",
    "divisionCount": 2,
    "ages": [],
    "ball": "green"
@@ -146,6 +131,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-11-25",
+   "opens": "2026-08-26",
    "divisionCount": 3,
    "ages": [
     14
@@ -165,6 +152,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-11-29",
+   "opens": "2026-01-01",
    "divisionCount": 6,
    "ages": [
     10,
@@ -187,6 +176,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-01",
+   "opens": "2026-10-24",
    "divisionCount": 12,
    "ages": [
     12,
@@ -208,6 +199,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-03",
+   "opens": "2026-09-01",
    "divisionCount": 8,
    "ages": [
     10,
@@ -229,6 +222,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-11-30",
+   "opens": "2026-11-21",
    "divisionCount": 6,
    "ages": [
     12,
@@ -250,6 +245,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-02",
+   "opens": "2026-11-10",
    "divisionCount": 6,
    "ages": [
     10,
@@ -271,6 +268,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-04",
+   "opens": "2026-11-05",
    "divisionCount": 2,
    "ages": [],
    "ball": "?",
@@ -289,6 +288,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-03",
+   "opens": "2026-09-15",
    "divisionCount": 5,
    "ages": [],
    "ball": "?"
@@ -306,6 +307,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-09",
+   "opens": "2026-09-01",
    "divisionCount": 8,
    "ages": [
     10,
@@ -327,6 +330,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-06",
+   "opens": "2026-11-09",
    "divisionCount": 4,
    "ages": [
     18
@@ -347,6 +352,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-09",
+   "opens": "2026-09-01",
    "divisionCount": 2,
    "ages": [
     11
@@ -367,6 +374,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-09",
+   "opens": "2026-07-01",
    "divisionCount": 2,
    "ages": [
     15
@@ -387,6 +396,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-06",
+   "opens": "2026-10-01",
    "divisionCount": 12,
    "ages": [],
    "ball": "?"
@@ -404,6 +415,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-11",
+   "opens": "2026-09-15",
    "divisionCount": 4,
    "ages": [],
    "ball": "?"
@@ -421,6 +434,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-09",
+   "opens": "2026-09-01",
    "divisionCount": 14,
    "ages": [
     10,
@@ -443,6 +458,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-15",
+   "opens": "2026-09-01",
    "divisionCount": 2,
    "ages": [
     18
@@ -462,6 +479,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-16",
+   "opens": "2026-10-31",
    "divisionCount": 3,
    "ages": [
     12,
@@ -482,6 +501,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-15",
+   "opens": "2026-09-20",
    "divisionCount": 6,
    "ages": [
     12,
@@ -503,6 +524,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-17",
+   "opens": "2026-07-01",
    "divisionCount": 12,
    "ages": [
     12,
@@ -524,6 +547,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-19",
+   "opens": "2026-07-01",
    "divisionCount": 8,
    "ages": [
     10,
@@ -546,6 +571,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-17",
+   "opens": "2026-07-01",
    "divisionCount": 18,
    "ages": [
     10,
@@ -568,6 +595,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-23",
+   "opens": "2026-11-16",
    "divisionCount": 14,
    "ages": [
     10,
@@ -590,6 +619,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-23",
+   "opens": "2026-11-16",
    "divisionCount": 18,
    "ages": [
     10,
@@ -612,6 +643,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-31",
+   "opens": "2026-11-15",
    "divisionCount": 16,
    "ages": [
     10,
@@ -633,6 +666,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-27",
+   "opens": "2026-11-23",
    "divisionCount": 14,
    "ages": [
     10,
@@ -655,6 +690,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-28",
+   "opens": "2026-11-20",
    "divisionCount": 4,
    "ages": [
     10
@@ -675,6 +712,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-27",
+   "opens": "2026-11-01",
    "divisionCount": 4,
    "ages": [],
    "ball": "?",
@@ -694,6 +733,7 @@
     "Players"
    ],
    "regEnd": "2027-01-03",
+   "opens": "2026-11-01",
    "divisionCount": 2,
    "ages": [
     10
@@ -715,6 +755,7 @@
     "Players"
    ],
    "regEnd": "2027-01-01",
+   "opens": "2026-11-01",
    "divisionCount": 14,
    "ages": [
     10,
@@ -737,6 +778,8 @@
     "Matches",
     "Players"
    ],
+   "regEnd": "2026-12-01",
+   "opens": "2026-11-22",
    "divisionCount": 6,
    "ages": [
     12,
@@ -759,6 +802,7 @@
     "Players"
    ],
    "regEnd": "2027-01-04",
+   "opens": "2026-12-07",
    "divisionCount": 6,
    "ages": [
     12,
@@ -781,6 +825,7 @@
     "Players"
    ],
    "regEnd": "2027-01-07",
+   "opens": "2026-12-07",
    "divisionCount": 8,
    "ages": [
     10,
@@ -804,6 +849,7 @@
     "Players"
    ],
    "regEnd": "2027-01-05",
+   "opens": "2026-11-15",
    "divisionCount": 14,
    "ages": [
     10,
@@ -827,6 +873,7 @@
     "Players"
    ],
    "regEnd": "2027-01-05",
+   "opens": "2026-12-01",
    "divisionCount": 4,
    "ages": [],
    "ball": "?",
@@ -846,6 +893,7 @@
     "Players"
    ],
    "regEnd": "2027-01-11",
+   "opens": "2026-12-01",
    "divisionCount": 16,
    "ages": [
     10,
@@ -868,6 +916,7 @@
     "Players"
    ],
    "regEnd": "2027-01-09",
+   "opens": "2026-11-20",
    "divisionCount": 14,
    "ages": [
     10,
@@ -891,6 +940,7 @@
     "Players"
    ],
    "regEnd": "2027-01-05",
+   "opens": "2026-10-26",
    "divisionCount": 16,
    "ages": [
     12,
@@ -913,6 +963,7 @@
     "Players"
    ],
    "regEnd": "2027-01-09",
+   "opens": "2026-12-01",
    "divisionCount": 2,
    "ages": [
     10
@@ -934,6 +985,7 @@
     "Players"
    ],
    "regEnd": "2027-01-11",
+   "opens": "2026-12-07",
    "divisionCount": 2,
    "ages": [
     10
@@ -955,6 +1007,7 @@
     "Players"
    ],
    "regEnd": "2027-01-14",
+   "opens": "2026-12-07",
    "divisionCount": 8,
    "ages": [
     10,
@@ -978,6 +1031,7 @@
     "Players"
    ],
    "regEnd": "2027-01-13",
+   "opens": "2026-12-07",
    "divisionCount": 4,
    "ages": [],
    "ball": "?",
@@ -997,6 +1051,7 @@
     "Players"
    ],
    "regEnd": "2027-01-13",
+   "opens": "2026-10-26",
    "divisionCount": 2,
    "ages": [
     10
@@ -1018,6 +1073,7 @@
     "Players"
    ],
    "regEnd": "2027-01-13",
+   "opens": "2026-12-01",
    "divisionCount": 2,
    "ages": [
     10
@@ -1039,6 +1095,7 @@
     "Players"
    ],
    "regEnd": "2027-01-13",
+   "opens": "2026-11-16",
    "divisionCount": 14,
    "ages": [
     10,
@@ -1062,6 +1119,7 @@
     "Players"
    ],
    "regEnd": "2027-01-13",
+   "opens": "2026-11-16",
    "divisionCount": 8,
    "ages": [
     12,
@@ -1083,6 +1141,7 @@
     "Players"
    ],
    "regEnd": "2027-01-25",
+   "opens": "2026-12-01",
    "divisionCount": 8,
    "ages": [
     10,
@@ -1105,6 +1164,7 @@
     "Players"
    ],
    "regEnd": "2027-02-04",
+   "opens": "2026-12-24",
    "divisionCount": 25,
    "ages": [
     12,
@@ -1128,6 +1188,7 @@
     "Players"
    ],
    "regEnd": "2027-01-28",
+   "opens": "2026-12-01",
    "divisionCount": 20,
    "ages": [
     12,
@@ -1150,6 +1211,7 @@
     "Players"
    ],
    "regEnd": "2027-02-10",
+   "opens": "2026-12-01",
    "divisionCount": 4,
    "ages": [],
    "ball": "green",
@@ -1169,6 +1231,7 @@
     "Players"
    ],
    "regEnd": "2027-02-10",
+   "opens": "2026-12-21",
    "divisionCount": 2,
    "ages": [
     18
@@ -1189,6 +1252,7 @@
     "Players"
    ],
    "regEnd": "2027-02-12",
+   "opens": "2026-11-01",
    "divisionCount": 50,
    "ages": [],
    "ball": "?",
@@ -1208,6 +1272,7 @@
     "Players"
    ],
    "regEnd": "2027-02-17",
+   "opens": "2026-12-01",
    "divisionCount": 1,
    "ages": [],
    "ball": "green",
