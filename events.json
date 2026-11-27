@@ -1,7 +1,7 @@
 {
- "generated": "2026-11-27T01:00:20Z",
+ "generated": "2026-11-27T02:18:19Z",
  "count": 60,
- "dropped": 27,
+ "dropped": 26,
  "utr": 4,
  "ta": 56,
  "events": [
@@ -30,7 +30,7 @@
    "regEnd": "2026-11-27",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "TERM 4 Junior UTR Matchplay",
@@ -57,7 +57,7 @@
    "regEnd": "2026-11-27",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
@@ -71,7 +71,7 @@
     18
    ],
    "ball": "?",
-   "dropped": "not for him: \"Members Only\""
+   "dropped": "page says: Members Only"
   },
   {
    "name": "2026 CBC Vida Essendon Orange Hot Shots Match Play #10",
@@ -108,7 +108,7 @@
     14
    ],
    "ball": "?",
-   "dropped": "not for him: \"invitational\""
+   "dropped": "page says: invitational"
   },
   {
    "name": "2026 JC Keilor Park TC Tournament",
@@ -123,7 +123,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2026 JC My First Tournament #18 Sunbury",
@@ -151,8 +151,7 @@
     14,
     16
    ],
-   "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "ball": "?"
   },
   {
    "name": "2026 JDS CBC Green Ball Gardiner - Glen Iris Tournament",
@@ -177,7 +176,7 @@
    "where": "Eynesbury",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 O3k J125 GBS125 Hume Tennis Head Discovery #1",
@@ -234,7 +233,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "ages [10]"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 O5k MCC Glen Iris Open",
@@ -245,7 +244,7 @@
    "where": "Mt Waverley",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC JC RSYLTC Club Championships",
@@ -261,7 +260,7 @@
     18
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 OC JC Kooyong Lawn Tennis Club Championships",
@@ -276,7 +275,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Open Championships Taylors Lakes",
@@ -287,7 +286,7 @@
    "where": "Taylors Lakes",
    "ages": [],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 JC Vida Truganina Yellow Ball Tournament #1",
@@ -310,7 +309,7 @@
    "where": "Epping",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC Eynesbury Tennis Club",
@@ -321,7 +320,7 @@
    "where": "EYNESBURY",
    "ages": [],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 J125 Metro East GWSH Labour Day",
@@ -336,7 +335,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 J250 GBS125 Waverley Tournament",
@@ -440,7 +439,7 @@
    "where": "North Ringwood",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #4 Truganina Slam",
@@ -483,7 +482,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "ages [10]"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 OC JC North Ringwood Tennis Club UTR Event",
@@ -527,7 +526,7 @@
     18
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 GBS250 GWSH Easter Tournament",
@@ -540,7 +539,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 O3k Tennis World Melbourne Park & Albert Reserve Tournament #1",
@@ -551,7 +550,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
@@ -565,7 +564,7 @@
     12
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 CBC Vida Essendon Green Ball Tournament #2",
@@ -619,7 +618,7 @@
     12
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 CBC Vida Altona Green Ball Tournament #2",
@@ -695,7 +694,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "ages [10]"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 JC Vida Altona Yellow Ball Tournament #2",
@@ -720,7 +719,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "ages [10]"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 J125 Tennis World Melbourne Park & Albert Reserve Tournament #2",
@@ -747,7 +746,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 J125 GBS500 41st Annual North Ringwood Junior Tournament",
@@ -777,7 +776,7 @@
     16
    ],
    "ball": "green",
-   "dropped": "not for him: \"Invitational\""
+   "dropped": "page says: Invitational"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #9 Essendon",
@@ -803,7 +802,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "ages none"
+   "dropped": "no age groups published"
   }
  ]
 }
