@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-27T10:20:09Z",
- "count": 63,
- "dropped": 19,
- "utr": 6,
+ "generated": "2026-11-27T12:33:18Z",
+ "count": 61,
+ "dropped": 17,
+ "utr": 4,
  "ta": 57,
  "events": [
   {
@@ -19,20 +19,6 @@
    "ball": "?"
   },
   {
-   "name": "Elite Master Circuit Pre-Advance #15 Indoor",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/406300",
-   "src": "utr",
-   "km": 22,
-   "where": "Epping",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "ages": [],
-   "ball": "?",
-   "dropped": "no age groups published"
-  },
-  {
    "name": "Rosanna Tennis Club AO 1 Point Slam Community Event",
    "date": "2026-11-28",
    "url": "https://app.utrsports.net/events/411216",
@@ -45,19 +31,6 @@
    "ages": [],
    "ball": "?",
    "dropped": "no age groups published"
-  },
-  {
-   "name": "TERM 4 Junior UTR Matchplay",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/402559",
-   "src": "utr",
-   "km": 8,
-   "where": "Brighton",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "ages": [],
-   "ball": "?"
   },
   {
    "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
@@ -88,15 +61,15 @@
    "note": "members only — check before entering"
   },
   {
-   "name": "Hume Tennis UTR #7 - Junior & Open",
+   "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
    "date": "2026-11-29",
-   "url": "https://app.utrsports.net/events/411117",
+   "url": "https://app.utrsports.net/events/405980",
    "src": "utr",
-   "km": 33,
-   "where": "Craigieburn",
+   "km": 39,
+   "where": "Aintree",
    "utrMin": null,
    "utrMax": null,
-   "regEnd": "2026-11-27",
+   "regEnd": "2026-11-29",
    "ages": [],
    "ball": "?"
   },
@@ -108,8 +81,7 @@
    "km": 17,
    "where": "Essendon",
    "ages": [],
-   "ball": "green",
-   "dropped": "page says: police"
+   "ball": "green"
   },
   {
    "name": "2026 JC CBC Green Vida Truganina Tournament",
@@ -206,7 +178,7 @@
    "where": "Eynesbury",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 J125 & GBS250 FCTC New Year Tournament",
@@ -278,7 +250,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "page says: police"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 O5k MCC Glen Iris Open",
@@ -289,7 +261,7 @@
    "where": "Mt Waverley",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC JC RSYLTC Club Championships",
@@ -355,7 +327,7 @@
    "where": "Epping",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC Eynesbury Tennis Club",
@@ -491,7 +463,7 @@
    "where": "North Ringwood",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 JDS Vida Junior Development Series #4 Truganina Slam",
@@ -534,7 +506,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 OC JC North Ringwood Tennis Club UTR Event",
@@ -601,7 +573,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   },
   {
    "name": "2027 OC Bendigo Bank Future Aces Junior Cup Taylors Lakes #2",
@@ -753,7 +725,7 @@
     10
    ],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 JC Vida Altona Yellow Ball Tournament #2",
@@ -782,7 +754,7 @@
     10
    ],
    "ball": "green",
-   "dropped": "page says: police"
+   "dropped": "only a 10-and-under draw"
   },
   {
    "name": "2027 J125 Tennis World Melbourne Park & Albert Reserve Tournament #2",
@@ -864,7 +836,7 @@
    "where": "Melbourne",
    "ages": [],
    "ball": "?",
-   "dropped": "page says: police"
+   "dropped": "no age groups published"
   }
  ]
 }
