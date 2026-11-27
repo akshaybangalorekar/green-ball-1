@@ -1,7 +1,7 @@
 name: Test browser harvest
 on:
   push:
-    paths: ["tests/harvest_check.py"]
+    paths: ["tests/harvest_check.py", "events.py"]
 jobs:
   test:
     runs-on: ubuntu-latest

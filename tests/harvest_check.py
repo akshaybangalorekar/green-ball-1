@@ -1,4 +1,4 @@
-"""Regression test for the eligibility rule. Runs the real verify_on_page against known URLs."""
+"""Regression test for the eligibility rule (v2). Runs the real verify_on_page against known URLs."""
 import json, re, sys, urllib.request
 from playwright.sync_api import sync_playwright
 
