@@ -428,6 +428,11 @@
     background: var(--surface-2); color: var(--ink-dim); padding: 3px 6px; border-radius: 4px; }
   .evpri { margin-left: auto; font-family: var(--mono); font-size: 8.5px; letter-spacing: .06em;
     text-transform: uppercase; color: var(--ink-dim); }
+  .evpri.go { background: #d9722f; color: #fff; }
+  .evpri.tg { background: rgba(217,114,47,.15); color: #b45a1e; }
+  .evpri.lnp { background: rgba(61,103,86,.12); color: var(--ink-dim); }
+  .evpri.cf { background: rgba(46,158,91,.15); color: #1f7a48; }
+  .evpri.nm { background: rgba(47,111,181,.14); color: #245d9b; }
   .evpri.no { background: var(--loss); color: #fff; padding: 3px 7px; border-radius: 4px; }
   .evpri.go { background: var(--brand); color: #fff; padding: 3px 7px; border-radius: 4px; }
   .evpri.tg { background: var(--brand-wash); color: var(--brand); padding: 3px 7px; border-radius: 4px; font-weight: 700; }
@@ -1855,9 +1860,9 @@ const PRIORITY = {
   "Start here": { label: "Book now", hint: "enter these", cls: "go" },
   "Target": { label: "Good target", hint: "worth entering", cls: "tg" },
   "Optional": { label: "If it suits", hint: "optional", cls: "" },
-  "Later": { label: "Need more time", hint: "too strong for now", cls: "" },
-  "Easy": { label: "Comfortable", hint: "below his level", cls: "" },
-  "Open": { label: "Level not published", hint: "check the divisions", cls: "" },
+  "Later": { label: "Need more time", hint: "too strong for now", cls: "nm" },
+  "Easy": { label: "Comfortable", hint: "below his level", cls: "cf" },
+  "Open": { label: "Level not published", hint: "check the divisions", cls: "lnp" },
 };
 
 
@@ -2049,9 +2054,9 @@ function viewPathway() {
         <tbody>
           <tr><td><span class="evpri go">Book now</span></td><td>He fits the level — UTR matchplay, JDS, JC, or a band he sits inside.</td></tr>
           <tr><td><span class="evpri tg">Good target</span></td><td>Ranked J125 to J1000, or a band up to 1.0 above his rating.</td></tr>
-          <tr><td><span class="evpri">Level not published</span></td><td>Neither site states the standard. Check the divisions before entering.</td></tr>
-          <tr><td><span class="evpri">Comfortable</span></td><td>Below his level — hot shots, red or orange ball, or a band well under him.</td></tr>
-          <tr><td><span class="evpri">Need more time</span></td><td>A published band more than 1.0 above him.</td></tr>
+          <tr><td><span class="evpri lnp">Level not published</span></td><td>Neither site states the standard. Check the divisions before entering.</td></tr>
+          <tr><td><span class="evpri cf">Comfortable</span></td><td>Below his level — hot shots, red or orange ball, or a band well under him.</td></tr>
+          <tr><td><span class="evpri nm">Need more time</span></td><td>A published band more than 1.0 above him.</td></tr>
           <tr><td><span class="evpri no">Not eligible</span></td><td>He cannot enter, and the reason is shown underneath.</td></tr>
           <tr><td><span class="evpri no">Members only</span></td><td>A junior event, but only for club members.</td></tr>
         </tbody>
