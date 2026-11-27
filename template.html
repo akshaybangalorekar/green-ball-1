@@ -198,6 +198,14 @@
     font-family: inherit; font-size: 14.5px; font-weight: 600; padding: 7px 14px; border-radius: 9px; cursor: pointer; }
   .ios-input { width: 66px; text-align: right; font-family: var(--mono); font-size: 15px; color: var(--ink);
     background: var(--surface-2); border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px; }
+  .ios-det { border-bottom: 1px solid var(--line-soft); }
+  .ios-det > summary { padding: 13px 16px; font-size: 15px; font-weight: 600; cursor: pointer; list-style: none; }
+  .ios-det > summary::-webkit-details-marker { display: none; }
+  .ios-det > summary::after { content: " ›"; float: right; color: var(--ink-dim); }
+  .ios-det[open] > summary::after { content: " ⌄"; }
+  .ios-detbody { padding: 0 16px 14px; }
+  .ios-detbody p { margin: 0 0 10px; font-size: 13px; line-height: 1.55; color: var(--ink-dim); }
+  .ios-detbody b { color: var(--ink); }
   .ios-foot { margin: 18px 6px 0; font-size: 12.5px; line-height: 1.6; color: var(--ink-dim); text-align: center; }
   .ios-switch { position: relative; display: inline-block; width: 51px; height: 31px; flex: 0 0 51px; }
   .ios-switch input { position: absolute; opacity: 0; width: 0; height: 0; }
@@ -2847,6 +2855,27 @@ function settingsSheet() {
         <small>Type this in Settings, now and then, when UTR publishes a new rating. The app cannot calculate it —
         UTR is Universal Tennis's own algorithm, fed by the association's submissions. Everything else recalculates
         around the number you enter.</small></div>
+      <details class="ios-det"><summary>How events are chosen</summary>
+        <div class="ios-detbody">
+          <p><b>Never shown.</b> Wheelchair, walking tennis, blind, deaf, all abilities, para,
+            special olympics, intellectual, police, fire games, veterans and masters events.
+            Everything else appears in the list.</p>
+          <p><b>Eligible</b> when the event page lists a 12, 14, 16 or 18 and under division.
+            That beats everything else — if a junior draw exists, he can enter it. If the page also
+            mentions members or invitation, the card carries a note rather than being removed.</p>
+          <p><b>Not eligible</b> — still shown, with the reason — when there is no junior division:
+            no age groups published, only a 10-and-under draw, or only 12 years and over.</p>
+          <p><b>The tag.</b> Book now — UTR matchplay, JDS, JC, or a rating band he fits inside.
+            Good target — ranked J125 to J1000, or a band up to 1.0 above him.
+            Worth entering — the level is not published anywhere.
+            Comfortable — hot shots, red or orange ball, or a band well below him.
+            Need more time — a published band more than 1.0 above his rating.</p>
+          <p><b>The 1.0 grows with him.</b> 1.0 below a UTR of 2.0, then 1.2, 1.4, 1.6 and 1.8 as his
+            rating rises. The further he goes, the further the app will reach.</p>
+          <p><b>Level.</b> Neither Tennis Australia nor UTR publishes a rating band for most events,
+            so "Worth entering" means honestly unknown — never a guess.</p>
+        </div>
+      </details>
       <div class="ios-row col"><b>What counts for UTR</b>
         <small>Only matches UTR records. His WDTA club sets are green ball, which Waverley does not submit, so they
         are counted separately and do not move the rating.</small></div>
