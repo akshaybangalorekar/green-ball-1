@@ -1799,6 +1799,7 @@ function liveEvents() {
       : e.src === "utr" ? "UTR" : "Open",
     ball: e.ball || "yellow",
     dropped: e.dropped || null,
+    note: e.note || null,
     p: (() => {
       const my = MY_UTR || 0;
       const TOL = my < 2 ? 1.0 : my < 3 ? 1.2 : my < 4 ? 1.4 : my < 5 ? 1.6 : 1.8;
@@ -2033,13 +2034,16 @@ function viewPathway() {
     </div>
   </details>`;
   const evBody = evKey + up.map((e) => {
-    const pr = e.dropped ? { label: "Not eligible", cls: "no" } : (PRIORITY[e.p] || { label: e.p, cls: "" });
+    const pr = e.dropped ? { label: "Not eligible", cls: "no" }
+      : e.note ? { label: "Members only", cls: "no" }
+      : (PRIORITY[e.p] || { label: e.p, cls: "" });
     return `<div class="ev">
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         <span class="evpri ${pr.cls}" data-whybtn="1" role="button" tabindex="0">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)} · ${esc(e.dr)} · ${srcChip(e)}</div>
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
+      ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
       <details class="evbox"><summary>Why this one?</summary>
         <div class="evfacts">
           <span><b>Format</b>${esc(fmtOf(e))}</span>
