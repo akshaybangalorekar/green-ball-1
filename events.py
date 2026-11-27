@@ -237,7 +237,7 @@ def verify_on_page(pg, e):
         return e, None          # no division published yet, but it is a junior event
     if ages:
         return e, "only a " + "/".join(str(a) for a in ages) + "-and-under draw"
-    return e, "no age groups published"
+    return e, "no age groups listed — check the event page"
 
 
 def dedupe_key(e):
