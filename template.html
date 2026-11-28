@@ -2200,7 +2200,9 @@ function viewPathway() {
         <div class="evfacts">
           <span><b>Format</b>${esc((e.info && e.info.format) || fmtOf(e))}</span>
           <span><b>Matches</b>${esc((e.info && e.info.matches) || matchesOf(e))}</span>
-          <span><b>UTR</b>${e.ball === "green" ? "green ball — counts only if UTR-listed" : "counts"}</span>
+          <span><b>UTR</b>${e.src === "utr"
+            ? "counts — this event is listed on UTR"
+            : (e.ball === "green" ? "green ball — counts only if the club lists it with UTR" : "counts")}</span>
           <span><b>Enter by</b>${e.regEnd ? fmtShort(e.regEnd) : "not published"}</span>
           <span><b>Club round</b>${clubClash(e) ? "round " + clubClash(e) + " that day" : "none that day"}</span>
           <span><b>Level</b>${e.utrMin != null ? e.utrMin + "–" + e.utrMax : (e.info && e.info.standard ? esc(e.info.standard) : "not published")}</span>
