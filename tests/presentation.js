@@ -45,7 +45,7 @@ cards.forEach((c, i) => {
     check(`${name}: members is not Book now`, !/Book now/.test(c));
   }
   if (EVENTS[i].ball === "green") {
-    check(`${name}: green ball carries the caveat`, /counts only if UTR-listed/.test(c));
+    check(`${name}: green ball carries the caveat`, /counts only if the club lists it with UTR/.test(c));
   }
 });
 console.log(fails ? `${fails} failure(s)` : `all presentation checks pass`);
