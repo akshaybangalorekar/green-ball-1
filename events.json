@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-27T23:59:14Z",
+ "generated": "2026-11-28T02:43:13Z",
  "count": 103,
  "dropped": 19,
  "utr": 3,
@@ -30,25 +30,6 @@
    ],
    "ages": [],
    "ball": "?"
-  },
-  {
-   "name": "The Patch Tennis Club AO 1 Point Slam Community Event",
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/405469",
-   "src": "utr",
-   "km": 29,
-   "where": "The Patch",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-27",
-   "saw_divisions": true,
-   "tabs_read": [
-    "Players",
-    "Events"
-   ],
-   "ages": [],
-   "ball": "?",
-   "dropped": "no 12U, 14U or 16U division — nothing he can enter"
   },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
@@ -138,6 +119,25 @@
     14
    ],
    "ball": "green"
+  },
+  {
+   "name": "Chelsea Heights Tennis Academy AO 1 Point Slam Community Event",
+   "date": "2026-12-02",
+   "url": "https://app.utrsports.net/events/409612",
+   "src": "utr",
+   "km": 23,
+   "where": "Chelsea Heights",
+   "utrMin": null,
+   "utrMax": null,
+   "regEnd": "2026-12-02",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Players",
+    "Events"
+   ],
+   "ages": [],
+   "ball": "?",
+   "dropped": "no 12U, 14U or 16U division — nothing he can enter"
   },
   {
    "name": "2026 JC Hume Tennis HEAD Discovery Final",
