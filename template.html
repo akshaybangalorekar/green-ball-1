@@ -176,6 +176,12 @@
   @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
   .fresh.warn { background: rgba(217,114,47,.12); color: #9c4d18; }
   .fresh.bad { background: rgba(196,57,43,.12); color: #a33124; font-weight: 600; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px;
+    vertical-align: 0; }
+  .dot.yellow { background: #e9e04a; border: 1px solid #b8ae1e; }
+  .dot.green { background: #4fae4f; border: 1px solid #2f7a2f; }
+  .dot.orange { background: #e08a2e; border: 1px solid #b06412; }
+  .dimtext { font-style: normal; color: var(--ink-dim); font-size: 11px; }
   .filters { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 8px;
     padding: 12px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
   .tagtable { width: 100%; border-collapse: collapse; margin: 4px 0 12px; }
@@ -1832,6 +1838,7 @@ function liveEvents() {
     dropped: e.dropped || null,
     info: e.info || null,
     regEnd: e.regEnd || null,
+    u12: e.u12 || null,
     closed: !!(e.regEnd && e.regEnd < new Date().toISOString().slice(0, 10)),
     note: e.note || null,
     p: (() => {

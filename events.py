@@ -297,6 +297,18 @@ def verify_on_page(pg, e):
     opens = grab(r"entry opens")
     if opens:
         e["opens"] = opens
+    # the Events tab is a table: Name <tab> Draws <tab> Entries
+    divs = []
+    for line in block.split("\n"):
+        parts = line.split("\t")
+        if len(parts) == 3 and parts[1].strip().isdigit() and parts[2].strip().isdigit():
+            nm2 = parts[0].strip()
+            if re.search(r"(U|Under\s?)?1[02]\b", nm2, re.I) and re.search(r"singles|\bBS\b|\bGS\b|\bS\b", nm2, re.I):
+                low = nm2.lower()
+                ball = "green" if "green" in low else "orange" if ("orange" in low or "red" in low) else "yellow"
+                divs.append({"name": nm2[:40], "entries": int(parts[2]), "ball": ball})
+    if divs:
+        e["u12"] = divs
     nm = re.search(r"\bevents\b[^\d]{0,20}(\d{1,2})\s*\n", block, re.I)
     if nm:
         e["divisionCount"] = int(nm.group(1))
