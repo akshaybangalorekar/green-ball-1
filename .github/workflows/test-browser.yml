@@ -1,7 +1,7 @@
 name: Test browser harvest
 on:
   push:
-    paths: ["tests/harvest_check.py", "tests/presentation.js", "tests/tag_rules.js", "events.py", "index.html"]
+    paths: ["tests/harvest_check.py", "events.py", "index.html", "test_div.py"]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -11,6 +11,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright && python -m playwright install --with-deps chromium
-      - run: python tests/harvest_check.py
+      - run: python test_div.py
       - run: node tests/tag_rules.js index.html
       - run: node tests/presentation.js index.html
