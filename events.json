@@ -1,36 +1,10 @@
 {
- "generated": "2026-11-28T02:43:13Z",
- "count": 103,
- "dropped": 19,
- "utr": 3,
- "ta": 100,
+ "generated": "2026-11-28T13:05:26Z",
+ "count": 106,
+ "dropped": 22,
+ "utr": 4,
+ "ta": 102,
  "events": [
-  {
-   "name": "Aintree Junior Matchplay: 2 Matches in 1.5 Hours",
-   "info": {
-    "matches": "TWO Verified Singles Matches",
-    "format": "One Set first to 6 games. Tie break at 5 all. Deuce two sudden death.",
-    "age": "18 AND UNDER Juniors",
-    "time": "3:30pm - 5:00pm",
-    "standard": "It is suitable for juniors playing in local competitions. Green and yellow Balls are okay. It would not be suitable for orange or red ball players. We will sort",
-    "verified": true
-   },
-   "date": "2026-11-28",
-   "url": "https://app.utrsports.net/events/405979",
-   "src": "utr",
-   "km": 39,
-   "where": "Aintree",
-   "utrMin": null,
-   "utrMax": null,
-   "regEnd": "2026-11-28",
-   "saw_divisions": true,
-   "tabs_read": [
-    "Players",
-    "Events"
-   ],
-   "ages": [],
-   "ball": "?"
-  },
   {
    "name": "2026 OC JC East Coburg Club Champs (Members Only)",
    "date": "2026-11-28",
@@ -130,6 +104,47 @@
    "utrMin": null,
    "utrMax": null,
    "regEnd": "2026-12-02",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Players",
+    "Events"
+   ],
+   "ages": [],
+   "ball": "?",
+   "dropped": "no 12U, 14U or 16U division — nothing he can enter"
+  },
+  {
+   "name": "Crib Point Tennis Club AO 1 Point Slam Community Event",
+   "date": "2026-12-03",
+   "url": "https://app.utrsports.net/events/410962",
+   "src": "utr",
+   "km": 59,
+   "where": "Crib Point",
+   "utrMin": null,
+   "utrMax": null,
+   "regEnd": "2026-12-03",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Players",
+    "Events"
+   ],
+   "ages": [],
+   "ball": "?",
+   "dropped": "no 12U, 14U or 16U division — nothing he can enter"
+  },
+  {
+   "name": "A Grand Ol‘ Slam at Wonga Park TC",
+   "info": {
+    "format": "s and schedules may be adjusted if required due to weather or unforeseen circumstances."
+   },
+   "date": "2026-12-04",
+   "url": "https://app.utrsports.net/events/410193",
+   "src": "utr",
+   "km": 21,
+   "where": "Wonga Park",
+   "utrMin": null,
+   "utrMax": null,
+   "regEnd": "2026-11-30",
    "saw_divisions": true,
    "tabs_read": [
     "Players",
@@ -1519,6 +1534,26 @@
    "dropped": "page says: Invitational"
   },
   {
+   "name": "2027 OC Kooyong Lawn TC Parent/Child Doubles Tournament",
+   "date": "2027-03-21",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=2FDDCEDF-B977-4405-8830-DAB9D6AA4A34",
+   "src": "ta",
+   "km": 3,
+   "where": "Kooyong",
+   "saw_divisions": false,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-12",
+   "opens": "2027-01-06",
+   "divisionCount": 1,
+   "ages": [],
+   "ball": "green",
+   "dropped": "page says: Invitational"
+  },
+  {
    "name": "2027 J250 GBS125 Eastern Region Tennis Association Tournament",
    "date": "2027-03-26",
    "url": "https://tournaments.tennis.com.au/sport/tournament?id=FF4AC022-7C34-4A45-889E-7D6FD187E053",
@@ -1541,6 +1576,30 @@
     16
    ],
    "ball": "?"
+  },
+  {
+   "name": "2027 O3k J125 Hume #3",
+   "date": "2027-03-26",
+   "url": "https://tournaments.tennis.com.au/sport/tournament?id=6C141514-C0CC-4DCC-B8B5-06162AFF1868",
+   "src": "ta",
+   "km": 29,
+   "where": "Craigieburn",
+   "saw_divisions": true,
+   "tabs_read": [
+    "Overview",
+    "Matches",
+    "Players"
+   ],
+   "regEnd": "2027-03-16",
+   "opens": "2027-01-18",
+   "divisionCount": 18,
+   "ages": [
+    10,
+    12,
+    14,
+    16
+   ],
+   "ball": "green"
   },
   {
    "name": "2027 J125 GBS125 Lauriston Junior Tournament",
