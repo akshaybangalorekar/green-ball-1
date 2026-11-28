@@ -182,6 +182,9 @@
   .dot.green { background: #4fae4f; border: 1px solid #2f7a2f; }
   .dot.orange { background: #e08a2e; border: 1px solid #b06412; }
   .dimtext { font-style: normal; color: var(--ink-dim); font-size: 11px; }
+  .fav { appearance: none; border: 0; background: none; cursor: pointer; font-size: 17px;
+    line-height: 1; color: var(--ink-dim); padding: 0 2px; margin-left: 2px; }
+  .fav.on { color: #d1476b; }
   .calbar { display: flex; align-items: center; gap: 8px; margin: 12px 0 4px; }
   .calbtn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 9px;
     background: var(--brand-wash); color: var(--brand); cursor: pointer; }
@@ -1485,6 +1488,9 @@ const UTR_KEY = "em-gb1-utr";
 const THEME_KEY = "em-gb1-theme";
 const LOG_KEY = "em-gb1-matches";
 const PASS_KEY = "em-gb1-passed";
+const FAV_KEY = "em-gb1-favs";
+let FAVS = (() => { try { return new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]")); } catch (e) { return new Set(); } })();
+const saveFavs = () => { try { localStorage.setItem(FAV_KEY, JSON.stringify([...FAVS])); } catch (e) {} };
 const HIDE_KEY = "em-gb1-hide";
 let PICKED_DAY = null;
 let HIDE = (() => { try { return JSON.parse(localStorage.getItem(HIDE_KEY) || "{}"); } catch (e) { return {}; } })();
@@ -2218,6 +2224,8 @@ function viewPathway() {
       <div class="evtop"><span class="evdate">${fmtShort(e.d)}</span><span class="evtier">${esc(e.t)}</span>
         ${srcChip(e)}
         <button class="whybtn" data-whybtn="1">Why</button>
+        <button class="fav${FAVS.has(e.n) ? " on" : ""}" data-fav="${esc(e.n)}"
+          aria-label="Favourite">${FAVS.has(e.n) ? "\u2665" : "\u2661"}</button>
         <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</div>
@@ -2867,6 +2875,15 @@ function bind() {
     b.onclick = () => {
       const box = b.closest(".ev").querySelector(".evbox");
       if (box) box.hidden = !box.hidden;
+    };
+  });
+  document.querySelectorAll("[data-fav]").forEach((b) => {
+    b.onclick = (ev2) => {
+      ev2.stopPropagation();
+      const n = b.dataset.fav;
+      if (FAVS.has(n)) { FAVS.delete(n); b.classList.remove("on"); b.textContent = "\u2661"; }
+      else { FAVS.add(n); b.classList.add("on"); b.textContent = "\u2665"; }
+      saveFavs();
     };
   });
   const dj = $("#dateJump");
