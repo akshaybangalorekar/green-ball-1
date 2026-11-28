@@ -2168,16 +2168,6 @@ function viewPathway() {
       <p class="evkey"><b>Not eligible</b> — shown with the reason rather than hidden, so nothing goes missing.
         Only wheelchair, walking tennis and other adaptive events are left out entirely.</p>
       <p class="evkey">Green ball counts toward his UTR only when the event is UTR-listed.</p>
-      <div class="calbar">
-        <label class="calbtn" for="dateJump" aria-label="Pick a day">
-          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor"
-            stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="11" rx="2"/>
-            <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
-        </label>
-        <input type="date" id="dateJump" value="${PICKED_DAY || ""}">
-        <span class="calview">${PICKED_DAY ? fmtShort(PICKED_DAY) : "All dates"}</span>
-        ${PICKED_DAY ? `<button class="calclear" id="calClear">Clear</button>` : ""}
-      </div>
       <div class="filters">
         <label class="enrol"><input type="checkbox" data-hide="closed" ${HIDE.closed ? "checked" : ""}>
           <span>Hide entries closed</span></label>
@@ -2208,7 +2198,18 @@ function viewPathway() {
   const hiddenNote = (up.length !== shown.length)
     ? `<p class="evkey" style="margin:0 0 10px">${up.length - shown.length} hidden by your filters.</p>` : "";
 
-  const evBody = runChip + (freshness.text && !running ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + hiddenNote + shown.map((e) => {
+  const calBar = `<div class="calbar">
+        <label class="calbtn" for="dateJump" aria-label="Pick a day">
+          <svg viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor"
+            stroke-width="1.4" stroke-linecap="round"><rect x="2" y="3" width="12" height="11" rx="2"/>
+            <path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+        </label>
+        <input type="date" id="dateJump" value="${PICKED_DAY || ""}">
+        <span class="calview">${PICKED_DAY ? fmtShort(PICKED_DAY) : "All dates"}</span>
+        ${PICKED_DAY ? `<button class="calclear" id="calClear">Clear</button>` : ""}
+      </div>`;
+
+  const evBody = calBar + runChip + (freshness.text && !running ? `<p class="fresh ${freshness.cls}">${esc(freshness.text)}</p>` : "") + evKey + hiddenNote + shown.map((e) => {
     const pr = e.closed ? { label: "Entries closed", cls: "no" }
       : e.dropped ? { label: "Not eligible", cls: "no" }
       : e.note ? { label: "Members only", cls: "no" }
