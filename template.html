@@ -1831,6 +1831,7 @@ function liveEvents() {
     ball: e.ball || "yellow",
     dropped: e.dropped || null,
     info: e.info || null,
+    regEnd: e.regEnd || null,
     closed: !!(e.regEnd && e.regEnd < new Date().toISOString().slice(0, 10)),
     note: e.note || null,
     p: (() => {
@@ -2191,7 +2192,7 @@ function viewPathway() {
         <span class="evpri ${pr.cls}">${esc(pr.label)}</span></div>
       <div class="evname">${esc(e.n)}</div>
       <div class="evmeta">${esc(e.s)}${e.dr ? " · " + esc(e.dr) : ""}</div>
-      ${e.closed ? `<p class="evdrop">Entries closed ${fmtShort(e.regEnd)} — the tournament may already be under way</p>` : ""}
+      ${e.closed && e.regEnd ? `<p class="evdrop">Entries closed ${fmtShort(e.regEnd)} — the tournament may already be under way</p>` : ""}
       ${e.dropped ? `<p class="evdrop">Not eligible — ${esc(e.dropped)}</p>` : ""}
 
       ${e.note ? `<p class="evdrop">${esc(e.note)}</p>` : ""}
